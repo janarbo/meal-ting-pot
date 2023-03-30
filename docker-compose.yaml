@@ -1,14 +1,20 @@
-# volumes:
+volumes:
+  meal-ting-pot-data:
+    external: true
 services:
   fastapi:
     build:
-      context: sample_service
+      context: meal-ting-pot
       dockerfile: Dockerfile.dev
+    environment:
+      DATABASE_URL: postgresql://user:password@db/meal-ting-pot
+      WAIT_HOSTS: db:5432
+      PORT: 8000
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - ./sample_service:/app
-      
+      - ./meal-ting-pot:/app
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -22,5 +28,15 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-            
+      REACT_APP_MEAL_TING_POT_API_HOST: http://localhost:8000
+
+  db:
+    image: postgres:14.7-bullseye
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: meal-ting-pot
+    ports:
+      - "15432:5432"
+    volumes:
+      - meal-ting-pot-data:/var/lib/postgresql/data
