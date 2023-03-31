@@ -1,6 +1,6 @@
-steps =[
-        [
-    """
+steps = [
+    [
+        """
     CREATE TABLE menu_items(
         menu_item_id SERIAL PRIMARY KEY NOT NULL,
         food_type VARCHAR(100) NOT NULL,
@@ -16,8 +16,8 @@ steps =[
         chef_id INTEGER NOT NULL REFERENCES users(id)
     );
     """,
-    """
+        """
     DROP TABLE menu_items;
-    """
+    """,
     ]
 ]

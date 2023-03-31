@@ -7,6 +7,7 @@ services:
       context: meal-ting-pot
       dockerfile: Dockerfile.dev
     environment:
+      SIGNING_KEY: abchbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4MDIwNDg3NCwiaWF0IjoxNjgwMjA0ODc0fQ.zP48f3iAahHElKAEOXo56SdBHDZxJORiow9Usnit_cY
       DATABASE_URL: postgresql://user:password@db/meal-ting-pot
       WAIT_HOSTS: db:5432
       PORT: 8000

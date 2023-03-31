@@ -7,6 +7,7 @@ steps = [
             first_name VARCHAR(100) NOT NULL,
             last_name VARCHAR(100) NOT NULL,
             username VARCHAR(18) NOT NULL UNIQUE,
+            hashed_password VARCHAR(250) NOT NULL,
             email VARCHAR(40) NOT NULL UNIQUE,
             is_chef BOOL NOT NULL
         );
@@ -14,7 +15,6 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE users;
-        """
+        """,
     ]
-
 ]
