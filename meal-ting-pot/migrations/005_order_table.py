@@ -1,6 +1,6 @@
-steps=[
+steps = [
     [
-    """
+        """
     CREATE TABLE order_status(
         status_id SERIAL PRIMARY KEY NOT NULL,
         name VARCHAR(100) NOT NULL
@@ -11,12 +11,12 @@ steps=[
     INSERT INTO order_status (name) VALUES ('COMPLETED');
     INSERT INTO order_status (name) VALUES ('DECLINED');
     """,
-    """
+        """
     DROP TABLE order_status;
-    """
+    """,
     ],
     [
-    """
+        """
     CREATE TABLE orders(
         order_id SERIAL PRIMARY KEY NOT NULL,
         customer_id INTEGER references users(id),
@@ -26,8 +26,8 @@ steps=[
         status INTEGER NOT NULL REFERENCES order_status(status_id)
     );
     """,
-    """
+        """
     DROP TABLE orders;
-    """
-    ]
+    """,
+    ],
 ]
