@@ -1,6 +1,6 @@
-steps=[
+steps = [
     [
-    """
+        """
     CREATE TABLE user_profiles(
         profile_id SERIAL PRIMARY KEY NOT NULL,
         user_id INTEGER NOT NULL REFERENCES users(id),
@@ -12,20 +12,20 @@ steps=[
         availability BOOL NOT NULL
     );
     """,
-    """
+        """
     DROP TABLE user_profiles;
     """,
     ],
     [
-    """
+        """
     CREATE TABLE social_media(
         id SERIAL PRIMARY KEY NOT NULL,
         url VARCHAR(1000) NOT NULL,
         user_profile_id INTEGER NOT NULL REFERENCES  user_profiles(profile_id)
     );
     """,
-    """
+        """
     DROP TABLE social_media;
     """,
-    ]
+    ],
 ]
