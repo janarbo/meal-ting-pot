@@ -5,6 +5,9 @@ steps=[
         status_id SERIAL PRIMARY KEY NOT NULL,
         name VARCHAR(100) NOT NULL
     );
+
+    INSERT INTO cart_status (name) VALUES ('OPEN');
+    INSERT INTO cart_status (name) VALUES ('CLOSED');
     """,
     """
     DROP TABLE cart_status;
