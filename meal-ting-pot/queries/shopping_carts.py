@@ -18,6 +18,7 @@ class ShoppingCartOut(BaseModel):
 
 class ShoppingCartWithCartItemsOut(BaseModel):
     id: int
+    photo: str
     name: str
     quantity: int
     price: int
@@ -31,6 +32,7 @@ class ShoppingCartRepository:
                     db.execute(
                         """
                             SELECT ci.id
+                                , mi.photo
                                 , mi.name
                                 , ci.quantity
                                 , mi.price
@@ -47,9 +49,10 @@ class ShoppingCartRepository:
                     for record in results:
                         cart_item = ShoppingCartWithCartItemsOut(
                             id=record[0],
-                            name=record[1],
-                            quantity=record[2],
-                            price=record[3]
+                            photo=record[1],
+                            name=record[2],
+                            quantity=record[3],
+                            price=record[4]
                         )
                         result.append(cart_item)
                     return result
