@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Union
+from typing import Optional, Union, List
 from queries.pool import pool
 
 
@@ -16,7 +16,47 @@ class ShoppingCartOut(BaseModel):
     status: int
 
 
+class ShoppingCartWithCartItemsOut(BaseModel):
+    id: int
+    name: str
+    quantity: int
+    price: int
+
+
 class ShoppingCartRepository:
+    def get_one_with_cart_items(self, shopping_cart_id: int) -> Union[List[ShoppingCartWithCartItemsOut],Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                            SELECT ci.id
+                                , mi.name
+                                , ci.quantity
+                                , mi.price
+                            FROM cart_items ci
+                            JOIN menu_items mi ON ci.menu_item_id = mi.menu_item_id
+                            WHERE ci.shopping_cart_id = %s;
+                        """,
+                        [shopping_cart_id],
+                    )
+                    results = db.fetchall()
+                    if results is None:
+                        return None
+                    result = []
+                    for record in results:
+                        cart_item = ShoppingCartWithCartItemsOut(
+                            id=record[0],
+                            name=record[1],
+                            quantity=record[2],
+                            price=record[3]
+                        )
+                        result.append(cart_item)
+                    return result
+        except Exception as e:
+            print(e)
+            return {"message": "Invalid shopping cart ID"}
+
     def get_one(self, shopping_cart_id: int) -> Optional[ShoppingCartOut]:
         try:
             with pool.connection() as conn:

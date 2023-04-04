@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union, Optional
+from typing import Union, Optional, List
 from queries.cart_items import (
     Error,
     CartItemIn,
     CartItemOut,
-    CartItemRepository
+    CartItemRepository,
 )
 from authenticator import authenticator
 
