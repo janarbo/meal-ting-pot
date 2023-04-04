@@ -15,7 +15,7 @@ router = APIRouter()
 def create_shopping_cart(
     response: Response,
     repo: ShoppingCartRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     response.status = 400
     return repo.create()
@@ -28,7 +28,7 @@ def get_one_shopping_Cart(
     shopping_cart_id: int,
     response: Response,
     repo: ShoppingCartRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> ShoppingCartOut:
     shopping_cart = repo.get_one(shopping_cart_id)
     if shopping_cart is None:
@@ -43,6 +43,6 @@ def update_shopping_cart(
     shopping_cart_id: int,
     shopping_cart: ShoppingCartIn,
     repo: ShoppingCartRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data)
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, ShoppingCartOut]:
     return repo.update(shopping_cart_id, shopping_cart)
