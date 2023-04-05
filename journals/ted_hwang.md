@@ -35,6 +35,7 @@ Derek led as the driver to finalize creating our postgres tables. We finished cr
 Additionally, for tables that had references to another table, we created queries in beekeeper to join tables together. Tomorrow, we plan on pairing up to finalize our backend endpoints.
 
 #### (Tuesday) 4/4/2023
+We ended up working individually to work on our backend endpoints. I completed the create, update, and delete endpoint for the cart_item table. Additionally, I created a get endpoint for shopping cart to include the cart_item table and menu_item table. I had trouble figuring out how to join the tables together but eventually got the output I wanted in beekeeper studio.
 
 #### (Wednesday) 4/5/2023
 
