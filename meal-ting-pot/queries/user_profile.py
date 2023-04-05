@@ -28,7 +28,6 @@ class UserProfileOut(BaseModel):
 
 
 
-
 class UserProfileRepository:
     def update(self, profile_id: int, user_profile: UserProfileIn, account_data: dict) ->  Union[UserProfileOut, Error]:
         try:
