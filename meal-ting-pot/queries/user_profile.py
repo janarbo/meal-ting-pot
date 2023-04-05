@@ -14,6 +14,8 @@ class UserProfileIn(BaseModel):
     address: str
     bio: str
     availability: bool
+    tags: Optional[int]
+    featured_menu_item: Optional[int]
 
 
 class UserProfileOut(BaseModel):
@@ -31,9 +33,9 @@ class UserProfileOut(BaseModel):
 class UserProfileRepository:
     def update(self, profile_id: int, user_profile: UserProfileIn, account_data: dict) ->  Union[UserProfileOut, Error]:
         try:
-              with pool.connection() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
-                     db.execute(
+                    db.execute(
                         """
                         UPDATE user_profiles
                         SET  full_name = %s
@@ -42,16 +44,20 @@ class UserProfileRepository:
                             ,address = %s
                             ,bio = %s
                             ,availability = %s
+                            ,tags = %s
+                            ,featured_menu_item = %s
                         WHERE profile_id = %s
                         """,
                         [
-                         user_profile.full_name,
-                         user_profile.email,
-                         user_profile.phone_number,
-                         user_profile.address,
-                         user_profile.bio,
-                         user_profile.availability,
-                         profile_id],
+                        user_profile.full_name,
+                        user_profile.email,
+                        user_profile.phone_number,
+                        user_profile.address,
+                        user_profile.bio,
+                        user_profile.availability,
+                        user_profile.tags,
+                        user_profile.featured_menu_item,
+                        profile_id],
                     )
                 return self.user_profile_in_to_out(profile_id, user_profile, account_data["id"])
         except Exception as e:
@@ -68,13 +74,13 @@ class UserProfileRepository:
                     result = db.execute(
                         """
                         SELECT profile_id
-                             , user_id
-                             , full_name
-                             , email
-                             , phone_number
-                             , address
-                             , bio
-                             , availability
+                            , user_id
+                            , full_name
+                            , email
+                            , phone_number
+                            , address
+                            , bio
+                            , availability
                         FROM user_profiles
                         WHERE profile_id = %s
                         """,
@@ -129,12 +135,14 @@ class UserProfileRepository:
         )
     def user_profile_to_out(self, record):
         return UserProfileOut(
-                              profile_id=record[0],
-                              user_id=record[1],
-                              full_name=record[2],
-                              email=record[3],
-                              phone_number=record[4],
-                              address=record[5],
-                              bio=record[6],
-                              availability=record[7]
+                            profile_id=record[0],
+                            user_id=record[1],
+                            full_name=record[2],
+                            email=record[3],
+                            phone_number=record[4],
+                            address=record[5],
+                            bio=record[6],
+                            availability=record[7],
+                            tags=record[8],
+                            featured_menu_item=record[9]
                             )
