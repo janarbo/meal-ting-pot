@@ -9,7 +9,6 @@ class Error(BaseModel):
 
 
 class OrdersIn(BaseModel):
-    customer_id: int
     order_date: date
     total_price: int
     shopping_cart_id: int
@@ -34,29 +33,27 @@ class OrdersRepository:
                     result = db.execute(
                         """
                         INSERT INTO orders
-                            (order_date, total_price, customer_id, shopping_cart_id, status)
+                            (customer_id, order_date, total_price, shopping_cart_id, status)
                         VALUES
-                        (%s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, 1)
                         RETURNING order_id, status;
                         """,
                             [
+                                account_data["id"],
                                 orders.order_date,
                                 orders.total_price,
-                                orders.customer_id,
                                 orders.shopping_cart_id,
-                                orders.status,
-                                account_data["id"],
                             ],
                     )
                     row = result.fetchone()
                     order_id = row[0]
                     status = row[1]
                     return self.orders_in_to_out(
-                        account_data["id"],
                         order_id=order_id,
                         orders=orders,
                         shopping_cart_id=orders.shopping_cart_id,
-                        customer_id=orders.customer_id,
+                        customer_id=account_data["id"],
+                        status=status,
                     )
         except Exception as e:
             print(e)
@@ -109,14 +106,15 @@ class OrdersRepository:
             return {"message": "Could not update orders"}
 
     def orders_in_to_out(
-        self, order_id: int, orders: OrdersIn, shopping_cart_id: int, customer_id: int
+        self, order_id: int, orders: OrdersIn, shopping_cart_id: int, customer_id: int, status: int
     ):
         old_data = orders.dict(exclude={"shopping_cart_id", "customer_id"})
         return OrdersOut(
             order_id=order_id,
             **old_data,
             shopping_cart_id=shopping_cart_id,
-            customer_id=customer_id
+            customer_id=customer_id,
+            status=status
     )
 
     def orders_to_out(self, record):
