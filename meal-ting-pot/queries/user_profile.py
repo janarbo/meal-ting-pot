@@ -14,8 +14,8 @@ class UserProfileIn(BaseModel):
     address: str
     bio: str
     availability: bool
-    tags: Optional[int]
-    featured_menu_item: Optional[int]
+    tags: int
+    featured_menu_item: int
 
 
 class UserProfileOut(BaseModel):
@@ -81,6 +81,8 @@ class UserProfileRepository:
                             , address
                             , bio
                             , availability
+                            ,tags
+                            ,featured_menu_item
                         FROM user_profiles
                         WHERE profile_id = %s
                         """,
@@ -102,9 +104,9 @@ class UserProfileRepository:
                     result = db.execute(
                         """
             INSERT INTO user_profiles
-                (user_id, full_name, email, phone_number, address, bio, availability)
+                (user_id, full_name, email, phone_number, address, bio, availability, tags, featured_menu_item)
             VALUES
-                (%s, %s, %s, %s, %s, %s, %s)
+                (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING profile_id;
             """,
                         [
@@ -115,7 +117,8 @@ class UserProfileRepository:
                             user_profile.address,
                             user_profile.bio,
                             user_profile.availability,
-
+                            user_profile.tags,
+                            user_profile.featured_menu_item
                         ],
                     )
                     profile_id = result.fetchone()[0]
