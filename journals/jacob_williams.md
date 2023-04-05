@@ -27,3 +27,9 @@ We started on the user authentication which allows users to signup, login, and l
 ## Added Migrations/Updated description to 1000 char limit in menu item table
 
 Today as a group we added Migrations 003 - User Profile and Social Media, 004 - shopping cart, 005 - order, and updated description to 1000 char limit in menu item table.
+
+## 4/4/23
+
+## Orders backend endpoint
+
+Created queries/routers files for the orders endpoint and started implementing the needed features: create order/get all orders/update order. Was able to get it all working after a few tweaks and error shooting with the group. We may need to update it depending on where we go from here but for now its good. The rest of my group worked on getting all their endpoints started and working.
