@@ -1,32 +1,29 @@
 from pydantic import BaseModel
-from typing import Optional, Union, List
+from typing import Optional, Union
 from queries.pool import pool
+
 
 class Error(BaseModel):
     message: str
 
+class SocialMediaIn(BaseModel):
+    url : str
+    user_profile_id: int
 
-class CartItemIn(BaseModel):
-    shopping_cart_id: int
-    menu_item_id: int
-    quantity: int
-
-
-class CartItemOut(BaseModel):
+class SocialMediaOut(BaseModel):
     id: int
-    shopping_cart_id: int
-    menu_item_id: int
-    quantity: int
+    url: str
+    user_profile_id : int
 
 
-class CartItemRepository:
+class SocialMediaRepository:
     def delete(self, id: int) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        DELETE from cart_items
+                        DELETE from social_media
                         WHERE id = %s
                         """,
                         [id]
@@ -36,58 +33,56 @@ class CartItemRepository:
             print(e)
             return False
 
-    def update(self, id: int, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
+
+    def update(self, id: int, social_media: SocialMediaIn) -> Union[SocialMediaOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        UPDATE cart_items
-                        SET shopping_cart_id = %s
-                            , menu_item_id = %s
-                            , quantity = %s
+                        UPDATE social_media
+                        SET url= %s
+                          , user_profile_id= %s
                         WHERE id = %s;
                         """,
                         [
-                            cart_item.shopping_cart_id,
-                            cart_item.menu_item_id,
-                            cart_item.quantity,
+                            social_media.url,
+                            social_media.user_profile_id,
                             id
                         ]
                     )
-                    return self.cart_item_in_to_out(id, cart_item)
+                    return self.social_media_in_to_out(id, social_media)
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
 
-    def create(self, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
+
+    def create(self, social_media: SocialMediaIn) -> Union[SocialMediaOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO cart_items (shopping_cart_id, menu_item_id, quantity)
-                        VALUES (%s, %s, %s)
+                        INSERT INTO social_media (url, user_profile_id)
+                        VALUES (%s, %s)
                         RETURNING id
                         """,
                         [
-                            cart_item.shopping_cart_id,
-                            cart_item.menu_item_id,
-                            cart_item.quantity
+                            social_media.url,
+                            social_media.user_profile_id
                         ]
                     )
                     id = result.fetchone()[0]
-                    return self.cart_item_in_to_out(
-                        id, cart_item
+                    return self.social_media_in_to_out(
+                        id, social_media
                     )
         except Exception as e:
-            print(e)
             return {"message": "Create did not work"}
 
-    def cart_item_in_to_out(
-            self, id: int, cart_item: CartItemIn
+    def social_media_in_to_out(
+            self, id:int, social_media: SocialMediaIn
     ):
-        old_data = cart_item.dict()
-        return CartItemOut(
+        old_data = social_media.dict()
+        return SocialMediaOut(
             id=id, **old_data
         )
