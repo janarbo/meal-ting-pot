@@ -18,8 +18,14 @@ class UserProfileIn(BaseModel):
     tags: Optional[int]
     featured_menu_item: Optional[int]
 
-
-
+class UserProfileDetailOut(BaseModel):
+    profile_id : int
+    user_id: int
+    full_name: str
+    address: str
+    availability: bool
+    tags: str
+    featured_menu_item: Optional[str]
 
 class UserProfileOut(BaseModel):
     profile_id : int
@@ -75,6 +81,47 @@ class UserProfileRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not update the user profile"}
+
+    def get_all(self) -> Union[Error, List[UserProfileDetailOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        up.profile_id,
+                        up.user_id,
+                        up.full_name,
+                        up.address,
+                        up.availability,
+                        t.name AS tag_name,
+                        mi.photo AS featured_menu_item_photo
+                        FROM
+                        user_profiles up
+                        LEFT JOIN tags t ON up.tags = t.id
+                        LEFT JOIN menu_items mi ON up.featured_menu_item = mi.menu_item_id
+                        WHERE up.availability = true AND mi.photo is not null
+                        """,
+                    )
+                    results = db.fetchall()
+                    if results is None:
+                        return None
+                    result = []
+                    for record in results:
+                        user_profile = UserProfileDetailOut(
+                            profile_id=record[0],
+                            user_id=record[1],
+                            full_name=record[2],
+                            address=record[3],
+                            availability=record[4],
+                            tags=record[5],
+                            featured_menu_item=record[6]
+                        )
+                        result.append(user_profile)
+                    return result
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get the user profile"}
 
 
     def get_one(self, profile_id: int) -> Optional[UserProfileOut]:
