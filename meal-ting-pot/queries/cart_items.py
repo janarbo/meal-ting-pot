@@ -11,6 +11,8 @@ class CartItemIn(BaseModel):
     menu_item_id: int
     quantity: int
 
+class UpdateCartItemIn(BaseModel):
+    quantity: int
 
 class CartItemOut(BaseModel):
     id: int
@@ -36,29 +38,33 @@ class CartItemRepository:
             print(e)
             return False
 
-    def update(self, id: int, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
+    def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    db.execute(
+                    result = db.execute(
                         """
                         UPDATE cart_items
-                        SET shopping_cart_id = %s
-                            , menu_item_id = %s
-                            , quantity = %s
-                        WHERE id = %s;
+                        SET quantity = %s
+                        WHERE id = %s
+                        RETURNING shopping_cart_id, menu_item_id
                         """,
-                        [
-                            cart_item.shopping_cart_id,
-                            cart_item.menu_item_id,
-                            cart_item.quantity,
-                            id
-                        ]
+                        [cart_item.quantity, id]
                     )
-                    return self.cart_item_in_to_out(id, cart_item)
+                    row = result.fetchone()
+                    shopping_cart_id = row[0]
+                    menu_item_id = row[1]
+                    return CartItemOut(
+                        id=id,
+                        shopping_cart_id=shopping_cart_id,
+                        menu_item_id=menu_item_id,
+                        quantity=cart_item.quantity
+                    )
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
+
+
 
     def create(self, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
         try:
