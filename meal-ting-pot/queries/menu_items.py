@@ -18,6 +18,7 @@ class MenuItemIn(BaseModel):
     tags: Optional[str]
     calories: int
     ingredients: str
+    status:bool
 
 
 class MenuItemOut(BaseModel):
@@ -33,6 +34,7 @@ class MenuItemOut(BaseModel):
     calories: int
     ingredients: str
     chef_id: int
+    status:bool
 
 
 class MenuItemRepository:
@@ -53,7 +55,8 @@ class MenuItemRepository:
         tags,
         calories,
         ingredients,
-        chef_id
+        chef_id,
+        status
         FROM menu_items
         WHERE menu_item_id=%s
         """,
@@ -100,7 +103,8 @@ class MenuItemRepository:
                         tags=%s,
                         calories=%s,
                         ingredients=%s,
-                        chef_id=%s
+                        chef_id=%s,
+                        status=%s
                         WHERE menu_item_id=%s
                         """,
                         [
@@ -115,6 +119,7 @@ class MenuItemRepository:
                             menu_item.calories,
                             menu_item.ingredients,
                             account_data["id"],
+                            menu_item.status,
                             menu_item_id
                         ],
                     )
@@ -123,13 +128,13 @@ class MenuItemRepository:
             print(e)
             return {"message": "could not update that menu item"}
 
-    def get_all(self, account_data: dict)-> Union[Error, List[MenuItemOut]]:
+    def get_all_chef(self, account_data: dict)-> Union[Error, List[MenuItemOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT menu_item_id, food_type, name, price, description, photo, comment, spicy_level, tags, calories, ingredients, chef_id
+                        SELECT menu_item_id, food_type, name, price, description, photo, comment, spicy_level, tags, calories, ingredients, chef_id, status
                         FROM menu_items
                         WHERE chef_id = %s
                         ORDER BY food_type;
@@ -145,6 +150,27 @@ class MenuItemRepository:
             print(e)
         return{"message": "Could not get all menu items"}
 
+    def get_all_customer(self, chef_id: int)-> Union[Error, List[MenuItemOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT menu_item_id, food_type, name, price, description, photo, comment, spicy_level, tags, calories, ingredients, chef_id, status
+                        FROM menu_items
+                        WHERE chef_id = %s
+                        ORDER BY food_type;
+                        """,
+                        [chef_id]
+                    )
+                    result=db.fetchall()
+                    return[
+                        self.record_to_menu_item_out(record)
+                        for record in result
+                    ]
+        except Exception as e:
+            print(e)
+        return{"message": "Could not get all menu items"}
 
     def create(
         self, menu_item: MenuItemIn, account_data: dict
@@ -155,9 +181,9 @@ class MenuItemRepository:
                     result = db.execute(
                         """
             INSERT INTO menu_items
-                (food_type, name, price, description, comment, photo, spicy_level, tags, calories, ingredients, chef_id)
+                (food_type, name, price, description, comment, photo, spicy_level, tags, calories, ingredients, chef_id, status)
             VALUES
-                (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s)
             RETURNING menu_item_id;
             """,
                         [
@@ -172,6 +198,7 @@ class MenuItemRepository:
                             menu_item.calories,
                             menu_item.ingredients,
                             account_data["id"],
+                            menu_item.status
                         ],
                     )
                     menu_item_id = result.fetchone()[0]
@@ -202,5 +229,6 @@ class MenuItemRepository:
             tags=record[8],
             calories=record[9],
             ingredients=record[10],
-            chef_id=record[11]
+            chef_id=record[11],
+            status=record[12]
         )
