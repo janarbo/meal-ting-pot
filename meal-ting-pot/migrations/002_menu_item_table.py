@@ -13,6 +13,7 @@ steps = [
             tags VARCHAR(200) NULL,
             calories INTEGER NOT NULL,
             ingredients VARCHAR(300) NOT NULL,
+            status BOOL NOT NULL,
             chef_id INTEGER NOT NULL REFERENCES users(id)
         );
         """,
