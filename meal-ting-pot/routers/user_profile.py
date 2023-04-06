@@ -7,6 +7,7 @@ from queries.user_profile import (
     Error,
 )
 
+
 from authenticator import authenticator
 
 router = APIRouter()
