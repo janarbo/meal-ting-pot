@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
+from typing import Union, List
 from queries.user_profile import (
     UserProfileIn,
     UserProfileRepository,
     UserProfileOut,
     Error,
+    UserProfileDetailOut
 )
 
 
@@ -43,3 +44,12 @@ def update_profile(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, UserProfileOut]:
     return repo.update(profile_id, user_profile, account_data)
+
+@router.get("/profile/",response_model=Union[Error, List[UserProfileDetailOut]])
+def get_all_profile(
+    response : Response,
+    repo: UserProfileRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> UserProfileOut:
+    user_profile = repo.get_all()
+    return repo.get_all()
