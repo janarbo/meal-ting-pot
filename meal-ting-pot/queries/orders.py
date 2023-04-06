@@ -8,17 +8,12 @@ class Error(BaseModel):
     message: str
 
 
-<<<<<<< HEAD
 class CreateOrderIn(BaseModel):
-=======
-class OrdersIn(BaseModel):
->>>>>>> main
     order_date: date
     total_price: int
     shopping_cart_id: int
 
 
-<<<<<<< HEAD
 class UpdateOrderIn(BaseModel):
     status: int
 
@@ -29,8 +24,6 @@ class CartItemDetail(BaseModel):
     photo: str
     quantity: int
 
-=======
->>>>>>> main
 class OrdersOut(BaseModel):
     order_id: int
     customer_id: int
@@ -39,7 +32,6 @@ class OrdersOut(BaseModel):
     shopping_cart_id: int
     status: int
 
-<<<<<<< HEAD
 class OrdersDetailOut(BaseModel):
     order_id: int
     customer_id: int
@@ -56,17 +48,10 @@ class OrdersDetailOut(BaseModel):
 class OrdersRepository:
     def create(
         self, orders: CreateOrderIn, account_data: dict
-=======
-
-class OrdersRepository:
-    def create(
-        self, orders: OrdersIn, account_data: dict
->>>>>>> main
     ) -> Union[OrdersOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-<<<<<<< HEAD
                     db.execute(
                         """
                         SELECT ci.id
@@ -81,19 +66,13 @@ class OrdersRepository:
                     if len(cart) == 0:
                         return {"message": "Shopping cart is empty"}
 
-=======
->>>>>>> main
                     result = db.execute(
                         """
                         INSERT INTO orders
                             (customer_id, order_date, total_price, shopping_cart_id, status)
                         VALUES
                         (%s, %s, %s, %s, 1)
-<<<<<<< HEAD
                         RETURNING order_id, order_date, status;
-=======
-                        RETURNING order_id, status;
->>>>>>> main
                         """,
                             [
                                 account_data["id"],
@@ -104,7 +83,6 @@ class OrdersRepository:
                     )
                     row = result.fetchone()
                     order_id = row[0]
-<<<<<<< HEAD
                     order_date = row[1]
                     status = row[2]
                     return OrdersOut(
@@ -114,21 +92,11 @@ class OrdersRepository:
                         total_price=orders.total_price,
                         shopping_cart_id=orders.shopping_cart_id,
                         status=status
-=======
-                    status = row[1]
-                    return self.orders_in_to_out(
-                        order_id=order_id,
-                        orders=orders,
-                        shopping_cart_id=orders.shopping_cart_id,
-                        customer_id=account_data["id"],
-                        status=status,
->>>>>>> main
                     )
         except Exception as e:
             print(e)
             return {"message": "Create did not work"}
 
-<<<<<<< HEAD
     def get_all(self) -> Union[List[OrdersDetailOut],Error]:
         try:
             with pool.connection() as conn:
@@ -198,49 +166,15 @@ class OrdersRepository:
 
     def update(
         self, order_id: int, orders: UpdateOrderIn
-=======
-    def get_all(self, customer_id: Optional[int] = None) -> List[OrdersOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    if customer_id is None:
-                        db.execute(
-                            """
-                            SELECT order_id, order_date, total_price, customer_id, shopping_cart_id, status
-                            FROM orders
-                            """
-                        )
-                    else:
-                        db.execute(
-                            """
-                            SELECT order_id, order_date, total_price, customer_id, shopping_cart_id, status
-                            FROM orders
-                            WHERE customer_id = %s
-                            """,
-                            [customer_id],
-                        )
-                    return [self.orders_to_out(record) for record in db.fetchall()]
-        except Exception as e:
-            print(e)
-            return []
-
-    def update(
-        self, order_id: int, orders: OrdersIn
->>>>>>> main
     ) -> Union[OrdersOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-<<<<<<< HEAD
                     result = db.execute(
-=======
-                    db.execute(
->>>>>>> main
                         """
                         UPDATE orders
                         SET status = %s
                         WHERE order_id = %s
-<<<<<<< HEAD
                         RETURNING customer_id, order_date, total_price, shopping_cart_id
                         """,
                         [orders.status, order_id],
@@ -257,32 +191,7 @@ class OrdersRepository:
                         total_price=total_price,
                         shopping_cart_id=shopping_cart_id,
                         status=orders.status
-=======
-                        """,
-                        [orders.status, order_id],
-                    )
-                    return self.orders_in_to_out(
-                        order_id, orders, orders.shopping_cart_id, orders.customer_id
->>>>>>> main
                     )
         except Exception as e:
             print(e)
             return {"message": "Could not update orders"}
-<<<<<<< HEAD
-=======
-
-    def orders_in_to_out(
-        self, order_id: int, orders: OrdersIn, shopping_cart_id: int, customer_id: int, status: int
-    ):
-        old_data = orders.dict(exclude={"shopping_cart_id", "customer_id"})
-        return OrdersOut(
-            order_id=order_id,
-            **old_data,
-            shopping_cart_id=shopping_cart_id,
-            customer_id=customer_id,
-            status=status
-    )
-
-    def orders_to_out(self, record):
-        return OrdersOut(order_id=record[0], status=record[1])
->>>>>>> main
