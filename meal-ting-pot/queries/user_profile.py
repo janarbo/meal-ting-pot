@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Union
+from typing import Optional, Union, List
 from queries.pool import pool
 
 
@@ -10,10 +10,15 @@ class Error(BaseModel):
 class UserProfileIn(BaseModel):
     full_name: str
     email: str
+    photo: str
     phone_number: int
     address: str
     bio: str
     availability: bool
+    tags: Optional[int]
+    featured_menu_item: Optional[int]
+
+
 
 
 class UserProfileOut(BaseModel):
@@ -21,37 +26,50 @@ class UserProfileOut(BaseModel):
     user_id: int
     full_name: str
     email: str
+    photo : str
     phone_number: int
     address: str
     bio: str
     availability: bool
+    tags: Optional[int]
+    featured_menu_item: Optional[int]
+    social_media: List[str]
+
+
 
 
 
 class UserProfileRepository:
     def update(self, profile_id: int, user_profile: UserProfileIn, account_data: dict) ->  Union[UserProfileOut, Error]:
         try:
-              with pool.connection() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as db:
-                     db.execute(
+                    db.execute(
                         """
                         UPDATE user_profiles
                         SET  full_name = %s
                             ,email = %s
+                            ,photo = %s
                             ,phone_number = %s
                             ,address = %s
                             ,bio = %s
                             ,availability = %s
+                            ,tags = %s
+                            ,featured_menu_item = %s
                         WHERE profile_id = %s
                         """,
                         [
-                         user_profile.full_name,
-                         user_profile.email,
-                         user_profile.phone_number,
-                         user_profile.address,
-                         user_profile.bio,
-                         user_profile.availability,
-                         profile_id],
+                            user_profile.full_name,
+                            user_profile.email,
+                            user_profile.photo,
+                            user_profile.phone_number,
+                            user_profile.address,
+                            user_profile.bio,
+                            user_profile.availability,
+                            user_profile.tags,
+                            user_profile.featured_menu_item,
+                            profile_id
+                        ],
                     )
                 return self.user_profile_in_to_out(profile_id, user_profile, account_data["id"])
         except Exception as e:
@@ -59,82 +77,94 @@ class UserProfileRepository:
             return {"message": "Could not update the user profile"}
 
 
-
-
     def get_one(self, profile_id: int) -> Optional[UserProfileOut]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    result = db.execute(
-                        """
-                        SELECT profile_id
-                             , user_id
-                             , full_name
-                             , email
-                             , phone_number
-                             , address
-                             , bio
-                             , availability
-                        FROM user_profiles
-                        WHERE profile_id = %s
-                        """,
-                        [profile_id],
-                    )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.user_profile_to_out(record)
-        except Exception as e:
-            return {"message": "Could not get the user profile"}
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as db:
+                        result = db.execute(
+                            """
+                            SELECT up.* as user_profiles, ARRAY_AGG(s.url) as social_media
+                            FROM users as u
+                            LEFT OUTER JOIN user_profiles up
+                                on (u.id=up.user_id)
+                            LEFT OUTER JOIN social_media s
+                                on (up.profile_id=s.user_profile_id)
+                            WHERE u.id = %s
+                            GROUP BY up.profile_id
+                            ORDER BY up.profile_id;
+
+                            """,
+                            [profile_id],
+                        )
+                        records = result.fetchall()
+                        if not records:
+                            return None
+                        return self.user_profile_to_out(records[0])
+            except Exception as e:
+                print(e)
+                return {"message": "Could not get the user profile"}
 
     def create(
-        self, user_profile: UserProfileIn, account_data: dict
-    ) -> Union[UserProfileOut, Error]:
+            self, user_profile: UserProfileIn, account_data: dict
+
+        ) -> Union[UserProfileOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-            INSERT INTO user_profiles
-                (user_id, full_name, email, phone_number, address, bio, availability)
-            VALUES
-                (%s, %s, %s, %s, %s, %s, %s)
-            RETURNING profile_id;
-            """,
+                        INSERT INTO user_profiles
+                            (user_id, full_name, email, photo, phone_number, address, bio, availability, tags, featured_menu_item)
+                        VALUES
+                            (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        RETURNING profile_id;
+                        """,
                         [
                             account_data["id"],
                             user_profile.full_name,
                             user_profile.email,
+                            user_profile.photo,
                             user_profile.phone_number,
                             user_profile.address,
                             user_profile.bio,
                             user_profile.availability,
-
+                            user_profile.tags,
+                            user_profile.featured_menu_item,
                         ],
                     )
                     profile_id = result.fetchone()[0]
                     return self.user_profile_in_to_out(
-                        profile_id, user_profile, account_data["id"]
+                        profile_id,
+                        user_profile,
+                        account_data["id"],
                     )
         except Exception as e:
             print(e)
             return {"message": "Create did not work"}
 
     def user_profile_in_to_out(
-        self, profile_id: int, user_profile: UserProfileIn, user_id
-    ):
+        self, profile_id: int, user_profile: UserProfileIn, user_id: int
+    ) -> UserProfileOut:
         old_data = user_profile.dict()
         return UserProfileOut(
-           profile_id=profile_id, **old_data, user_id=user_id
+            profile_id=profile_id,
+            user_id=user_id,
+            **old_data,
+            social_media=[],
         )
-    def user_profile_to_out(self, record):
+
+    def user_profile_to_out(self, record) -> UserProfileOut:
         return UserProfileOut(
-                              profile_id=record[0],
-                              user_id=record[1],
-                              full_name=record[2],
-                              email=record[3],
-                              phone_number=record[4],
-                              address=record[5],
-                              bio=record[6],
-                              availability=record[7]
-                            )
+            profile_id=record[0],
+            user_id=record[1],
+            full_name=record[2],
+            email=record[3],
+            photo=record[4],
+            phone_number=record[5],
+            address=record[6],
+            bio=record[7],
+            availability=record[8],
+            tags=record[9],
+            featured_menu_item=record[10],
+            social_media=record[11]
+        )
