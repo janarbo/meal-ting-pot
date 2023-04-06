@@ -38,6 +38,9 @@ Additionally, for tables that had references to another table, we created querie
 We ended up working individually to work on our backend endpoints. I completed the create, update, and delete endpoint for the cart_item table. Additionally, I created a get endpoint for shopping cart to include the cart_item table and menu_item table. I had trouble figuring out how to join the tables together but eventually got the output I wanted in beekeeper studio.
 
 #### (Wednesday) 4/5/2023
+We made a few revisions to our database schema for our user story. For instance, a chef was supposed to be able to delete a menu item from their list, however, it was used as a foreign key in the orders table. Therefore, if a customer created an order with that menu item, the chef was unable to delete the menu item. To resolve this, we added a status property to menu item which is a boolean. The chef can set it to false to "delete" (hide the item from customers and the chef). Perhaps MongoDb would have been a better implementation because there are no foreign key constraints.
+
+Afterwards, we worked individually to continue our backend endpoints. I revised the GET endpoint for our orders table to include further details from other tables like the name, price, quantity, and photo of each cart item in the shopping cart. Additionally, revise the UPDATE endpoint to only take in the status input from the user. After an order is created, users should not be able to change the shopping cart id, total price, or order date in the order instance.
 
 #### (Thursday) 4/6/2023
 
