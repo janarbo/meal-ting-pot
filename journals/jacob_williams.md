@@ -30,6 +30,24 @@ Today as a group we added Migrations 003 - User Profile and Social Media, 004 - 
 
 ## 4/4/23
 
+## Backend endpoint revision
+
+As a group we had one person pilot as the rest followed along and helped out. Worked on revising several backend endpoints after brainstorming in certain areas making we have everything we need on our backend. Ted got redux setup, installed, and ready for when we need it on the frontend.
+
+## 4/5/23
+
 ## Orders backend endpoint
 
 Created queries/routers files for the orders endpoint and started implementing the needed features: create order/get all orders/update order. Was able to get it all working after a few tweaks and error shooting with the group. We may need to update it depending on where we go from here but for now its good. The rest of my group worked on getting all their endpoints started and working.
+
+## 4/6/23
+
+## More backend endpoint revision
+
+I piloted for my group as we revised the "update" cart_items to only have the quantity field. After working through some minor errors we were able to get it all working how we wanted. I also piloted on writing the "get all" endpoint for user_profile, so that we can use it to populate the main page. As a group we got a few other revisions done ultimately getting our backend done and then started on frontend auth.
+
+## 4/7/23
+
+## Frontend auth
+
+
