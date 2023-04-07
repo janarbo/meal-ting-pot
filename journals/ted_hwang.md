@@ -43,6 +43,11 @@ We made a few revisions to our database schema for our user story. For instance,
 Afterwards, we worked individually to continue our backend endpoints. I revised the GET endpoint for our orders table to include further details from other tables like the name, price, quantity, and photo of each cart item in the shopping cart. Additionally, revise the UPDATE endpoint to only take in the status input from the user. After an order is created, users should not be able to change the shopping cart id, total price, or order date in the order instance.
 
 #### (Thursday) 4/6/2023
+Janar and Jacob finished the remaining backend endpoints as drivers and, since Derek and I finished, we helped navigate if they ran into any issues. We were getting a value type error for one of the properties and fixed the issue by revising the pydantic model.
+
+Although we finished, in the near future, I want to revise the create order endpoint so that, if multiple menu items in the shopping cart come from different chefs, the shopping cart items will be grouped by chef and have an order for each.
+
+In the remaining time, we got started on frontend authentication for Redux by looking into documentation. The material is very dense and we definitely need to research more to finish front-end authentication.
 
 #### (Friday) 4/7/2023
 
