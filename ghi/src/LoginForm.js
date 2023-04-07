@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "./store/authAPI";
 
@@ -7,29 +7,17 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const[login, result] = useLoginMutation();
+  const[login, result] = useLoginMutation();
   const dispatch = useDispatch();
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  login({'username':username, 'password':password});
-  event.target.reset();
-};
-// //   useEffect(() => {
-//     const checkIfLoggedIn = async () => {
-//       const response = await fetch("/api/accounts/login", {
-//         method: "GET",
-//       });
-//       if (result.isSuccess) {
-//         const { data } = await response.json();
-//         dispatch(login(data));
-//         setIsLoggedIn(true);
-//       } else {
-//         alert("Invalid username or password");
-//       }
-//     };
-//     checkIfLoggedIn();
-//   }, []);
+  // If user is logged in, we want to
+  // prevent them from seeing this page
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    login({'username': username, 'password': password});
+    event.target.reset();
+  };
 
   return (
     <form onSubmit={handleSubmit}>
