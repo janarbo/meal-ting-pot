@@ -32,3 +32,11 @@
 * Finished create, update, get one profile for user_profile table endpoint.
 * Finished create, update, delete for social_media table endpoint.
 * Tomorrow we will be working on the frontend.
+
+### Wednesday 4-04-2023
+* Combined social_media and use_profile table for get_one endpoint, got stuck on how to return a list with all social_media included.
+* Updated create and update function for user_profile table endpoint.
+
+### Thursday 4-05-2023
+* With my teammates help, I got get_one profile function worked.
+* Ted led as driver we started our frontend auth.
