@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.shopping_carts import ShoppingCartRepository, ShoppingCartOut, ShoppingCartWithCartItemsOut
 from authenticator import authenticator
+from typing import List
 
 client = TestClient(app)
 
@@ -24,20 +25,16 @@ class GetShoppingCartRepository:
                 shopping_cart_id=1,
                 status=1
             )
-        else:
-            return None
 
-    def get_one_with_cart_items(self, shopping_cart_id: int) -> ShoppingCartWithCartItemsOut:
+    def get_one_with_cart_items(self, shopping_cart_id: int) -> List[ShoppingCartWithCartItemsOut]:
         if shopping_cart_id == 1:
-            return ShoppingCartWithCartItemsOut(
-                    id=1,
-                    photo="photo.com",
-                    name="food item",
-                    quantity=1,
-                    price=1
-            )
-        else:
-            return None
+            return [ShoppingCartWithCartItemsOut(
+                id=1,
+                photo="photo.com",
+                name="food item",
+                quantity=1,
+                price=1
+            )]
 
 def test_get_one():
     app.dependency_overrides[ShoppingCartRepository] = GetShoppingCartRepository
@@ -62,14 +59,13 @@ def test_get_one_with_cart_items():
     ] = get_current_account_data_test
 
     response = client.get("cart/1/items")
-
     app.dependency_overrides = {}
 
     assert response.status_code == 200
     assert response.json() == [{
-      "id": 1,
-      "photo": "photo.com",
-      "name": "food item",
-      "quantity": 1,
-      "price": 1
+        "id": 1,
+        "photo": "photo.com",
+        "name": "food item",
+        "quantity": 1,
+        "price": 1
     }]
