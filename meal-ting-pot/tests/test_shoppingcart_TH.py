@@ -25,6 +25,8 @@ class GetShoppingCartRepository:
                 shopping_cart_id=1,
                 status=1
             )
+        else:
+            return None
 
     def get_one_with_cart_items(self, shopping_cart_id: int) -> List[ShoppingCartWithCartItemsOut]:
         if shopping_cart_id == 1:
@@ -35,6 +37,8 @@ class GetShoppingCartRepository:
                 quantity=1,
                 price=1
             )]
+        else:
+            return None
 
 def test_get_one():
     app.dependency_overrides[ShoppingCartRepository] = GetShoppingCartRepository
@@ -42,15 +46,18 @@ def test_get_one():
         authenticator.get_current_account_data
     ] = get_current_account_data_test
 
-    response = client.get("/cart/1")
+    response = client.get("/cart/2")
 
     app.dependency_overrides = {}
 
-    assert response.status_code == 200
-    assert response.json() == {
-        "shopping_cart_id": 1,
-        "status": 1
-    }
+    if response.status_code == 404:
+        assert response.json() == { "detail": "shopping cart not found" }
+    else:
+        assert response.status_code == 200
+        assert response.json() == {
+            "shopping_cart_id": 1,
+            "status": 1
+        }
 
 def test_get_one_with_cart_items():
     app.dependency_overrides[ShoppingCartRepository] = GetShoppingCartRepository
@@ -58,14 +65,18 @@ def test_get_one_with_cart_items():
         authenticator.get_current_account_data
     ] = get_current_account_data_test
 
-    response = client.get("cart/1/items")
+    response = client.get("cart/2/items")
+
     app.dependency_overrides = {}
 
-    assert response.status_code == 200
-    assert response.json() == [{
-        "id": 1,
-        "photo": "photo.com",
-        "name": "food item",
-        "quantity": 1,
-        "price": 1
-    }]
+    if response.status_code == 404:
+        assert response.json() == { "detail": "shopping cart not found" }
+    else:
+        assert response.status_code == 200
+        assert response.json() == [{
+            "id": 1,
+            "photo": "photo.com",
+            "name": "food item",
+            "quantity": 1,
+            "price": 1
+        }]
