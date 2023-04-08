@@ -52,6 +52,8 @@ In the remaining time, we got started on frontend authentication for Redux by lo
 #### (Friday) 4/7/2023
 Yesterday, Derek did some research after class and got the login portion for frontend auth working. Today, I led as the driver for frontend auth for creating an account. I was running into an issue where the value that was expected was a dictionary. Instead of using FormData, i created a dictionary based on the info provided from each form input. This resolved the issue and we were able to have the user create an account and receive a JWT token in their cookies.
 
+Additionally, I created two unit tests for my get_one and get_one_with_cart_items endpoint in the shopping cart query. I wanted to check if the response is in the correct format as the pydantic model and if the response gives an error message when the id does not exist.
+
 Since we're having Spring Break next week, we discussed whether if we wanted to do any project work. We agreed that we wanted to finish the Frontend auth so that we are able to protect and work on any components after break.
 
 </details>
