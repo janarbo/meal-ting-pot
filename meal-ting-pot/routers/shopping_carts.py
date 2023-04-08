@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException
 from typing import Union, Optional, List
 from queries.shopping_carts import (
     Error,
@@ -33,8 +33,8 @@ def get_one_shopping_cart(
 ) -> ShoppingCartOut:
     shopping_cart = repo.get_one(shopping_cart_id)
     if shopping_cart is None:
-        response.status_code = 404
-    return repo.get_one(shopping_cart_id)
+        raise HTTPException(status_code=404, detail="shopping cart not found")
+    return shopping_cart
 
 
 @router.get(
@@ -48,7 +48,7 @@ def get_one_shopping_cart_w_items(
 ):
     shopping_cart = repo.get_one_with_cart_items(shopping_cart_id)
     if shopping_cart is None:
-        response.status_code = 400
+        raise HTTPException(status_code=404, detail="shopping cart not found")
     return shopping_cart
 
 @router.put(
@@ -60,4 +60,7 @@ def update_shopping_cart(
     repo: ShoppingCartRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, ShoppingCartOut]:
+    shopping_cart = repo.get_one(shopping_cart_id)
+    if shopping_cart is None:
+        raise HTTPException(status_code=404, detail="shopping cart not found")
     return repo.update(shopping_cart_id, shopping_cart)
