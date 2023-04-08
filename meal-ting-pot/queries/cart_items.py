@@ -12,10 +12,15 @@ class CartItemIn(BaseModel):
     quantity: int
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 class UpdateCartItemIn(BaseModel):
     quantity: int
 >>>>>>> main
+=======
+class UpdateCartItemIn(BaseModel):
+    quantity: int
+>>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
 
 class CartItemOut(BaseModel):
     id: int
@@ -42,25 +47,33 @@ class CartItemRepository:
             return False
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def update(self, id: int, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
+=======
+    def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
+>>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    db.execute(
+                    result = db.execute(
                         """
                         UPDATE cart_items
-                        SET shopping_cart_id = %s
-                            , menu_item_id = %s
-                            , quantity = %s
-                        WHERE id = %s;
+                        SET quantity = %s
+                        WHERE id = %s
+                        RETURNING shopping_cart_id, menu_item_id
                         """,
-                        [
-                            cart_item.shopping_cart_id,
-                            cart_item.menu_item_id,
-                            cart_item.quantity,
-                            id
-                        ]
+                        [cart_item.quantity, id]
                     )
+                    row = result.fetchone()
+                    shopping_cart_id = row[0]
+                    menu_item_id = row[1]
+                    return CartItemOut(
+                        id=id,
+                        shopping_cart_id=shopping_cart_id,
+                        menu_item_id=menu_item_id,
+                        quantity=cart_item.quantity
+                    )
+<<<<<<< HEAD
                     return self.cart_item_in_to_out(id, cart_item)
 =======
     def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
@@ -86,15 +99,22 @@ class CartItemRepository:
                         quantity=cart_item.quantity
                     )
 >>>>>>> main
+=======
+>>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 >>>>>>> main
+=======
+
+
+>>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
     def create(self, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
@@ -127,6 +147,10 @@ class CartItemRepository:
             id=id, **old_data
         )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> main
+=======
+
+>>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
