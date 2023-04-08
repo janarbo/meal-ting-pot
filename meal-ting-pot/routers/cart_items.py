@@ -5,6 +5,10 @@ from queries.cart_items import (
     CartItemIn,
     CartItemOut,
     CartItemRepository,
+<<<<<<< HEAD
+=======
+    UpdateCartItemIn
+>>>>>>> main
 )
 from authenticator import authenticator
 
@@ -25,7 +29,11 @@ def create_cart_item(
 @router.put("/cart_item/{id}", response_model=Union[CartItemOut, Error])
 def update_cart_item(
     id: int,
+<<<<<<< HEAD
     cart_item: CartItemIn,
+=======
+    cart_item: UpdateCartItemIn,
+>>>>>>> main
     repo: CartItemRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[CartItemOut, Error]:

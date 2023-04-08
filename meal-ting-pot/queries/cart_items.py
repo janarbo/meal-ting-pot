@@ -11,6 +11,11 @@ class CartItemIn(BaseModel):
     menu_item_id: int
     quantity: int
 
+<<<<<<< HEAD
+=======
+class UpdateCartItemIn(BaseModel):
+    quantity: int
+>>>>>>> main
 
 class CartItemOut(BaseModel):
     id: int
@@ -36,6 +41,7 @@ class CartItemRepository:
             print(e)
             return False
 
+<<<<<<< HEAD
     def update(self, id: int, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
@@ -56,10 +62,39 @@ class CartItemRepository:
                         ]
                     )
                     return self.cart_item_in_to_out(id, cart_item)
+=======
+    def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        UPDATE cart_items
+                        SET quantity = %s
+                        WHERE id = %s
+                        RETURNING shopping_cart_id, menu_item_id
+                        """,
+                        [cart_item.quantity, id]
+                    )
+                    row = result.fetchone()
+                    shopping_cart_id = row[0]
+                    menu_item_id = row[1]
+                    return CartItemOut(
+                        id=id,
+                        shopping_cart_id=shopping_cart_id,
+                        menu_item_id=menu_item_id,
+                        quantity=cart_item.quantity
+                    )
+>>>>>>> main
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> main
     def create(self, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
@@ -91,3 +126,7 @@ class CartItemRepository:
         return CartItemOut(
             id=id, **old_data
         )
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
