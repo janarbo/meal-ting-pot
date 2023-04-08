@@ -50,5 +50,8 @@ Although we finished, in the near future, I want to revise the create order endp
 In the remaining time, we got started on frontend authentication for Redux by looking into documentation. The material is very dense and we definitely need to research more to finish front-end authentication.
 
 #### (Friday) 4/7/2023
+Yesterday, Derek did some research after class and got the login portion for frontend auth working. Today, I led as the driver for frontend auth for creating an account. I was running into an issue where the value that was expected was a dictionary. Instead of using FormData, i created a dictionary based on the info provided from each form input. This resolved the issue and we were able to have the user create an account and receive a JWT token in their cookies.
+
+Since we're having Spring Break next week, we discussed whether if we wanted to do any project work. We agreed that we wanted to finish the Frontend auth so that we are able to protect and work on any components after break.
 
 </details>
