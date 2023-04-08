@@ -11,16 +11,10 @@ class CartItemIn(BaseModel):
     menu_item_id: int
     quantity: int
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 class UpdateCartItemIn(BaseModel):
     quantity: int
->>>>>>> main
-=======
-class UpdateCartItemIn(BaseModel):
-    quantity: int
->>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
+
 
 class CartItemOut(BaseModel):
     id: int
@@ -46,13 +40,7 @@ class CartItemRepository:
             print(e)
             return False
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    def update(self, id: int, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
-=======
-    def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
->>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
-        try:
+
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
@@ -73,9 +61,6 @@ class CartItemRepository:
                         menu_item_id=menu_item_id,
                         quantity=cart_item.quantity
                     )
-<<<<<<< HEAD
-                    return self.cart_item_in_to_out(id, cart_item)
-=======
     def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
@@ -98,23 +83,12 @@ class CartItemRepository:
                         menu_item_id=menu_item_id,
                         quantity=cart_item.quantity
                     )
->>>>>>> main
-=======
->>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
+
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
-
->>>>>>> main
-=======
-
-
->>>>>>> 97b48929edb7ae83260268069499d4987de75c7d
     def create(self, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
@@ -146,11 +120,3 @@ class CartItemRepository:
         return CartItemOut(
             id=id, **old_data
         )
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> main
-=======
-
->>>>>>> 97b48929edb7ae83260268069499d4987de75c7d

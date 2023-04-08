@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from fastapi import APIRouter, Depends, Response
-=======
 from fastapi import APIRouter, Depends, Response, HTTPException
->>>>>>> main
 from typing import Union, Optional, List
 from queries.shopping_carts import (
     Error,
