@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { setUser } from "./user.js";
 
 export const authApi = createApi({
     reducerPath: 'authentication',
@@ -6,8 +7,8 @@ export const authApi = createApi({
         baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
         credentials: "include",
         prepareHeaders: (headers, { getState }) => {
-            const token = getState().token
-            console.log(token)
+            const token = getState().token;
+            console.log(token);
 
             // If we have a token set in state, let's assume that we should be passing it.
             if (token) {
@@ -65,19 +66,41 @@ export const authApi = createApi({
             invalidatesTags: result => {
                 return (result && ['accounts']) || [];
             },
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(authApi.endpoints.getToken.initiate());
+                } catch (error) {
+                    console.error(error);
+                }
+            }
         }),
         getToken: builder.query({
             query: () => ({
-            url: '/token',
-
-            credentials: 'include',
+                url: '/token',
+                method: "get",
+                credentials: 'include'
             }),
             providesTags: ['Token'],
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    dispatch(setUser(data));
+                } catch (error) {
+                    console.error(error);
+                }
+            }
         }),
         logout: builder.mutation({
-            query: () => '/token',
+            query: () => ({
+                url: '/token',
+                method: 'delete',
+            }),
+            invalidatesTags: result => {
+                return (result && ['accounts']) || [];
+            },
         }),
     }),
 });
 
-export const { useAuthQuery, useLoginMutation, useSignupMutation } = authApi;
+export const { useAuthQuery, useLoginMutation, useSignupMutation, useLogoutMutation, useGetTokenQuery } = authApi;
