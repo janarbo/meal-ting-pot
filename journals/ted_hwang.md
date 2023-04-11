@@ -57,3 +57,11 @@ Additionally, I created two unit tests for my get_one and get_one_with_cart_item
 Since we're having Spring Break next week, we discussed whether if we wanted to do any project work. We agreed that we wanted to finish the Frontend auth so that we are able to protect and work on any components after break.
 
 </details>
+
+<details>
+    <summary>Spring Break</summary>
+
+#### (Monday) 4/10/2023
+We agreed as a group to take some time over break to work on our projects. Today, we continued working on frontend authentication. We were able to protect any routes and also set up a userSlice to store user information from payload. Lastly, we wrote the logout and getToken query for our authAPI.
+
+</details>
