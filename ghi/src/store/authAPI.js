@@ -13,7 +13,7 @@ export const authApi = createApi({
 
             // If we have a token set in state, let's assume that we should be passing it.
             if (token) {
-                headers.set('authorization', `Bearer ${token}`)
+                headers.set('authorization', `Bearer ${token}`);
                 console.log('imloggedin')
             }
             return headers
@@ -23,9 +23,9 @@ export const authApi = createApi({
         signup: builder.mutation({
             query: info => {
                 console.log(info);
-                let dictionary = {}
+                let dictionary = {};
                 if (info instanceof HTMLElement) {
-                    dictionary = {info}
+                    dictionary = {info};
                 } else {
                     dictionary = {
                         "first_name": info.first_name,
@@ -34,7 +34,7 @@ export const authApi = createApi({
                         "hashed_password": info.password,
                         "email": info.email,
                         "is_chef": info.isChef
-                    }
+                    };
                 }
                 return {
                     url: '/accounts',
