@@ -18,6 +18,7 @@ function App() {
   }
 
   return (
+
     <div>
       <ErrorNotification error={error} />
       <BrowserRouter>
