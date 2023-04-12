@@ -12,7 +12,7 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.post("/menu_items", tags=["MENU ITEMS"], response_model=Union[MenuItemOut, Error])
+@router.post("/menu-items", tags=["MENU ITEMS"], response_model=Union[MenuItemOut, Error])
 def create_menu_item(
     menu_item: MenuItemIn,
     response: Response,
