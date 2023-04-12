@@ -22,6 +22,36 @@ class CartItemOut(BaseModel):
 
 
 class CartItemRepository:
+    def get_one(self, id: int) -> Optional[CartItemOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT shopping_cart_id
+                        , menu_item_id
+                        , quantity
+                        FROM cart_items
+                        WHERE id=%s
+                        """,
+                        [id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    shopping_cart_id = record[0]
+                    menu_item_id = record[1]
+                    quantity = record[2]
+                    return CartItemOut(
+                        id=id,
+                        shopping_cart_id=shopping_cart_id,
+                        menu_item_id=menu_item_id,
+                        quantity=quantity
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get cart item"}
+
     def delete(self, id: int) -> bool:
         try:
             with pool.connection() as conn:
@@ -42,6 +72,7 @@ class CartItemRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
+                    print(cart_item)
                     result = db.execute(
                         """
                         UPDATE cart_items
@@ -97,4 +128,3 @@ class CartItemRepository:
         return CartItemOut(
             id=id, **old_data
         )
-
