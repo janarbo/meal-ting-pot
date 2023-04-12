@@ -7,7 +7,7 @@ class Error(BaseModel):
     message: str
 
 
-class ShoppingCartIn(BaseModel):
+class UpdateShoppingCartIn(BaseModel):
     status: int
 
 
@@ -81,7 +81,7 @@ class ShoppingCartRepository:
             return {"message": "Could not get shopping cart"}
 
     def update(
-        self, shopping_cart_id: int, shopping_cart: ShoppingCartIn
+        self, shopping_cart_id: int, shopping_cart: UpdateShoppingCartIn
     ) -> Union[ShoppingCartOut, Error]:
         try:
             with pool.connection() as conn:
@@ -94,8 +94,9 @@ class ShoppingCartRepository:
                         """,
                         [shopping_cart.status, shopping_cart_id],
                     )
-                    return self.shopping_cart_in_to_out(
-                        shopping_cart_id, shopping_cart
+                    return ShoppingCartOut(
+                        shopping_cart_id=shopping_cart_id,
+                        status=shopping_cart.status
                     )
         except Exception as e:
             print(e)
@@ -121,12 +122,6 @@ class ShoppingCartRepository:
         except Exception as e:
             print(e)
             return {"message": "Create did not work"}
-
-    def shopping_cart_in_to_out(
-        self, shopping_cart_id: int, shopping_cart: ShoppingCartIn
-    ):
-        old_data = shopping_cart.dict()
-        return ShoppingCartOut(shopping_cart_id=shopping_cart_id, **old_data)
 
     def shopping_cart_to_out(self, record):
         return ShoppingCartOut(shopping_cart_id=record[0], status=record[1])

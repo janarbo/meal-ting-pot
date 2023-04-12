@@ -46,6 +46,43 @@ class OrdersDetailOut(BaseModel):
 
 
 class OrdersRepository:
+    def get_one(self, order_id: int) -> Optional[OrdersOut]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT order_id
+                        , customer_id
+                        , order_date
+                        , total_price
+                        , shopping_cart_id
+                        , status
+                        FROM orders
+                        WHERE order_id=%s
+                        """,
+                        [order_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    customer_id = record[1]
+                    order_date = record[2]
+                    total_price = record[3]
+                    shopping_cart_id = record[4]
+                    status = record[5]
+                    return OrdersOut(
+                        order_id=order_id,
+                        customer_id=customer_id,
+                        order_date=order_date,
+                        total_price=total_price,
+                        shopping_cart_id=shopping_cart_id,
+                        status=status
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get order"}
+
     def create(
         self, orders: CreateOrderIn, account_data: dict
     ) -> Union[OrdersOut, Error]:
@@ -162,7 +199,7 @@ class OrdersRepository:
                     return result
         except Exception as e:
             print(e)
-            return {"message": "Create did not work"}
+            return {"message": "error in query, check console"}
 
     def update(
         self, order_id: int, orders: UpdateOrderIn
