@@ -6,6 +6,7 @@ export const authApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
         credentials: "include",
+        tagTypes: ['token'],
         prepareHeaders: (headers, { getState }) => {
             const token = getState().token;
             console.log(token);
@@ -42,9 +43,7 @@ export const authApi = createApi({
                     credentials: 'include',
                 }
             },
-            invalidatesTags: result => {
-                return (result && ['accounts']) || [];
-            },
+            invalidatesTags: ['token'],
         }),
         login: builder.mutation({
             query: info => {
@@ -63,9 +62,7 @@ export const authApi = createApi({
                     credentials: 'include',
                 };
             },
-            invalidatesTags: result => {
-                return (result && ['accounts']) || [];
-            },
+            invalidatesTags: ['token'],
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
                 try {
                     await queryFulfilled;
@@ -81,7 +78,6 @@ export const authApi = createApi({
                 method: "get",
                 credentials: 'include'
             }),
-            providesTags: ['Token'],
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
@@ -96,9 +92,7 @@ export const authApi = createApi({
                 url: '/token',
                 method: 'delete',
             }),
-            invalidatesTags: result => {
-                return (result && ['accounts']) || [];
-            },
+            invalidatesTags: ['token']
         }),
     }),
 });
