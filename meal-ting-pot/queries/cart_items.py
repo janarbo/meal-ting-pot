@@ -72,7 +72,6 @@ class CartItemRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    print(cart_item)
                     result = db.execute(
                         """
                         UPDATE cart_items
