@@ -8,6 +8,7 @@ import MainPage from './MainPage.js';
 import Nav from './Nav.js';
 import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
+import GetAllChefMenuList from './chefMenuList.js';
 
 function App() {
   const [error, setError] = useState(null);
@@ -18,7 +19,6 @@ function App() {
   }
 
   return (
-
     <div>
       <ErrorNotification error={error} />
       <BrowserRouter>
@@ -26,6 +26,7 @@ function App() {
         <Routes>
           <Route element={<Protected token={data} />}>
             <Route path="home" element={<MainPage />} />
+            <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
           </Route>
           <Route path="" element={<LandingPage />} />
           <Route path="login" element={<LoginForm />}/>
