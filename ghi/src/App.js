@@ -6,8 +6,8 @@ import LandingPage from './LandingPage.js';
 import SignupForm from './SignupForm.js';
 import MainPage from './MainPage.js';
 import Nav from './Nav.js';
-import { useGetTokenQuery } from './store/authAPI.js';
-import Protected from './store/protected.js';
+import { useGetTokenQuery } from './features/auth/authAPI.js';
+import Protected from './features/auth/protected.js';
 
 function App() {
   const [error, setError] = useState(null);

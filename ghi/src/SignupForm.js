@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSignupMutation } from "./store/authAPI";
+import { useSignupMutation } from "./features/auth/authAPI";
 
 const SignupForm = () => {
     const [firstName, setFirstName] = useState('');

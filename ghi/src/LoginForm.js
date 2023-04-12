@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "./store/authAPI";
+import { useLoginMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
