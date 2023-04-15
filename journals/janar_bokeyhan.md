@@ -40,3 +40,18 @@
 ### Thursday 4-05-2023
 * With my teammates help, I got get_one profile function worked.
 * Ted led as driver we started our frontend auth.
+
+###  Monday 4-10-2023
+* Ted led as driver we finished our frontend auth.
+
+###  Wednesday 4-12-2023
+* Ted led as driver we worked together on frontend for menu_item.
+* We installed tailwindcss together.
+
+###  Thurday 4-13-2023
+* I finished frontend of get all profiles by using redux, and made it rendered as card style,this feature allows customer users to be able to choose their prefered chef and order food from chef profile detail page.
+
+### Friday 4-14-2023
+* I finished frontend of profile form by using redux, this feature allows chef users to edit their profile information after they logged in.
+* When I input the phone number, I found that the phone number type is integer which has limited max size, so I changed the data type to BIGINT.
+* I also created the endpoint for get all tags, which can populate the tags for drop down menu in profile form.
