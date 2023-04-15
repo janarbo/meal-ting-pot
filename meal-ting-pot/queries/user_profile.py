@@ -15,7 +15,7 @@ class UserProfileIn(BaseModel):
     address: str
     bio: str
     availability: bool
-    tags: Optional[int]
+    tags: Optional[str]
     featured_menu_item: Optional[int]
 
 class UserProfileDetailOut(BaseModel):
@@ -24,7 +24,7 @@ class UserProfileDetailOut(BaseModel):
     full_name: str
     address: str
     availability: bool
-    tags: str
+    tags:  Optional[str]
     featured_menu_item: Optional[str]
 
 class UserProfileOut(BaseModel):
@@ -37,7 +37,7 @@ class UserProfileOut(BaseModel):
     address: str
     bio: str
     availability: bool
-    tags: Optional[int]
+    tags: Optional[str]
     featured_menu_item: Optional[int]
     social_media: List[str]
 

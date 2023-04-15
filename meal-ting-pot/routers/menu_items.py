@@ -64,4 +64,4 @@ def get_one_menu_item(
     menu_item=repo.get_one(menu_item_id)
     if menu_item is None:
         response.status_code=404
-        return menu_item
+    return menu_item

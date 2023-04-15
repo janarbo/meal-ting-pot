@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useGetAllChefQuery } from './features/menu-items/menuItemApi'
-import ErrorNotification from './ErrorNotification';
+import { useGetAllChefQuery } from '../features/menu-items/menuItemApi'
+import ErrorNotification from '../ErrorNotification';
 import { useSelector } from "react-redux";
 
 function GetAllChefMenuList() {
