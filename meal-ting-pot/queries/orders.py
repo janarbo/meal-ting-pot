@@ -24,6 +24,7 @@ class CartItemDetail(BaseModel):
     photo: str
     quantity: int
 
+
 class OrdersOut(BaseModel):
     order_id: int
     customer_id: int
@@ -31,6 +32,7 @@ class OrdersOut(BaseModel):
     total_price: int
     shopping_cart_id: int
     status: int
+
 
 class OrdersDetailOut(BaseModel):
     order_id: int
@@ -61,7 +63,7 @@ class OrdersRepository:
                         FROM orders
                         WHERE order_id=%s
                         """,
-                        [order_id]
+                        [order_id],
                     )
                     record = result.fetchone()
                     if record is None:
@@ -77,7 +79,7 @@ class OrdersRepository:
                         order_date=order_date,
                         total_price=total_price,
                         shopping_cart_id=shopping_cart_id,
-                        status=status
+                        status=status,
                     )
         except Exception as e:
             print(e)
@@ -95,9 +97,7 @@ class OrdersRepository:
                         FROM cart_items ci
                         WHERE ci.shopping_cart_id = %s
                         """,
-                            [
-                                orders.shopping_cart_id
-                            ]
+                        [orders.shopping_cart_id],
                     )
                     cart = db.fetchall()
                     if len(cart) == 0:
@@ -111,12 +111,12 @@ class OrdersRepository:
                         (%s, %s, %s, %s, 1)
                         RETURNING order_id, order_date, status;
                         """,
-                            [
-                                account_data["id"],
-                                orders.order_date,
-                                orders.total_price,
-                                orders.shopping_cart_id,
-                            ],
+                        [
+                            account_data["id"],
+                            orders.order_date,
+                            orders.total_price,
+                            orders.shopping_cart_id,
+                        ],
                     )
                     row = result.fetchone()
                     order_id = row[0]
@@ -128,13 +128,13 @@ class OrdersRepository:
                         order_date=order_date,
                         total_price=orders.total_price,
                         shopping_cart_id=orders.shopping_cart_id,
-                        status=status
+                        status=status,
                     )
         except Exception as e:
             print(e)
             return {"message": "Create did not work"}
 
-    def get_all(self) -> Union[List[OrdersDetailOut],Error]:
+    def get_all(self) -> Union[List[OrdersDetailOut], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -193,7 +193,7 @@ class OrdersRepository:
                             chef_id=record[6],
                             chef_email=record[7],
                             chef_phone=record[8],
-                            chef_address=record[9]
+                            chef_address=record[9],
                         )
                         result.append(cart_item)
                     return result
@@ -227,7 +227,7 @@ class OrdersRepository:
                         order_date=order_date,
                         total_price=total_price,
                         shopping_cart_id=shopping_cart_id,
-                        status=orders.status
+                        status=orders.status,
                     )
         except Exception as e:
             print(e)
