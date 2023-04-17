@@ -1,5 +1,4 @@
 [flake8]
 exclude = ghi,docs,journals,sample_service/migrations
 ignore =
-    E203, W503, # Incompatible with black see https://github.com/ambv/black/issues/315
-    E501, # Lot of lines too long right now
+    E203, W503, E501
