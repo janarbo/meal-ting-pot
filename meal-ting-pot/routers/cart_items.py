@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, Response, HTTPException
-from typing import Union, Optional, List
+from typing import Union
 from queries.cart_items import (
     Error,
     CartItemIn,
     CartItemOut,
     CartItemRepository,
-    UpdateCartItemIn
+    UpdateCartItemIn,
 )
 from authenticator import authenticator
 
@@ -23,6 +23,7 @@ def get_one_cart_item(
     if cart_item is None:
         raise HTTPException(status_code=404, detail="cart item not found")
     return cart_item
+
 
 @router.post("/cart-item", response_model=Union[CartItemOut, Error])
 def create_cart_item(

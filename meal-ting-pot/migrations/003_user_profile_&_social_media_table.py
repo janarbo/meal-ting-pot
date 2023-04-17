@@ -25,7 +25,7 @@ steps = [
     """,
         """
     DROP TABLE tags
-    """
+    """,
     ],
     [
         """

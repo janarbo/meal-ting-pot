@@ -25,7 +25,9 @@ class ShoppingCartWithCartItemsOut(BaseModel):
 
 
 class ShoppingCartRepository:
-    def get_one_with_cart_items(self, shopping_cart_id: int) -> Union[List[ShoppingCartWithCartItemsOut],Error]:
+    def get_one_with_cart_items(
+        self, shopping_cart_id: int
+    ) -> Union[List[ShoppingCartWithCartItemsOut], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -52,7 +54,7 @@ class ShoppingCartRepository:
                             photo=record[1],
                             name=record[2],
                             quantity=record[3],
-                            price=record[4]
+                            price=record[4],
                         )
                         result.append(cart_item)
                     return result
@@ -78,6 +80,7 @@ class ShoppingCartRepository:
                         return None
                     return self.shopping_cart_to_out(record)
         except Exception as e:
+            print(e)
             return {"message": "Could not get shopping cart"}
 
     def update(
@@ -96,7 +99,7 @@ class ShoppingCartRepository:
                     )
                     return ShoppingCartOut(
                         shopping_cart_id=shopping_cart_id,
-                        status=shopping_cart.status
+                        status=shopping_cart.status,
                     )
         except Exception as e:
             print(e)
