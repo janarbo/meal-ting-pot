@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 function GetAllChefMenuList() {
     const userId = useSelector((state) => state.auth.user.id);
+    console.log(userId);
     const { data } = useGetAllChefQuery(userId);
     console.log(data);
     return (
