@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginForm from './LoginForm.js';
 import ErrorNotification from './ErrorNotification';
@@ -22,15 +22,15 @@ function App() {
     <div>
       <ErrorNotification error={error} />
       <BrowserRouter>
-        <Nav />
-        <Routes>
-          <Route element={<Protected token={data} />}>
-            <Route path="home" element={<MainPage />} />
-            <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
-          </Route>
-          <Route path="" element={<LandingPage />} />
-          <Route path="login" element={<LoginForm />}/>
-          <Route path="signup" element={<SignupForm />} />
+        <Nav accountInfo={data}/>
+          <Routes>
+            <Route element={<Protected token={data} />}>
+              <Route path="home" element={<MainPage />} />
+              <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
+            </Route>
+            <Route path="" element={<LandingPage />} />
+            <Route path="login" element={<LoginForm accountInfo={data} />}/>
+            <Route path="signup" element={<SignupForm accountInfo={data} />} />
         </Routes>
       </BrowserRouter>
     </div>
