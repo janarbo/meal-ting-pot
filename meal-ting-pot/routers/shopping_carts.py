@@ -38,7 +38,8 @@ def get_one_shopping_cart(
 
 
 @router.get(
-        "/cart/{shopping_cart_id}/items", response_model=Union[Optional[List[ShoppingCartWithCartItemsOut]], Error]
+    "/cart/{shopping_cart_id}/items",
+    response_model=Union[Optional[List[ShoppingCartWithCartItemsOut]], Error],
 )
 def get_one_shopping_cart_w_items(
     shopping_cart_id: int,
@@ -52,7 +53,9 @@ def get_one_shopping_cart_w_items(
     return shopping_cart
 
 
-@router.put("/cart/{shopping_cart_id}", response_model=Union[ShoppingCartOut, Error])
+@router.put(
+    "/cart/{shopping_cart_id}", response_model=Union[ShoppingCartOut, Error]
+)
 def update_shopping_cart(
     shopping_cart_id: int,
     shopping_cart: UpdateShoppingCartIn,

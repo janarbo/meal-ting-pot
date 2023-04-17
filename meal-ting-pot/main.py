@@ -2,7 +2,15 @@ from fastapi import FastAPI
 from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import menu_items, accounts, shopping_carts, user_profile, cart_items, orders, social_media
+from routers import (
+    menu_items,
+    accounts,
+    shopping_carts,
+    user_profile,
+    cart_items,
+    orders,
+    social_media,
+)
 
 tags_metadata = [
     {
