@@ -9,7 +9,7 @@ export const chefProfileApi = createApi({
     endpoints: builder => ({
         getAllChefProfiles: builder.query({
             query: () => '/profile/',
-            providesTags: ['ProfileList'],
+            providesTags: ['MainPage'],
         }),
 
         createProfile: builder.mutation({
@@ -19,7 +19,7 @@ export const chefProfileApi = createApi({
             method: 'post',
 
             }),
-            invalidatesTags: ['ProfileList'],
+            invalidatesTags: ['MainPage'],
         }),
     }),
 });

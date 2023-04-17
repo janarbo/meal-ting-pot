@@ -10,7 +10,6 @@ import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
 import GetAllChefMenuList from './component/chefMenuList.js';
 import ProfileForm from './component/ChefProfileForm.js';
-import ChefProfileList from  './component/ChefProfileList.js';
 
 function App() {
   const [error, setError] = useState(null);
@@ -30,7 +29,6 @@ function App() {
             <Route path="home" element={<MainPage />} />
             <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
             <Route path="chef/profile" element={<ProfileForm />} />
-            <Route path="profiles" element={<ChefProfileList />} />
 
           </Route>
           <Route path="" element={<LandingPage />} />

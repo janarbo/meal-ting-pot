@@ -55,7 +55,7 @@ function ProfileForm(){
       };
         const result = await createProfile(payload);
         console.log(payload)
-        navigate('/profiles');
+        navigate('/home');
           } catch (error) {
             setError(error)
             console.log(error)

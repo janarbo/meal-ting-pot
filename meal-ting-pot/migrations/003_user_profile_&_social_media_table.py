@@ -40,7 +40,9 @@ steps = [
         bio VARCHAR(1000) NOT NULL,
         availability BOOL NOT NULL,
         tags INTEGER NULL REFERENCES tags(id),
-        featured_menu_item INTEGER NULL REFERENCES menu_items(menu_item_id)
+        featured_menu_item INTEGER NULL REFERENCES menu_items(menu_item_id),
+        CONSTRAINT unique_user_id UNIQUE(user_id)
+
     );
     """,
         """
