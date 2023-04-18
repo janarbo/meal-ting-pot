@@ -67,6 +67,7 @@ build-meal-ting-pot-service:
   services:
     - docker:19.03.1-dind
   before_script:
+    - export SIGNING_KEY=os.environ["SIGNING_KEY"]
     - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
     - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
     - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
