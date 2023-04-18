@@ -15,8 +15,8 @@ stages:
 api-unit-test-job:
   image: python:3-bullseye
   stage: test
-  needs:
-    - lint-test-job
+  # needs:
+  #   - lint-test-job
   script:
     - cd meal-ting-pot
     - pip install -r requirements.txt
