@@ -9,7 +9,7 @@ from queries.user_profile import (
 )
 
 
-from authenticator import authenticator
+from authenticator1 import authenticator
 
 router = APIRouter()
 
