@@ -43,8 +43,6 @@ app.include_router(social_media.router, tags=["SOCIAL MEDIA"])
 app.include_router(tags.router, tags=["TAGS"])
 
 
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[os.environ.get("CORS_HOST", "http://localhost:3000")],
