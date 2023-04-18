@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useSignupMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +10,7 @@ const SignupForm = ({ accountInfo }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isChef, setIsChef] = useState(false);
-    const [signup, result] = useSignupMutation();
+    const [signup] = useSignupMutation();
     const navigate = useNavigate();
 
     const handleOnClick = () => {
