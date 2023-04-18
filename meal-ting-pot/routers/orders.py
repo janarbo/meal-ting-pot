@@ -9,7 +9,7 @@ from queries.orders import (
     Error,
 )
 
-from authenticator import authenticator
+from authenticator1 import authenticator
 
 router = APIRouter()
 

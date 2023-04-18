@@ -4,8 +4,6 @@ import { useCreateProfileMutation } from './features/chef-profile/chefProfileApi
 import {useNavigate} from 'react-router-dom'
 
 function ProfileForm(){
-
-
   const [fullname, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState('');
@@ -16,10 +14,9 @@ function ProfileForm(){
 
   const [featuredmenuitem, setFeaturedMenuItem] = useState('');
   const [tagname, setTagName] = useState ('');
-  const [error, setError] = useState ('');
 
   const navigate = useNavigate();
-  const [createProfile, { isLoading }] = useCreateProfileMutation();
+  const [createProfile] = useCreateProfileMutation();
 
   const handleOnClick = () => {
     availability ? setAvailability(false): setAvailability(true);
@@ -53,11 +50,10 @@ function ProfileForm(){
         'tags':tagname,
         "featured_menu_item":featuredmenuitem,
       };
-        const result = await createProfile(payload);
+        await createProfile(payload);
         console.log(payload)
         navigate('/home');
           } catch (error) {
-            setError(error)
             console.log(error)
           }
   };

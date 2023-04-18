@@ -7,7 +7,7 @@ from queries.cart_items import (
     CartItemRepository,
     UpdateCartItemIn,
 )
-from authenticator import authenticator
+from authenticator1 import authenticator
 
 router = APIRouter()
 
