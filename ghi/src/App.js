@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginForm from './LoginForm.js';
-import ErrorNotification from './ErrorNotification';
 import LandingPage from './LandingPage.js';
 import SignupForm from './SignupForm.js';
 import MainPage from './MainPage.js';
@@ -11,7 +9,6 @@ import Protected from './features/auth/protected.js';
 import GetAllChefMenuList from './chefMenuList.js';
 
 function App() {
-  const [error, setError] = useState(null);
   const { data } = useGetTokenQuery();
 
   if ( data === undefined ) {
@@ -20,7 +17,6 @@ function App() {
 
   return (
     <div>
-      <ErrorNotification error={error} />
       <BrowserRouter>
         <Nav accountInfo={data}/>
           <Routes>
