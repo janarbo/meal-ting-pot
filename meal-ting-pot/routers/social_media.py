@@ -8,7 +8,7 @@ from queries.social_media import (
 )
 
 
-from authenticator1 import authenticator
+from authenticator import authenticator
 
 router = APIRouter()
 

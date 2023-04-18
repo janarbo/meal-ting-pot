@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from authenticator1 import authenticator
+from authenticator import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import menu_items, accounts, shopping_carts, user_profile, cart_items, orders, social_media, tags
@@ -41,8 +41,6 @@ app.include_router(cart_items.router, tags=["CART ITEMS"])
 app.include_router(orders.router, tags=["ORDERS"])
 app.include_router(social_media.router, tags=["SOCIAL MEDIA"])
 app.include_router(tags.router, tags=["TAGS"])
-
-
 
 
 app.add_middleware(
