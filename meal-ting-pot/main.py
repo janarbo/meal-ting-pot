@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from authenticator import authenticator
+from authenticator1 import authenticator
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import menu_items, accounts, shopping_carts, user_profile, cart_items, orders, social_media, tags
@@ -42,10 +42,14 @@ app.include_router(orders.router, tags=["ORDERS"])
 app.include_router(social_media.router, tags=["SOCIAL MEDIA"])
 app.include_router(tags.router, tags=["TAGS"])
 
+origins = [
+    os.environ.get("CORS_HOST"),
+    "http://localhost:3000"
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.environ.get("CORS_HOST", "http://localhost:3000")],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
