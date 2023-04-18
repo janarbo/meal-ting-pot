@@ -22,7 +22,8 @@ steps = [
         customer_id INTEGER references users(id),
         order_date DATE NOT NULL,
         total_price REAL NOT NULL,
-        shopping_cart_id INTEGER NOT NULL REFERENCES shopping_carts(shopping_cart_id),
+        shopping_cart_id
+            INTEGER NOT NULL REFERENCES shopping_carts(shopping_cart_id),
         status INTEGER NOT NULL REFERENCES order_status(status_id)
     );
     """,

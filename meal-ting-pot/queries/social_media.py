@@ -1,19 +1,21 @@
 from pydantic import BaseModel
-from typing import Optional, Union
+from typing import Union
 from queries.pool import pool
 
 
 class Error(BaseModel):
     message: str
 
+
 class SocialMediaIn(BaseModel):
-    url : str
+    url: str
     user_profile_id: int
+
 
 class SocialMediaOut(BaseModel):
     id: int
     url: str
-    user_profile_id : int
+    user_profile_id: int
 
 
 class SocialMediaRepository:
@@ -26,15 +28,16 @@ class SocialMediaRepository:
                         DELETE from social_media
                         WHERE id = %s
                         """,
-                        [id]
+                        [id],
                     )
                     return True
         except Exception as e:
             print(e)
             return False
 
-
-    def update(self, id: int, social_media: SocialMediaIn) -> Union[SocialMediaOut, Error]:
+    def update(
+        self, id: int, social_media: SocialMediaIn
+    ) -> Union[SocialMediaOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -45,19 +48,16 @@ class SocialMediaRepository:
                           , user_profile_id= %s
                         WHERE id = %s;
                         """,
-                        [
-                            social_media.url,
-                            social_media.user_profile_id,
-                            id
-                        ]
+                        [social_media.url, social_media.user_profile_id, id],
                     )
                     return self.social_media_in_to_out(id, social_media)
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
 
-
-    def create(self, social_media: SocialMediaIn) -> Union[SocialMediaOut, Error]:
+    def create(
+        self, social_media: SocialMediaIn
+    ) -> Union[SocialMediaOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -67,22 +67,14 @@ class SocialMediaRepository:
                         VALUES (%s, %s)
                         RETURNING id
                         """,
-                        [
-                            social_media.url,
-                            social_media.user_profile_id
-                        ]
+                        [social_media.url, social_media.user_profile_id],
                     )
                     id = result.fetchone()[0]
-                    return self.social_media_in_to_out(
-                        id, social_media
-                    )
+                    return self.social_media_in_to_out(id, social_media)
         except Exception as e:
+            print(e)
             return {"message": "Create did not work"}
 
-    def social_media_in_to_out(
-            self, id:int, social_media: SocialMediaIn
-    ):
+    def social_media_in_to_out(self, id: int, social_media: SocialMediaIn):
         old_data = social_media.dict()
-        return SocialMediaOut(
-            id=id, **old_data
-        )
+        return SocialMediaOut(id=id, **old_data)
