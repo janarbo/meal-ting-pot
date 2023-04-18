@@ -12,8 +12,6 @@ COPY authenticator.py authenticator.py
 # Modify these instructions to do that
 COPY queries queries
 COPY routers routers
-COPY migrations migrations
-
 
 # !! PORT env var needs to match with exposed port in caprover dashboard
 # CMD uvicorn main:app --host 0.0.0.0 --port 80
@@ -22,9 +20,10 @@ COPY migrations migrations
 # If you're using a relational database andwant migrations
 # to be run automatically, delete the previous CMD line and
 # uncomment the following COPY and CMD lines
-COPY migrations migrations
 
 RUN python -m pip install -r requirements.txt
+
+COPY migrations migrations
 
 # # !! PORT env var needs to match with exposed port in caprover dashboard
 CMD python -m migrations up && uvicorn main:app --host 0.0.0.0 --port 80
