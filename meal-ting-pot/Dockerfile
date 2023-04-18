@@ -20,7 +20,7 @@ COPY routers routers
 # to be run automatically, delete the previous CMD line and
 # uncomment the following COPY and CMD lines
 COPY migrations migrations
-COPY authenticator.py authenticator.py
+# COPY authenticator.py authenticator.py
 
 RUN python -m pip install -r requirements.txt
 
