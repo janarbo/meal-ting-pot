@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, HTTPException
-from typing import Union, List, Optional
+from typing import Union, List
 from queries.orders import (
     CreateOrderIn,
     UpdateOrderIn,
@@ -37,6 +37,7 @@ def create_order(
     response.status = 400
     return repo.create(orders, account_data)
 
+
 @router.get("/orders", response_model=List[OrdersDetailOut])
 def get_all_orders(
     response: Response,
@@ -46,8 +47,11 @@ def get_all_orders(
     response.status = 400
     orders = repo.get_all()
     if orders is None:
-        raise HTTPException(status_code=404, detail="There are no orders in database")
+        raise HTTPException(
+            status_code=404, detail="There are no orders in database"
+        )
     return orders
+
 
 @router.put("/orders/{order_id}", response_model=Union[OrdersOut, Error])
 def update_order(

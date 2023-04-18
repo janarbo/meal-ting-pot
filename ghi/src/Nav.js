@@ -1,25 +1,38 @@
-import { NavLink } from 'react-router-dom'
 import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import {
+//     useCreateShoppingCartMutation,
+//     useGetOneShoppingCartQuery,
+//     useUpdateShoppingCartMutation,
+//     useGetOneShoppingCartWithItemsQuery
+// } from './features/shopping-cart/shoppingCartApi';
 
-function Nav() {
+function Nav({ accountInfo }) {
     const navigate = useNavigate();
-    const [logout, setLogout] = useLogoutMutation();
+    const [logout] = useLogoutMutation();
 
-    function handleLogout() {
-        navigate('')
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        await logout();
+        navigate("/");
     }
 
     return (
-        <button onClick={async () => {
-            await logout();
-            handleLogout();
-        }}>
-            Logout
-        </button>
+        <nav>
+            {accountInfo &&
+                <div>
+                    <button onClick={handleLogout}>
+                    Logout
+                    </button>
+                    <IconButton>
+                    </IconButton>
+                    <ShoppingCartIcon />
+                </div>
+            }
+        </nav>
     );
   }
 

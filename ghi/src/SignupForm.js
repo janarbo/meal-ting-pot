@@ -1,16 +1,17 @@
 import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { useSignupMutation } from "./features/auth/authAPI";
+import { useNavigate } from "react-router-dom";
 
-const SignupForm = () => {
+const SignupForm = ({ accountInfo }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isChef, setIsChef] = useState(false);
-    const [signup, result] = useSignupMutation();
+    const [signup] = useSignupMutation();
+    const navigate = useNavigate();
 
     const handleOnClick = () => {
         isChef ? setIsChef(false): setIsChef(true);
@@ -28,6 +29,18 @@ const SignupForm = () => {
         });
         event.target.reset();
     };
+
+    useEffect(() => {
+        if (accountInfo) {
+            isChef ? (
+            // Need to change this link to chef profile page
+            navigate("/home")
+        ) : (
+            navigate("/home")
+        )}
+    }, [accountInfo, navigate, isChef])
+
+    const canSave = Boolean(firstName) && Boolean(lastName) && Boolean(username) && Boolean(password) && Boolean(email)
 
     return (
     <form onSubmit={handleSubmit}>
@@ -75,7 +88,7 @@ const SignupForm = () => {
             name="chef"
         />
         <label htmlFor="chef">Chef account</label>
-        <button type="submit">Create</button>
+        <button className="dbg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit" disabled={!canSave}>Create</button>
     </form>
     );
 }

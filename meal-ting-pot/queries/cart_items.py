@@ -1,6 +1,7 @@
 from pydantic import BaseModel
-from typing import Optional, Union, List
+from typing import Optional, Union
 from queries.pool import pool
+
 
 class Error(BaseModel):
     message: str
@@ -11,8 +12,10 @@ class CartItemIn(BaseModel):
     menu_item_id: int
     quantity: int
 
+
 class UpdateCartItemIn(BaseModel):
     quantity: int
+
 
 class CartItemOut(BaseModel):
     id: int
@@ -34,7 +37,7 @@ class CartItemRepository:
                         FROM cart_items
                         WHERE id=%s
                         """,
-                        [id]
+                        [id],
                     )
                     record = result.fetchone()
                     if record is None:
@@ -46,7 +49,7 @@ class CartItemRepository:
                         id=id,
                         shopping_cart_id=shopping_cart_id,
                         menu_item_id=menu_item_id,
-                        quantity=quantity
+                        quantity=quantity,
                     )
         except Exception as e:
             print(e)
@@ -61,14 +64,16 @@ class CartItemRepository:
                         DELETE from cart_items
                         WHERE id = %s
                         """,
-                        [id]
+                        [id],
                     )
                     return True
         except Exception as e:
             print(e)
             return False
 
-    def update(self, id: int, cart_item: UpdateCartItemIn) -> Union[CartItemOut, Error]:
+    def update(
+        self, id: int, cart_item: UpdateCartItemIn
+    ) -> Union[CartItemOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -79,7 +84,7 @@ class CartItemRepository:
                         WHERE id = %s
                         RETURNING shopping_cart_id, menu_item_id
                         """,
-                        [cart_item.quantity, id]
+                        [cart_item.quantity, id],
                     )
                     row = result.fetchone()
                     shopping_cart_id = row[0]
@@ -88,13 +93,11 @@ class CartItemRepository:
                         id=id,
                         shopping_cart_id=shopping_cart_id,
                         menu_item_id=menu_item_id,
-                        quantity=cart_item.quantity
+                        quantity=cart_item.quantity,
                     )
         except Exception as e:
             print(e)
             return {"message": "Could not update cart item"}
-
-
 
     def create(self, cart_item: CartItemIn) -> Union[CartItemOut, Error]:
         try:
@@ -102,28 +105,24 @@ class CartItemRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        INSERT INTO cart_items (shopping_cart_id, menu_item_id, quantity)
+                        INSERT INTO cart_items (shopping_cart_id
+                        , menu_item_id
+                        , quantity)
                         VALUES (%s, %s, %s)
                         RETURNING id
                         """,
                         [
                             cart_item.shopping_cart_id,
                             cart_item.menu_item_id,
-                            cart_item.quantity
-                        ]
+                            cart_item.quantity,
+                        ],
                     )
                     id = result.fetchone()[0]
-                    return self.cart_item_in_to_out(
-                        id, cart_item
-                    )
+                    return self.cart_item_in_to_out(id, cart_item)
         except Exception as e:
             print(e)
             return {"message": "Create did not work"}
 
-    def cart_item_in_to_out(
-            self, id: int, cart_item: CartItemIn
-    ):
+    def cart_item_in_to_out(self, id: int, cart_item: CartItemIn):
         old_data = cart_item.dict()
-        return CartItemOut(
-            id=id, **old_data
-        )
+        return CartItemOut(id=id, **old_data)
