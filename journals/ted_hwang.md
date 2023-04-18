@@ -65,3 +65,15 @@ Since we're having Spring Break next week, we discussed whether if we wanted to 
 We agreed as a group to take some time over break to work on our projects. Today, we continued working on frontend authentication. We were able to protect any routes and also set up a userSlice to store user information from payload. Lastly, we wrote the logout and getToken query for our authAPI.
 
 </details>
+
+<details>
+    <summary>Week 16</summary>
+
+#### (Monday) 4/17/2023
+We learned how to use caprover to deploy our application. We decided to work on that today and then start the frontend components afterwards.
+
+We ended today by revising our .gitlab-ci.yml file to include jobs for testing, building, and deployment. We were able to pass all tests on our latest commit but ran into a CORS issue and an "authenticator module was not found" in the deployment logs.
+
+We plan on asking for guidance from our instructors as we are unsure whether this is a bug in our backend, frontend, or caprover configurations.
+
+</details>
