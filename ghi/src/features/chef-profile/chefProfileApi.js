@@ -21,10 +21,15 @@ export const chefProfileApi = createApi({
             }),
             invalidatesTags: ['MainPage'],
         }),
-    }),
-});
 
+        getAllTags: builder.query({
+        query: () => '/tags',
+        providesTags: ['Tags']
+        })
+    })
+});
 export const {
     useGetAllChefProfilesQuery,
     useCreateProfileMutation,
+    useGetAllTagsQuery
 } = chefProfileApi;

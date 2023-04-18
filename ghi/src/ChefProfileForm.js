@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useCreateProfileMutation } from '../features/chef-profile/chefProfileApi';
+import { useCreateProfileMutation } from './features/chef-profile/chefProfileApi';
 import {useNavigate} from 'react-router-dom'
 
 function ProfileForm(){

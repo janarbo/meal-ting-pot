@@ -8,8 +8,10 @@ import MainPage from './MainPage.js';
 import Nav from './Nav.js';
 import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
-import GetAllChefMenuList from './component/chefMenuList.js';
-import ProfileForm from './component/ChefProfileForm.js';
+import GetAllChefMenuList from './chefMenuList.js';
+import ProfileForm from './ChefProfileForm.js';
+import FilteredProfiles from './FilteredProfiles.js';
+
 
 function App() {
   const [error, setError] = useState(null);
@@ -29,7 +31,7 @@ function App() {
             <Route path="home" element={<MainPage />} />
             <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
             <Route path="chef/profile" element={<ProfileForm />} />
-
+            <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
           </Route>
           <Route path="" element={<LandingPage />} />
           <Route path="login" element={<LoginForm />}/>

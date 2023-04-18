@@ -4,6 +4,7 @@ import { authApi } from "../features/auth/authAPI";
 import { userSlice }  from "../features/auth/user";
 import { menuItemApi } from "../features/menu-items/menuItemApi";
 import { chefProfileApi } from "../features/chef-profile/chefProfileApi";
+// import profilesReducer from "../features/chef-profile/profilesSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,8 @@ const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [menuItemApi.reducerPath]: menuItemApi.reducer,
     [chefProfileApi.reducerPath]: chefProfileApi.reducer,
+    // profiles: profilesReducer,
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
