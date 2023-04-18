@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   useGetAllChefProfilesQuery,
-  useGetAllTagsQuery,
+  // useGetAllTagsQuery,
 } from "./features/chef-profile/chefProfileApi";
 import { useParams } from "react-router-dom";
 
