@@ -23,7 +23,6 @@ function App() {
 
   return (
     <div>
-      <ErrorNotification error={error} />
       <BrowserRouter basename={basename}>
         <Nav accountInfo={data}/>
           <Routes>
