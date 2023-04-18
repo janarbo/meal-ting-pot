@@ -4,8 +4,6 @@ from queries.tags import Tag, TagRepository, Error
 from pydantic import ValidationError
 
 
-
-
 router = APIRouter()
 
 
@@ -19,5 +17,5 @@ def get_all_tags(
         if tags is None:
             return {"message": "No tags found"}
         return tags
-    except ValidationError as e:
+    except ValidationError:
         return {"message": "ERROR"}

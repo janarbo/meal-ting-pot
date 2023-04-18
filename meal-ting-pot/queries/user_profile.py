@@ -25,7 +25,7 @@ class UserProfileDetailOut(BaseModel):
     full_name: str
     address: str
     availability: bool
-    tags:  Optional[str]
+    tags: Optional[str]
     featured_menu_item: Optional[str]
 
 
@@ -42,6 +42,7 @@ class UserProfileOut(BaseModel):
     tags: Optional[str]
     featured_menu_item: Optional[int]
     social_media: Optional[List[str]] = None
+
 
 class UserProfileRepository:
     def update(
@@ -126,31 +127,31 @@ class UserProfileRepository:
             return {"message": "Could not get the user profile"}
 
     def get_one(self, profile_id: int) -> Optional[UserProfileOut]:
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor() as db:
-                        result = db.execute(
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
 
-                            """
-                            SELECT up.*, ARRAY_AGG(s.url) AS social_media
-                            FROM user_profiles AS up
-                            LEFT JOIN social_media AS s ON up.profile_id = s.user_profile_id
-                            WHERE up.profile_id = %s
-                            GROUP BY up.profile_id;
-                            """,
-                            [profile_id],
-                        )
-                        print(result)
-                        records = result.fetchall()
-                        if not records:
-                            return None
-                        profile = self.user_profile_to_out(records[0])
-                        if not profile.social_media:
-                            profile.social_media = None
-                        return profile
-            except Exception as e:
-                print(e)
-                return {"message": "Could not get the user profile"}
+                        """
+                        SELECT up.*, ARRAY_AGG(s.url) AS social_media
+                        FROM user_profiles AS up
+                        LEFT JOIN social_media AS s ON up.profile_id = s.user_profile_id
+                        WHERE up.profile_id = %s
+                        GROUP BY up.profile_id;
+                        """,
+                        [profile_id],
+                    )
+                    print(result)
+                    records = result.fetchall()
+                    if not records:
+                        return None
+                    profile = self.user_profile_to_out(records[0])
+                    if not profile.social_media:
+                        profile.social_media = None
+                    return profile
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get the user profile"}
 
     def create(
         self, user_profile: UserProfileIn, account_data: dict
@@ -199,7 +200,7 @@ class UserProfileRepository:
             **old_data,
         )
 
-    def user_profile_to_out(self,  record) -> UserProfileOut:
+    def user_profile_to_out(self, record) -> UserProfileOut:
         return UserProfileOut(
             profile_id=record[0],
             user_id=record[1],
