@@ -1,20 +1,18 @@
-import { NavLink } from 'react-router-dom'
 import React from "react";
-import { useState, useEffect } from "react";
-import { useGetTokenQuery, useLogoutMutation } from "./features/auth/authAPI";
+import { useLogoutMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {
-    useCreateShoppingCartMutation,
-    useGetOneShoppingCartQuery,
-    useUpdateShoppingCartMutation,
-    useGetOneShoppingCartWithItemsQuery
-} from './features/shopping-cart/shoppingCartApi';
+// import {
+//     useCreateShoppingCartMutation,
+//     useGetOneShoppingCartQuery,
+//     useUpdateShoppingCartMutation,
+//     useGetOneShoppingCartWithItemsQuery
+// } from './features/shopping-cart/shoppingCartApi';
 
 function Nav({ accountInfo }) {
     const navigate = useNavigate();
-    const [logout, setLogout] = useLogoutMutation();
+    const [logout] = useLogoutMutation();
 
     const handleLogout = async (e) => {
         e.preventDefault();
