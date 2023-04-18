@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 const FilteredProfiles = () => {
   const { tagName } = useParams();
   const [profiles, setProfiles] = useState([]);
-  const { data: tags } = useGetAllTagsQuery();
+  // const { data: tags } = useGetAllTagsQuery();
   const { data, isLoading } = useGetAllChefProfilesQuery();
 
   useEffect(() => {
