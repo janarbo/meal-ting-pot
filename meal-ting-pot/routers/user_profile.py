@@ -1,11 +1,13 @@
 from fastapi import APIRouter, Depends, Response
-from typing import Union
+from typing import Union, List
 from queries.user_profile import (
     UserProfileIn,
     UserProfileRepository,
     UserProfileOut,
     Error,
+    UserProfileDetailOut
 )
+
 
 from authenticator import authenticator
 
@@ -22,7 +24,7 @@ def create_user_profile(
     response.status = 400
     return repo.create(user_profile, account_data)
 
-@router.get("/profile/{profile_id}",response_model=Union[UserProfileOut, Error])
+@router.get("/profile/{profile_id}", response_model=Union[UserProfileOut, Error])
 def get_one_profile(
     profile_id: int,
     response : Response,
@@ -34,7 +36,7 @@ def get_one_profile(
         response.status_code = 404
     return user_profile
 
-@router.put("/profile/{profile_id}",response_model=Union[UserProfileOut, Error])
+@router.put("/profile/{profile_id}", response_model=Union[UserProfileOut, Error])
 def update_profile(
     profile_id: int,
     user_profile: UserProfileIn,
@@ -42,3 +44,12 @@ def update_profile(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, UserProfileOut]:
     return repo.update(profile_id, user_profile, account_data)
+
+@router.get("/profile/", response_model=Union[Error, List[UserProfileDetailOut]])
+def get_all_profile(
+    response : Response,
+    repo: UserProfileRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> UserProfileOut:
+    user_profile = repo.get_all()
+    return repo.get_all()
