@@ -35,12 +35,14 @@ steps = [
         full_name VARCHAR(150) NOT NULL,
         email VARCHAR(40) NOT NULL,
         photo VARCHAR(1000) NOT NULL,
-        phone_number INTEGER NOT NULL,
+        phone_number BIGINT NOT NULL,
         address VARCHAR(300) NOT NULL,
         bio VARCHAR(1000) NOT NULL,
         availability BOOL NOT NULL,
         tags INTEGER NULL REFERENCES tags(id),
-        featured_menu_item INTEGER NULL REFERENCES menu_items(menu_item_id)
+        featured_menu_item INTEGER NULL REFERENCES menu_items(menu_item_id),
+        CONSTRAINT unique_user_id UNIQUE(user_id)
+
     );
     """,
         """
