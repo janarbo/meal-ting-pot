@@ -35,7 +35,7 @@ build-front-end-job:
     # CI/CD variables, that value will override the value here.
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-    PUBLIC_URL: https://bidoofsupremacy.gitlab.io/meal-ting-pot
+    PUBLIC_URL: https://bidoof_supremacy.gitlab.io/meal-ting-pot
     REACT_APP_MEAL_TING_POT_API_HOST: https://meal-ting-pot.dec-pt-9.mod3projects.com
   script:
     - cd ghi
