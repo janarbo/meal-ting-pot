@@ -76,4 +76,9 @@ We ended today by revising our .gitlab-ci.yml file to include jobs for testing, 
 
 We plan on asking for guidance from our instructors as we are unsure whether this is a bug in our backend, frontend, or caprover configurations.
 
+#### (Tuesday) 4/18/2023
+We resolved our bug from yesterday by revising our production dockerfile. Although the errors were from cors, we had to look more closely at the caprover logs to debug.
+
+We continued working on deployment and was able to get our backend build server running w/o bugs. Though we are getting a cors issue in our frontend service from gitlab.com. We'll continue looking into it tomorrow and plan to get guidance from an instructor.
+
 </details>
