@@ -41,7 +41,7 @@ class UserProfileOut(BaseModel):
     availability: bool
     tags: Optional[str]
     featured_menu_item: Optional[int]
-    social_media: Optional[List[str]] = None
+    social_media: Optional[List[str]]
 
 
 class UserProfileRepository:
@@ -141,7 +141,6 @@ class UserProfileRepository:
                         """,
                         [profile_id],
                     )
-                    print(result)
                     records = result.fetchall()
                     if not records:
                         return None
@@ -201,6 +200,9 @@ class UserProfileRepository:
         )
 
     def user_profile_to_out(self, record) -> UserProfileOut:
+        social_media = record[11]
+        if None in social_media:
+            social_media = []
         return UserProfileOut(
             profile_id=record[0],
             user_id=record[1],
@@ -213,5 +215,5 @@ class UserProfileRepository:
             availability=record[8],
             tags=record[9],
             featured_menu_item=record[10],
-            social_media=record[11] if isinstance(record[11], list) else None
+            social_media=social_media
         )
