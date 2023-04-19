@@ -1,17 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import { useState, useEffect } from "react";
-import { useGetTokenQuery, useLogoutMutation } from "./features/auth/authAPI";
-import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {
-    useCreateShoppingCartMutation,
-    useGetOneShoppingCartQuery,
-    useUpdateShoppingCartMutation,
-    useGetOneShoppingCartWithItemsQuery
-} from './features/shopping-cart/shoppingCartApi';
-=======
 import { useLogoutMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
@@ -22,7 +9,6 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 //     useUpdateShoppingCartMutation,
 //     useGetOneShoppingCartWithItemsQuery
 // } from './features/shopping-cart/shoppingCartApi';
->>>>>>> main
 
 function Nav({ accountInfo }) {
     const navigate = useNavigate();
