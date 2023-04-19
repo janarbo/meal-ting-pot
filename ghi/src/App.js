@@ -29,7 +29,7 @@ function App() {
             <Route element={<Protected token={data} />}>
               <Route path="home" element={<MainPage />} />
               <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
-               <Route path="chef/profile" element={<ProfileForm />} />
+              <Route path="chef/profile" element={<ProfileForm />} />
             <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
             </Route>
             <Route path="" element={<LandingPage />} />
