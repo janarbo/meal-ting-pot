@@ -35,6 +35,8 @@ function ProfileForm(){
     fetchData();
   }, []);
 
+  const [featuredMenuItemName, setFeaturedMenuItemName] = useState([]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
