@@ -10,6 +10,7 @@ import GetAllChefMenuList from './chefMenuList.js';
 import ProfileForm from './ChefProfileForm.js';
 import FilteredProfiles from './FilteredProfiles.js';
 import ShoppingCartList from './ShoppingCartList.js';
+import AboutUs from './AboutUs.js';
 
 function App() {
   const { data } = useGetTokenQuery();
@@ -31,6 +32,7 @@ function App() {
             <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
             <Route path="chef/profile" element={<ProfileForm />} />
             <Route path="cart" element={<ShoppingCartList />} />
+            <Route path="about" element={<AboutUs />} />
           <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
           </Route>
           <Route path="" element={<LandingPage />} />

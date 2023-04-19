@@ -16,13 +16,27 @@ function Nav({ accountInfo }) {
     }
 
     const handleCart = async (e) => {
-        e.preventDefault();
         navigate("/cart");
     }
 
     const handleHome = async (e) => {
-        e.preventDefault();
         navigate("/home");
+    }
+
+    const handleAboutUs = async (e) => {
+        navigate("/about")
+    }
+
+    const handleOrders = async (e) => {
+        if (accountInfo.account.is_chef) {
+            navigate("/chef/orders");
+        } else {
+            navigate("/orders");
+        }
+    }
+
+    const handleProfile = async (e) => {
+        navigate("/chef/profile");
     }
 
     return (
@@ -32,13 +46,13 @@ function Nav({ accountInfo }) {
                     <Navbar data-theme="garden" expand="sm">
                         <Navbar.Brand style={{ color: '#5C7F67'}} className="font-extrabold pl-5 hover:cursor-pointer" onClick={ handleHome }>Meal-Ting-Pot</Navbar.Brand>
                             <button onClick={ handleHome } className="text-lg ml-10 mr-10 hover:text-lime-600 font-bold">Home</button>
-                            <button className="text-lg mr-10 hover:text-lime-600 font-bold">About Us</button>
-                            {accountInfo.account.is_chef && <button className="text-lg hover:text-lime-600 font-bold">Profile</button>}
+                            <button className="text-lg mr-10 hover:text-lime-600 font-bold" onClick={ handleAboutUs }>About Us</button>
+                            {accountInfo.account.is_chef && <button className="text-lg hover:text-lime-600 font-bold" onClick= { handleProfile }>Profile</button>}
                             <Navbar.Toggle />
                             <Navbar.Collapse className="justify-content-end pr-10">
                                 <button className="mr-10 text-lg hover:text-lime-600 font-bold" onClick={ handleLogout }>Sign Out</button>
-                                <button className="mr-10 text-lg hover:text-lime-600 font-bold">Orders</button>
-                                <IconButton className="mr-10 text-lg hover:text-lime-600 font-bold" onClick={ handleCart }>
+                                <button className="mr-10 text-lg hover:text-lime-600 font-bold" onClick={ handleOrders }>Orders</button>
+                                <IconButton style={{color: '#b05e5e'}} className="mr-10 text-lg font-bold" onClick={ handleCart }>
                                     <ShoppingCartIcon className="mr-1"/> Cart
                                 </IconButton>
                             </Navbar.Collapse>
