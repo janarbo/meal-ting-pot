@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
   useGetAllChefProfilesQuery,
-  useGetAllTagsQuery,
+  // useGetAllTagsQuery,
 } from "./features/chef-profile/chefProfileApi";
 import { useParams } from "react-router-dom";
 
 const FilteredProfiles = () => {
   const { tagName } = useParams();
   const [profiles, setProfiles] = useState([]);
-  const { data: tags } = useGetAllTagsQuery();
+  // const { data: tags } = useGetAllTagsQuery();
   const { data, isLoading } = useGetAllChefProfilesQuery();
 
   useEffect(() => {

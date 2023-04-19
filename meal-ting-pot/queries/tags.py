@@ -1,12 +1,9 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
 from queries.pool import pool
 
 
 class Error(BaseModel):
     message: str
-
-
 
 
 # Define a Tag model for the response data
@@ -36,5 +33,5 @@ class TagRepository:
                         tag = Tag(id=result[0], name=result[1])
                         tags.append(tag)
                     return tags
-        except Exception as e:
+        except Exception:
             return {"message": "Could not get the tags"}
