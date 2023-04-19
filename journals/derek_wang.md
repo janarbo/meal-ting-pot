@@ -12,3 +12,15 @@ Today we worked on auth with Ted driving and the rest of us navigating. We insta
 
 ## April 03, 2023
 Today we worked on getting the rest of our migrations together as well as writing the SQL queries in beekeeper to help visualize how we would join the different tables. It got a little crazy with the orders table and having to go into the shopping cart id to get to the shopping cart item then grabbing the menu item to get the name and price, but we were able to struggle a bit and get it figured out. Definitely rewarding to get that done and tomorrow we'll get started on some more endpoints.
+
+## April 04, 2023
+Today we split off into working on our own backend enpoints. Started on the crud for menu items. Fastapi is definitely different than django, but still kind of similar.
+
+## April 05. 2023
+Just continued working on my menu item routes, finished them up and committed them and also helped out with some debugging.
+
+## April 06, 2023
+Needed to make some revisions to menu items to include the status boolean for each menu items since we can't actually "delete" them or the order history that is dependent on them would get messed up. Instead set a boolean so that only available items will be displayed. Also added an additional endpoint for a get menu items using chef id for customers as well as protection for our endpoints.
+
+## April 07, 2023
+Started working on some frontend auth together. Using redux and definitely pretty challenging. Was able to use some of the resources we had to throw together a simple login page and get it working.
