@@ -30,7 +30,7 @@ function App() {
               <Route path="home" element={<MainPage />} />
               <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
               <Route path="chef/profile" element={<ProfileForm />} />
-            <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
+              <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
             </Route>
             <Route path="" element={<LandingPage />} />
             <Route path="login" element={<LoginForm accountInfo={data} />}/>
