@@ -81,4 +81,7 @@ We resolved our bug from yesterday by revising our production dockerfile. Althou
 
 We continued working on deployment and was able to get our backend build server running w/o bugs. Though we are getting a cors issue in our frontend service from gitlab.com. We'll continue looking into it tomorrow and plan to get guidance from an instructor.
 
+#### (Wednesday) 4/19/2023
+The error was from a small typo in our CORS_HOST environment variable not matching our server in our gitlab yml file. After we resolved that issue, we started our frontend components. I began working on the nav component and did research on tailwind css to make it prettier. Tomorrow, I plan to start on the shopping cart component.
+
 </details>
