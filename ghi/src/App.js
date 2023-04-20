@@ -11,6 +11,8 @@ import ProfileForm from './ChefProfileForm.js';
 import FilteredProfiles from './FilteredProfiles.js';
 import ShoppingCartList from './ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
+import ChefOrderList from './ChefOrderList.js';
+import CustomerOrderList from './CustomerOrderList.js';
 
 function App() {
   const { data } = useGetTokenQuery();
@@ -31,8 +33,10 @@ function App() {
             <Route path="home" element={<MainPage />} />
             <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
             <Route path="chef/profile" element={<ProfileForm />} />
+            <Route path="chef/orders" element={<ChefOrderList />} />
             <Route path="cart" element={<ShoppingCartList />} />
             <Route path="about" element={<AboutUs />} />
+            <Route path="orders" element={<CustomerOrderList />} />
           <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
           </Route>
           <Route path="" element={<LandingPage />} />
