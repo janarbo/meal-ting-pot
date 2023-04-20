@@ -1,23 +1,12 @@
-import React, { useEffect } from "react";
-import { NavLink } from 'react-router-dom'
+import React from "react";
 import landing2 from './images/landing2.jpg'
-import { useNavigate } from "react-router-dom";
 
-const LandingPage = ({ accountInfo }) => {
-  const navigate = useNavigate();
+const LandingPage = () => {
   const backgroundImage = `url(${landing2})`
   const h1Style = {
       fontFamily: 'fantasy',
       marginBottom: '10rem'
   }
-
-  useEffect(() => {
-    if (accountInfo && accountInfo.account.is_chef) {
-      navigate("/chef/profile");
-    } else {
-      navigate("/home");
-    }
-  }, [accountInfo, navigate])
 
 return (
         <div className="hero min-h-screen" style={{ backgroundImage }}>
