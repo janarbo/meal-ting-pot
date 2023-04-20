@@ -4,6 +4,8 @@ import {
   useGetAllChefProfilesQuery,
   useGetAllTagsQuery,
 } from "./features/chef-profile/chefProfileApi";
+import Footer from "./Footer";
+
 
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState(null);
@@ -64,6 +66,7 @@ const MainPage = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 };
