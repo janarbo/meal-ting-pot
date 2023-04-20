@@ -10,7 +10,6 @@ const MainPage = () => {
   const { data: tags } = useGetAllTagsQuery();
   const { data, isLoading } = useGetAllChefProfilesQuery();
   const [filteredProfiles, setFilteredProfiles] = useState([]);
-  const navigate= useNavigate();
 
 
   const handleTagClick = (tag) => {
