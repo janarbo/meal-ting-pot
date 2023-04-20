@@ -12,7 +12,7 @@ const LandingPage = ({ accountInfo }) => {
   }
 
   useEffect(() => {
-    if (accountInfo.account.is_chef) {
+    if (accountInfo && accountInfo.account.is_chef) {
       navigate("/chef/profile");
     } else {
       navigate("/home");

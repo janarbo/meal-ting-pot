@@ -1,9 +1,10 @@
 import React from "react";
 import { useLogoutMutation } from "./features/auth/authAPI";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Navbar } from 'react-bootstrap';
+import logo from './images/logo2.jpg';
 
 function Nav({ accountInfo }) {
     const navigate = useNavigate();
@@ -44,15 +45,18 @@ function Nav({ accountInfo }) {
             {accountInfo &&
                 <>
                     <Navbar data-theme="garden" expand="sm">
-                        <Navbar.Brand style={{ color: '#5C7F67'}} className="font-extrabold pl-5 hover:cursor-pointer" onClick={ handleHome }>Meal-Ting-Pot</Navbar.Brand>
-                            <button onClick={ handleHome } className="text-lg ml-10 mr-10 hover:text-lime-600 font-bold">Home</button>
-                            <button className="text-lg mr-10 hover:text-lime-600 font-bold" onClick={ handleAboutUs }>About Us</button>
-                            {accountInfo.account.is_chef && <button className="text-lg hover:text-lime-600 font-bold" onClick= { handleProfile }>Profile</button>}
+                        <NavLink className="pl-5">
+                            <img className="max-h-72 max-w-72 w-14 h-14" src={logo} />
+                        </NavLink>
+                        <Navbar.Brand style={{ color: '#b05e5e'}} className="font-extrabold pl-5 hover:cursor-pointer" onClick={ handleHome }>Meal-Ting-Pot</Navbar.Brand>
+                            <button onClick={ handleHome } className="text-lg ml-5 mr-10 hover:text-red-600 font-bold">Home</button>
+                            <button className="text-lg mr-10 hover:text-red-600 font-bold" onClick={ handleAboutUs }>About Us</button>
+                            {accountInfo.account.is_chef && <button className="text-lg hover:text-red-600 font-bold" onClick= { handleProfile }>Profile</button>}
                             <Navbar.Toggle />
                             <Navbar.Collapse className="justify-content-end pr-10">
-                                <button className="mr-10 text-lg hover:text-lime-600 font-bold" onClick={ handleLogout }>Sign Out</button>
-                                <button className="mr-10 text-lg hover:text-lime-600 font-bold" onClick={ handleOrders }>Orders</button>
-                                <IconButton style={{color: '#b05e5e'}} className="mr-10 text-lg font-bold" onClick={ handleCart }>
+                                <button className="mr-10 text-lg hover:text-red-600 font-bold" onClick={ handleLogout }>Sign Out</button>
+                                <button className="mr-10 text-lg hover:text-red-600 font-bold" onClick={ handleOrders }>Orders</button>
+                                <IconButton style={{color: '#5C7F67'}} className="mr-10 text-lg font-bold" onClick={ handleCart }>
                                     <ShoppingCartIcon className="mr-1"/> Cart
                                 </IconButton>
                             </Navbar.Collapse>
