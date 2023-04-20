@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from 'react-router-dom'
 import landing2 from './images/landing2.jpg'
+import { useNavigate } from "react-router-dom";
 
-const LandingPage = () => {
-    const backgroundImage = `url(${landing2})`
-    const h1Style = {
-        fontFamily: 'fantasy',
-        marginBottom: '10rem'
+const LandingPage = ({ accountInfo }) => {
+  const navigate = useNavigate();
+  const backgroundImage = `url(${landing2})`
+  const h1Style = {
+      fontFamily: 'fantasy',
+      marginBottom: '10rem'
+  }
+
+  useEffect(() => {
+    if (accountInfo.account.is_chef) {
+      navigate("/chef/profile");
+    } else {
+      navigate("/home");
     }
-
+  }, [accountInfo, navigate])
 
 return (
-    // <nav className="nav">
-    //     <div>
-    //         <NavLink to="/login">Login</NavLink>
-    //         <NavLink to="/signup">Signup</NavLink>
-    //     </div>
-    // </nav>
-
         <div className="hero min-h-screen" style={{ backgroundImage }}>
         <div className="hero-overlay bg-opacity-50"></div>
         <div className="hero-content text-center text-neutral-content">

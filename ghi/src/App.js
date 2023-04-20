@@ -39,7 +39,7 @@ function App() {
             <Route path="orders" element={<CustomerOrderList />} />
           <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
           </Route>
-          <Route path="" element={<LandingPage />} />
+          <Route path="" element={<LandingPage accountInfo={data}/>} />
           <Route path="login" element={<LoginForm accountInfo={data} />}/>
           <Route path="signup" element={<SignupForm accountInfo={data} />} />
         </Routes>
