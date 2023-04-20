@@ -37,7 +37,7 @@ function App() {
             <Route path="cart" element={<ShoppingCartList />} />
             <Route path="about" element={<AboutUs />} />
             <Route path="orders" element={<CustomerOrderList />} />
-          <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
+            <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
           </Route>
           <Route path="" element={<LandingPage accountInfo={data}/>} />
           <Route path="login" element={<LoginForm accountInfo={data} />}/>
