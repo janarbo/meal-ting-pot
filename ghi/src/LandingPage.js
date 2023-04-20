@@ -1,14 +1,12 @@
 import React from "react";
-import { NavLink } from 'react-router-dom'
 import landing2 from './images/landing2.jpg'
 
 const LandingPage = () => {
-    const backgroundImage = `url(${landing2})`
-    const h1Style = {
-        fontFamily: 'fantasy',
-        marginBottom: '10rem'
-    }
-
+  const backgroundImage = `url(${landing2})`
+  const h1Style = {
+      fontFamily: 'fantasy',
+      marginBottom: '10rem'
+  }
 
 return (
         <div className="hero min-h-screen" style={{ backgroundImage }}>
