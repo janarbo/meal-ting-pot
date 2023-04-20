@@ -16,6 +16,10 @@ const SideBar = () => {
         navigate("profile/");
     };
 
+    const handleCreateProfileClick = () => {
+        navigate("/createprofile")
+    };
+
     const handleMenuClick = () => {
         navigate("/menu");
     };
@@ -58,74 +62,83 @@ const SideBar = () => {
             <ul className="list-inside">
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleHomeClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleHomeClick}
                     >
-                        Home
+                    Home
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleProfileClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleProfileClick}
                     >
-                        My Profile
+                    My Profile
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleMenuClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleCreateProfileClick}
                     >
-                        My Menu
+                    Create Profile
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleOrdersClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleMenuClick}
                     >
-                        See My Orders
+                    My Menu
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleAvailableClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleOrdersClick}
                     >
-                        Available
+                    See My Orders
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleUnavailableClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleAvailableClick}
                     >
-                        Unavailable
+                    Available
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full mb-2"
-                        onClick={handleLogoutClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleUnavailableClick}
                     >
-                        Logout
+                    Unavailable
                     </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
-                                text-black font-bold py-2 px-4 rounded-full"
-                        onClick={handleSupportClick}
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full mb-2"
+                    onClick={handleLogoutClick}
                     >
-                        Support Center
+                    Logout
+                    </button>
+                </li>
+                <li>
+                    <button
+                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100
+                                                text-black font-bold py-2 px-4 rounded-full"
+                    onClick={handleSupportClick}
+                    >
+                    Support Center
                     </button>
                 </li>
             </ul>
