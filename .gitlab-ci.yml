@@ -3,7 +3,7 @@ stages:
   - build
   - deploy
 
-# # Run flake8 to check for code quality
+# Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
   stage: test
@@ -11,7 +11,7 @@ lint-test-job:
     - pip install flake8
     - flake8 meal-ting-pot
 
-# # Run the unit tests
+# Run the unit tests
 api-unit-test-job:
   image: python:3-bullseye
   stage: test
@@ -24,7 +24,7 @@ api-unit-test-job:
     - export SIGNING_KEY="abchbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4MDIwNDg3NCwiaWF0IjoxNjgwMjA0ODc0fQ.zP48f3iAahHElKAEOXo56SdBHDZxJORiow9Usnit_cY"
     - python -m pytest
 
-# # Build the React/JavaScript front-end
+# Build the React/JavaScript front-end
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
@@ -35,8 +35,8 @@ build-front-end-job:
     # CI/CD variables, that value will override the value here.
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-    PUBLIC_URL: https://bidoofsupremacy.gitlab.io/meal-ting-pot/
-    REACT_APP_MEAL_TING_POT_API_HOST: https://captain.dec-pt-9.mod3projects.com/
+    PUBLIC_URL: https://bidoof_supremacy.gitlab.io/meal-ting-pot
+    REACT_APP_MEAL_TING_POT_API_HOST: https://meal-ting-pot.dec-pt-9.mod3projects.com
   script:
     - cd ghi
     - npm install
@@ -46,7 +46,7 @@ build-front-end-job:
     paths:
       - ghi/build/
 
-# # Deploy the React/JavaScript front-end to GitLab pages
+# Deploy the React/JavaScript front-end to GitLab pages
 pages:
   stage: deploy
   rules:

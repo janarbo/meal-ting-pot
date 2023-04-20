@@ -8,7 +8,7 @@ import {
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState(null);
   const { data: tags } = useGetAllTagsQuery();
-  console.log(tags)
+  // console.log(tags)
   const { data, isLoading } = useGetAllChefProfilesQuery();
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const navigate= useNavigate();
@@ -19,7 +19,7 @@ const MainPage = () => {
       return newTag.tag === tag.name;
     });
     setFilteredProfiles(newProfile);
-    navigate(`/filtered/${tag.name}`); // navigate to the filtered page
+    navigate(`/filtered/${tag.name}`); 
   };
 
   if (isLoading) {
@@ -70,55 +70,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
- // const [token, result] = useGetTokenQuery();
-
-    // return(
-    //     <button onClick={() => {
-    //         token();
-    //     }}>
-    //         Get token
-    //     </button>
-    // )
-
-// import { useState } from 'react';
-// import { useGetAllChefProfilesQuery } from '../features/chef-profile/chefProfileApi';
-
-// function ChefProfileList() {
-//   const { data, isLoading } = useGetAllChefProfilesQuery();
-//   console.log(data);
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>name</th>
-//             <th>addresss</th>
-//             <th>availability</th>
-//             <th>tags</th>
-//             <th>featured_menu_item</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {data && data.map((profile) => (
-//             <tr key={profile.profile_id}>
-//               <td>{profile.full_name}</td>
-//               <td>{profile.address}</td>
-//               <td>{profile.availability}</td>
-//               <td>{profile.tags}</td>
-//                 <td>
-//                 {profile.featured_menu_item && <img src={profile.featured_menu_item} alt="Featured menu item" style={{ width: '200px', height: '200px' }} />}
-//               </td>
-//             </tr>
-//             ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
-// export default ChefProfileList;
