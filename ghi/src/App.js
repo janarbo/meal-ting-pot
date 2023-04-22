@@ -8,7 +8,6 @@ import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
 import GetAllChefMenuList from './chefMenuList.js';
 import ProfileForm from './ChefProfileForm.js';
-import FilteredProfiles from './FilteredProfiles.js';
 import ShoppingCartList from './ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
 import ChefOrderList from './ChefOrderList.js';
@@ -40,7 +39,6 @@ function App() {
               <Route path="cart" element={<ShoppingCartList />} />
               <Route path="about" element={<AboutUs />} />
               <Route path="orders" element={<CustomerOrderList />} />
-              <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
               <Route path="/store" element={<Store />} />
             </Route>
             <Route path="" element={<LandingPage />} />
