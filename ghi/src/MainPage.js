@@ -8,19 +8,18 @@ import {
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState(null);
   const { data: tags } = useGetAllTagsQuery();
-  // console.log(tags)
   const { data, isLoading } = useGetAllChefProfilesQuery();
   const [filteredProfiles, setFilteredProfiles] = useState([]);
-  const navigate= useNavigate();
+
+
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
-    const newProfile = data.filter((newTag) => {
-      return newTag.tag === tag.name;
-    });
-    setFilteredProfiles(newProfile);
-    navigate(`/filtered/${tag.name}`); 
-  };
+    const newProfiles = data.filter((profile) => profile.tags.includes(tag.name));
+    setFilteredProfiles(newProfiles);
+  }
+
+
 
   if (isLoading) {
     return <div>Loading...</div>;
