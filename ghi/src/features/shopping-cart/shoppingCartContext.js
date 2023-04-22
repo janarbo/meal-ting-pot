@@ -1,6 +1,4 @@
 import { createContext, useState } from "react";
-// import { useGetOneShoppingCartWithItemsQuery } from "./shoppingCartApi";
-import { getProductData } from "../../ShoppingCartExperiment/productStore";
 
 export const ShoppingCartContext = createContext({
     items: [],
@@ -11,12 +9,8 @@ export const ShoppingCartContext = createContext({
     getTotalCost: () => {}
 });
 
-// [ {id, menu_item_id, quantity, shopping_cart_id}]
-
 export function ShoppingCartProvider({children}) {
     const [cartProducts, setCartProducts] = useState([]);
-    // const { data } = useGetOneShoppingCartWithItemsQuery(cartId);
-
 
     function getProductQuantity(id) {
         const quantity = cartProducts.find(product => product.id === id)?.quantity
@@ -28,7 +22,7 @@ export function ShoppingCartProvider({children}) {
         return quantity;
     }
 
-    function addOneToCart(id) {
+    function addOneToCart(id, price, chefId, photo) {
         const quantity = getProductQuantity(id);
 
         if (quantity === 0) {
@@ -37,7 +31,10 @@ export function ShoppingCartProvider({children}) {
                     ...cartProducts,
                     {
                         id: id,
-                        quantity: 1
+                        quantity: 1,
+                        price: price,
+                        chef_id: chefId,
+                        photo: photo
                     }
                 ]
             )
@@ -79,8 +76,7 @@ export function ShoppingCartProvider({children}) {
     function getTotalCost() {
         let totalCost = 0;
         cartProducts.map((cartItem) => {
-            const productData = getProductData(cartItem.id);
-            totalCost += (productData.price * cartItem.quantity);
+            totalCost += (cartItem.price * cartItem.quantity);
         })
         return totalCost;
     }
@@ -91,7 +87,7 @@ export function ShoppingCartProvider({children}) {
         addOneToCart,
         removeOneFromCart,
         deleteFromCart,
-        getTotalCost
+        getTotalCost,
     }
 
     return (

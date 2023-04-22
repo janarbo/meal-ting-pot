@@ -8,7 +8,13 @@ export const menuItemApi = createApi({
     }),
     endpoints: (builder) => ({
         getAllCustomer: builder.query({
-            query: () => '/menu-items',
+            query: chefId => ({
+                url: '/menu-items',
+                method: 'GET',
+                params: {
+                    chef_id: chefId
+                }
+            })
         }),
         getAllChef: builder.query({
             query: (chefId) => '/chef/' + chefId + '/menu_items',

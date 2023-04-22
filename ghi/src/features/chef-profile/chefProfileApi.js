@@ -7,6 +7,11 @@ export const chefProfileApi = createApi({
         credentials: "include"
     }),
     endpoints: builder => ({
+        getOneChefProfile: builder.query({
+            query: (id) => '/profile/' + id,
+            provideTags: ['MainPage'],
+        }),
+
         getAllChefProfiles: builder.query({
             query: () => '/profile/',
             providesTags: ['MainPage'],
@@ -31,5 +36,6 @@ export const chefProfileApi = createApi({
 export const {
     useGetAllChefProfilesQuery,
     useCreateProfileMutation,
-    useGetAllTagsQuery
+    useGetAllTagsQuery,
+    useGetOneChefProfileQuery
 } = chefProfileApi;
