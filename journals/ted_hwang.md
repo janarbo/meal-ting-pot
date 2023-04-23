@@ -84,4 +84,14 @@ We continued working on deployment and was able to get our backend build server 
 #### (Wednesday) 4/19/2023
 The error was from a small typo in our CORS_HOST environment variable not matching our server in our gitlab yml file. After we resolved that issue, we started our frontend components. I began working on the nav component and did research on tailwind css to make it prettier. Tomorrow, I plan to start on the shopping cart component.
 
+#### (Thursday) 4/20/2023
+I spent time researching how others implemented a shopping cart in their front-end and I am deciding on between using createSlice or createContext for my component. There were a lot of informative videos and it helped further my understanding about the state management in redux. I plan on working over the weekend to finish this so that I can make time to do additional css next week.
+
+#### (Sunday) 4/23/2023
+I was able to get my shopping cart component finished! I ended up using createContext because it allowed me to share the shopping cart data across my component tree effectively by wrapping it with the provider that was returned. Since chef users will be able to look at their order list and update the status of the order, I also allowed customers to add menu items from different chefs into the cart by creating multiple orders separated by chef_id during checkout.
+
+To reflect, I'm surprised by the amount of progress we made and knowledge we gained from this project. Initially, I was worried I would not pass module 3 because the mvp for our project seemed difficult when we started. Additionally, we would have to get familiar using fastapi, writing sql queries, redux, and frontend-auth.
+
+I'm proud and excited to see where we're at now with our project/growth. I don't think we were expecting to have finished some of these components and deployment early and now we can spend more time on css/readMe documentation. Looking forward to see how this project turns out before we submit it this Friday.
+
 </details>
