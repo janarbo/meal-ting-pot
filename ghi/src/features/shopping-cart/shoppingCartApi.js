@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setShoppingCart } from './shoppingCartSlice';
 
 
 export const shoppingCartApi = createApi({
@@ -10,7 +9,6 @@ export const shoppingCartApi = createApi({
         credentials: "include",
     }),
     endpoints: (builder) => ({
-        // SHOPPING CART //
         createShoppingCart: builder.mutation({
             query: () => ({
                 url: '/cart',
@@ -33,7 +31,6 @@ export const shoppingCartApi = createApi({
             provideTags: ['Cart']
         }),
 
-        // CART ITEMS //
         createCartItem: builder.mutation({
             query: (data) => ({
                 url: '/cart-item',
@@ -59,7 +56,6 @@ export const shoppingCartApi = createApi({
             }),
             invalidateTags: ['Cart']
         })
-
     })
 })
 

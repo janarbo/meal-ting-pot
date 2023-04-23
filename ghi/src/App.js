@@ -11,9 +11,10 @@ import ProfileForm from './ChefProfileForm.js';
 import ShoppingCartList from './components/shopping-cart/ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
 import ChefOrderList from './ChefOrderList.js';
-import CustomerOrderList from './CustomerOrderList.js';
+import CustomerOrderList from './components/orders/CustomerOrderList.js';
 import ShoppingCartProvider from './features/shopping-cart/shoppingCartContext.js';
 import ChefStore from './ChefStore.js';
+
 
 function App() {
   const { data } = useGetTokenQuery();

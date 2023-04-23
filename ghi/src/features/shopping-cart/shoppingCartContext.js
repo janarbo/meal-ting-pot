@@ -6,7 +6,8 @@ export const ShoppingCartContext = createContext({
     addOneToCart: () => {},
     removeOneFromCart: () => {},
     deleteFromCart: () => {},
-    getTotalCost: () => {}
+    getTotalCost: () => {},
+    clearCart: () => {},
 });
 
 export function ShoppingCartProvider({children}) {
@@ -81,6 +82,10 @@ export function ShoppingCartProvider({children}) {
         return totalCost;
     }
 
+    function clearCart() {
+        setCartProducts([]);
+    }
+
     const contextValue = {
         items: cartProducts,
         getProductQuantity,
@@ -88,6 +93,7 @@ export function ShoppingCartProvider({children}) {
         removeOneFromCart,
         deleteFromCart,
         getTotalCost,
+        clearCart,
     }
 
     return (

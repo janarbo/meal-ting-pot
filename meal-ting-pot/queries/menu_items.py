@@ -226,7 +226,6 @@ class MenuItemRepository:
         )
 
     def record_to_menu_item_out(self, record):
-        print(record)
         return MenuItemOut(
             menu_item_id=record[0],
             food_type=record[1],
