@@ -1,23 +1,8 @@
 steps = [
     [
         """
-    CREATE TABLE cart_status(
-        status_id SERIAL PRIMARY KEY NOT NULL,
-        name VARCHAR(100) NOT NULL
-    );
-
-    INSERT INTO cart_status (name) VALUES ('OPEN');
-    INSERT INTO cart_status (name) VALUES ('CLOSED');
-    """,
-        """
-    DROP TABLE cart_status;
-    """,
-    ],
-    [
-        """
     CREATE TABLE shopping_carts(
-        shopping_cart_id SERIAL PRIMARY KEY NOT NULL,
-        status INTEGER NOT NULL REFERENCES cart_status(status_id)
+        shopping_cart_id SERIAL PRIMARY KEY NOT NULL
     );
     """,
         """
