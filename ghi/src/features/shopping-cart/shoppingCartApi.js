@@ -17,15 +17,6 @@ export const shoppingCartApi = createApi({
             invalidateTags: ['Cart'],
         }),
 
-        updateShoppingCart: builder.mutation({
-            query: (cartId, data) => ({
-                url: '/cart/' + cartId,
-                body: data,
-                method: 'PUT'
-            }),
-            invalidateTags: ['Cart']
-        }),
-
         getOneShoppingCartWithItems: builder.query({
             query: (cartId) => '/cart/' + cartId + '/items',
             provideTags: ['Cart']
@@ -62,7 +53,6 @@ export const shoppingCartApi = createApi({
 
 export const {
     useCreateShoppingCartMutation,
-    useUpdateShoppingCartMutation,
     useGetOneShoppingCartWithItemsQuery,
     useCreateCartItemMutation,
     useUpdateCartItemMutation,

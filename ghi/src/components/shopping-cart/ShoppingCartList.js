@@ -12,6 +12,7 @@ import { useCreateOrderMutation } from "../../features/orders/orderApi";
 function ShoppingCartList() {
     const navigate = useNavigate();
     const shoppingCart = useContext(ShoppingCartContext);
+    console.log(shoppingCart);
 
     const [createShoppingCart] = useCreateShoppingCartMutation();
     const [createCartItem] = useCreateCartItemMutation();
