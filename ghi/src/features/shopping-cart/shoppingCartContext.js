@@ -85,7 +85,7 @@ export function ShoppingCartProvider({children}) {
     function getSubCost(products) {
         let subCost = 0;
         for (let product of products) {
-            subCost += product.price;
+            subCost += (product.price * product.quantity);
         }
         return subCost;
     }
