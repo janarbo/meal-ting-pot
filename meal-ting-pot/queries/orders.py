@@ -97,18 +97,6 @@ class OrdersRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    db.execute(
-                        """
-                        SELECT ci.id
-                        FROM cart_items ci
-                        WHERE ci.shopping_cart_id = %s
-                        """,
-                        [orders.shopping_cart_id],
-                    )
-                    cart = db.fetchall()
-                    if len(cart) == 0:
-                        return {"message": "Shopping cart is empty"}
-
                     result = db.execute(
                         """
                         INSERT INTO orders

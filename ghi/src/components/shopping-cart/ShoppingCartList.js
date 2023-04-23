@@ -47,7 +47,8 @@ function ShoppingCartList() {
                 shopping_cart_id: shoppingCartId,
                 chef_id: shoppingCart.items[0].chef_id,
             }
-            await createOrder(orderData);
+
+            const edit = await createOrder(orderData);
 
             shoppingCart.clearCart();
             navigate('/orders')
