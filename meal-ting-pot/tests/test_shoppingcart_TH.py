@@ -2,7 +2,6 @@ from fastapi.testclient import TestClient
 from main import app
 from queries.shopping_carts import (
     ShoppingCartRepository,
-    ShoppingCartOut,
     ShoppingCartWithCartItemsOut,
 )
 from authenticator import authenticator

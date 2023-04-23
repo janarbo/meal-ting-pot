@@ -82,6 +82,14 @@ export function ShoppingCartProvider({children}) {
         return totalCost;
     }
 
+    function getSubCost(products) {
+        let subCost = 0;
+        for (let product of products) {
+            subCost += product.price;
+        }
+        return subCost;
+    }
+
     function clearCart() {
         setCartProducts([]);
     }
@@ -93,6 +101,7 @@ export function ShoppingCartProvider({children}) {
         removeOneFromCart,
         deleteFromCart,
         getTotalCost,
+        getSubCost,
         clearCart,
     }
 

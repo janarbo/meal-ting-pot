@@ -12,7 +12,6 @@ import { useCreateOrderMutation } from "../../features/orders/orderApi";
 function ShoppingCartList() {
     const navigate = useNavigate();
     const shoppingCart = useContext(ShoppingCartContext);
-    console.log(shoppingCart);
 
     const [createShoppingCart] = useCreateShoppingCartMutation();
     const [createCartItem] = useCreateCartItemMutation();
@@ -30,27 +29,39 @@ function ShoppingCartList() {
         }
 
         try {
-            const response = await createShoppingCart();
-            const shoppingCartId = response.data.shopping_cart_id;
-
-            shoppingCart.items.forEach(async (product) => {
-                const cartItemData = {
-                    shopping_cart_id: shoppingCartId,
-                    menu_item_id: product.id,
-                    quantity: product.quantity
+            const productsByChef = {};
+            shoppingCart.items.forEach((product) => {
+                const chefId = product.chef_id;
+                if (chefId in productsByChef) {
+                    productsByChef[chefId].push(product);
+                } else {
+                    productsByChef[chefId] = [product];
                 }
-                await createCartItem(cartItemData);
             })
 
-            const orderData = {
-                order_date: new Date().toISOString().slice(0, 10),
-                total_price: parseInt(shoppingCart.getTotalCost().toFixed(2)),
-                shopping_cart_id: shoppingCartId,
-                chef_id: shoppingCart.items[0].chef_id,
+            for (let chefId in productsByChef) {
+                const products = productsByChef[chefId];
+                const response = await createShoppingCart();
+                const shoppingCartId = response.data.shopping_cart_id;
+
+                for (let product of products) {
+                    const cartItemData = {
+                        shopping_cart_id: shoppingCartId,
+                        menu_item_id: product.id,
+                        quantity: product.quantity
+                    };
+                    await createCartItem(cartItemData);
+                }
+
+                const orderData = {
+                    order_date: new Date().toISOString().slice(0, 10),
+                    total_price: parseInt(shoppingCart.getSubCost(products).toFixed(2)),
+                    shopping_cart_id: shoppingCartId,
+                    chef_id: parseInt(chefId),
+                }
+
+                await createOrder(orderData);
             }
-
-            const edit = await createOrder(orderData);
-
             shoppingCart.clearCart();
             navigate('/orders')
 
