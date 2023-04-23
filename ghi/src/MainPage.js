@@ -10,8 +10,11 @@ const MainPage = () => {
   const { data: tags } = useGetAllTagsQuery();
   const { data, isLoading } = useGetAllChefProfilesQuery();
   const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const navigate = useNavigate();
 
-
+  const handleProfileClick = (fullName, userId, profileId) => {
+    navigate(`/chef/${fullName}/${userId}/${profileId}/`);
+  }
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
@@ -45,8 +48,9 @@ const MainPage = () => {
           : data
         ).map((profile) => (
           <div
-            key={profile.profile_id}
+            key={profile.user_id}
             className="bg-white overflow-hidden shadow rounded-lg"
+            onClick={() => handleProfileClick(profile.full_name, profile.user_id, profile.profile_id)}
           >
             <img
               className="w-45 h-45 object-cover"
