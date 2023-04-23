@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { useCreateProfileMutation, useGetAllTagsQuery } from './features/chef-profile/chefProfileApi';
+import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
 import {useNavigate} from 'react-router-dom'
-import { useGetAllChefQuery } from './features/menu-items/menuItemApi';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import { useGetAllChefQuery } from '../menu-items/menuItemApi';
 
 
 function ProfileForm(){
+  const [profileId, setProfileId] = useState(null);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState('');
@@ -40,8 +40,11 @@ function ProfileForm(){
         'tags':tagName,
         "featured_menu_item":featuredMenuItem,
       };
+        const response = await createProfile(payload);
+        const newProfileId = response.data.profile_id;
+        setProfileId(newProfileId)
         await createProfile(payload);
-        navigate('/home');
+        navigate(`/chef/profile/${newProfileId}`);
           } catch (error) {
             console.log(error)
           }
@@ -71,7 +74,6 @@ function ProfileForm(){
                       id="fullName"
                       autoComplete="name"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder="Full name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                     />
@@ -90,7 +92,6 @@ function ProfileForm(){
                     id="email"
                     autoComplete="email"
                     className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -109,7 +110,6 @@ function ProfileForm(){
                       id='photo'
                       autoComplete="photo"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder='Photo'
                       value={photo}
                       onChange={e => setPhoto(e.target.value)}
                     />
@@ -128,7 +128,6 @@ function ProfileForm(){
                       id='phoneNumber'
                       autoComplete="phoneNumber"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder='PhoneNumber'
                       value={phoneNumber}
                       onChange={e => setPhoneNumber(e.target.value)}
                     />

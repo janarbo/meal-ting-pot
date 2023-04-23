@@ -37,7 +37,7 @@ function Nav({ accountInfo }) {
     }
 
     const handleProfile = async (e) => {
-        navigate("/chef/profile");
+        navigate("/chef/profile/create");
     }
 
     return (

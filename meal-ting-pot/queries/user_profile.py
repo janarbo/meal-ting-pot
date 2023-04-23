@@ -40,7 +40,7 @@ class UserProfileOut(BaseModel):
     bio: str
     availability: bool
     tags: Optional[str]
-    featured_menu_item: Optional[int]
+    featured_menu_item: Optional[str]
     social_media: Optional[List[str]]
 
 
@@ -131,13 +131,26 @@ class UserProfileRepository:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
-
                         """
-                        SELECT up.*, ARRAY_AGG(s.url) AS social_media
+                        SELECT
+                        up.profile_id,
+                        up.user_id,
+                        up.full_name,
+                        up.email,
+                        up.photo,
+                        up.phone_number,
+                        up.address,
+                        up.bio,
+                        up.availability,
+                        t.name AS tag_name,
+                        m.name AS menu_item_name,
+                        ARRAY_AGG(s.url) AS social_media
                         FROM user_profiles AS up
                         LEFT JOIN social_media AS s ON up.profile_id = s.user_profile_id
+                        LEFT JOIN tags AS t ON up.tags = t.id
+                        LEFT JOIN menu_items AS m ON up.featured_menu_item = m.menu_item_id
                         WHERE up.profile_id = %s
-                        GROUP BY up.profile_id;
+                        GROUP BY up.profile_id, t.name, m.name;
                         """,
                         [profile_id],
                     )
@@ -217,3 +230,11 @@ class UserProfileRepository:
             featured_menu_item=record[10],
             social_media=social_media
         )
+
+
+
+       # SELECT up.*, ARRAY_AGG(s.url) AS social_media
+                        # FROM user_profiles AS up
+                        # LEFT JOIN social_media AS s ON up.profile_id = s.user_profile_id
+                        # WHERE up.profile_id = %s
+                        # GROUP BY up.profile_id;
