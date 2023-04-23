@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLogoutMutation } from "./features/auth/authAPI";
 import { useNavigate, NavLink } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Navbar } from 'react-bootstrap';
 import logo from './images/logo2.jpg';
+import { ShoppingCartContext } from "./features/shopping-cart/shoppingCartContext";
 
 function Nav({ accountInfo }) {
     const navigate = useNavigate();
@@ -40,6 +41,9 @@ function Nav({ accountInfo }) {
         navigate("/chef/profile");
     }
 
+    const shoppingCart = useContext(ShoppingCartContext);
+    const productsCount = shoppingCart.items.reduce((sum, product) => sum + product.quantity, 0);
+
     return (
         <>
             {accountInfo &&
@@ -57,7 +61,7 @@ function Nav({ accountInfo }) {
                                 <button className="mr-10 text-lg hover:text-red-600 font-bold" onClick={ handleLogout }>Sign Out</button>
                                 <button className="mr-10 text-lg hover:text-red-600 font-bold" onClick={ handleOrders }>Orders</button>
                                 <IconButton style={{color: '#5C7F67'}} className="mr-10 text-lg font-bold" onClick={ handleCart }>
-                                    <ShoppingCartIcon className="mr-1"/> Cart
+                                    <ShoppingCartIcon className="mr-1"/> Cart ({productsCount} items)
                                 </IconButton>
                             </Navbar.Collapse>
                     </Navbar>
