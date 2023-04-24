@@ -1,7 +1,6 @@
 import { ShoppingCartContext } from "../../features/shopping-cart/shoppingCartContext"
 import { useContext, useState } from "react"
 import CartMenuItem from "./CartMenuItem";
-import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 // Shopping Cart API
 import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shoppingCartApi";
@@ -72,22 +71,25 @@ function ShoppingCartList() {
 
     return (
         <>
-            <h1>Items in your cart:</h1>
-            {shoppingCart.items.length > 0 ? (
+            <div className="mt-10 max-w-6xl mx-auto">
+                <h3 className="pt-8 mb-0 font-semibold font-serif">Shopping Cart</h3>
+                <hr className="mt-0"></hr>
+                {shoppingCart.items.length > 0 ? (
                 shoppingCart.items.map((product, idx) => (
                     <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
                 ))
-            ) : (
-                <p>Your cart is empty</p>
-            )}
-            {shoppingCart.items.length > 0 && (
+                ) : (
+                <h4 className="italic">Your cart is empty</h4>
+                )}
+                {shoppingCart.items.length > 0 && (
                 <>
-                    <h2>Total: ${shoppingCart.getTotalCost().toFixed(2)}</h2>
-                    <Button onClick={handleOrderSubmit} variant="success" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting...' : 'Submit Order'}
-                    </Button>
+                    <h3>Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
+                    <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-300 hover:bg-green-400 text-gray-800 py-2 px-3 border rounded shadow mb-4">
+                    {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                    </button>
                 </>
-            )}
+                )}
+            </div>
         </>
     )
 }
