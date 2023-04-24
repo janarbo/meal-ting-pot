@@ -8,7 +8,7 @@ import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
 import GetAllChefMenuList from './chefMenuList.js';
 import ProfileForm from './ChefProfileForm.js';
-import FilteredProfiles from './FilteredProfiles.js';
+// import FilteredProfiles from './FilteredProfiles.js';
 import ShoppingCartList from './ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
 import ChefOrderList from './ChefOrderList.js';
