@@ -1,7 +1,7 @@
 import { useGetAllChefQuery } from './features/menu-items/menuItemApi'
 import { useSelector } from "react-redux";
 
-function GetAllChefMenuList() {
+function GetAllChefMenuItemList({accountInfo}) {
     const userId = useSelector((state) => state.auth.user.id);
     console.log(userId);
     const { data } = useGetAllChefQuery(userId);
@@ -21,4 +21,4 @@ function GetAllChefMenuList() {
     );
 }
 
-export default GetAllChefMenuList;
+export default GetAllChefMenuItemList;
