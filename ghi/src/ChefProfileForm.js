@@ -1,12 +1,9 @@
-import React from "react";
-import { useState } from "react";
-import {
-  useCreateProfileMutation,
-  useGetAllTagsQuery,
-} from "./features/chef-profile/chefProfileApi";
-import { useNavigate } from "react-router-dom";
-import { useGetAllChefQuery } from "./features/menu-items/menuItemApi";
-// import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import React from 'react';
+import { useState } from 'react';
+import { useCreateProfileMutation, useGetAllTagsQuery } from './features/chef-profile/chefProfileApi';
+import {useNavigate} from 'react-router-dom'
+import { useGetAllChefQuery } from './features/menu-items/menuItemApi';
+import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import SideBar from "./SideBar";
 
 function ProfileForm() {
@@ -51,9 +48,6 @@ function ProfileForm() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="absolute inset-y-0 left-0 flex flex-col w-1/ h-full top-20 bg-gray-100 pt-40 pb-10 pl-10 pr-20">
-        <SideBar />
-      </div>
       <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
         <form
           onSubmit={handleSubmit}
@@ -65,6 +59,7 @@ function ProfileForm() {
                 Profile
               </h2>
             </div>
+
             <div className="mt-6 flex flex-col lg:flex-row">
               <div className="flex-grow space-y-6">
                 <div>
@@ -256,6 +251,7 @@ function ProfileForm() {
             </div>
           </div>
         </form>
+        <SideBar />
       </div>
     </div>
   );

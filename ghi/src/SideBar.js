@@ -17,7 +17,7 @@ const SideBar = () => {
     };
 
     const handleCreateProfileClick = () => {
-        navigate("/create/profile")
+        navigate("/createprofile")
     };
 
     const handleMenuClick = () => {
