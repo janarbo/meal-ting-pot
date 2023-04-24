@@ -71,7 +71,7 @@ function ShoppingCartList() {
 
     return (
             <div data-theme="garden" className="min-h-screen pt-4 font-sans">
-                <div className="bg-white pt-3 pl-5 pr-5 max-w-8xl mx-auto">
+                <div className="bg-white pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
                     <h3 className="mt-1 mb-4 font-normal">Shopping Cart</h3>
                     <hr className="mt-0 mb-3"></hr>
                     {shoppingCart.items.length > 0 ? (
@@ -83,10 +83,10 @@ function ShoppingCartList() {
                     )}
                     {shoppingCart.items.length > 0 && (
                     <>
-                    <h3 className="font-normal mt-4">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                    <button onClick={handleOrderSubmit} disabled={isSubmitting} className="text-xl hover:bg-gray-100 text-gray-800 py-3 px-3 border rounded shadow mb-4 mt-3">
-                    {isSubmitting ? 'Submitting...' : 'Submit Order'}
-                    </button>
+                        <h3 className="font-normal mt-4">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
+                        <button onClick={handleOrderSubmit} disabled={isSubmitting} className="text-xl hover:bg-gray-100 text-gray-800 py-3 px-3 border rounded shadow mb-4 mt-3">
+                        {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                        </button>
                     </>
                     )}
                 </div>
