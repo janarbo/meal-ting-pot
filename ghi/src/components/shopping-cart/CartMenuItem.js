@@ -53,9 +53,9 @@ function CartMenuItem(props) {
     return (
         <>
         <div className="flex">
-            <img className="max-h-72 max-w-72 w-40 h-40" src={photo}></img>
+            <img className="max-h-72 max-w-72 w-40 h-40 rounded" src={photo}></img>
             <div className="flex flex-col ml-4">
-                <h4 className="font-medium">{menuItem.name}</h4>
+                <h4 className="font-normal">{menuItem.name}</h4>
                 <div className="flex items-center">
                     <p className="mr-1 pt-3">Qty:</p>
                     { select && (
@@ -84,17 +84,17 @@ function CartMenuItem(props) {
                                 required
                                 className="inline-block border border-gray-400 rounded-md py-1 px-4 mr-2 w-24 h-12">
                             </input>
-                            <button onClick={() => handleInputChange(moreThanTenValue)} className="bg-amber-200 hover:bg-amber-300 text-gray-800 py-2 px-3 border rounded shadow">Update</button>
+                            <button onClick={() => handleInputChange(moreThanTenValue)} className="text-gray-800 hover:bg-gray-100 py-2 px-3 border rounded">Update</button>
                         </div>
                     )}
-                    <button onClick={() => shoppingCart.deleteFromCart(id)} className="bg-red-400 hover:bg-red-500 text-gray-800 py-2 px-3 border rounded shadow">Delete</button>
+                    <button onClick={() => shoppingCart.deleteFromCart(id)} className="text-gray-800 hover:bg-gray-100 py-2 px-3 border rounded">Delete</button>
                 </div>
                 <div>
-                        <p className="mt-2 italic">Price: ${menuItem.price.toFixed(2)}</p>
+                        <p className="mt-2 text-l">Price: ${menuItem.price.toFixed(2)}</p>
                         {quantity > 1 ? (
-                            <p className="italic">Subtotal ({quantity} items): ${(quantity * menuItem.price).toFixed(2)}</p> )
+                            <p className="text-l">Subtotal ({quantity} items): ${(quantity * menuItem.price).toFixed(2)}</p> )
                         : (
-                            <p className="italic">Subtotal ({quantity} item): ${(quantity * menuItem.price).toFixed(2)}</p>
+                            <p className="text-l">Subtotal ({quantity} item): ${(quantity * menuItem.price).toFixed(2)}</p>
                         )}
                 </div>
             </div>
