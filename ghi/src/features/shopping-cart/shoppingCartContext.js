@@ -5,6 +5,7 @@ export const ShoppingCartContext = createContext({
     getProductQuantity: () => {},
     addOneToCart: () => {},
     removeOneFromCart: () => {},
+    adjustQuantity: () => {},
     deleteFromCart: () => {},
     getTotalCost: () => {},
     clearCart: () => {},
@@ -66,6 +67,20 @@ export function ShoppingCartProvider({children}) {
         }
     }
 
+    function adjustQuantity(id, quantity) {
+        if (quantity == "0 (Delete)") {
+            deleteFromCart(id);
+        } else {
+            setCartProducts(
+                cartProducts.map(
+                    product => product.id === id
+                    ? {...product, quantity: product.quantity=parseInt(quantity)}
+                    : product
+                )
+            )
+        }
+    }
+
     function deleteFromCart(id) {
         setCartProducts(
             cartProducts => cartProducts.filter(currentProduct => {
@@ -99,6 +114,7 @@ export function ShoppingCartProvider({children}) {
         getProductQuantity,
         addOneToCart,
         removeOneFromCart,
+        adjustQuantity,
         deleteFromCart,
         getTotalCost,
         getSubCost,

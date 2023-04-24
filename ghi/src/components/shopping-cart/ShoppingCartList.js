@@ -1,7 +1,6 @@
 import { ShoppingCartContext } from "../../features/shopping-cart/shoppingCartContext"
 import { useContext, useState } from "react"
 import CartMenuItem from "./CartMenuItem";
-import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 // Shopping Cart API
 import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shoppingCartApi";
@@ -71,24 +70,27 @@ function ShoppingCartList() {
     };
 
     return (
-        <>
-            <h1>Items in your cart:</h1>
-            {shoppingCart.items.length > 0 ? (
-                shoppingCart.items.map((product, idx) => (
-                    <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
-                ))
-            ) : (
-                <p>Your cart is empty</p>
-            )}
-            {shoppingCart.items.length > 0 && (
-                <>
-                    <h2>Total: ${shoppingCart.getTotalCost().toFixed(2)}</h2>
-                    <Button onClick={handleOrderSubmit} variant="success" disabled={isSubmitting}>
+            <div data-theme="garden" className="min-h-screen pt-4 font-sans">
+                <div className="bg-white pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
+                    <h3 className="mt-1 mb-4 font-normal">Shopping Cart</h3>
+                    <hr className="mt-0 mb-3"></hr>
+                    {shoppingCart.items.length > 0 ? (
+                    shoppingCart.items.map((product, idx) => (
+                        <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
+                    ))
+                    ) : (
+                    <h4 className="italic">Your cart is empty</h4>
+                    )}
+                    {shoppingCart.items.length > 0 && (
+                    <>
+                        <h3 className="font-normal mt-4">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
+                        <button onClick={handleOrderSubmit} disabled={isSubmitting} className="text-xl hover:bg-gray-100 text-gray-800 py-3 px-3 border rounded shadow mb-4 mt-3">
                         {isSubmitting ? 'Submitting...' : 'Submit Order'}
-                    </Button>
-                </>
-            )}
-        </>
+                        </button>
+                    </>
+                    )}
+                </div>
+            </div>
     )
 }
 
