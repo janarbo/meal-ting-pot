@@ -5,7 +5,7 @@ import { useGetOneMenuItemQuery } from '../../features/menu-items/menuItemApi';
 function CartMenuItem(props) {
     const shoppingCart = useContext(ShoppingCartContext);
     const id = props.id;
-    let quantity = props.quantity;
+    const quantity = props.quantity;
     const photo = props.photo;
     const { data: menuItem, isLoading } = useGetOneMenuItemQuery(id);
 
