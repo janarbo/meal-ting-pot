@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "./features/auth/authAPI";
-import { useChefAvailabilityMutation } from "./features/chef-profile/chefAPI";
+import { useChefAvailabilityMutation } from "./features/chef-profile/ChefStatusAPI";
 
 const SideBar = () => {
     const navigate = useNavigate();
