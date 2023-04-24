@@ -1,5 +1,5 @@
 import { Card, Button, Form, Row, Col } from 'react-bootstrap';
-import { ShoppingCartContext } from './features/shopping-cart/shoppingCartContext';
+import { ShoppingCartContext } from '../../features/shopping-cart/shoppingCartContext';
 import { useContext } from 'react';
 
 function MenuItemCard(props) {
@@ -10,7 +10,7 @@ function MenuItemCard(props) {
     return (
         <Card>
             <Card.Body>
-                <Card.Img variant="top" src={product.photo}/>
+                <Card.Img variant="top" src={product.photo} className="rounded max-h-60 max-w-60 h-auto w-auto"/>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>${product.price}</Card.Text>
                 { productQuantity > 0 ?
