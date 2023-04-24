@@ -60,7 +60,7 @@ function Nav({ accountInfo }) {
                             <div className="flex">
                                 <button className="mr-10 text-2xl hover:underline font-medium" onClick={ handleOrders }>Orders</button>
                                 <button className="mr-10 text-2xl hover:underline font-medium" onClick={ handleLogout }>Sign Out</button>
-                                <IconButton className="mr-10 text-black text-2xl font-bold" onClick={ handleCart }>
+                                <IconButton className="mr-10 text-black text-2xl font-semibold" onClick={ handleCart }>
                                     <ShoppingCartIcon className="mr-1"/> Cart ({productsCount} items)
                                 </IconButton>
                             </div>
