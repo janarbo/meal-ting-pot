@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
 import {
   useGetAllChefProfilesQuery,
   useGetAllTagsQuery,
 } from "./features/chef-profile/chefProfileApi";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 
 const MainPage = () => {
@@ -25,10 +25,10 @@ const MainPage = () => {
   }
 
 
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <>
@@ -44,6 +44,7 @@ const MainPage = () => {
             </button>
           ))}
       </div>
+      <div > <h2 className="text-lg leading-6 font-medium text-gray-900">Explore Chefs</h2></div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
           ? filteredProfiles
