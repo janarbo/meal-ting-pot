@@ -16,7 +16,7 @@ class UserProfileIn(BaseModel):
     bio: str
     availability: bool
     tags: Optional[str]
-    featured_menu_item: Optional[int]
+    featured_menu_item: Optional[str]
 
 
 class UserProfileDetailOut(BaseModel):
@@ -174,7 +174,16 @@ class UserProfileRepository:
                     result = db.execute(
                         """
                         INSERT INTO user_profiles
-                            (user_id, full_name, email, photo, phone_number, address, bio, availability, tags, featured_menu_item)
+                            (user_id,
+                            full_name,
+                            email,
+                            photo,
+                            phone_number,
+                            address,
+                            bio,
+                            availability,
+                            tags,
+                            featured_menu_item)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING profile_id;
@@ -230,11 +239,3 @@ class UserProfileRepository:
             featured_menu_item=record[10],
             social_media=social_media
         )
-
-
-
-       # SELECT up.*, ARRAY_AGG(s.url) AS social_media
-                        # FROM user_profiles AS up
-                        # LEFT JOIN social_media AS s ON up.profile_id = s.user_profile_id
-                        # WHERE up.profile_id = %s
-                        # GROUP BY up.profile_id;

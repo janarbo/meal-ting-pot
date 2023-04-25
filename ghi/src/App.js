@@ -15,6 +15,7 @@ import ChefOrderList from './ChefOrderList.js';
 import CustomerOrderList from './CustomerOrderList.js';
 import ChefProfilePage from './features/chef-profile/ChefProfilePage.js'
 import ChefProfileUpdate from './features/chef-profile/ChefProfileUpdate.js';
+import UpdateProfileForm from './features/chef-profile/UpdateProfile.js';
 
 function App() {
   const { data } = useGetTokenQuery();
@@ -37,7 +38,7 @@ function App() {
               <Route path="menu-items" element={<GetAllChefMenuList />} />
               <Route path="profile/create" element={<ProfileForm />} />
               <Route path="profile/:profileId" element={<ChefProfilePage/>} />
-              <Route path="profile/:profileId/edit" element={<ChefProfileUpdate/>} />
+              <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
               <Route path="orders" element={<ChefOrderList />} />
             </Route>
             <Route path="cart" element={<ShoppingCartList />} />

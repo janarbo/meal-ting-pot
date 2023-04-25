@@ -20,8 +20,8 @@ export const chefProfileApi = createApi({
         }),
 
         getAllTags: builder.query({
-        query: () => '/tags',
-        providesTags: ['Tags'],
+            query: () => '/tags',
+            providesTags: ['Tags'],
         }),
 
 
@@ -37,14 +37,15 @@ export const chefProfileApi = createApi({
 
 
         updateProfile: builder.mutation({
-            query: (profileId, data) => ({
-            url: '/profile/' + profileId,
-            body: data,
-            method: 'put'
-
+            query: (data) => ({
+                url: `/profile/${data.profile_id}`,
+                method: 'PUT',
+                body:{
+                    ...data,
+                }
             }),
-        invalidatesTags: ['MainPage','ChefProfilePage'],
-        }),
+            invalidatesTags: ['MainPage'],
+        })
     })
 })
 

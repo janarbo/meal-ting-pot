@@ -1,12 +1,24 @@
-import React from 'react';
-import { useState } from 'react';
-import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
-import {useNavigate} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, useLocation} from 'react-router-dom';
+import {
+  useUpdateProfileMutation,
+  useGetAllTagsQuery,
+  useGetOneProfileQuery,
+} from './chefProfileApi';
 import { useGetAllChefQuery } from '../menu-items/menuItemApi';
+import { useSelector } from "react-redux";
 
 
-function ProfileForm(){
-  const [profileId, setProfileId] = useState(null);
+function UpdateProfileForm() {
+  const { profileId } = useParams();
+  const userId = useSelector((state) => state.auth.userInfo.id);
+  const { data: profile } = useGetOneProfileQuery(parseInt(profileId));
+  const { data: tags } = useGetAllTagsQuery();
+  const { data: menuItems } = useGetAllChefQuery(userId);
+  const navigate = useNavigate();
+
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState('');
@@ -15,41 +27,56 @@ function ProfileForm(){
   const [bio, setBio] = useState('');
   const [availability, setAvailability] = useState(false);
   const [featuredMenuItem, setFeaturedMenuItem] = useState('');
-  const [tagName, setTagName] = useState ('');
-  const { data: menuItems } = useGetAllChefQuery();
-  const { data: tags } = useGetAllTagsQuery();
-  const navigate = useNavigate();
-  const [createProfile] = useCreateProfileMutation();
+  const [tagName, setTagName] = useState('');
+
+  useEffect(() => {
+    if (profile) {
+      setFullName(profile.full_name);
+      setEmail(profile.email);
+      setPhoto(profile.photo);
+      setPhoneNumber(profile.phone_number);
+      setAddress(profile.address);
+      setBio(profile.bio);
+      setAvailability(profile.availability);
+      setFeaturedMenuItem(profile.featured_menu_item);
+      setTagName(profile.tags);
+    }
+  }, [profile]);
 
   const handleOnClick = () => {
-    availability ? setAvailability(false): setAvailability(true);
-  }
-
-
+    setAvailability(!availability);
+  };
+  const canSave = !isLoading
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(profileId);
+
+    if (canSave) {
     try {
-      const payload = {
-        'full_name':fullName,
-        'email': email,
-        'photo': photo,
-        'phone_number':phoneNumber,
-        'address': address,
-        'bio':bio,
-        'availability': availability,
-        'tags':tagName,
-        'featured_menu_item':featuredMenuItem,
-      };
-        const response = await createProfile(payload);
-        const newProfileId = response.data.profile_id;
-        setProfileId(newProfileId)
-        await createProfile(payload);
-        navigate(`/chef/profile/${newProfileId}`);
-          } catch (error) {
-            console.log(error)
-          }
+        await updateProfile({
+        profile_id: parseInt(profileId),
+        full_name: fullName,
+        email: email,
+        photo:  photo,
+        phone_number: phoneNumber,
+        address:  address,
+        bio:  bio,
+        availability:  availability,
+        tags: tagName,
+        featured_menu_item: featuredMenuItem,
+      }).unwrap()
+        navigate(`/chef/profile/${profileId}`);
+      } catch(error) {
+      console.log(error);
+    }
+    }
   };
 
+
+   if (isLoading){
+      return <div>Updating...</div>;
+
+   }
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -57,26 +84,26 @@ function ProfileForm(){
       <form onSubmit={handleSubmit} className="divide-y divide-gray-200 lg:col-span-9">
         <div className="py-6 px-4 sm:p-6 lg:pb-8">
           <div>
-            <h2 className="text-lg leading-6 font-medium text-gray-900">Profile</h2>
+            <h2 className="text-lg leading-6 font-medium text-gray-900">Edit Profile</h2>
           </div>
 
           <div className="mt-6 flex flex-col lg:flex-row">
             <div className="flex-grow space-y-6">
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="full_name" className="block text-sm font-medium text-gray-700">
                   Full name
                 </label>
                 <div className="mt-1 rounded-md shadow-sm flex">
                   <div className="relative flex-grow focus-within:z-10">
                     <input
                       type="text"
-                      name="fullName"
-                      id="fullName"
+                      name="full_name"
+                      id="full_name"
                       autoComplete="name"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                    />
+                   />
                   </div>
                 </div>
               </div>
@@ -99,7 +126,7 @@ function ProfileForm(){
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
                   Photo
                 </label>
                 <div className="mt-1 rounded-md shadow-sm flex">
@@ -117,7 +144,7 @@ function ProfileForm(){
               </div>
 
                <div>
-                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">
                   Phone Number
                 </label>
                 <div className="mt-1 rounded-md shadow-sm flex">
@@ -146,6 +173,7 @@ function ProfileForm(){
                     className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
+
                   />
                 </div>
               </div>
@@ -162,6 +190,7 @@ function ProfileForm(){
                   className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                   value={bio}
                   onChange={e => setBio(e.target.value)}
+
                 ></textarea>
               </div>
           </div>
@@ -184,8 +213,8 @@ function ProfileForm(){
           label='tags'
           id='tags'
           value={tagName}
-          onChange={(e) => setTagName(e.target.value)}
-          className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
+        onChange={(e) => setTagName(e.target.value)}
+        className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
         >
           <option value=''>Tag</option>
           {tags?.map(tag => {
@@ -203,6 +232,7 @@ function ProfileForm(){
           className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           value={featuredMenuItem}
           onChange={e => setFeaturedMenuItem(e.target.value)} >
+
             <option value=''>Signature Dish</option>
             {menuItems?.map(menuItem=> {
               return(
@@ -222,6 +252,9 @@ function ProfileForm(){
       </div>
   </div>
 
+
   );
+
 }
-export default ProfileForm;
+
+export default UpdateProfileForm;
