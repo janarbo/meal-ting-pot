@@ -30,7 +30,7 @@ function App() {
     <>
       <ShoppingCartProvider>
         <BrowserRouter basename={basename}>
-          <Nav accountInfo={data}/>
+          <Nav accountInfo={data} />
           <Routes>
             <Route element={<Protected token={data} />}>
               <Route path="home" element={<MainPage />} />
@@ -43,7 +43,7 @@ function App() {
               <Route path="orders" element={<CustomerOrderList />} />
             </Route>
             <Route path="" element={<LandingPage />} />
-            <Route path="login" element={<LoginForm accountInfo={data} />}/>
+            <Route path="login" element={<LoginForm accountInfo={data} />} />
             <Route path="signup" element={<SignupForm accountInfo={data} />} />
           </Routes>
         </BrowserRouter>
