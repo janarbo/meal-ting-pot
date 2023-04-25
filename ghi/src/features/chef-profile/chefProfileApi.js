@@ -17,30 +17,57 @@ export const chefProfileApi = createApi({
         providesTags: ["MainPage"],
         }),
 
-        createProfile: builder.mutation({
-        query: (data) => ({
-            url: "/profile",
-            body: data,
-            method: "post",
-        }),
-        invalidatesTags: ["MainPage"],
+
+        getOneProfile: builder.query({
+            query: (profileId) => '/profile/' + profileId,
+            providesTags: ['MainPage'],
+
         }),
 
         getAllTags: builder.query({
-            query: () => "/tags",
-            providesTags: ["Tags"],
+            query: () => '/tags',
+            providesTags: ['Tags'],
+        }),
+
+
+        createProfile: builder.mutation({
+            query: (data) =>({
+            url: '/profile',
+            body: data,
+            method: 'post'
+
+            }),
+           invalidatesTags: ['MainPage'],
+        }),
+
+
+        updateProfile: builder.mutation({
+            query: (data) => ({
+                url: `/profile/${data.profile_id}`,
+                method: 'PUT',
+                body:{
+                    ...data,
+                }
+            }),
+            invalidatesTags: ['MainPage'],
         }),
 
         getAvailableChefProfilesQuery: builder.query({
             query: (availability) => "/profile/" + availability,
             providesTags: ['MainPage'],
         }),
-    }),
-});
+
+    })
+})
+
+
 export const {
     useGetAllChefProfilesQuery,
     useCreateProfileMutation,
     useGetAllTagsQuery,
+    useUpdateProfileMutation,
+    useGetOneProfileQuery,
     useGetOneChefProfileQuery,
-    useGetAvailableChefProfilesQuery,
+    useGetAvailableChefProfilesQueryQuery
+
 } = chefProfileApi;
