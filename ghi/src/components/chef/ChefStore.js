@@ -51,10 +51,9 @@ function ChefStore() {
         <>
             <div className="pt-4 font-sans flex-col justify-start bg-white pl-5 pr-5 max-w-7xl mx-auto">
                 <div className="flex mb-4">
-                    <img onError={addDefaultSrc} className="mt-4 max-h-72 max-w-72 w-40 h-40 rounded-full" src={profileData.photo}></img>
+                    <img onError={addDefaultSrc} alt={profileData.photo} className="mt-4 max-h-72 max-w-72 w-40 h-40 rounded-full" src={profileData.photo}></img>
                     <div className="flex flex-col">
                         <h1 align="left" className="p-3 mb-0 font-light">{profileData.full_name}</h1>
-                        <h5></h5>
                         <p className="ml-4 mb-2 mr-5 font-light">{profileData.bio}</p>
                     </div>
                     <div className="pl-2 pt-2 flex flex-col">
