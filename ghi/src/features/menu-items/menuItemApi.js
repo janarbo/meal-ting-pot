@@ -9,8 +9,12 @@ export const menuItemApi = createApi({
     tagTypes:['MenuItems'],
     endpoints: (builder) => ({
         getAllCustomer: builder.query({
-            query: (chefId) => `/menu-items/?chefId=${chefId}`,
-            providesTags:['MenuItems']
+            query: chefId => ({
+                url: '/menu-items',
+                method: 'GET',
+                params: {
+                chef_id: chefId
+            }
         }),
         getAllChef: builder.query({
             query: (chefId) => `/chef/${chefId}/menu_items`,
@@ -42,11 +46,12 @@ export const menuItemApi = createApi({
 
         deleteMenuItem: builder.mutation({
             query:({menuItemId})=> `/menu-items/${menuItemId}`,
-            methode:'DELETE'
+            method:'DELETE'
         }),
         invalidatesTags:['MenuItems']
-})
-})
+    }),
+}),
+});
 
 export const {
     useGetAllCustomerQuery,
@@ -54,5 +59,5 @@ export const {
     useGetOneMenuItemQuery,
     useDeleteMenuItemMutation,
     useCreateMenuItemMutation,
-    useUpdateMenuItemMutation
+    useUpdateMenuItemMutation,
 } = menuItemApi;
