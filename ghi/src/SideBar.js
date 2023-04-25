@@ -21,7 +21,7 @@
         };
 
         const handleCreateProfileClick = () => {
-            navigate("");
+            navigate("/chef/profile/create");
         };
 
         const handleMenuClick = () => {
@@ -29,7 +29,7 @@
         };
 
         const handleOrdersClick = () => {
-            navigate("/orders");
+            navigate("/chef/orders");
         };
 
         const handleAvailabilityClick = () => {
