@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-function GetAllChefMenuList() {
 
+function GetAllChefMenuList() {
     const userId = useSelector((state) => state.auth.userInfo.id);
     const [updateMenuItemStatus, {isLoading}]=useUpdateMenuItemMutation()
     const { data: menuItems, isLoading: isLoadingMenuItems } = useGetAllChefQuery(userId);
@@ -17,8 +17,7 @@ function GetAllChefMenuList() {
     const updateMenuItemStatusClicked= async (menu_item)=>{
         if (canSave){
             try{
-                await
-                updateMenuItemStatus({
+                await updateMenuItemStatus({
                     menu_item_id: menu_item.menu_item_id,
                     food_type: menu_item.food_type,
                     name: menu_item.name,
@@ -31,7 +30,8 @@ function GetAllChefMenuList() {
                     calories: menu_item.calories,
                     ingredients: menu_item.ingredients,
                     status: menu_item.status ? false: true
-                }).unwrap()
+                }).unwrap();
+
 
             } catch(err){
                 console.error('Status Update Failed', err)

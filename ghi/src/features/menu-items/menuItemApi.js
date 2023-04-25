@@ -18,50 +18,46 @@ export const menuItemApi = createApi({
       })
     }),
     getAllChef: builder.query({
-      query: (chefId) => ({
-        url: `/chef/${chefId}/menu_items`,
-        providesTags: ['MenuItems']
-      })
+      query: (chefId) => `/chef/${chefId}/menu_items`,
+      providesTags:['MenuItems']
     }),
     getOneMenuItem: builder.query({
-      query: (menuItemId) => ({
-        url: `/menu-items/${menuItemId}`,
-        providesTags: ['MenuItems']
-      })
+      query: (menuItemId) => `/menu-items/${menuItemId}`,
+      providesTags:['MenuItems']
     }),
+
     createMenuItem: builder.mutation({
-      query: (menuItem) => ({
-        url: `/menu-items`,
-        method: 'POST',
+      query:(menuItem)=>({
+        url:`/menu-items`,
+        method:'POST',
         body: menuItem
       }),
-      invalidatesTags: ['MenuItems']
-    }),
+        invalidatesTags:['MenuItems']
+      }),
     updateMenuItem: builder.mutation({
-      query: (menuItem) => ({
+      query:(menuItem)=>({
         url: `/menu-items/${menuItem.menu_item_id}`,
         method: 'PUT',
-        body: {
-          ...menuItem
-        }
+        body:{
+            ...menuItem
+          }
       }),
-      invalidatesTags: ['MenuItems']
-    }),
-    deleteMenuItem: builder.mutation({
-      query: ({ menuItemId }) => ({
-        url: `/menu-items/${menuItemId}`,
-        method: 'DELETE'
+        invalidatesTags:['MenuItems']
       }),
-      invalidatesTags: ['MenuItems']
-    })
-  })
-});
+
+      deleteMenuItem: builder.mutation({
+        query:({menuItemId})=> `/menu-items/${menuItemId}`,
+        method:'DELETE'
+      }),
+        invalidatesTags:['MenuItems']
+})
+})
 
 export const {
-  useGetAllCustomerQuery,
-  useGetAllChefQuery,
-  useGetOneMenuItemQuery,
-  useDeleteMenuItemMutation,
-  useCreateMenuItemMutation,
-  useUpdateMenuItemMutation
+    useGetAllCustomerQuery,
+    useGetAllChefQuery,
+    useGetOneMenuItemQuery,
+    useDeleteMenuItemMutation,
+    useCreateMenuItemMutation,
+    useUpdateMenuItemMutation
 } = menuItemApi;
