@@ -25,6 +25,8 @@ function ChefStore() {
         return <p>Loading...</p>
     }
 
+    const filteredMenuData = menuData.filter(product => product.status === true);
+
     const handleButtonClick = (event) => {
         const value = event.target.value;
         if (value == "main") {
@@ -35,7 +37,6 @@ function ChefStore() {
             dessertRef.current.scrollIntoView({ behavior: "smooth"});
         }
     }
-
 
     return (
         <>
@@ -55,32 +56,34 @@ function ChefStore() {
                 </div>
 
                 <hr></hr>
+                {filteredMenuData.filter(product => product).length > 0 && (
                 <h6 className="text-xl font-normal mt-6 mb-3">Browse By Meal Type</h6>
+                )}
                 <div>
-                    {menuData.filter(product => product.food_type === 'main').length > 0 && (
+                    {filteredMenuData.filter(product => product.food_type === 'main').length > 0 && (
                     <>
                         <button onClick={handleButtonClick} value="main" className="text-gray-800 py-3 px-3 border rounded mb-4 hover:bg-gray-100 mr-4">Main</button>
                     </>
                     )}
-                    {menuData.filter(product => product.food_type === 'side').length > 0 && (
+                    {filteredMenuData.filter(product => product.food_type === 'side').length > 0 && (
                     <>
                         <button onClick={handleButtonClick} value="side" className="text-gray-800 py-3 px-3 border rounded mb-4 hover:bg-gray-100 mr-4">Side</button>
                     </>
                     )}
-                    {menuData.filter(product => product.food_type === 'dessert').length > 0 && (
+                    {filteredMenuData.filter(product => product.food_type === 'dessert').length > 0 && (
                     <>
                         <button onClick={handleButtonClick} value="dessert" className="text-gray-800 py-3 px-3 border rounded mb-4 hover:bg-gray-100 mr-4">Dessert</button>
                     </>
                     )}
                 </div>
 
-                {menuData.filter(product => product.food_type === 'main').length > 0 && (
+                {filteredMenuData.filter(product => product.food_type === 'main').length > 0 && (
                     <>
                         <div ref={mainRef} className="pb-5">
                             <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Main Items</h6>
                             <div data-theme="garden" className="p-4">
                                 <Row xs={1} md={3} className="g-4">
-                                {menuData.filter(product => product.food_type === 'main').map((product) => (
+                                {filteredMenuData.filter(product => product.food_type === 'main').map((product) => (
                                     <Col align="center" key={product.menu_item_id}>
                                         <MenuItemCard product={product}/>
                                     </Col>
@@ -91,13 +94,13 @@ function ChefStore() {
                     </>
                 )}
 
-                {menuData.filter(product => product.food_type === 'side').length > 0 && (
+                {filteredMenuData.filter(product => product.food_type === 'side').length > 0 && (
                     <>
                         <div ref={sideRef} className="pb-5">
                             <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Side Items</h6>
                             <div data-theme="garden" className="p-4">
                                 <Row xs={1} md={3} className="g-4">
-                                {menuData.filter(product => product.food_type === 'side').map((product) => (
+                                {filteredMenuData.filter(product => product.food_type === 'side').map((product) => (
                                     <Col align="center" key={product.menu_item_id}>
                                         <MenuItemCard product={product}/>
                                     </Col>
@@ -108,13 +111,13 @@ function ChefStore() {
                     </>
                 )}
 
-                {menuData.filter(product => product.food_type === 'dessert').length > 0 && (
+                {filteredMenuData.filter(product => product.food_type === 'dessert').length > 0 && (
                     <>
                         <div ref={dessertRef} className="pb-5">
                             <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Dessert Items</h6>
                             <div data-theme="garden" className="p-4">
                                 <Row xs={1} md={3} className="g-4">
-                                {menuData.filter(product => product.food_type === 'dessert').map((product) => (
+                                {filteredMenuData.filter(product => product.food_type === 'dessert').map((product) => (
                                     <Col align="center" key={product.menu_item_id}>
                                         <MenuItemCard product={product}/>
                                     </Col>
