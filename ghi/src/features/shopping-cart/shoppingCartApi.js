@@ -32,7 +32,7 @@ export const shoppingCartApi = createApi({
         }),
 
         updateCartItem: builder.mutation({
-            query: (id, data) => ({
+            query: ({ id, data }) => ({
                 url: '/cart-item/' + id,
                 body: data,
                 method: 'PUT'
