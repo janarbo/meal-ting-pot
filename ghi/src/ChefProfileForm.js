@@ -6,48 +6,45 @@ import { useGetAllChefQuery } from './features/menu-items/menuItemApi';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import SideBar from "./SideBar";
 
-
-function ProfileForm(){
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [photo, setPhoto] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [bio, setBio] = useState('');
+function ProfileForm() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [bio, setBio] = useState("");
   const [availability, setAvailability] = useState(false);
-  const [featuredMenuItem, setFeaturedMenuItem] = useState('');
-  const [tagName, setTagName] = useState ('');
+  const [featuredMenuItem, setFeaturedMenuItem] = useState("");
+  const [tagName, setTagName] = useState("");
   const { data: menuItems } = useGetAllChefQuery();
   const { data: tags } = useGetAllTagsQuery();
   const navigate = useNavigate();
   const [createProfile] = useCreateProfileMutation();
 
   const handleOnClick = () => {
-    availability ? setAvailability(false): setAvailability(true);
-  }
-
+    availability ? setAvailability(false) : setAvailability(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const payload = {
-        'full_name':fullName,
-        'email': email,
-        'photo': photo,
-        'phone_number':phoneNumber,
-        'address': address,
-        'bio':bio,
-        'availability': availability,
-        'tags':tagName,
-        "featured_menu_item":featuredMenuItem,
+        full_name: fullName,
+        email: email,
+        photo: photo,
+        phone_number: phoneNumber,
+        address: address,
+        bio: bio,
+        availability: availability,
+        tags: tagName,
+        featured_menu_item: featuredMenuItem,
       };
-        await createProfile(payload);
-        navigate('/home');
-          } catch (error) {
-            console.log(error)
-          }
+      await createProfile(payload);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
   };
-
 
   return (
     <div className="flex items-center justify-center h-screen">
