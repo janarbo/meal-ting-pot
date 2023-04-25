@@ -6,25 +6,53 @@ export const menuItemApi = createApi({
         baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
         credentials: "include"
     }),
+    tagTypes:['MenuItems'],
     endpoints: (builder) => ({
         getAllCustomer: builder.query({
-            query: () => '/menu-items',
+            query: (chefId) => `/menu-items/?chefId=${chefId}`,
+            providesTags:['MenuItems']
         }),
         getAllChef: builder.query({
-            query: (chefId) => '/chef/' + chefId + '/menu_items',
+            query: (chefId) => `/chef/${chefId}/menu_items`,
+            providesTags:['MenuItems']
         }),
         getOneMenuItem: builder.query({
-            query: (menuItemId) => '/menu-items/' + menuItemId,
+            query: (menuItemId) => `/menu-items/${menuItemId}`,
+            providesTags:['MenuItems']
         }),
-        deleteMenuItem: builder.query({
-            query: (menuItemId) => '/menu-items' + menuItemId
-        })
-    })
+
+        createMenuItem: builder.mutation({
+            query:(menuItem)=>({
+                url:`/menu-items`,
+                method:'POST',
+                body: menuItem
+            }),
+            invalidatesTags:['MenuItems']
+        }),
+        updateMenuItem: builder.mutation({
+            query:(menuItem)=>({
+                url: `/menu-items/${menuItem.menu_item_id}`,
+                method: 'PUT',
+                body:{
+                    ...menuItem
+                }
+            }),
+            invalidatesTags:['MenuItems']
+        }),
+
+        deleteMenuItem: builder.mutation({
+            query:({menuItemId})=> `/menu-items/${menuItemId}`,
+            methode:'DELETE'
+        }),
+        invalidatesTags:['MenuItems']
+})
 })
 
 export const {
     useGetAllCustomerQuery,
     useGetAllChefQuery,
     useGetOneMenuItemQuery,
-    useDeleteMenuItemQuery
+    useDeleteMenuItemMutation,
+    useCreateMenuItemMutation,
+    useUpdateMenuItemMutation
 } = menuItemApi;

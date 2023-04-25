@@ -6,9 +6,11 @@ import MainPage from './MainPage.js';
 import Nav from './Nav.js';
 import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
-import GetAllChefMenuList from './chefMenuList.js';
+import GetAllChefMenuList from './features/menu-items/chefMenuList.js';
 import ProfileForm from './ChefProfileForm.js';
 import FilteredProfiles from './FilteredProfiles.js';
+import CreateMenuItemForm from './features/menu-items/createMenuItemForm.js';
+import UpdateMenuItemForm from './features/menu-items/chefUpdateMenuItem.js';
 
 
 function App() {
@@ -28,8 +30,12 @@ function App() {
           <Routes>
             <Route element={<Protected token={data} />}>
               <Route path="home" element={<MainPage />} />
-              <Route path="chef/menu-items" element={<GetAllChefMenuList />} />
-              <Route path="chef/profile" element={<ProfileForm />} />
+              <Route path="chef">
+                <Route path="menu-items" element={<GetAllChefMenuList />} />
+                <Route path="menu-items/new" element={<CreateMenuItemForm/>}/>
+                <Route path="menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
+                <Route path="profile" element={<ProfileForm />} />
+              </Route>
             <Route path="/filtered/:tagName" element={<FilteredProfiles />} />
             </Route>
             <Route path="" element={<LandingPage />} />
