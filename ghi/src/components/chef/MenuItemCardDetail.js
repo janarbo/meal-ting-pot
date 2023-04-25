@@ -8,7 +8,7 @@ function MenuItemCardDetail(props) {
 
     return (
         <div className="hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
-            <img className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
+            <img alt={product.photo} className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
             <div className="px-6 pt-3 pb-3">
                 {/* NAME/DESCRIPTION */}
                 <div className="font-semibold text-xl mb-2 capitalize">{product.name}</div>
