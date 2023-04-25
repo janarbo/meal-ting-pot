@@ -11,7 +11,7 @@ function MenuItemCard(props) {
         <Card>
             <Card.Body>
                 <Card.Img variant="top" src={product.photo} className="rounded max-h-60 max-w-60 h-auto w-auto"/>
-                <Card.Title>{product.name}</Card.Title>
+                <Card.Title className="capitalize">{product.name}</Card.Title>
                 <Card.Text>${product.price}</Card.Text>
                 { productQuantity > 0 ?
                     <>
