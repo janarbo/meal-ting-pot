@@ -1,41 +1,46 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const chefProfileApi = createApi({
-    reducerPath: 'profiles',
+    reducerPath: "profiles",
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
-        credentials: "include"
+        credentials: "include",
     }),
-    endpoints: builder => ({
+    endpoints: (builder) => ({
         getOneChefProfile: builder.query({
-            query: (id) => '/profile/' + id,
-            provideTags: ['MainPage'],
+        query: (id) => "/profile/" + id,
+        provideTags: ["MainPage"],
         }),
 
         getAllChefProfiles: builder.query({
-            query: () => '/profile/',
-            providesTags: ['MainPage'],
+        query: () => "/profile/",
+        providesTags: ["MainPage"],
         }),
 
         createProfile: builder.mutation({
-            query: data =>({
-            url: '/profile',
+        query: (data) => ({
+            url: "/profile",
             body: data,
-            method: 'post',
-
-            }),
-            invalidatesTags: ['MainPage'],
+            method: "post",
+        }),
+        invalidatesTags: ["MainPage"],
         }),
 
         getAllTags: builder.query({
-        query: () => '/tags',
-        providesTags: ['Tags']
-        })
-    })
+            query: () => "/tags",
+            providesTags: ["Tags"],
+        }),
+
+        getAvailableChefProfilesQuery: builder.query({
+            query: (availability) => "/profile/" + availability,
+            providesTags: ['MainPage'],
+        }),
+    }),
 });
 export const {
     useGetAllChefProfilesQuery,
     useCreateProfileMutation,
     useGetAllTagsQuery,
-    useGetOneChefProfileQuery
+    useGetOneChefProfileQuery,
+    useGetAvailableChefProfilesQuery,
 } = chefProfileApi;

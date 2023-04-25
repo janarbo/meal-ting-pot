@@ -13,9 +13,8 @@ export const menuItemApi = createApi({
                 url: '/menu-items',
                 method: 'GET',
                 params: {
-                    chef_id: chefId
-                }
-            })
+                chef_id: chefId
+            }
         }),
         getAllChef: builder.query({
             query: (chefId) => `/chef/${chefId}/menu_items`,
@@ -47,7 +46,7 @@ export const menuItemApi = createApi({
 
         deleteMenuItem: builder.mutation({
             query:({menuItemId})=> `/menu-items/${menuItemId}`,
-            method:'DELETE'
+            methode:'DELETE'
         }),
         invalidatesTags:['MenuItems']
 })
