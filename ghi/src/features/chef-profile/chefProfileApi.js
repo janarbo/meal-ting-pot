@@ -37,7 +37,7 @@ export const chefProfileApi = createApi({
             method: 'post'
 
             }),
-           invalidatesTags: ['MainPage'],
+            invalidatesTags: ['MainPage'],
         }),
 
 
@@ -51,12 +51,6 @@ export const chefProfileApi = createApi({
             }),
             invalidatesTags: ['MainPage'],
         }),
-
-        getAvailableChefProfilesQuery: builder.query({
-            query: (availability) => "/profile/" + availability,
-            providesTags: ['MainPage'],
-        }),
-
     })
 })
 
@@ -68,6 +62,5 @@ export const {
     useUpdateProfileMutation,
     useGetOneProfileQuery,
     useGetOneChefProfileQuery,
-    useGetAvailableChefProfilesQueryQuery
 
 } = chefProfileApi;
