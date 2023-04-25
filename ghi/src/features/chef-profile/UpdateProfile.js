@@ -51,8 +51,6 @@ function UpdateProfileForm() {
   const canSave = !isLoading
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(profileId);
-
     if (canSave) {
     try {
         await updateProfile({
