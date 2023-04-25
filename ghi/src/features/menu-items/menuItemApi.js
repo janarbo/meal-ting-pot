@@ -45,11 +45,13 @@ export const menuItemApi = createApi({
         invalidatesTags:['MenuItems']
       }),
 
-      deleteMenuItem: builder.mutation({
-        query:({menuItemId})=> `/menu-items/${menuItemId}`,
+    deleteMenuItem: builder.mutation({
+      query:({menuItemId})=> ({
+        url: `/menu-items/${menuItemId}`,
         method:'DELETE'
       }),
         invalidatesTags:['MenuItems']
+    })
 })
 })
 
