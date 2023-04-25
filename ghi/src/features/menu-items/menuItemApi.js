@@ -15,7 +15,8 @@ export const menuItemApi = createApi({
         params: {
             chef_id: chefId
         }
-    })
+    }),
+      provideTags:['MenuItems']
     }),
     getAllChef: builder.query({
       query: (chefId) => `/chef/${chefId}/menu_items`,

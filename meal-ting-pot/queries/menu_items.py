@@ -165,7 +165,7 @@ class MenuItemRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT menu_item_id, food_type, name, price, description, photo, comment, spicy_level, tags, calories, ingredients, chef_id, status
+                        SELECT menu_item_id, food_type, name, price, description, comment, photo, spicy_level, tags, calories, ingredients, chef_id, status
                         FROM menu_items
                         WHERE chef_id = %s
                         ORDER BY food_type;
@@ -233,8 +233,8 @@ class MenuItemRepository:
             name=record[2],
             price=record[3],
             description=record[4],
-            comment=record[6],
-            photo=record[5],
+            comment=record[5],
+            photo=record[6],
             spicy_level=record[7],
             tags=record[8],
             calories=record[9],
