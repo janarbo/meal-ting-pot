@@ -56,6 +56,7 @@ return(
                     value={formData.food_type}
                     onChange={handleFormChange}
                 >
+                <option value=''>Choose Food Type</option>
                 {foodTypeOptions.map(food_type=>{
                     return(
                         <option key={food_type} value={food_type}>{food_type}</option>
@@ -90,6 +91,7 @@ return(
                     value={formData.spicy_level}
                     onChange={handleFormChange}
                 >
+                    <option value=''>Choose a Spice Level</option>
                 {spicyLevelOptions.map(spicy_level=>{
                     return(
                         <option key={spicy_level} value={spicy_level}>{spicy_level}</option>
