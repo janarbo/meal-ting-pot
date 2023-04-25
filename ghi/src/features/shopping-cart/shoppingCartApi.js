@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+
 export const shoppingCartApi = createApi({
     reducerPath: "shoppingCart",
+    tagTypes: ['Cart'],
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
         credentials: "include",
-        tagTypes: ['Cart']
     }),
     endpoints: (builder) => ({
         createShoppingCart: builder.mutation({
@@ -13,21 +14,38 @@ export const shoppingCartApi = createApi({
                 url: '/cart',
                 method: 'POST'
             }),
-            invalidateTags: ['Cart']
+            invalidateTags: ['Cart'],
         }),
-        getOneShoppingCart: builder.query({
-            query: (cartId) => '/cart/' +  cartId
+
+        getOneShoppingCartWithItems: builder.query({
+            query: (cartId) => '/cart/' + cartId + '/items',
+            providesTags: ['Cart']
         }),
-        updateShoppingCart: builder.mutation({
-            query: (cartId, data) => ({
-                url: '/cart/' + cartId,
+
+        createCartItem: builder.mutation({
+            query: (data) => ({
+                url: '/cart-item',
                 body: data,
-                method: 'PUT',
+                method: 'POST'
+            }),
+            InvalidateTags: ['Cart']
+        }),
+
+        updateCartItem: builder.mutation({
+            query: ({ id, data }) => ({
+                url: '/cart-item/' + id,
+                body: data,
+                method: 'PUT'
             }),
             invalidateTags: ['Cart']
         }),
-        getOneShoppingCartWithItems: builder.query({
-            query: (cartId) => '/cart/' + cartId + '/items'
+
+        deleteCartItem: builder.mutation({
+            query: (id) => ({
+                url: '/cart-item/' + id,
+                method: 'DELETE'
+            }),
+            invalidateTags: ['Cart']
         })
     })
 })
@@ -35,7 +53,8 @@ export const shoppingCartApi = createApi({
 
 export const {
     useCreateShoppingCartMutation,
-    useGetOneShoppingCartQuery,
-    useUpdateShoppingCartMutation,
     useGetOneShoppingCartWithItemsQuery,
+    useCreateCartItemMutation,
+    useUpdateCartItemMutation,
+    useDeleteCartItemMutation,
 } = shoppingCartApi;

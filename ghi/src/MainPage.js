@@ -1,17 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate} from "react-router-dom";
 import {
   useGetAllChefProfilesQuery,
   useGetAllTagsQuery,
 } from "./features/chef-profile/chefProfileApi";
+import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
+
 
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState(null);
   const { data: tags } = useGetAllTagsQuery();
   const { data, isLoading } = useGetAllChefProfilesQuery();
   const [filteredProfiles, setFilteredProfiles] = useState([]);
+  const navigate = useNavigate();
 
-
+  const handleProfileClick = (fullName, userId, profileId) => {
+    navigate(`/chef/${fullName}/${userId}/${profileId}/`);
+  }
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
@@ -20,10 +25,10 @@ const MainPage = () => {
   }
 
 
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <>
@@ -39,14 +44,16 @@ const MainPage = () => {
             </button>
           ))}
       </div>
+      <div > <h2 className="text-lg leading-6 font-medium text-gray-900">Explore Chefs</h2></div>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
           ? filteredProfiles
           : data
         ).map((profile) => (
           <div
-            key={profile.profile_id}
+            key={profile.user_id}
             className="bg-white overflow-hidden shadow rounded-lg"
+            onClick={() => handleProfileClick(profile.full_name, profile.user_id, profile.profile_id)}
           >
             <img
               className="w-45 h-45 object-cover"
@@ -64,6 +71,7 @@ const MainPage = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 };
