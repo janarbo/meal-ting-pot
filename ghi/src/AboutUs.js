@@ -69,7 +69,12 @@ const AboutUs = () => {
             <ul className="flex justify-center">
               {Object.keys(member.socialLinks).map((key) => (
                 <li key={key} className="mx-2">
-                  <a href={member.socialLinks[key]}>{key}</a>
+                  <a
+                    href={member.socialLinks[key]}
+                    className="text-[#b05e5e] text-decoration-none hover:text-black"
+                  >
+                    {key}
+                  </a>
                 </li>
               ))}
             </ul>
