@@ -25,7 +25,7 @@
         };
 
         const handleMenuClick = () => {
-            navigate("/menu");
+            navigate("/chef/menu-items");
         };
 
         const handleOrdersClick = () => {
