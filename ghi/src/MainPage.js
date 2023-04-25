@@ -24,11 +24,10 @@ const MainPage = () => {
     setFilteredProfiles(newProfiles);
   }
 
-
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <>

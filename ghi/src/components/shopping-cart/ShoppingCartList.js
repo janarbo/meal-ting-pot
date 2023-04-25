@@ -77,7 +77,7 @@ function ShoppingCartList() {
                         {shoppingCart.items.length > 0 && (
                             <div className="flex-grow-1 flex justify-end items-center">
                                 <h3 className="mt-2 mb-4 font-normal">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                                <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:bg-gray-100 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
+                                <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:bg-green-200 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
                                 {isSubmitting ? 'Submitting...' : 'Submit Order'}
                                 </button>
                             </div>
