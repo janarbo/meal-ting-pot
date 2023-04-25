@@ -1,90 +1,83 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation} from 'react-router-dom';
-import {
-  useUpdateProfileMutation,
-  useGetAllTagsQuery,
-  useGetOneProfileQuery,
-} from './chefProfileApi';
+import React from "react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUpdateProfileMutation, useGetAllTagsQuery, useGetOneProfileQuery} from "./chefProfileApi";
 import { useGetAllChefQuery } from '../menu-items/menuItemApi';
-import { useSelector } from "react-redux";
-import SideBar from '../../SideBar';
 
 
 
-function UpdateProfileForm() {
-  const { profileId } = useParams();
-  const userId = useSelector((state) => state.auth.userInfo.id);
-  const { data: profile } = useGetOneProfileQuery(parseInt(profileId));
-  const { data: tags } = useGetAllTagsQuery();
-  const { data: menuItems } = useGetAllChefQuery(userId);
-  const navigate = useNavigate();
 
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+function ChefProfileUpdate() {
+    // const profileId = singleProfile?.profileId;
 
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [photo, setPhoto] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [bio, setBio] = useState('');
-  const [availability, setAvailability] = useState(false);
-  const [featuredMenuItem, setFeaturedMenuItem] = useState('');
-  const [tagName, setTagName] = useState('');
+    const navigate = useNavigate();
+    const {data: singleProfile} = useGetOneProfileQuery();
 
-  useEffect(() => {
-    if (profile) {
-      setFullName(profile.full_name);
-      setEmail(profile.email);
-      setPhoto(profile.photo);
-      setPhoneNumber(profile.phone_number);
-      setAddress(profile.address);
-      setBio(profile.bio);
-      setAvailability(profile.availability);
-      setFeaturedMenuItem(profile.featured_menu_item);
-      setTagName(profile.tags);
+    const {
+        profileId,
+        'full_name': initialFullName,
+        'email': initialEmail,
+        'photo': initialPhoto,
+        'phone_number': initialPhoneNumber,
+        'address': initialAddress,
+        'bio': initialBio,
+        'availability': initialAvailabilty,
+        'tags': initialTags,
+        'featuredMenuItem': initialFeaturedMenuItem
+
+    } = singleProfile || {};
+
+    const [fullName, setFullName] = useState(initialFullName || '');
+    const [email, setEmail] = useState(initialEmail || '');
+    const [photo, setPhoto] = useState(initialPhoto || '');
+    const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber || '');
+    const [address, setAddress] = useState(initialAddress || '');
+    const [bio, setBio] = useState(initialBio || '');
+    const [availability, setAvailability] = useState( false);
+    const [featuredMenuItem, setFeaturedMenuItem] = useState('');
+    const [tagName, setTagName] = useState('');
+
+    const { data: menuItems } = useGetAllChefQuery();
+    const { data: tags } = useGetAllTagsQuery();
+    const [editProfile] = useUpdateProfileMutation();
+
+
+    const handleOnClick = () => {
+        availability ? setAvailability(false): setAvailability(true);
     }
-  }, [profile]);
 
-  const handleOnClick = () => {
-    setAvailability(!availability);
-  };
-  const canSave = !isLoading
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(profileId);
 
-    if (canSave) {
-    try {
-        await updateProfile({
-        profile_id: parseInt(profileId),
-        full_name: fullName,
-        email: email,
-        photo:  photo,
-        phone_number: phoneNumber,
-        address:  address,
-        bio:  bio,
-        availability:  availability,
-        tags: tagName,
-        featured_menu_item: featuredMenuItem,
-      }).unwrap()
-        navigate(`/chef/profile/${profileId}`);
-      } catch(error) {
-      console.log(error);
+    const profileUpdateSubmitHandler = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('full_name', fullName)
+        formData.append('email', email)
+        formData.append('photo', photo)
+        formData.append('phone_number',phoneNumber)
+        formData.append('address', address)
+        formData.append('bio', bio)
+        formData.append('availability', availability)
+        formData.append('tags', tagName)
+        formData.append('featured_menu_item', featuredMenuItem)
+
+        editProfile({ profile_id: profileId, data: formData });
+
+        console.log(profileId)
+
+
+         navigate(`/chef/profile/${profileId}`)
+
+
+
     }
-    }
-  };
 
 
-   if (isLoading){
-      return <div>Updating...</div>;
 
-   }
 
-  return (
-    <div className="flex items-center justify-center h-screen">
-      <SideBar />
+    return(
+   <div className="flex items-center justify-center h-screen">
      <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
-      <form onSubmit={handleSubmit} className="divide-y divide-gray-200 lg:col-span-9">
+      <form onSubmit={profileUpdateSubmitHandler} className="divide-y divide-gray-200 lg:col-span-9">
         <div className="py-6 px-4 sm:p-6 lg:pb-8">
           <div>
             <h2 className="text-lg leading-6 font-medium text-gray-900">Edit Profile</h2>
@@ -93,20 +86,20 @@ function UpdateProfileForm() {
           <div className="mt-6 flex flex-col lg:flex-row">
             <div className="flex-grow space-y-6">
               <div>
-                <label htmlFor="full_name" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
                   Full name
                 </label>
                 <div className="mt-1 rounded-md shadow-sm flex">
                   <div className="relative flex-grow focus-within:z-10">
                     <input
                       type="text"
-                      name="full_name"
-                      id="full_name"
+                      name="fullName"
+                      id="fullName"
                       autoComplete="name"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                   />
+                    />
                   </div>
                 </div>
               </div>
@@ -147,7 +140,7 @@ function UpdateProfileForm() {
               </div>
 
                <div>
-                <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
                   Phone Number
                 </label>
                 <div className="mt-1 rounded-md shadow-sm flex">
@@ -176,7 +169,6 @@ function UpdateProfileForm() {
                     className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
-
                   />
                 </div>
               </div>
@@ -193,7 +185,6 @@ function UpdateProfileForm() {
                   className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
                   value={bio}
                   onChange={e => setBio(e.target.value)}
-
                 ></textarea>
               </div>
           </div>
@@ -215,9 +206,9 @@ function UpdateProfileForm() {
         <select
           label='tags'
           id='tags'
-          value={tagName}
-        onChange={(e) => setTagName(e.target.value)}
-        className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
+          value={tagName.toString()}
+          onChange={(e) => setTagName(e.target.value)}
+          className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
         >
           <option value=''>Tag</option>
           {tags?.map(tag => {
@@ -233,9 +224,8 @@ function UpdateProfileForm() {
           label='Featured Menu Item'
           id='featuredMenuItem'
           className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          value={featuredMenuItem}
+          value={Number(featuredMenuItem)}
           onChange={e => setFeaturedMenuItem(e.target.value)} >
-
             <option value=''>Signature Dish</option>
             {menuItems?.map(menuItem=> {
               return(
@@ -246,7 +236,7 @@ function UpdateProfileForm() {
             })}
         </select>
               <button type="submit" className="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Save
+                Update
               </button>
        </div>
         </div>
@@ -254,10 +244,7 @@ function UpdateProfileForm() {
       </form>
       </div>
   </div>
-
-
-  );
-
+    );
 }
 
-export default UpdateProfileForm;
+export default ChefProfileUpdate;

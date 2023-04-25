@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link  } from 'react-router-dom';
 import { useGetOneProfileQuery } from './chefProfileApi';
+import SideBar from '../../SideBar';
+
 
 function ChefProfilePage() {
   const { profileId } = useParams();
@@ -21,6 +23,8 @@ function ChefProfilePage() {
   }
 
   return (
+  <div>
+  <SideBar />
   <div>
   <table className="border-collapse border border-gray-400  mt-15">
     <tbody>
@@ -63,6 +67,7 @@ function ChefProfilePage() {
     </tbody>
   </table>
   <Link to={`/chef/profile/${profileId}/edit`} className="bg-green-700 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mt-8">Update Profile</Link>
+</div>
 </div>
 
 );

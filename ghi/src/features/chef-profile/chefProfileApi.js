@@ -7,6 +7,11 @@ export const chefProfileApi = createApi({
         credentials: "include"
     }),
     endpoints: builder => ({
+        getOneChefProfile: builder.query({
+            query: (id) => '/profile/' + id,
+            provideTags: ['MainPage'],
+        }),
+
         getAllChefProfiles: builder.query({
             query: () => '/profile/',
             providesTags: ['MainPage'],
@@ -45,7 +50,13 @@ export const chefProfileApi = createApi({
                 }
             }),
             invalidatesTags: ['MainPage'],
-        })
+        }),
+
+        getAvailableChefProfilesQuery: builder.query({
+            query: (availability) => "/profile/" + availability,
+            providesTags: ['MainPage'],
+        }),
+
     })
 })
 
@@ -56,4 +67,7 @@ export const {
     useGetAllTagsQuery,
     useUpdateProfileMutation,
     useGetOneProfileQuery,
+    useGetOneChefProfileQuery,
+    useGetAvailableChefProfilesQueryQuery
+
 } = chefProfileApi;
