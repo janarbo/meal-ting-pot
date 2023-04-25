@@ -15,7 +15,7 @@ import AboutUs from './AboutUs.js';
 import ChefOrderList from './ChefOrderList.js';
 import CustomerOrderList from './components/orders/CustomerOrderList.js';
 import ShoppingCartProvider from './features/shopping-cart/shoppingCartContext.js';
-import ChefStore from './ChefStore.js';
+import ChefStore from './components/chef/ChefStore.js';
 
 
 function App() {
