@@ -1,21 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const menuItemApi = createApi({
-  reducerPath: 'menuItem',
-  baseQuery: fetchBaseQuery({
+    reducerPath: 'menuItem',
+    baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
     credentials: "include"
-  }),
-  tagTypes: ['MenuItems'],
-  endpoints: (builder) => ({
+    }),
+    tagTypes: ['MenuItems'],
+    endpoints: (builder) => ({
     getAllCustomer: builder.query({
-      query: (chefId) => ({
+        query: (chefId) => ({
         url: '/menu-items',
         method: 'GET',
         params: {
-          chef_id: chefId
+            chef_id: chefId
         }
-      })
+    })
     }),
     getAllChef: builder.query({
       query: (chefId) => `/chef/${chefId}/menu_items`,

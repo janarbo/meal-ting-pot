@@ -27,9 +27,9 @@ function ChefStore() {
 
     const handleButtonClick = (event) => {
         const value = event.target.value;
-        if (value == "main") {
+        if (value === "main") {
             mainRef.current.scrollIntoView({ behavior: "smooth" });
-        } else if (value == "side") {
+        } else if (value === "side") {
             sideRef.current.scrollIntoView({ behavior: "smooth"});
         } else {
             dessertRef.current.scrollIntoView({ behavior: "smooth"});
