@@ -27,7 +27,7 @@ export const orderApi = createApi({
         }),
 
         updateOrder: builder.mutation({
-            query: (id, data) => ({
+            query: ({ id, data }) => ({
                 url: '/orders/' + id,
                 body: data,
                 method: 'PUT',

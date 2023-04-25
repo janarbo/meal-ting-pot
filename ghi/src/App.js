@@ -18,7 +18,7 @@ import AboutUs from './AboutUs.js';
 import ChefOrderList from './ChefOrderList.js';
 import CustomerOrderList from './components/orders/CustomerOrderList.js';
 import ShoppingCartProvider from './features/shopping-cart/shoppingCartContext.js';
-import ChefStore from './ChefStore.js';
+import ChefStore from './components/chef/ChefStore.js';
 
 
 function App() {
@@ -33,14 +33,14 @@ function App() {
 
   return (
     <>
-    <ShoppingCartProvider>
-     <BrowserRouter basename={basename}>
-        <Nav accountInfo={data}/>
-        <Routes>
-          <Route element={<Protected token={data} />}>
-            <Route path="home" element={<MainPage />} />
-            <Route path="chef">
-               <Route path="menu-items" element={<GetAllChefMenuList />} />
+      <ShoppingCartProvider>
+        <BrowserRouter basename={basename}>
+          <Nav accountInfo={data} />
+          <Routes>
+            <Route element={<Protected token={data} />}>
+              <Route path="home" element={<MainPage />} />
+              <Route path="chef">
+                <Route path="menu-items" element={<GetAllChefMenuList />} />
                 <Route path="menu-items/new" element={<CreateMenuItemForm/>}/>
                 <Route path="menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
               <Route path="profile/create" element={<ProfileForm />} />
@@ -55,7 +55,7 @@ function App() {
               <Route path="orders" element={<CustomerOrderList />} />
             </Route>
             <Route path="" element={<LandingPage />} />
-            <Route path="login" element={<LoginForm accountInfo={data} />}/>
+            <Route path="login" element={<LoginForm accountInfo={data} />} />
             <Route path="signup" element={<SignupForm accountInfo={data} />} />
           </Routes>
         </BrowserRouter>

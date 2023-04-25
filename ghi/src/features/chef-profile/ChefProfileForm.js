@@ -17,17 +17,16 @@ function ProfileForm(){
   const [address, setAddress] = useState('');
   const [bio, setBio] = useState('');
   const [availability, setAvailability] = useState(false);
-  const [featuredMenuItem, setFeaturedMenuItem] = useState('');
-  const [tagName, setTagName] = useState ('');
+  const [featuredMenuItem, setFeaturedMenuItem] = useState("");
+  const [tagName, setTagName] = useState("");
   const { data: menuItems } = useGetAllChefQuery();
   const { data: tags } = useGetAllTagsQuery();
   const navigate = useNavigate();
   const [createProfile] = useCreateProfileMutation();
 
   const handleOnClick = () => {
-    availability ? setAvailability(false): setAvailability(true);
-  }
-
+    availability ? setAvailability(false) : setAvailability(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +51,6 @@ function ProfileForm(){
             console.log(error)
           }
   };
-
 
   return (
 
