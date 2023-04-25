@@ -25,11 +25,8 @@ function ChefStore() {
         return <p>Loading...</p>
     }
 
-<<<<<<< HEAD
     const filteredMenuData = menuData.filter(product => product.status === true);
 
-=======
->>>>>>> main
     const handleButtonClick = (event) => {
         const value = event.target.value;
         if (value == "main") {
@@ -41,10 +38,6 @@ function ChefStore() {
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
     return (
         <>
             <div className="pt-4 font-sans flex-col justify-start bg-white pl-5 pr-5 max-w-screen-2xl mx-auto">
@@ -63,56 +56,34 @@ function ChefStore() {
                 </div>
 
                 <hr></hr>
-<<<<<<< HEAD
                 {filteredMenuData.filter(product => product).length > 0 && (
                 <h6 className="text-xl font-normal mt-6 mb-3">Browse By Meal Type</h6>
                 )}
                 <div>
                     {filteredMenuData.filter(product => product.food_type === 'main').length > 0 && (
-=======
-                <h6 className="text-xl font-normal mt-6 mb-3">Browse By Meal Type</h6>
-                <div>
-                    {menuData.filter(product => product.food_type === 'main').length > 0 && (
->>>>>>> main
                     <>
                         <button onClick={handleButtonClick} value="main" className="text-gray-800 py-3 px-3 border rounded mb-4 hover:bg-gray-100 mr-4">Main</button>
                     </>
                     )}
-<<<<<<< HEAD
                     {filteredMenuData.filter(product => product.food_type === 'side').length > 0 && (
-=======
-                    {menuData.filter(product => product.food_type === 'side').length > 0 && (
->>>>>>> main
                     <>
                         <button onClick={handleButtonClick} value="side" className="text-gray-800 py-3 px-3 border rounded mb-4 hover:bg-gray-100 mr-4">Side</button>
                     </>
                     )}
-<<<<<<< HEAD
                     {filteredMenuData.filter(product => product.food_type === 'dessert').length > 0 && (
-=======
-                    {menuData.filter(product => product.food_type === 'dessert').length > 0 && (
->>>>>>> main
                     <>
                         <button onClick={handleButtonClick} value="dessert" className="text-gray-800 py-3 px-3 border rounded mb-4 hover:bg-gray-100 mr-4">Dessert</button>
                     </>
                     )}
                 </div>
 
-<<<<<<< HEAD
                 {filteredMenuData.filter(product => product.food_type === 'main').length > 0 && (
-=======
-                {menuData.filter(product => product.food_type === 'main').length > 0 && (
->>>>>>> main
                     <>
                         <div ref={mainRef} className="pb-5">
                             <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Main Items</h6>
                             <div data-theme="garden" className="p-4">
                                 <Row xs={1} md={3} className="g-4">
-<<<<<<< HEAD
                                 {filteredMenuData.filter(product => product.food_type === 'main').map((product) => (
-=======
-                                {menuData.filter(product => product.food_type === 'main').map((product) => (
->>>>>>> main
                                     <Col align="center" key={product.menu_item_id}>
                                         <MenuItemCard product={product}/>
                                     </Col>
@@ -123,21 +94,13 @@ function ChefStore() {
                     </>
                 )}
 
-<<<<<<< HEAD
                 {filteredMenuData.filter(product => product.food_type === 'side').length > 0 && (
-=======
-                {menuData.filter(product => product.food_type === 'side').length > 0 && (
->>>>>>> main
                     <>
                         <div ref={sideRef} className="pb-5">
                             <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Side Items</h6>
                             <div data-theme="garden" className="p-4">
                                 <Row xs={1} md={3} className="g-4">
-<<<<<<< HEAD
                                 {filteredMenuData.filter(product => product.food_type === 'side').map((product) => (
-=======
-                                {menuData.filter(product => product.food_type === 'side').map((product) => (
->>>>>>> main
                                     <Col align="center" key={product.menu_item_id}>
                                         <MenuItemCard product={product}/>
                                     </Col>
@@ -148,21 +111,13 @@ function ChefStore() {
                     </>
                 )}
 
-<<<<<<< HEAD
                 {filteredMenuData.filter(product => product.food_type === 'dessert').length > 0 && (
-=======
-                {menuData.filter(product => product.food_type === 'dessert').length > 0 && (
->>>>>>> main
                     <>
                         <div ref={dessertRef} className="pb-5">
                             <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Dessert Items</h6>
                             <div data-theme="garden" className="p-4">
                                 <Row xs={1} md={3} className="g-4">
-<<<<<<< HEAD
                                 {filteredMenuData.filter(product => product.food_type === 'dessert').map((product) => (
-=======
-                                {menuData.filter(product => product.food_type === 'dessert').map((product) => (
->>>>>>> main
                                     <Col align="center" key={product.menu_item_id}>
                                         <MenuItemCard product={product}/>
                                     </Col>
