@@ -1,47 +1,37 @@
-import { Card, Button, Form, Row, Col } from 'react-bootstrap';
 import { ShoppingCartContext } from '../../features/shopping-cart/shoppingCartContext';
 import { useContext } from 'react';
 
 function MenuItemCard(props) {
     const product = props.product;
-    console.log(product);
     const shoppingCart = useContext(ShoppingCartContext);
     const productQuantity = shoppingCart.getProductQuantity(product.menu_item_id);
 
     return (
-        // <Card>
-        //     <Card.Body>
-        //         <Card.Img variant="top" src={product.photo} className="rounded max-h-60 max-w-60 h-auto w-auto"/>
-        //         <Card.Title className="capitalize">{product.name}</Card.Title>
-        //         <Card.Text>${product.price}</Card.Text>
-        //         { productQuantity > 0 ?
-        //             <>
-        //                 <Form as={Row}>
-        //                     <Form.Label column="true" sm="6">In Cart: {productQuantity}</Form.Label>
-        //                     <Col sm="6">
-        //                         <Button sm="6" className="mx-2" onClick={() => shoppingCart.addOneToCart(product.menu_item_id)} >+</Button>
-        //                         <Button sm="6" className="mx-2" onClick={() => shoppingCart.removeOneFromCart(product.menu_item_id)}>-</Button>
-        //                     </Col>
-        //                 </Form>
-        //                 <Button variant="danger" className="my-2" onClick={() => shoppingCart.deleteFromCart(product.menu_item_id)}>Remove from cart</Button>
-        //             </>
-        //             : <Button variant="primary" onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</Button>
-        //         }
-        //     </Card.Body>
-        //  </Card>
-
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+        <div onClick={props.onClick} className="hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
             <img className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
-            <div class="px-6 py-4">
-                <div class="font-semibold text-xl mb-2 capitalize">{product.name}</div>
-                <p class="text-gray-700 text-base">
+            <div className="px-6 py-4">
+                <div className="font-semibold text-xl mb-2 capitalize">{product.name}</div>
+                <p className="text-gray-700 text-base mb-0">
                 {product.description}
                 </p>
             </div>
-            <div class="px-6 pt-4 pb-2">
+            <div className="flex justify-between">
+                <h6 className="font-medium text-left ml-5">${product.price}</h6>
+                { productQuantity > 0 && (
+                <h6 className="font-normal text-right mr-5">In Cart: {productQuantity}</h6>
+                )}
+            </div>
+            <div className= "px-6 pt-0 pb-2">
+                <hr className="mt-0"></hr>
                 { productQuantity > 0 ? (
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                ) : <button class="bg-[#b05e5e] font-normal text-xl hover:bg-[#bf7070] py-2 px-3 border mb-2 mt-2" onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
+                    <>
+                        <button onClick={() => shoppingCart.removeOneFromCart(product.menu_item_id)} className="bg-[#c78e8e] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">-</button>
+                        <button onClick={() => shoppingCart.deleteFromCart(product.menu_item_id)} className="bg-[#c78e8e] font-normal text-xl hover:opacity-80 py-2 px-3 border ml-2 mr-2 mb-2 mt-2 rounded-xl">Remove from Cart</button>
+                        <button onClick={() => shoppingCart.addOneToCart(product.menu_item_id)} className="bg-[#9db2a3] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">+</button>
+                    </>
+                ) :
+                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full"
+                            onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
                 }
             </div>
         </div>
