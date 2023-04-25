@@ -25,10 +25,10 @@ const MainPage = () => {
   }
 
 
-  
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <>
