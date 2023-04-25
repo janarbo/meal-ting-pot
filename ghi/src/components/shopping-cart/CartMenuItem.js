@@ -62,7 +62,7 @@ function CartMenuItem(props) {
         <div className="flex">
             <img className="max-h-72 max-w-72 w-40 h-40 rounded" src={photo}></img>
             <div className="flex flex-col ml-4">
-                <h4 className="font-normal">{menuItem.name}</h4>
+                <h4 className="font-normal capitalize">{menuItem.name}</h4>
                 <div className="flex items-center">
                     <p className="mr-1 pt-3">Qty:</p>
                     { dropdown && (
