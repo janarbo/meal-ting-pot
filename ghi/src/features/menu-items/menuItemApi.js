@@ -14,47 +14,49 @@ export const menuItemApi = createApi({
         method: 'GET',
         params: {
             chef_id: chefId
-        },
-        providesTags:['MenuItems']
-    }),
+        }
+    })
     }),
     getAllChef: builder.query({
-      query: (chefId) => `/chef/${chefId}/menu_items`,
-      providesTags:['MenuItems']
+        query: (chefId) => ({
+        url: `/chef/${chefId}/menu_items`,
+        providesTags: ['MenuItems']
+    })
     }),
     getOneMenuItem: builder.query({
-      query: (menuItemId) => `/menu-items/${menuItemId}`,
-      providesTags:['MenuItems']
+        query: (menuItemId) => ({
+        url: `/menu-items/${menuItemId}`,
+        providesTags: ['MenuItems']
+    })
     }),
 
     createMenuItem: builder.mutation({
-      query:(menuItem)=>({
-        url:`/menu-items`,
-        method:'POST',
+        query: (menuItem) => ({
+        url: `/menu-items`,
+        method: 'POST',
         body: menuItem
-      }),
-        invalidatesTags:['MenuItems']
-      }),
+    }),
+        invalidatesTags: ['MenuItems']
+    }),
     updateMenuItem: builder.mutation({
-      query:(menuItem)=>({
+        query: (menuItem) => ({
         url: `/menu-items/${menuItem.menu_item_id}`,
         method: 'PUT',
-        body:{
+        body: {
             ...menuItem
-          }
-      }),
-        invalidatesTags:['MenuItems']
-      }),
-
+        }
+    }),
+        invalidatesTags: ['MenuItems']
+    }),
     deleteMenuItem: builder.mutation({
-      query:({menuItemId})=> ({
+        query: ({ menuItemId }) => ({
         url: `/menu-items/${menuItemId}`,
-        method:'DELETE'
-      }),
-        invalidatesTags:['MenuItems']
+        method: 'DELETE'
+    }),
+        invalidatesTags: ['MenuItems']
     })
 })
-})
+});
 
 export const {
     useGetAllCustomerQuery,
