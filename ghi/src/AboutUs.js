@@ -1,4 +1,5 @@
 import React from "react";
+import ted from "../src/images/aboutUs/ted_hwang.jpg"
 
 const teamMembers = [
   {
@@ -14,7 +15,7 @@ const teamMembers = [
   {
     name: "Ted Hwang",
     image:
-      "https://img.freepik.com/free-vector/plant-emoji_78370-262.jpg?w=826&t=st=1682322093~exp=1682322693~hmac=994b87fbe8336e70394cf41c7510320a93cf74ae100f877f204ceb1bc88abefe",
+      ted,
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.",
     socialLinks: {
       Gitlab: "https://gitlab.com/htedd",
