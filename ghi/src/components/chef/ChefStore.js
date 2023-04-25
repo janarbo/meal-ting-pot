@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetAllCustomerQuery } from "../../features/menu-items/menuItemApi";
 import { Row, Col } from 'react-bootstrap';
 import { useGetOneChefProfileQuery } from "../../features/chef-profile/chefProfileApi";
 import MenuItemCard from "./MenuItemCard";
+import MenuItemCardDetail from "./MenuItemCardDetail";
 import NoAvatar from "../../images/NoAvatar.png"
 
 
@@ -11,6 +12,14 @@ function ChefStore() {
     const profileImage = NoAvatar;
     const addDefaultSrc = (event) => {
         event.target.src = profileImage;
+    }
+
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [showCardDetail, setShowCardDetail] = useState(false);
+
+    function handleCardClick(product) {
+        setSelectedItem(product);
+        setShowCardDetail(true);
     }
 
     const mainRef = useRef(null);
@@ -29,9 +38,9 @@ function ChefStore() {
 
     const handleButtonClick = (event) => {
         const value = event.target.value;
-        if (value == "main") {
+        if (value === "main") {
             mainRef.current.scrollIntoView({ behavior: "smooth" });
-        } else if (value == "side") {
+        } else if (value === "side") {
             sideRef.current.scrollIntoView({ behavior: "smooth"});
         } else {
             dessertRef.current.scrollIntoView({ behavior: "smooth"});
@@ -85,7 +94,11 @@ function ChefStore() {
                                 <Row xs={1} md={3} className="g-4">
                                 {filteredMenuData.filter(product => product.food_type === 'main').map((product) => (
                                     <Col align="center" key={product.menu_item_id}>
-                                        <MenuItemCard product={product}/>
+                                        {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
+                                            <MenuItemCardDetail product={product} />
+                                        ) : (
+                                            <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
+                                        )}
                                     </Col>
                                 ))}
                                 </Row>
@@ -102,7 +115,11 @@ function ChefStore() {
                                 <Row xs={1} md={3} className="g-4">
                                 {filteredMenuData.filter(product => product.food_type === 'side').map((product) => (
                                     <Col align="center" key={product.menu_item_id}>
-                                        <MenuItemCard product={product}/>
+                                        {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
+                                            <MenuItemCardDetail product={product} />
+                                        ) : (
+                                            <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
+                                        )}
                                     </Col>
                                 ))}
                                 </Row>
@@ -119,7 +136,11 @@ function ChefStore() {
                                 <Row xs={1} md={3} className="g-4">
                                 {filteredMenuData.filter(product => product.food_type === 'dessert').map((product) => (
                                     <Col align="center" key={product.menu_item_id}>
-                                        <MenuItemCard product={product}/>
+                                        {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
+                                            <MenuItemCardDetail product={product} />
+                                        ) : (
+                                            <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
+                                        )}
                                     </Col>
                                 ))}
                                 </Row>
