@@ -95,3 +95,11 @@ To reflect, I'm surprised by the amount of progress we made and knowledge we gai
 I'm proud and excited to see where we're at now with our project/growth. I don't think we were expecting to have finished some of these components and deployment early and now we can spend more time on css/readMe documentation. Looking forward to see how this project turns out before we submit it this Friday.
 
 </details>
+
+<details>
+    <summary>Week 16</summary>
+
+#### (Monday) 4/24/2023
+I resolved some bugs regarding my state for the shoppingCartList component. Afterwards, I worked on the chef store component so that their profile information will be displayed. Lastly, I worked on css for the card components to use tailwind instead of react-bootstrap
+
+</details>
