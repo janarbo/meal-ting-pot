@@ -3,7 +3,6 @@ import { useContext } from 'react';
 
 function MenuItemCardDetail(props) {
     const product = props.product;
-    console.log(product);
     const shoppingCart = useContext(ShoppingCartContext);
     const productQuantity = shoppingCart.getProductQuantity(product.menu_item_id);
 
