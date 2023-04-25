@@ -1,18 +1,21 @@
 import React from 'react';
 import { useState } from 'react';
-import { useCreateProfileMutation, useGetAllTagsQuery } from './features/chef-profile/chefProfileApi';
+import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
 import {useNavigate} from 'react-router-dom'
-import { useGetAllChefQuery } from './features/menu-items/menuItemApi';
+import { useGetAllChefQuery } from '../menu-items/menuItemApi';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import SideBar from "./SideBar";
+import SideBar from '../../SideBar';
 
-function ProfileForm() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [bio, setBio] = useState("");
+
+
+function ProfileForm(){
+  const [profileId, setProfileId] = useState(null);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [bio, setBio] = useState('');
   const [availability, setAvailability] = useState(false);
   const [featuredMenuItem, setFeaturedMenuItem] = useState("");
   const [tagName, setTagName] = useState("");
@@ -29,25 +32,31 @@ function ProfileForm() {
     e.preventDefault();
     try {
       const payload = {
-        full_name: fullName,
-        email: email,
-        photo: photo,
-        phone_number: phoneNumber,
-        address: address,
-        bio: bio,
-        availability: availability,
-        tags: tagName,
-        featured_menu_item: featuredMenuItem,
+        'full_name':fullName,
+        'email': email,
+        'photo': photo,
+        'phone_number':phoneNumber,
+        'address': address,
+        'bio':bio,
+        'availability': availability,
+        'tags':tagName,
+        'featured_menu_item':featuredMenuItem,
       };
-      await createProfile(payload);
-      navigate("/home");
-    } catch (error) {
-      console.log(error);
-    }
+        const response = await createProfile(payload);
+        const newProfileId = response.data.profile_id;
+        setProfileId(newProfileId)
+        await createProfile(payload);
+        navigate(`/chef/profile/${newProfileId}`);
+          } catch (error) {
+            console.log(error)
+          }
   };
 
   return (
+
     <div className="flex items-center justify-center h-screen">
+      <SideBar />
+
       <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
         <form
           onSubmit={handleSubmit}
@@ -108,7 +117,7 @@ function ProfileForm() {
 
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="photo"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Photo
@@ -121,7 +130,6 @@ function ProfileForm() {
                       id="photo"
                       autoComplete="photo"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder="Photo"
                       value={photo}
                       onChange={(e) => setPhoto(e.target.value)}
                     />
@@ -143,7 +151,6 @@ function ProfileForm() {
                       id="phoneNumber"
                       autoComplete="phoneNumber"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder="PhoneNumber"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
@@ -251,8 +258,9 @@ function ProfileForm() {
             </div>
           </div>
         </form>
-        <SideBar />
+
       </div>
+
     </div>
   );
 }

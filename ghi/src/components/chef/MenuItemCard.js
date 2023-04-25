@@ -4,6 +4,10 @@ import { useContext } from 'react';
 
 function MenuItemCard(props) {
     const product = props.product;
+<<<<<<< HEAD
+=======
+    console.log(product);
+>>>>>>> main
     const shoppingCart = useContext(ShoppingCartContext);
     const productQuantity = shoppingCart.getProductQuantity(product.menu_item_id);
 
@@ -31,6 +35,7 @@ function MenuItemCard(props) {
 
         <div className="max-w-sm rounded overflow-hidden shadow-lg">
             <img className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
+<<<<<<< HEAD
             <div className="px-6 py-4">
                 <div className="font-semibold text-xl mb-2 capitalize">{product.name}</div>
                 <p className="text-gray-700 text-base">
@@ -41,6 +46,18 @@ function MenuItemCard(props) {
                 { productQuantity > 0 ? (
                     <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
                 ) : <button className="bg-[#b05e5e] font-normal text-xl hover:bg-[#bf7070] py-2 px-3 border mb-2 mt-2" onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
+=======
+            <div class="px-6 py-4">
+                <div class="font-semibold text-xl mb-2 capitalize">{product.name}</div>
+                <p class="text-gray-700 text-base">
+                {product.description}
+                </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+                { productQuantity > 0 ? (
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                ) : <button class="bg-[#b05e5e] font-normal text-xl hover:bg-[#bf7070] py-2 px-3 border mb-2 mt-2" onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
+>>>>>>> main
                 }
             </div>
         </div>

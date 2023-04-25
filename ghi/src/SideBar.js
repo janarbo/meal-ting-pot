@@ -2,22 +2,26 @@
     import { useState } from "react";
     import { useNavigate } from "react-router-dom";
     import { useLogoutMutation } from "./features/auth/authAPI";
+    import { useParams } from "react-router-dom";
 
     const SideBar = () => {
         const navigate = useNavigate();
         const [logout] = useLogoutMutation();
         const [availability, setAvailability] = useState(false);
+        const { profileId } = useParams();
+        console.log(profileId)
+
 
         const handleHomeClick = () => {
             navigate("/home");
         };
 
         const handleProfileClick = () => {
-            navigate("profile/");
+            navigate(`/chef/profile/${profileId}`);
         };
 
         const handleCreateProfileClick = () => {
-            navigate("/profile");
+            navigate("");
         };
 
         const handleMenuClick = () => {
