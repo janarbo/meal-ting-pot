@@ -4,23 +4,27 @@ import {
   useGetAllChefProfilesQuery,
   useGetAllTagsQuery,
 } from "./features/chef-profile/chefProfileApi";
+import Footer from "./Footer";
+
 
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState(null);
   const { data: tags } = useGetAllTagsQuery();
-  // console.log(tags)
   const { data, isLoading } = useGetAllChefProfilesQuery();
   const [filteredProfiles, setFilteredProfiles] = useState([]);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+
+  const handleProfileClick = (fullName, userId, profileId) => {
+    navigate(`/chef/${fullName}/${userId}/${profileId}/`);
+  }
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
-    const newProfile = data.filter((newTag) => {
-      return newTag.tag === tag.name;
-    });
-    setFilteredProfiles(newProfile);
-    navigate(`/filtered/${tag.name}`); // navigate to the filtered page
-  };
+    const newProfiles = data.filter((profile) => profile.tags.includes(tag.name));
+    setFilteredProfiles(newProfiles);
+  }
+
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -46,8 +50,9 @@ const MainPage = () => {
           : data
         ).map((profile) => (
           <div
-            key={profile.profile_id}
+            key={profile.user_id}
             className="bg-white overflow-hidden shadow rounded-lg"
+            onClick={() => handleProfileClick(profile.full_name, profile.user_id, profile.profile_id)}
           >
             <img
               className="w-45 h-45 object-cover"
@@ -65,60 +70,9 @@ const MainPage = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 };
 
 export default MainPage;
- // const [token, result] = useGetTokenQuery();
-
-    // return(
-    //     <button onClick={() => {
-    //         token();
-    //     }}>
-    //         Get token
-    //     </button>
-    // )
-
-// import { useState } from 'react';
-// import { useGetAllChefProfilesQuery } from '../features/chef-profile/chefProfileApi';
-
-// function ChefProfileList() {
-//   const { data, isLoading } = useGetAllChefProfilesQuery();
-//   console.log(data);
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>name</th>
-//             <th>addresss</th>
-//             <th>availability</th>
-//             <th>tags</th>
-//             <th>featured_menu_item</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {data && data.map((profile) => (
-//             <tr key={profile.profile_id}>
-//               <td>{profile.full_name}</td>
-//               <td>{profile.address}</td>
-//               <td>{profile.availability}</td>
-//               <td>{profile.tags}</td>
-//                 <td>
-//                 {profile.featured_menu_item && <img src={profile.featured_menu_item} alt="Featured menu item" style={{ width: '200px', height: '200px' }} />}
-//               </td>
-//             </tr>
-//             ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
-
-// export default ChefProfileList;

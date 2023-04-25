@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional, Union
 from queries.pool import pool
+from decimal import Decimal
 
 
 class Error(BaseModel):
@@ -10,7 +11,7 @@ class Error(BaseModel):
 class MenuItemIn(BaseModel):
     food_type: str
     name: str
-    price: int
+    price: Decimal
     description: str
     comment: Optional[str]
     photo: str
@@ -25,7 +26,7 @@ class MenuItemOut(BaseModel):
     menu_item_id: int
     food_type: str
     name: str
-    price: int
+    price: Decimal
     description: str
     comment: Optional[str]
     photo: str
@@ -232,8 +233,8 @@ class MenuItemRepository:
             name=record[2],
             price=record[3],
             description=record[4],
-            comment=record[5],
-            photo=record[6],
+            comment=record[6],
+            photo=record[5],
             spicy_level=record[7],
             tags=record[8],
             calories=record[9],
