@@ -70,7 +70,7 @@ function GetAllChefMenuList() {
                     <tbody>
                     {menuItems.map(menu_item => (
                         <tr key={menu_item.menu_item_id}>
-                            <td><img  className="h-20 w-20 object-cover" src={menu_item.photo} alt="Menu Item Photo" /></td>
+                            <td><img  className="h-20 w-20 object-cover" src={menu_item.photo} alt={menu_item.photo} /></td>
                             <td>{menu_item.name}</td>
                             <td>{menu_item.price}</td>
                             <td>{menu_item.description}</td>

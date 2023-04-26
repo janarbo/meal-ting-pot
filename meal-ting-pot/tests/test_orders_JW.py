@@ -19,7 +19,7 @@ def get_current_account_data_test():
 
 
 class GetOrdersRepository:
-    def get_all_orders(self) -> List[OrdersDetailOut]:
+    def get_all(self) -> List[OrdersDetailOut]:
         return [
             OrdersDetailOut(
                 order_id=1,
@@ -36,7 +36,7 @@ class GetOrdersRepository:
         ]
 
 
-def test_get_all_orders():
+def test_get_all():
     app.dependency_overrides[OrdersRepository] = GetOrdersRepository
     app.dependency_overrides[
         authenticator.get_current_account_data
