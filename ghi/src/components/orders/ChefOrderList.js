@@ -4,16 +4,10 @@ import React, { useState } from "react";
 
 function ChefOrderList() {
     const chefId = useSelector((state) => state.auth.userInfo.id);
-
-
     const [selectedOrder, setSelectedOrder] = useState(null);
-
-
-
     const { data: orders, isLoading } = useGetAllOrdersQuery(chefId);
-    const [order, setOrders] = useState(null)
-    console.log(orders)
-
+    const [filterStatus, setFilterStatus] = useState(null);
+    const [showAllOrders, setShowAllOrders] = useState(false);
     const [updateOrder, { data: status, isLoading: isLoadingStatus }] = useUpdateOrderMutation();
     const canSave=!isLoading
 
@@ -35,36 +29,33 @@ function ChefOrderList() {
             return "DECLINED";
         }
     };
-
-
-
     const handleUpdateOrder = async (order, value) => {
-        if (canSave) {
-            try {
+          if (canSave) {
+              try {
 
-                    const items = order.shopping_cart.map(item => {
-                        return {
-                            photo: item.photo,
-                            name: item.name,
-                            price: item.price,
-                            quantity: item.quantity
-                        }
-                    });
+                      const items = order.shopping_cart.map(item => {
+                          return {
+                              photo: item.photo,
+                              name: item.name,
+                              price: item.price,
+                              quantity: item.quantity
+                          }
+                      });
 
-                    const updatedOrder = {
-                        order_id: order.order_id,
-                        order_date: order.order_date,
-                        status: value,
-                        shopping_cart: items
-                    }
-                    const result = await updateOrder(updatedOrder).unwrap();
-                    console.log(result);
+                      const updatedOrder = {
+                          order_id: order.order_id,
+                          order_date: order.order_date,
+                          status: value,
+                          shopping_cart: items
+                      }
+                      const result = await updateOrder(updatedOrder).unwrap();
+                      console.log(result);
 
-            } catch (error) {
-                console.log(error);
-            };
-        }
-    };
+              } catch (error) {
+                  console.log(error);
+              };
+          }
+      };
 
 
     const handleButtonClick = (order, value) => {
@@ -72,10 +63,38 @@ function ChefOrderList() {
         handleUpdateOrder(order, value);
     };
 
+   const handleFilterButtonClick = (status) => {
+    if (status === null) {
+        setShowAllOrders(true);
+        setFilterStatus(null);
+    }  else {
+        setFilterStatus(status);
+        setShowAllOrders(false);
+    }
+};
+    let filteredOrders = orders;
+      if (filterStatus !== null) {
+          filteredOrders = orders.filter(order => order.status === filterStatus);
+      }
+
   return (
 
   <div>
     <h1>Your Order List</h1>
+     <div>
+        <button
+          className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
+          onClick={() => handleFilterButtonClick(null)}
+        > All Orders</button>
+        <button
+          className={`btn btn-primary ${filterStatus === 3  ? "active" : ""}`}
+          onClick={() => handleFilterButtonClick(3)}
+          >Ready For pickup</button>
+        <button
+          className={`btn btn-primary ${filterStatus === 4 ? "active" : ""}`}
+          onClick={() => handleFilterButtonClick(4)}
+          >Completed</button>
+    </div>
     <div className="row">
       <div className="col-sm">
         <table className="table table-striped">
@@ -92,7 +111,7 @@ function ChefOrderList() {
           </thead>
           {orders ? (
             <tbody>
-              {orders
+              {filteredOrders
                 .filter((order) => getStatus(order.status) !== "DECLINED")
                 .sort((a, b) => {
                   if (a.status !== b.status) {
@@ -112,8 +131,7 @@ function ChefOrderList() {
                     >
                       <td>
                         <img src={item.photo} alt="Menu Item Photo" style={{ maxWidth: "100px" }}
-/>
-                      </td>
+                  /></td>
                       {index === 0 ? (
                         <>
                           <td>{item.name}</td>
@@ -185,12 +203,6 @@ function ChefOrderList() {
     </div>
   </div>
 );
-
-
-
-
-
-
 }
 
 export default ChefOrderList
