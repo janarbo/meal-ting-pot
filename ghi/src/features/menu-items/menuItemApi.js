@@ -14,8 +14,9 @@ export const menuItemApi = createApi({
         method: 'GET',
         params: {
             chef_id: chefId
-        }
-    })
+        },
+        providesTags:['MenuItems']
+    }),
     }),
     getAllChef: builder.query({
         query: (chefId) => ({
@@ -29,6 +30,7 @@ export const menuItemApi = createApi({
         providesTags: ['MenuItems']
     })
     }),
+
     createMenuItem: builder.mutation({
         query: (menuItem) => ({
         url: `/menu-items`,

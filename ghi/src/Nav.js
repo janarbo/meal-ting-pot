@@ -30,11 +30,7 @@ function Nav({ accountInfo }) {
     }
 
     const handleOrders = async (e) => {
-        if (accountInfo.account.is_chef) {
-            navigate("/chef/orders");
-        } else {
-            navigate("/orders");
-        }
+        navigate("/orders");
     }
 
     const handleProfile = async (e) => {
@@ -66,7 +62,7 @@ function Nav({ accountInfo }) {
                             </div>
                         </Navbar.Collapse>
                     </Navbar>
-                    <hr className="mb-0 mt-0"></hr>
+                    <hr className="mb-3 mt-0"></hr>
                 </>
             }
         </ >

@@ -5,7 +5,6 @@ import { useCreateMenuItemMutation } from "./menuItemApi";
 
 const CreateMenuItemForm=()=>{
     const chefId = useSelector((state)  => state.auth.userInfo.id);
-    console.log(chefId)
     const[createMenuItem, {isLoading}]= useCreateMenuItemMutation()
     const navigate= useNavigate()
     const [formData, setFormData]= useState({
@@ -43,18 +42,27 @@ const CreateMenuItemForm=()=>{
             }
         }
     }
+    const foodTypeOptions=['main', 'side', 'dessert']
+    const spicyLevelOptions=[0,1,2,3,4,5]
 return(
         <section>
             <h2>Create a New Menu Item</h2>
             <form>
                 <label htmlFor="food_type">Food Type:</label>
-                <input
+                <select
                     type="text"
                     id="food_type"
                     name="food_type"
                     value={formData.food_type}
                     onChange={handleFormChange}
-                />
+                >
+                <option value=''>Choose Food Type</option>
+                {foodTypeOptions.map(food_type=>{
+                    return(
+                        <option key={food_type} value={food_type}>{food_type}</option>
+                    )
+                })}
+                </select>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name= "name" value={formData.name} onChange={handleFormChange}/>
                 <label htmlFor="price">Price:</label>
@@ -76,7 +84,20 @@ return(
                 <label htmlFor="photo">photo:</label>
                 <input type="text" name= "photo" id="photo" value={formData.photo} onChange={handleFormChange}/>
                 <label htmlFor="spicy_level">Spicy Level:</label>
-                <input type="int" name="spicy_level" id="spicy_level" value={formData.spicy_level} onChange={handleFormChange}/>
+                <select
+                    type="int"
+                    id="spicy_level"
+                    name="spicy_level"
+                    value={formData.spicy_level}
+                    onChange={handleFormChange}
+                >
+                    <option value=''>Choose a Spice Level</option>
+                {spicyLevelOptions.map(spicy_level=>{
+                    return(
+                        <option key={spicy_level} value={spicy_level}>{spicy_level}</option>
+                    )
+                })}
+                </select>
                 <label htmlFor="tags">Tags:</label>
                 <input type="text" name="tags" id="tags" value={formData.tags} onChange={handleFormChange}/>
                 <label htmlFor="calories">calories:</label>
