@@ -16,7 +16,7 @@ import CreateMenuItemForm from './features/menu-items/createMenuItemForm.js';
 import UpdateMenuItemForm from './features/menu-items/chefUpdateMenuItem.js';
 import ShoppingCartList from './components/shopping-cart/ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
-import ChefOrderList from './ChefOrderList.js';
+import ChefOrderList from './components/orders/ChefOrderList.js';
 import CustomerOrderList from './components/orders/CustomerOrderList.js';
 import ShoppingCartProvider from './features/shopping-cart/shoppingCartContext.js';
 import ChefStore from './components/chef/ChefStore.js';
