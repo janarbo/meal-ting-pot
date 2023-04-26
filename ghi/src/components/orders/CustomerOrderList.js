@@ -6,18 +6,22 @@ const CustomerOrderList = () => {
 
     const getStatus = (status) => {
         switch (status) {
-        case 1:
-            return "CONFIRMED";
-        case 2:
-            return "READY_FOR_PICKUP";
-        case 3:
-            return "COMPLETED";
-        case 4:
-            return "DECLINED";
-        default:
-            return "SUBMITTED";
+            case 1:
+                return "SUBMITTED";
+            case 2:
+                return "CONFIRMED";
+            case 3:
+                return "READY_FOR_PICKUP";
+            case 4:
+                return "COMPLETED";
+            case 5:
+                return "DECLINED";
+            default:
+                return "UNKNOWN";
         }
     };
+
+
 
     if (isLoading) {
         return <div>Loading...</div>;
