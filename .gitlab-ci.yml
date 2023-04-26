@@ -61,6 +61,7 @@ pages:
     paths:
       - public
 
+
 build-meal-ting-pot-service:
   image: docker:19.03.1
   stage: build

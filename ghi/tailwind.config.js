@@ -2,5 +2,8 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: ["garden"],
-  plugins: [require("daisyui")],
+  plugins: [
+  require("daisyui"),
+  require('@tailwindcss/forms'),
+],
 }

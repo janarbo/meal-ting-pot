@@ -33,8 +33,7 @@ const SignupForm = ({ accountInfo }) => {
     useEffect(() => {
         if (accountInfo) {
             isChef ? (
-            // Need to change this link to chef profile page
-            navigate("/home")
+            navigate("/chef/profile/create")
         ) : (
             navigate("/home")
         )}

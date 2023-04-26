@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional, Union
 from queries.pool import pool
+from decimal import Decimal
 
 
 class Error(BaseModel):
@@ -10,7 +11,7 @@ class Error(BaseModel):
 class MenuItemIn(BaseModel):
     food_type: str
     name: str
-    price: int
+    price: Decimal
     description: str
     comment: Optional[str]
     photo: str
@@ -25,7 +26,7 @@ class MenuItemOut(BaseModel):
     menu_item_id: int
     food_type: str
     name: str
-    price: int
+    price: Decimal
     description: str
     comment: Optional[str]
     photo: str
@@ -140,7 +141,7 @@ class MenuItemRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT menu_item_id, food_type, name, price, description, photo, comment, spicy_level, tags, calories, ingredients, chef_id, status
+                        SELECT menu_item_id, food_type, name, price, description, comment, photo, spicy_level, tags, calories, ingredients, chef_id, status
                         FROM menu_items
                         WHERE chef_id = %s
                         ORDER BY food_type;
@@ -164,7 +165,7 @@ class MenuItemRepository:
                 with conn.cursor() as db:
                     db.execute(
                         """
-                        SELECT menu_item_id, food_type, name, price, description, photo, comment, spicy_level, tags, calories, ingredients, chef_id, status
+                        SELECT menu_item_id, food_type, name, price, description, comment, photo, spicy_level, tags, calories, ingredients, chef_id, status
                         FROM menu_items
                         WHERE chef_id = %s
                         ORDER BY food_type;

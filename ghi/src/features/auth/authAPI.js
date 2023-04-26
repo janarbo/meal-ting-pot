@@ -21,7 +21,6 @@ export const authApi = createApi({
     endpoints: (builder) => ({
         signup: builder.mutation({
             query: info => {
-                console.log(info);
                 let dictionary = {};
                 if (info instanceof HTMLElement) {
                     dictionary = {info};
