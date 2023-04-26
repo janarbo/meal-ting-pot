@@ -102,4 +102,7 @@ I'm proud and excited to see where we're at now with our project/growth. I don't
 #### (Monday) 4/24/2023
 I resolved some bugs regarding my state for the shoppingCartList component. Afterwards, I worked on the chef store component so that their profile information will be displayed. Lastly, I worked on css for the card components to use tailwind instead of react-bootstrap
 
+#### (Tuesday) 4/25/2023
+I worked on the chef store component so that, when users clicked on a MenuItemCard, a MenuItemCardDetail component shows instead with extra information (ingredients, tags, spicy level, calories). After finishing up my last component, I continued stylizing the home page and adjusted the footer so that it was below the content as well. I also wrote another unit test for cart-item and also protected chef pages from customer users. Therefore, if a customer user tries to type a url that only chef's should access, they are navigated to the home page.
+
 </details>
