@@ -15,8 +15,7 @@ const teamMembers = [
   },
   {
     name: "Ted Hwang",
-    image:
-      ted,
+    image: ted,
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.",
     socialLinks: {
       Gitlab: "https://gitlab.com/htedd",
@@ -35,9 +34,9 @@ const teamMembers = [
   },
   {
     name: "Jacob Williams",
-    image:
-      jacob,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.",
+    image: jacob,
+    bio:
+    "As a passionate food lover myself, I have always enjoyed trying out new dishes and exploring different cuisines to expand my palate.",
     socialLinks: {
       Gitlab: "https://gitlab.com/Jacobdub",
       Linkedin: "https://www.linkedin.com/in/jacob-williams04/",
