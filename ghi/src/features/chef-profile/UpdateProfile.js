@@ -213,7 +213,7 @@ function UpdateProfileForm() {
         <select
           label='tags'
           id='tags'
-          value={tagName}
+          value='tags'
         onChange={(e) => setTagName(e.target.value)}
         className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
         >
@@ -227,23 +227,28 @@ function UpdateProfileForm() {
           })}
         </select>
 
-        <select
-          label='Featured Menu Item'
-          id='featuredMenuItem'
-          className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          value={featuredMenuItem}
-          onChange={e => setFeaturedMenuItem(e.target.value)} >
+          {menuItems ? (
+            <select
+              label='Featured Menu Item'
+              id='featuredMenuItem'
+              className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={e => setFeaturedMenuItem(e.target.value)} >
 
-            <option value=''>Signature Dish</option>
-            {menuItems?.map(menuItem=> {
-              return(
-                <option key={menuItem.menu_item_id} value={menuItem.menu_item_id}>
-                  {menuItem.name}
-                </option>
-              );
-            })}
-        </select>
-              <button type="submit" className="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <option value=''>Signature Dish</option>
+                {menuItems?.map(menuItem=> {
+                  return(
+                    <option key={menuItem.menu_item_id} value={menuItem.menu_item_id}>
+                      {menuItem.name}
+                    </option>
+                  );
+                })}
+            </select>
+          ) : (
+              <button onClick={() => navigate(`/chef/${profileId}/menu-items/new`)} className="text-gray-800 hover:bg-[#b05e5e] w-full py-2 px-2 border rounded mb-1 hover:bg-gray-100">
+                Please create a Menu Item
+              </button>
+          )}
+              <button type="submit" className="w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save
               </button>
        </div>
