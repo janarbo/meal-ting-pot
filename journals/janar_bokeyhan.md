@@ -77,3 +77,8 @@
 ### Monday 4-24-2023
 * I finished the edit profile frontend today, I was ran into an issue that profile_id is not valid integer, I tried parse it to int, but it didn't help, when Ted trouble shooting Derek's code, I found that my APIslice query url is not passing correctly, we change the profileId to profile_id, and it solved the profileId issue!
 
+### Tuesday 4-25-2023
+* Today I worked on the chef order list frontend, it is quite chanlenging for me cuz there are 4 filter button to handle, I get the order_id is not valid interger error again, and my teammates helped me debug, we pass value as params to the handle update order function, and also deleted unused chefId params, also modified the providetag to providestag in the ApiSlice file, it was a typo, then fixed the issue. Big shout out to my teamates!
+* I also finished a unit test for the get all profile function today.
+* I fixed the order list problem,  seperated multiple items to different row in one order.
+* Hopefully tmr we will start CSS for the frontend.
