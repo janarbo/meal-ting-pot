@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { setUser } from "./user.js";
 
+<<<<<<< HEAD
 export const authApi = createApi({
     reducerPath: 'authentication',
     baseQuery: fetchBaseQuery({
@@ -23,6 +24,28 @@ export const authApi = createApi({
         signup: builder.mutation({
             query: info => {
                 console.log(info);
+=======
+
+export const authApi = createApi({
+    reducerPath: 'authentication',
+    tagTypes: ['token'],
+    baseQuery: fetchBaseQuery({
+        baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
+        credentials: 'include',
+        prepareHeaders: (headers, { getState }) => {
+            const token = getState().auth.userToken;
+
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`);
+            }
+
+            return headers
+        },
+    }),
+    endpoints: (builder) => ({
+        signup: builder.mutation({
+            query: info => {
+>>>>>>> main
                 let dictionary = {};
                 if (info instanceof HTMLElement) {
                     dictionary = {info};
@@ -46,6 +69,7 @@ export const authApi = createApi({
             invalidatesTags: ['token'],
         }),
         login: builder.mutation({
+<<<<<<< HEAD
             query: info => {
                 let formData = null;
                 if (info instanceof HTMLElement) {
@@ -71,10 +95,38 @@ export const authApi = createApi({
                     console.error(error);
                 }
             }
+=======
+        query: info => {
+            let formData = null;
+            if (info instanceof HTMLElement) {
+                formData = new FormData(info);
+            } else {
+                formData = new FormData();
+                formData.append("username", info.username);
+                formData.append("password", info.password);
+            }
+            return {
+                url: '/token',
+                method: 'post',
+                body: formData,
+                credentials: 'include',
+            };
+        },
+        invalidatesTags: ['token'],
+        async onQueryStarted(args, { dispatch, queryFulfilled }) {
+            try {
+                await queryFulfilled;
+                await dispatch(authApi.endpoints.getToken.initiate());
+            } catch (error) {
+                console.error(error);
+            }
+        },
+>>>>>>> main
         }),
         getToken: builder.query({
             query: () => ({
                 url: '/token',
+<<<<<<< HEAD
                 method: "get",
                 credentials: 'include'
             }),
@@ -86,13 +138,33 @@ export const authApi = createApi({
                     console.error(error);
                 }
             }
+=======
+                method: 'get',
+                credentials: 'include',
+            }),
+            providesTags: ['token'],
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    if (data != null) {
+                        dispatch(setUser(data));
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            },
+>>>>>>> main
         }),
         logout: builder.mutation({
             query: () => ({
                 url: '/token',
                 method: 'delete',
             }),
+<<<<<<< HEAD
             invalidatesTags: ['token']
+=======
+            invalidatesTags: ['token'],
+>>>>>>> main
         }),
     }),
 });

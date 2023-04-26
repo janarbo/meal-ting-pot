@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-from typing import Optional, Union
 from queries.pool import pool
 
 
@@ -37,7 +36,13 @@ class AccountQueries:
                     result = db.execute(
                         """
                     SELECT
-                        id, first_name, last_name, username, hashed_password, email, is_chef
+                        id
+                        , first_name
+                        , last_name
+                        , username
+                        , hashed_password
+                        , email
+                        , is_chef
                     FROM users
                     WHERE username = %s
                     """,
@@ -69,7 +74,12 @@ class AccountQueries:
                     result = db.execute(
                         """
                     INSERT INTO users
-                        (first_name, last_name, username, hashed_password, email, is_chef)
+                        (first_name
+                        , last_name
+                        , username
+                        , hashed_password
+                        , email
+                        , is_chef)
                     VALUES
                         (%s, %s, %s, %s, %s, %s)
                     RETURNING id;
