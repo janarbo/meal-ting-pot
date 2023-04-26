@@ -19,7 +19,11 @@ const LoginForm = ({ accountInfo }) => {
 
   useEffect(() => {
     if (accountInfo) {
-      navigate('/home');
+      if (accountInfo.account.is_chef) {
+        navigate('/chef/menu-items/')
+      } else {
+        navigate('/home');
+      }
     }
   }, [accountInfo, navigate])
 

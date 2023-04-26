@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
 return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-4 px-6">
+    <footer className="font-sans left-0 right-0 bg-white border-t border-gray-200 py-4 px-6">
         <div className="text-center mb-4">
-            <h2 className="text-lg font-bold">Meal-ting Pot</h2>
+            <h4 className="text-[#b05e5e] font-medium mb-3">Meal-ting Pot</h4>
             <p className="text-sm">
             Meal-ting Pot is an all-in-one platform that caters to both aspiring
             chefs and food enthusiasts. Whether you're eager to showcase your
@@ -16,15 +16,15 @@ return (
             </p>
         </div>
         <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="text-left">
-            <h3 className="font-bold mb-2">Featured Links</h3>
-            <div className="about-us-link">
-                <Link to="/about">About Us</Link>
-            </div>
+            <div>
+                <h5 className="font-medium mb-2">Featured Links</h5>
+                <div>
+                    <Link className="text-black no-underline hover:underline" to="/about">About Us</Link>
+                </div>
             </div>
             <div className="text-right">
-            <h3 className="font-bold mb-2">Contact Us</h3>
-            <p>example@mealtingpot.com</p>
+            <h5 className="mb-2">Contact Us</h5>
+            <p className="mb-0">example@mealtingpot.com</p>
             <p>123-456-7890</p>
             </div>
         </div>
