@@ -48,7 +48,7 @@ function App() {
                 <Route path="chef">
                   <Route path=":profileId/menu-items" element={<GetAllChefMenuList />} />
                   <Route path=":profileId/menu-items/new" element={<CreateMenuItemForm/>}/>
-                  <Route path="menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
+                  <Route path=":profileId/menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
                   <Route path="profile/create" element={<ProfileForm />} />
                   <Route path="profile/:profileId" element={<ChefProfilePage/>} />
                   <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />

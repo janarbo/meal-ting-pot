@@ -43,7 +43,7 @@ function GetAllChefMenuList() {
     }
     const updateMenuItemClicked=(menu_item)=>{
 
-        navigate(`/chef/menu-items/edit/${menu_item.menu_item_id}/`)
+        navigate(`/chef/${profileId}/menu-items/edit/${menu_item.menu_item_id}/`)
     }
     const createMenuItemClicked=()=>{
         navigate(`/chef/${profileId}/menu-items/new/`)
