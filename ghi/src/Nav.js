@@ -30,11 +30,7 @@ function Nav({ accountInfo }) {
     }
 
     const handleOrders = async (e) => {
-        if (accountInfo.account.is_chef) {
-            navigate("/chef/orders");
-        } else {
-            navigate("/orders");
-        }
+        navigate("/orders");
     }
 
     const handleProfile = async (e) => {
