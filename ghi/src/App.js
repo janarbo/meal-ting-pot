@@ -48,7 +48,6 @@ function App() {
               <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
               <Route path="orders" element={<ChefOrderList />} />
             </Route>
-              <Route path="chef/orders" element={<ChefOrderList />} />
               <Route path="chef/:fullName/:userId/:profileId" element={<ChefStore />} />
               <Route path="cart" element={<ShoppingCartList />} />
               <Route path="about" element={<AboutUs />} />
