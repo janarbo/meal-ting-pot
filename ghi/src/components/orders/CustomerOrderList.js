@@ -1,21 +1,27 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useGetAllOrdersQuery } from "../../features/orders/orderApi";
 
 const CustomerOrderList = () => {
-    const { data: orders, isLoading, isError } = useGetAllOrdersQuery();
+    const customerId = useSelector((state) => state.auth.userInfo.id);
+
+    const { data: orders, isLoading, isError } = useGetAllOrdersQuery(customerId, {customer_id: customerId});
+
 
     const getStatus = (status) => {
         switch (status) {
-        case 1:
-            return "CONFIRMED";
-        case 2:
-            return "READY_FOR_PICKUP";
-        case 3:
-            return "COMPLETED";
-        case 4:
-            return "DECLINED";
-        default:
-            return "SUBMITTED";
+            case 1:
+                return "SUBMITTED";
+            case 2:
+                return "CONFIRMED";
+            case 3:
+                return "READY_FOR_PICKUP";
+            case 4:
+                return "COMPLETED";
+            case 5:
+                return "DECLINED";
+            default:
+                return "UNKNOWN";
         }
     };
 
