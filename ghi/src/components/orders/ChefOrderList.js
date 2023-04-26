@@ -27,6 +27,8 @@ function ChefOrderList() {
             return "COMPLETED";
         case 5:
             return "DECLINED";
+        default:
+        return "UNKNOWN";
         }
     };
     const handleUpdateOrder = async (order, value) => {
