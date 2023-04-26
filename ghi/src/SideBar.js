@@ -9,7 +9,6 @@
         const [logout] = useLogoutMutation();
         const [availability, setAvailability] = useState(false);
         const { profileId } = useParams();
-        console.log(profileId)
 
 
         const handleHomeClick = () => {
@@ -21,15 +20,15 @@
         };
 
         const handleCreateProfileClick = () => {
-            navigate("");
+            navigate("/chef/profile/create");
         };
 
         const handleMenuClick = () => {
-            navigate("/menu");
+            navigate("/chef/menu-items");
         };
 
         const handleOrdersClick = () => {
-            navigate("/orders");
+            navigate("/chef/orders");
         };
 
         const handleAvailabilityClick = () => {
@@ -50,78 +49,78 @@
             navigate("/about");
         };
 
-return (
-<div className="flex">
-    <div>
-        <ul className="list-inside">
-            <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleHomeClick}
-                >
-                    Home
-                </button>
-            </li>
-            <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleProfileClick}
-                >
-                    My Profile
-                </button>
-            </li>
-            <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleCreateProfileClick}
-                >
-                    Create Profile
-                </button>
-            </li>
-            <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleMenuClick}
-                >
-                    My Menu
-                </button>
-            </li>
-            <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleOrdersClick}
-                >
-                    See My Orders
-                </button>
-            </li>
-            <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleAvailabilityClick}
-                >
-                    Available/Unavailable
-                </button>
-            </li>
+    return (
+    <div className="flex">
+        <div>
+            <ul className="list-inside">
                 <li>
-                <button
-                    className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
-                    onClick={handleLogoutClick}
-                >
-                    Logout
-                </button>
+                    <button
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleHomeClick}
+                    >
+                        Home
+                    </button>
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full"
-                        onClick={handleSupportClick}
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleProfileClick}
                     >
-                        Support Center
+                        My Profile
                     </button>
                 </li>
-            </ul>
+                <li>
+                    <button
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleCreateProfileClick}
+                    >
+                        Create Profile
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleMenuClick}
+                    >
+                        My Menu
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleOrdersClick}
+                    >
+                        See My Orders
+                    </button>
+                </li>
+                <li>
+                    <button
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleAvailabilityClick}
+                    >
+                        Available/Unavailable
+                    </button>
+                </li>
+                    <li>
+                    <button
+                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        onClick={handleLogoutClick}
+                    >
+                        Logout
+                    </button>
+                    </li>
+                    <li>
+                        <button
+                            className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full"
+                            onClick={handleSupportClick}
+                        >
+                            Support Center
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-);
-}
+    );
+    }
 
 export default SideBar;

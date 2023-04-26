@@ -29,6 +29,7 @@ export const menuItemApi = createApi({
         providesTags: ['MenuItems']
     })
     }),
+
     createMenuItem: builder.mutation({
         query: (menuItem) => ({
         url: `/menu-items`,
