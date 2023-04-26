@@ -90,8 +90,12 @@ class UserProfileRepository:
             print(e)
             return {"message": "Could not update the user profile"}
 
-
-    def update_availability(self, profile_id: int, user_profile: UserProfileAvailabilityIn, account_data: dict) -> Union[UserProfileOut, Error]:
+    def update_availability(
+        self,
+        profile_id: int,
+        user_profile: UserProfileAvailabilityIn,
+        account_data: dict,
+    ) -> Union[UserProfileOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -118,17 +122,16 @@ class UserProfileRepository:
                         "bio": row[5],
                         "tags": row[6],
                         "featured_menu_item": row[7],
-                        "availability": user_profile.availability
+                        "availability": user_profile.availability,
                     }
                     return UserProfileOut(
                         profile_id=profile_id,
                         user_id=account_data["id"],
-                        **dict
+                        **dict,
                     )
         except Exception as e:
             print(e)
             return {"message": "Could not update the user profile"}
-
 
     def get_all(self) -> Union[Error, List[UserProfileDetailOut]]:
         try:
@@ -283,5 +286,5 @@ class UserProfileRepository:
             availability=record[8],
             tags=record[9],
             featured_menu_item=record[10],
-            social_media=social_media
+            social_media=social_media,
         )
