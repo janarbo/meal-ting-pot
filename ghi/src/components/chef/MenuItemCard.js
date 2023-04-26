@@ -23,16 +23,6 @@ function MenuItemCard(props) {
             </div>
             <div className= "px-6 pt-0 pb-2">
                 <hr className="mt-0"></hr>
-                { productQuantity > 0 ? (
-                    <>
-                        <button onClick={() => shoppingCart.removeOneFromCart(product.menu_item_id)} className="bg-[#c78e8e] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">-</button>
-                        <button onClick={() => shoppingCart.deleteFromCart(product.menu_item_id)} className="bg-[#c78e8e] font-normal text-xl hover:opacity-80 py-2 px-3 border ml-2 mr-2 mb-2 mt-2 rounded-xl">Remove from Cart</button>
-                        <button onClick={() => shoppingCart.addOneToCart(product.menu_item_id)} className="bg-[#9db2a3] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">+</button>
-                    </>
-                ) :
-                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full"
-                            onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
-                }
             </div>
         </div>
     )
