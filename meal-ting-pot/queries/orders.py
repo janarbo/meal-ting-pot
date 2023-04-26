@@ -50,7 +50,7 @@ class OrdersDetailOut(BaseModel):
 
 
 class OrdersRepository:
-    def get_one(self, order_id: int) -> Optional[OrdersOut]:
+    def get_one_order(self, order_id: int) -> Optional[OrdersOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -130,7 +130,7 @@ class OrdersRepository:
             print(e)
             return {"message": "Create did not work"}
 
-    def get_all(self) -> Union[List[OrdersDetailOut], Error]:
+    def get_all_orders(self) -> Union[List[OrdersDetailOut], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
