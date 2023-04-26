@@ -35,6 +35,13 @@ const MainPage = () => {
     return <div>Loading...</div>;
   }
 
+  const availableProfiles = []
+  for (let profile of chefProfiles) {
+    if(profile.availability) {
+      availableProfiles.push(profile);
+    }
+  }
+
   return (
     <>
       <div className="min-h-screen font-sans">
@@ -57,7 +64,7 @@ const MainPage = () => {
           <div data-theme="garden" className="p-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
             ? filteredProfiles
-            : chefProfiles
+            : availableProfiles
           ).map((profile) => (
               <div
                 className="bg-white overflow-hidden shadow rounded-lg hover:cursor-pointer"
