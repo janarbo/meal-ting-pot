@@ -49,7 +49,7 @@ function ChefStore() {
 
     return (
         <>
-            <div className="pt-4 font-sans flex-col justify-start bg-white pl-5 pr-5 max-w-7xl mx-auto">
+            <div className="pt-1 font-sans flex-col justify-start bg-white pl-5 pr-5 max-w-7xl mx-auto">
                 <div className="flex mb-4">
                     <img onError={addDefaultSrc} alt={profileData.photo} className="mt-4 max-h-72 max-w-72 w-40 h-40 rounded-full" src={profileData.photo}></img>
                     <div className="flex flex-col">
