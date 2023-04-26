@@ -161,7 +161,7 @@ function ChefOrderList() {
                                           className="btn btn-secondary"
                                           onClick={() => handleButtonClick(order, 3)}
                                         >
-                                          Ready for pickup
+                                          Ready for Pickup
                                         </button>
                                         <button
                                           className="btn btn-primary"
