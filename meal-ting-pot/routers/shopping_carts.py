@@ -20,6 +20,7 @@ def create_shopping_cart(
     response.status = 400
     return repo.create()
 
+
 @router.get(
     "/cart/{shopping_cart_id}/items",
     response_model=Union[Optional[List[ShoppingCartWithCartItemsOut]], Error],

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, Union, List
+from typing import Union, List
 from queries.pool import pool
 
 
@@ -69,9 +69,7 @@ class ShoppingCartRepository:
                     )
                     row = result.fetchone()
                     shopping_cart_id = row[0]
-                    return ShoppingCartOut(
-                        shopping_cart_id=shopping_cart_id
-                    )
+                    return ShoppingCartOut(shopping_cart_id=shopping_cart_id)
         except Exception as e:
             print(e)
             return {"message": "Create did not work"}
