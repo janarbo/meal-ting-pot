@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux'
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
-    const{menuItemId} = useParams()
+    const{ profileId, menuItemId} = useParams()
+    console.log(profileId);
     const navigate=useNavigate()
     const [updateMenuItem, {isLoading}]= useUpdateMenuItemMutation()
     const {data: menuItem, isLoading: isLoadingMenuItem, isSuccess}= useGetOneMenuItemQuery(menuItemId)
@@ -46,7 +47,7 @@ const UpdateMenuItemForm = () => {
             try {
 
                 await updateMenuItem(formData).unwrap()
-                navigate(`/chef/menu-items`)
+                navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
                 console.error('Failed to save the menu item', e)
             }
