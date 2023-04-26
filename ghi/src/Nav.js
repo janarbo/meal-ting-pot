@@ -66,7 +66,7 @@ function Nav({ accountInfo }) {
                             </div>
                         </Navbar.Collapse>
                     </Navbar>
-                    <hr className="mb-0 mt-0"></hr>
+                    <hr className="mb-3 mt-0"></hr>
                 </>
             }
         </ >

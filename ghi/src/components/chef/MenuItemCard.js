@@ -17,9 +17,7 @@ function MenuItemCard(props) {
             </div>
             <div className="flex justify-between">
                 <h6 className="font-medium text-left ml-5">${product.price}</h6>
-                { productQuantity > 0 && (
-                <h6 className="font-normal text-right mr-5">In Cart: {productQuantity}</h6>
-                )}
+                <h6 className="font-bold text-right mr-5">+</h6>
             </div>
             <div className= "px-6 pt-0 pb-2">
                 <hr className="mt-0"></hr>
