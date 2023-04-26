@@ -1,12 +1,14 @@
 import { useGetAllChefQuery, useUpdateMenuItemMutation  } from './menuItemApi'
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 
 
 function GetAllChefMenuList() {
     const userId = useSelector((state) => state.auth.userInfo.id);
+    const { profileId } = useParams();
     const [updateMenuItemStatus, {isLoading}]=useUpdateMenuItemMutation()
     const { data: menuItems, isLoading: isLoadingMenuItems } = useGetAllChefQuery(userId);
     const navigate=useNavigate()
@@ -14,6 +16,7 @@ function GetAllChefMenuList() {
     if(isLoading||isLoadingMenuItems){
         return <p>Loading...</p>
     }
+
     const updateMenuItemStatusClicked= async (menu_item)=>{
         if (canSave){
             try{
@@ -43,7 +46,7 @@ function GetAllChefMenuList() {
         navigate(`/chef/menu-items/edit/${menu_item.menu_item_id}/`)
     }
     const createMenuItemClicked=()=>{
-        navigate(`/chef/menu-items/new/`)
+        navigate(`/chef/${profileId}/menu-items/new/`)
     }
     return (
 <div>
