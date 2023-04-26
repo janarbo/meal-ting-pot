@@ -5,12 +5,19 @@ import {
 } from "./features/chef-profile/chefProfileApi";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import NoAvatar from "./images/NoAvatar.png";
 
 
 const MainPage = () => {
+  const profileImage = NoAvatar;
+  const addDefaultSrc = (event) => {
+        event.target.src = profileImage;
+  }
+
   const [selectedTag, setSelectedTag] = useState(null);
-  const { data: tags } = useGetAllTagsQuery();
-  const { data, isLoading } = useGetAllChefProfilesQuery();
+  const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
+  const { data: chefProfiles, isLoading: chefProfilesLoading } = useGetAllChefProfilesQuery();
+
   const [filteredProfiles, setFilteredProfiles] = useState([]);
   const navigate = useNavigate();
 
@@ -20,58 +27,65 @@ const MainPage = () => {
 
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
-    const newProfiles = data.filter((profile) => profile.tags.includes(tag.name));
+    const newProfiles = chefProfiles.filter((profile) => profile.tags.includes(tag.name));
     setFilteredProfiles(newProfiles);
   }
 
-
-  if (isLoading) {
+  if (tagsLoading || chefProfilesLoading) {
     return <div>Loading...</div>;
   }
 
-
   return (
     <>
-      <div className="flex gap-2">
-        {tags &&
-          tags.map((tag) => (
-            <button
-              key={tag.id}
-              onClick={() => handleTagClick(tag)}
-              className={selectedTag === tag.name ? "font-bold" : ""}
-            >
-              {tag.name}
-            </button>
-          ))}
-      </div>
-      <div > <h2 className="text-lg leading-6 font-medium text-gray-900">Explore Chefs</h2></div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
-          ? filteredProfiles
-          : data
-        ).map((profile) => (
-          <div
-            key={profile.user_id}
-            className="bg-white overflow-hidden shadow rounded-lg"
-            onClick={() => handleProfileClick(profile.full_name, profile.user_id, profile.profile_id)}
-          >
-            <img
-              className="w-45 h-45 object-cover"
-              src={profile.featured_menu_item}
-              alt={profile.full_name}
-            />
-            <div className="px-4 py-4">
-              <h3 className="text-lg font-medium text-gray-900">
-                {profile.full_name}
-              </h3>
-              <p className="text-gray-500">{profile.address}</p>
-              <p className="text-gray-500">{profile.availability}</p>
-              <p className="text-gray-500">{profile.tags}</p>
-            </div>
+      <div className="min-h-screen font-sans">
+        <div className="pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
+          <h2 className="text-xl leading-6 font-normal pb-3">Browse by Cuisine</h2>
+          <div className="flex gap-2">
+            {tags &&
+              tags.map((tag) => (
+                <button
+                  key={tag.id}
+                  onClick={() => handleTagClick(tag)}
+                  className="text-gray-800 py-2 px-2 border rounded-full mb-4 hover:bg-gray-100 mr-1"
+                >
+                  {tag.name}
+                </button>
+              ))}
           </div>
-        ))}
+          <hr className="mt-0 mb-4"></hr>
+          <h2 className="text-xl leading-6 font-normal">Explore Chefs</h2>
+          <div data-theme="garden" className="p-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
+            ? filteredProfiles
+            : chefProfiles
+          ).map((profile) => (
+              <div
+                className="bg-white overflow-hidden shadow rounded-lg hover:cursor-pointer"
+                key={profile.user_id}
+                onClick={() => handleProfileClick(profile.full_name, profile.user_id, profile.profile_id)}
+              >
+                <img
+                  className="w-full h-48 md:h-50 rounded object-cover"
+                  src={profile.featured_menu_item}
+                  alt={profile.featured_menu_item}
+                />
+                <div className="px-4 py-3">
+                  <div className="flex">
+                    <img onError={addDefaultSrc} alt={profile.photo} className="max-h-12 max-w-12 w-12 h-12 rounded-full" src={profile.photo} />
+                    <div className="ml-5">
+                      <h3 className="text-xl font-normal mb-0">
+                        {profile.full_name}
+                      </h3>
+                      <p className="font-light">{profile.tags}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
