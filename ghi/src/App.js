@@ -43,6 +43,7 @@ function App() {
               <Route path="cart" element={<ShoppingCartList />} />
               <Route path="about" element={<AboutUs />} />
               <Route path="orders" element={<CustomerOrderList />} />
+              <Route path="chef/:fullName/:userId/:profileId" element={<ChefStore />} />
               <Route element={<ChefProtected token={data} />}>
                 <Route path="chef">
                   <Route path="menu-items" element={<GetAllChefMenuList />} />
@@ -52,7 +53,6 @@ function App() {
                   <Route path="profile/:profileId" element={<ChefProfilePage/>} />
                   <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
                   <Route path="orders" element={<ChefOrderList />} />
-                  <Route path=":fullName/:userId/:profileId" element={<ChefStore />} />
                 </Route>
               </Route>
             </Route>
