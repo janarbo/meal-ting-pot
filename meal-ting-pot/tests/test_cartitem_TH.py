@@ -27,31 +27,19 @@ class GetCartItemRepository:
             "id": 1,
             "shopping_cart_id": 1,
             "menu_item_id": 1,
-            "quantity": 5
+            "quantity": 5,
         }
         result.update(cart_item)
         return result
 
 
-input = {
-    "id": 1,
-    "shopping_cart_id": 1,
-    "menu_item_id": 1,
-    "quantity": 5
-}
+input = {"id": 1, "shopping_cart_id": 1, "menu_item_id": 1, "quantity": 5}
 
-result = {
-    "id": 1,
-    "shopping_cart_id": 1,
-    "menu_item_id": 1,
-    "quantity": 5
-}
+result = {"id": 1, "shopping_cart_id": 1, "menu_item_id": 1, "quantity": 5}
 
 
 def test_create():
-    app.dependency_overrides[
-        CartItemRepository
-    ] = GetCartItemRepository
+    app.dependency_overrides[CartItemRepository] = GetCartItemRepository
 
     app.dependency_overrides[
         authenticator.get_current_account_data

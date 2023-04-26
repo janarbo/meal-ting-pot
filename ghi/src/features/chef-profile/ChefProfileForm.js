@@ -5,7 +5,6 @@ import {useNavigate} from 'react-router-dom'
 
 
 function ProfileForm(){
-  const [profileId, setProfileId] = useState(null);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState('');
@@ -33,7 +32,6 @@ function ProfileForm(){
       };
         const response = await createProfile(payload);
         const newProfileId = response.data.profile_id;
-        setProfileId(newProfileId)
         await createProfile(payload);
         navigate(`/chef/${newProfileId}/menu-items/new`);
           } catch (error) {

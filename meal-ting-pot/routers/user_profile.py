@@ -53,7 +53,10 @@ def update_profile(
     return repo.update(profile_id, user_profile, account_data)
 
 
-@router.put("/profile/{profile_id}/availability", response_model=Union[UserProfileOut, Error])
+@router.put(
+    "/profile/{profile_id}/availability",
+    response_model=Union[UserProfileOut, Error],
+)
 def update_profile_availability(
     profile_id: int,
     user_profile: UserProfileAvailabilityIn,
@@ -61,6 +64,7 @@ def update_profile_availability(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, UserProfileOut]:
     return repo.update_availability(profile_id, user_profile, account_data)
+
 
 @router.get(
     "/profile/", response_model=Union[Error, List[UserProfileDetailOut]]
