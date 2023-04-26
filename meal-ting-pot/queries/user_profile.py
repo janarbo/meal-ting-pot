@@ -23,6 +23,7 @@ class UserProfileDetailOut(BaseModel):
     profile_id: int
     user_id: int
     full_name: str
+    photo: str
     address: str
     availability: bool
     tags: Optional[str]
@@ -95,6 +96,7 @@ class UserProfileRepository:
                         up.profile_id,
                         up.user_id,
                         up.full_name,
+                        up.photo,
                         up.address,
                         up.availability,
                         t.name AS tag_name,
@@ -115,10 +117,11 @@ class UserProfileRepository:
                             profile_id=record[0],
                             user_id=record[1],
                             full_name=record[2],
-                            address=record[3],
-                            availability=record[4],
-                            tags=record[5],
-                            featured_menu_item=record[6],
+                            photo=record[3],
+                            address=record[4],
+                            availability=record[5],
+                            tags=record[6],
+                            featured_menu_item=record[7],
                         )
                         result.append(user_profile)
                     return result
