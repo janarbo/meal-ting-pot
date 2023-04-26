@@ -61,11 +61,7 @@ pages:
     paths:
       - public
 
-<<<<<<< HEAD
 build-meal-ting-pot-service:
-=======
-# build-meal-ting-pot-service:
->>>>>>> main
   image: docker:19.03.1
   stage: build
   services:
