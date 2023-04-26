@@ -1,9 +1,6 @@
-import { ShoppingCartContext } from '../../features/shopping-cart/shoppingCartContext';
-import { useContext } from 'react';
-
 function MenuItemCard(props) {
     const product = props.product;
-    const shoppingCart = useContext(ShoppingCartContext);
+
 
     return (
         <div onClick={props.onClick} className="hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
