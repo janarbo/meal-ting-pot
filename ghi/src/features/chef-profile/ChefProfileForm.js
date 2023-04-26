@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
 import {useNavigate} from 'react-router-dom'
 import { useGetAllChefQuery } from '../menu-items/menuItemApi';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+// import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import SideBar from '../../SideBar';
 
 
