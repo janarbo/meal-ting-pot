@@ -84,8 +84,9 @@ const MainPage = () => {
             ))}
           </div>
         </div>
+        <hr className="mb-0"></hr>
+        <Footer />
       </div>
-      {/* <Footer /> */}
     </>
   );
 };
