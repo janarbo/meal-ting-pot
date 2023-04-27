@@ -1,5 +1,5 @@
 ### Accounts
-![image info](createAccount.png)
+![image info](./api/createAccount.png)
 This action creates an account tied to a specific user and stores it within the database.
 
 <details>
@@ -38,8 +38,8 @@ This action creates an account tied to a specific user and stores it within the 
 ```
 </details>
 
-![image info](login.png)
+![image info](./api/login.png)
 This action logs an existing user into the application.
 
 Request Body:
-![image info](requestbody.png)
+![image info](./api/requestbody.png)
