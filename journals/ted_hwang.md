@@ -97,7 +97,7 @@ I'm proud and excited to see where we're at now with our project/growth. I don't
 </details>
 
 <details>
-    <summary>Week 16</summary>
+    <summary>Week 17</summary>
 
 #### (Monday) 4/24/2023
 I resolved some bugs regarding my state for the shoppingCartList component. Afterwards, I worked on the chef store component so that their profile information will be displayed. Lastly, I worked on css for the card components to use tailwind instead of react-bootstrap
@@ -111,5 +111,8 @@ We worked together on any remaining components that needed to have their functio
 Also, we we're running into an issue where if a user signs in and logs out. The information stored in the userSlice was not changed. Therefore, if another user account is signed in wo refreshing the page, the 2nd account would see information from the 1st. We added a logout action in our userSlice that would change the state to the initial state and used it in our logout reducer in the authApi.
 
 Lastly, we uncommented our docker-compose yml file to make sure our code passes the pipelines for deployment. The deployed server is now up and running and we'll use CI/CD for any further changes.
+
+#### (Thursday) 4/27/2023
+Today, we worked on our documentation for the project and I worked the wireframe.md.
 
 </details>
