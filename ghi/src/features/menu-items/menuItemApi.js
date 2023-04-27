@@ -64,5 +64,5 @@ export const {
     useGetOneMenuItemQuery,
     useDeleteMenuItemMutation,
     useCreateMenuItemMutation,
-    useUpdateMenuItemMutation
+    useUpdateMenuItemMutation,
 } = menuItemApi;
