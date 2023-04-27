@@ -14,7 +14,6 @@ const MainPage = () => {
         event.target.src = profileImage;
   }
 
-  const [selectedTag, setSelectedTag] = useState(null);
   const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
   const { data: chefProfiles, isLoading: chefProfilesLoading } = useGetAllChefProfilesQuery();
 
@@ -26,7 +25,6 @@ const MainPage = () => {
   }
 
   const handleTagClick = (tag) => {
-    setSelectedTag(tag);
     const newProfiles = chefProfiles.filter((profile) => profile.tags.includes(tag.name));
     setFilteredProfiles(newProfiles);
   }

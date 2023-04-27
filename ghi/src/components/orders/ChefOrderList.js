@@ -8,10 +8,10 @@ function ChefOrderList() {
     const { data: orders, isLoading } = useGetAllOrdersQuery(chefId);
     const [filterStatus, setFilterStatus] = useState(null);
     const [showAllOrders, setShowAllOrders] = useState(false);
-    const [updateOrder, { data: status, isLoading: isLoadingStatus }] = useUpdateOrderMutation();
+    const [updateOrder] = useUpdateOrderMutation();
     const canSave=!isLoading
 
-    if(isLoading||isLoadingStatus){
+    if(isLoading){
         return <p>Loading...</p>
     }
 
@@ -131,7 +131,7 @@ function ChefOrderList() {
                               }
                             >
                               <td>
-                                <img src={item.photo} alt="Menu Item Photo" style={{ maxWidth: "100px" }}
+                                <img src={item.photo} alt={item.photo} style={{ maxWidth: "100px" }}
                           /></td>
                               {index === 0 ? (
                                 <>
