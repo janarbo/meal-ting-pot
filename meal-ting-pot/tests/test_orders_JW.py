@@ -1,67 +1,66 @@
-from datetime import date
 from main import app
 from fastapi.testclient import TestClient
-from unittest.mock import MagicMock
-from queries.orders import OrdersOut, OrdersRepository
+from queries.orders import OrdersDetailOut, OrdersRepository
+from authenticator import authenticator
+from typing import List
 
 client = TestClient(app)
 
-def test_get_one():
-    mock_cursor = MagicMock()
-    mock_conn = MagicMock()
-    mock_conn.cursor.return_value = mock_cursor
 
-    expected_sql = "SELECT order_id, customer_id, chef_id, order_date, total_price, shopping_cart_id, status FROM orders WHERE order_id=1"
-    expected_result = (1, 2, 3, date(2023, 1, 1), 50, 1, 1)
+def get_current_account_data_test():
+    return {
+        "first_name": "string",
+        "last_name": "string",
+        "username": "jacob",
+        "hashed_password": "jacob",
+        "email": "jacob@email.com",
+        "is_chef": True,
+    }
 
-    mock_repo = OrdersRepository()
-    mock_repo.pool.connection.return_value = mock_conn
-    mock_cursor.fetchone.return_value = expected_result
-    order = OrdersOut(
-        order_id=1,
-        customer_id=2,
-        chef_id=3,
-        order_date=date(2023, 1, 1),
-        total_price=50,
-        shopping_cart_id=1,
-        status=1,
-    )
 
-    response = client.get("/orders/1")
+class GetOrdersRepository:
+    def get_all(self) -> List[OrdersDetailOut]:
+        return [
+            OrdersDetailOut(
+                order_id=1,
+                customer_id=2,
+                order_date="2023-04-26",
+                total_price=100,
+                shopping_cart=[],
+                status=3,
+                chef_id=1,
+                chef_email="chef@email.com",
+                chef_phone=1111111111,
+                chef_address="1111 address ave",
+            )
+        ]
 
-    mock_cursor.execute.assert_called_once_with(expected_sql, [1])
-    assert response.status_code == 200
-    assert response.headers["Content-Type"] == "application/json"
-    assert response.json() == order.dict()
 
-def test_get_one_not_found():
-    mock_cursor = MagicMock()
-    mock_conn = MagicMock()
-    mock_conn.cursor.return_value = mock_cursor
+def test_get_all():
+    app.dependency_overrides[OrdersRepository] = GetOrdersRepository
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = get_current_account_data_test
 
-    expected_sql = "SELECT order_id, customer_id, chef_id, order_date, total_price, shopping_cart_id, status FROM orders WHERE order_id=1"
+    response = client.get("orders/")
 
-    mock_repo = OrdersRepository()
-    mock_repo.pool.connection.return_value = mock_conn
-    mock_cursor.fetchone.return_value = None
+    app.dependency_overrides = {}
 
-    response = client.get("/orders/1")
-
-    mock_cursor.execute.assert_called_once_with(expected_sql, [1])
-    assert response.status_code == 404
-
-def test_get_one_error():
-    mock_cursor = MagicMock()
-    mock_conn = MagicMock()
-    mock_conn.cursor.return_value = mock_cursor
-
-    expected_sql = "SELECT order_id, customer_id, chef_id, order_date, total_price, shopping_cart_id, status FROM orders WHERE order_id=1"
-
-    mock_repo = OrdersRepository()
-    mock_repo.pool.connection.return_value = mock_conn
-    mock_cursor.execute.side_effect = Exception("Database connection error")
-
-    response = client.get("/orders/1")
-
-    mock_cursor.execute.assert_called_once_with(expected_sql, [1])
-    assert response.status_code == 500
+    if response.status_code == 404:
+        assert response.json() == {"detail": "order not found"}
+    else:
+        assert response.status_code == 200
+        assert response.json() == [
+            {
+                "order_id": 1,
+                "customer_id": 2,
+                "order_date": "2023-04-26",
+                "total_price": 100,
+                "shopping_cart": [],
+                "status": 3,
+                "chef_id": 1,
+                "chef_email": "chef@email.com",
+                "chef_phone": 1111111111,
+                "chef_address": "1111 address ave",
+            }
+        ]

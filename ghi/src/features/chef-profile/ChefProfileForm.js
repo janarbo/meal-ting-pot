@@ -2,31 +2,19 @@ import React from 'react';
 import { useState } from 'react';
 import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
 import {useNavigate} from 'react-router-dom'
-import { useGetAllChefQuery } from '../menu-items/menuItemApi';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import SideBar from '../../SideBar';
-
 
 
 function ProfileForm(){
-  const [profileId, setProfileId] = useState(null);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [address, setAddress] = useState('');
   const [bio, setBio] = useState('');
-  const [availability, setAvailability] = useState(false);
-  const [featuredMenuItem, setFeaturedMenuItem] = useState("");
   const [tagName, setTagName] = useState("");
-  const { data: menuItems } = useGetAllChefQuery();
   const { data: tags } = useGetAllTagsQuery();
   const navigate = useNavigate();
   const [createProfile] = useCreateProfileMutation();
-
-  const handleOnClick = () => {
-    availability ? setAvailability(false) : setAvailability(true);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,15 +26,14 @@ function ProfileForm(){
         'phone_number':phoneNumber,
         'address': address,
         'bio':bio,
-        'availability': availability,
+        'availability': false,
         'tags':tagName,
-        'featured_menu_item':featuredMenuItem,
+        'featured_menu_item': null
       };
         const response = await createProfile(payload);
         const newProfileId = response.data.profile_id;
-        setProfileId(newProfileId)
         await createProfile(payload);
-        navigate(`/chef/profile/${newProfileId}`);
+        navigate(`/chef/${newProfileId}/menu-items/new`);
           } catch (error) {
             console.log(error)
           }
@@ -55,8 +42,6 @@ function ProfileForm(){
   return (
 
     <div className="flex items-center justify-center h-screen">
-      <SideBar />
-
       <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
         <form
           onSubmit={handleSubmit}
@@ -161,7 +146,7 @@ function ProfileForm(){
                     htmlFor="address"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Address
+                    Pickup Address
                   </label>
                   <div className="mt-2">
                     <input
@@ -195,23 +180,6 @@ function ProfileForm(){
                   </div>
                 </div>
 
-                <div className="flex items-center mt-6">
-                  <input
-                    type="checkbox"
-                    id="availability"
-                    name="availability"
-                    value={availability}
-                    onChange={handleOnClick}
-                    className="checkbox checkbox-primary"
-                  />
-                  <label
-                    htmlFor="availability"
-                    className="ml-2 block text-sm text-gray-900"
-                  >
-                    Availability
-                  </label>
-                </div>
-
                 <select
                   label="tags"
                   id="tags"
@@ -229,25 +197,6 @@ function ProfileForm(){
                   })}
                 </select>
 
-                <select
-                  label="Featured Menu Item"
-                  id="featuredMenuItem"
-                  className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={featuredMenuItem}
-                  onChange={(e) => setFeaturedMenuItem(e.target.value)}
-                >
-                  <option value="">Signature Dish</option>
-                  {menuItems?.map((menuItem) => {
-                    return (
-                      <option
-                        key={menuItem.menu_item_id}
-                        value={menuItem.menu_item_id}
-                      >
-                        {menuItem.name}
-                      </option>
-                    );
-                  })}
-                </select>
                 <button
                   type="submit"
                   className="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

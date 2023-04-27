@@ -39,7 +39,6 @@ class OrdersOut(BaseModel):
 class OrdersDetailOut(BaseModel):
     order_id: int
     customer_id: int
-    chef_id: int
     order_date: date
     total_price: int
     shopping_cart: list[CartItemDetail]

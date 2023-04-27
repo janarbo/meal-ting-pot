@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux'
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
-    const{menuItemId} = useParams()
+    const{ profileId, menuItemId} = useParams()
+    console.log(profileId);
     const navigate=useNavigate()
     const [updateMenuItem, {isLoading}]= useUpdateMenuItemMutation()
     const {data: menuItem, isLoading: isLoadingMenuItem, isSuccess}= useGetOneMenuItemQuery(menuItemId)
@@ -30,7 +31,7 @@ const UpdateMenuItemForm = () => {
             setFormData({menu_item_id: parseInt(menuItemId), food_type: menuItem.food_type, name: menuItem.name, price: menuItem.price, description:menuItem.description, comment: menuItem.comment, photo: menuItem.photo, spicy_level: menuItem.spicy_level, tags: menuItem.tags, calories: menuItem.calories, ingredients: menuItem.ingredients, status: menuItem.status
             })
         }
-    },[isSuccess, menuItem?.foodtype, menuItem?.name, menuItem?.price, menuItem?.description,menuItem?.comment, menuItem?.photo, menuItem?.spicy_level, menuItem?.tags,  menuItem?.calories,  menuItem?.ingredients, menuItem?.status])
+    },[isSuccess, menuItem?.foodtype, menuItem?.name, menuItem?.price, menuItem?.food_type, menuItemId ,menuItem?.description,menuItem?.comment, menuItem?.photo, menuItem?.spicy_level, menuItem?.tags,  menuItem?.calories,  menuItem?.ingredients, menuItem?.status])
     if (isLoadingMenuItem) return <p>Loading...</p>
     const handleFormChange=(e)=>{
         const value= e.target.value;
@@ -46,7 +47,7 @@ const UpdateMenuItemForm = () => {
             try {
 
                 await updateMenuItem(formData).unwrap()
-                navigate(`/chef/menu-items`)
+                navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
                 console.error('Failed to save the menu item', e)
             }
