@@ -45,19 +45,20 @@ const CustomerOrderList = () => {
                 return (
                     <div
                         key={order.order_id}
-                        className="border rounded-lg shadow-md bg-[#b05e5e] bg-opacity-50 overflow-hidden text-black"
+                        data-theme="garden"
+                        className="border rounded-lg shadow-md bg-gray bg-opacity-80 overflow-hidden text-black"
                     >
                         <div className="p-6 space-y-6">
-                            <h3 className="text-lg font-bold">
+                            <h3 className="text-lg font-bold text-[#b05e5e]">
                                 Placed: {order.order_date}
                             </h3>
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <p className="font-bold">Order Status:</p>
-                                    <p>{getStatus(order.status)}</p>
+                                    <p className="font-bold text-[#b05e5e]">Order Status:</p>
+                                    <p className="font-bold">{getStatus(order.status)}</p>
                                 </div>
                                 <div>
-                                    <p className="font-bold">Chef Info:</p>
+                                    <p className="font-bold text-[#b05e5e]">Chef Info:</p>
                                     <p>{order.chef_email}</p>
                                     <p>{order.chef_phone}</p>
                                     <p>{order.chef_address}</p>
@@ -66,10 +67,10 @@ const CustomerOrderList = () => {
                             <table className="w-full">
                                 <thead>
                                     <tr>
-                                        <th className="w-20">Image</th>
-                                        <th className="w-1/4">Item</th>
-                                        <th className="w-1/4">Quantity</th>
-                                        <th className="w-1/4">Price</th>
+                                        <th className="w-20 text-[#b05e5e]">Image</th>
+                                        <th className="w-1/4 text-[#b05e5e]">Item</th>
+                                        <th className="w-1/4 text-[#b05e5e]">Quantity</th>
+                                        <th className="w-1/4 text-[#b05e5e]">Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
