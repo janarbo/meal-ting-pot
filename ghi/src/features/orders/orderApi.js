@@ -31,7 +31,7 @@ export const orderApi = createApi({
                 url: `/orders/${orders.order_id}`,
                 method: 'PUT',
                 body: {
-                   ...orders,
+                    ...orders,
                 },
 
             }),
