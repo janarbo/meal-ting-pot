@@ -4,7 +4,7 @@ Domain driven design of our application during the planning phase of the project
 
 <h2>Complete WireFrame</h2>
 
-![Full Wireframe](wireframe.wireframe.png)
+![Full Wireframe](wireframe/wireframe.png)
 
 <h3> Landing Page </h3>
 
