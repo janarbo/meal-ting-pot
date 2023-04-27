@@ -8,7 +8,7 @@ class Error(BaseModel):
 
 # Define a Tag model for the response data
 class Tag(BaseModel):
-    id : int
+    id: int
     name: str
 
 

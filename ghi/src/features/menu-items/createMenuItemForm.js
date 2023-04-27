@@ -1,12 +1,22 @@
-import {useState} from "react";
-import {useSelector} from 'react-redux'
-import {useNavigate} from "react-router-dom";
+import { useState} from "react";
+import { useSelector } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 import { useCreateMenuItemMutation } from "./menuItemApi";
+import { useGetOneChefProfileQuery } from "../chef-profile/chefProfileApi";
+import { useUpdateProfileMutation } from "../chef-profile/chefProfileApi";
+import { useParams } from "react-router-dom";
+import { useGetAllTagsQuery } from "../chef-profile/chefProfileApi";
 
 const CreateMenuItemForm=()=>{
     const chefId = useSelector((state)  => state.auth.userInfo.id);
-    console.log(chefId)
-    const[createMenuItem, {isLoading}]= useCreateMenuItemMutation()
+    const { profileId } = useParams();
+
+    const[createMenuItem, {isLoading}]= useCreateMenuItemMutation();
+    const { data, isLoading: chefProfileLoading } = useGetOneChefProfileQuery(profileId);
+    const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
+
+    const [updateProfile] = useUpdateProfileMutation();
+
     const navigate= useNavigate()
     const [formData, setFormData]= useState({
         food_type: '',
@@ -21,8 +31,14 @@ const CreateMenuItemForm=()=>{
         ingredients: '',
         status: true,
         chef_id: chefId
+    })
+
+    if (chefProfileLoading || tagsLoading) {
+        return (
+            <div>Loading...</div>
+        )
     }
-    )
+
     const handleFormChange = (e) =>{
         const value = e.target.value;
         const inputName= e.target.name;
@@ -32,29 +48,62 @@ const CreateMenuItemForm=()=>{
         })
     }
     const canSubmit= !isLoading
-    const onSubmit= async()=> {
+    const onSubmit= async ()=> {
         if(canSubmit){
             try{
-                await createMenuItem(formData);
+                const response = await createMenuItem(formData);
+                if (data.featured_menu_item === null) {
+                    let tagId = null
+                    for (let tagObject of tags) {
+                        if (data.tags === tagObject.name) {
+                            tagId = tagObject.id
+                        }
+                    }
+
+                    const profileUpdate = {
+                        "address": data.address,
+                        "availability": data.availability,
+                        "bio": data.bio,
+                        "photo": data.photo,
+                        "featured_menu_item": response.data.menu_item_id.toString(),
+                        "profile_id": data.profile_id,
+                        "full_name": data.full_name,
+                        "email": data.email,
+                        "phone_number": data.phone_number,
+                        "tags": tagId
+                    }
+
+                    await updateProfile(profileUpdate);
+                }
                 setFormData({});
-                navigate("/chef/menu-items/")
+                navigate(`/chef/${profileId}/menu-items/`)
             }catch(e){
                 console.error('Failed to create', e)
             }
         }
     }
-return(
+    const foodTypeOptions=['main', 'side', 'dessert']
+    const spicyLevelOptions=[0,1,2,3,4,5]
+
+    return(
         <section>
             <h2>Create a New Menu Item</h2>
             <form>
                 <label htmlFor="food_type">Food Type:</label>
-                <input
+                <select
                     type="text"
                     id="food_type"
                     name="food_type"
                     value={formData.food_type}
                     onChange={handleFormChange}
-                />
+                >
+                <option value=''>Choose Food Type</option>
+                {foodTypeOptions.map(food_type=>{
+                    return(
+                        <option key={food_type} value={food_type}>{food_type}</option>
+                    )
+                })}
+                </select>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name= "name" value={formData.name} onChange={handleFormChange}/>
                 <label htmlFor="price">Price:</label>
@@ -76,7 +125,20 @@ return(
                 <label htmlFor="photo">photo:</label>
                 <input type="text" name= "photo" id="photo" value={formData.photo} onChange={handleFormChange}/>
                 <label htmlFor="spicy_level">Spicy Level:</label>
-                <input type="int" name="spicy_level" id="spicy_level" value={formData.spicy_level} onChange={handleFormChange}/>
+                <select
+                    type="int"
+                    id="spicy_level"
+                    name="spicy_level"
+                    value={formData.spicy_level}
+                    onChange={handleFormChange}
+                >
+                    <option value=''>Choose a Spice Level</option>
+                {spicyLevelOptions.map(spicy_level=>{
+                    return(
+                        <option key={spicy_level} value={spicy_level}>{spicy_level}</option>
+                    )
+                })}
+                </select>
                 <label htmlFor="tags">Tags:</label>
                 <input type="text" name="tags" id="tags" value={formData.tags} onChange={handleFormChange}/>
                 <label htmlFor="calories">calories:</label>

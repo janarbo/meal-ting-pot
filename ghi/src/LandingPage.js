@@ -1,5 +1,6 @@
 import React from "react";
-import landing2 from './images/landing2.jpg'
+import landing2 from './images/styling/landing2.jpg'
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const backgroundImage = `url(${landing2})`
@@ -7,6 +8,7 @@ const LandingPage = () => {
       fontFamily: 'fantasy',
       marginBottom: '10rem'
   }
+  const navigate = useNavigate();
 
 return (
         <div className="hero min-h-screen" style={{ backgroundImage }}>
@@ -15,15 +17,15 @@ return (
                     <div className="max-w-md">
                         <h1  style={h1Style} className="mb-6 text-6xl font-bold">Meal-ting Pot</h1>
                         <div className="mt-10 flex flex-col items-center justify-center gap-y-6">
-                        <a href="/login" className="w-full rounded-md bg-yellow-600 px-4 py-2 text-bg
+                        <button onClick={() => navigate('/login')} className="w-full rounded-md bg-yellow-600 px-4 py-2 text-bg
                         font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline
                         focus-visible:outline-2 focus-visible:outline-offset-2
                         focus-visible:outline-indigo-600"
-                        style={{ textDecoration: 'none' }}>Login</a>
-                        <a href="/signup" className="w-full rounded-md bg-gray-400 px-4 py-2 text-bg
+                        style={{ textDecoration: 'none' }}>Login</button>
+                        <button onClick={() => navigate('/signup')} className="w-full rounded-md bg-gray-400 px-4 py-2 text-bg
                         font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline
                         focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                         style={{ textDecoration: 'none' }}>Sign Up</a>
+                         style={{ textDecoration: 'none' }}>Sign Up</button>
                     </div>
                 </div>
             </div>

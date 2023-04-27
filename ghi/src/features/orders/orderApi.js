@@ -23,16 +23,19 @@ export const orderApi = createApi({
                 url: '/orders',
                 method: 'GET',
             }),
-            provideTags: ['Order']
+            providesTags: ['Order'],
         }),
 
         updateOrder: builder.mutation({
-            query: ({ id, data }) => ({
-                url: '/orders/' + id,
-                body: data,
+            query: ( orders ) => ({
+                url: `/orders/${orders.order_id}`,
                 method: 'PUT',
+                body: {
+                    ...orders,
+                },
+
             }),
-            invalidatesTags: ['Order']
+            invalidatesTags: ['Order'],
         })
     })
 })

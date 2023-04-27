@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   useUpdateProfileMutation,
   useGetAllTagsQuery,
@@ -14,12 +14,12 @@ import SideBar from '../../SideBar';
 function UpdateProfileForm() {
   const { profileId } = useParams();
   const userId = useSelector((state) => state.auth.userInfo.id);
-  const { data: profile } = useGetOneProfileQuery(parseInt(profileId));
-  const { data: tags } = useGetAllTagsQuery();
-  const { data: menuItems } = useGetAllChefQuery(userId);
+  const { data: profile, isLoading: profileLoading, isSuccess: profileSuccess } = useGetOneProfileQuery(parseInt(profileId));
+  const { data: tags, isLoading: tagsLoading, isSuccess: tagsSuccess } = useGetAllTagsQuery();
+  const { data: menuItems, isLoading: menuItemsLoading, isSuccess: menuItemsSuccess } = useGetAllChefQuery(userId);
   const navigate = useNavigate();
 
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,7 +32,7 @@ function UpdateProfileForm() {
   const [tagName, setTagName] = useState('');
 
   useEffect(() => {
-    if (profile) {
+    if (profileSuccess && tagsSuccess && menuItemsSuccess) {
       setFullName(profile.full_name);
       setEmail(profile.email);
       setPhoto(profile.photo);
@@ -40,22 +40,28 @@ function UpdateProfileForm() {
       setAddress(profile.address);
       setBio(profile.bio);
       setAvailability(profile.availability);
-      setFeaturedMenuItem(profile.featured_menu_item);
-      setTagName(profile.tags);
+      if (profile.featured_menu_item !== null) {
+        for (let menuItem of menuItems) {
+          if (profile.featured_menu_item === menuItem.name) {
+            setFeaturedMenuItem(menuItem.menu_item_id);
+          }
+        }
+      }
+      if (profile.tags !== null) {
+        for (let tag of tags) {
+          if (profile.tags === tag.name) {
+            setTagName(tag.id);
+          }
+        }
+      }
     }
-  }, [profile]);
+  }, [profileSuccess, tagsSuccess, menuItemsSuccess, menuItems, profile, tags]);
 
-  const handleOnClick = () => {
-    setAvailability(!availability);
-  };
-  const canSave = !isLoading
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(profileId);
-
-    if (canSave) {
     try {
-        await updateProfile({
+
+      let input = {
         profile_id: parseInt(profileId),
         full_name: fullName,
         email: email,
@@ -64,21 +70,27 @@ function UpdateProfileForm() {
         address:  address,
         bio:  bio,
         availability:  availability,
-        tags: tagName,
-        featured_menu_item: featuredMenuItem,
-      }).unwrap()
+        tags: parseInt(tagName),
+        featured_menu_item: featuredMenuItem
+      }
+
+      if (featuredMenuItem === "") {
+        input.featured_menu_item = null;
+      }
+
+        await updateProfile(input).unwrap()
         navigate(`/chef/profile/${profileId}`);
       } catch(error) {
       console.log(error);
     }
-    }
   };
 
-
-   if (isLoading){
+   if (profileLoading || tagsLoading || menuItemsLoading){
       return <div>Updating...</div>;
-
    }
+
+   console.log(tagName);
+   console.log(featuredMenuItem);
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -198,20 +210,6 @@ function UpdateProfileForm() {
               </div>
           </div>
 
-          <div className="flex items-center mt-6">
-          <input
-            type="checkbox"
-            id="availability"
-            name="availability"
-            value={availability}
-            onChange={handleOnClick}
-            className="checkbox checkbox-primary"
-          />
-          <label htmlFor="availability" className="ml-2 block text-sm text-gray-900">
-            Availability
-          </label>
-        </div>
-
         <select
           label='tags'
           id='tags'
@@ -219,7 +217,9 @@ function UpdateProfileForm() {
         onChange={(e) => setTagName(e.target.value)}
         className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
         >
-          <option value=''>Tag</option>
+          {tagName === "" && (
+            <option value=''>Tag</option>
+          )}
           {tags?.map(tag => {
             return (
               <option key={tag.id} value={tag.id}>
@@ -229,23 +229,33 @@ function UpdateProfileForm() {
           })}
         </select>
 
-        <select
-          label='Featured Menu Item'
-          id='featuredMenuItem'
-          className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          value={featuredMenuItem}
-          onChange={e => setFeaturedMenuItem(e.target.value)} >
+          {menuItems ? (
+            <select
+              label='Featured Menu Item'
+              id='featuredMenuItem'
+              value={featuredMenuItem}
+              className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              onChange={e => setFeaturedMenuItem(e.target.value)} >
 
-            <option value=''>Signature Dish</option>
-            {menuItems?.map(menuItem=> {
-              return(
-                <option key={menuItem.menu_item_id} value={menuItem.menu_item_id}>
-                  {menuItem.name}
-                </option>
-              );
-            })}
-        </select>
-              <button type="submit" className="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                {featuredMenuItem === "" && (
+                  <option value="">Signature Dish</option>
+                )}
+
+                {menuItems?.map(menuItem=> {
+                    return(
+                      <option key={menuItem.menu_item_id} value={menuItem.menu_item_id}>
+                        {menuItem.name}
+                      </option>
+                    );
+                })}
+
+            </select>
+          ) : (
+              <button onClick={() => navigate(`/chef/${profileId}/menu-items/new`)} className="text-gray-800 hover:bg-[#b05e5e] w-full py-2 px-2 border rounded mb-1 hover:bg-gray-100">
+                Please create a Menu Item
+              </button>
+          )}
+              <button type="submit" className="w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save
               </button>
        </div>

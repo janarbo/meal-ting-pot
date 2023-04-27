@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setUser } from "./user.js";
+import { setUser, logoutUser } from "./user.js";
 
 
 export const authApi = createApi({
@@ -18,9 +18,10 @@ export const authApi = createApi({
             return headers
         },
     }),
+
     endpoints: (builder) => ({
         signup: builder.mutation({
-            query: info => {
+            query: (info) => {
                 let dictionary = {};
                 if (info instanceof HTMLElement) {
                     dictionary = {info};
@@ -43,8 +44,9 @@ export const authApi = createApi({
             },
             invalidatesTags: ['token'],
         }),
+
         login: builder.mutation({
-        query: info => {
+        query: (info) => {
             let formData = null;
             if (info instanceof HTMLElement) {
                 formData = new FormData(info);
@@ -70,6 +72,7 @@ export const authApi = createApi({
             }
         },
         }),
+
         getToken: builder.query({
             query: () => ({
                 url: '/token',
@@ -88,12 +91,21 @@ export const authApi = createApi({
                 }
             },
         }),
+
         logout: builder.mutation({
             query: () => ({
                 url: '/token',
                 method: 'delete',
             }),
             invalidatesTags: ['token'],
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(logoutUser());
+                } catch (error) {
+                    console.error(error);
+                }
+            },
         }),
     }),
 });

@@ -20,15 +20,16 @@ export const menuItemApi = createApi({
     getAllChef: builder.query({
         query: (chefId) => ({
         url: `/chef/${chefId}/menu_items`,
+        }),
         providesTags: ['MenuItems']
-    })
     }),
     getOneMenuItem: builder.query({
         query: (menuItemId) => ({
         url: `/menu-items/${menuItemId}`,
-        providesTags: ['MenuItems']
-    })
     }),
+        providesTags: ['MenuItems']
+    }),
+
     createMenuItem: builder.mutation({
         query: (menuItem) => ({
         url: `/menu-items`,
@@ -63,5 +64,5 @@ export const {
     useGetOneMenuItemQuery,
     useDeleteMenuItemMutation,
     useCreateMenuItemMutation,
-    useUpdateMenuItemMutation
+    useUpdateMenuItemMutation,
 } = menuItemApi;
