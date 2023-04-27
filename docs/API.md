@@ -145,18 +145,18 @@ This action get all orders for the chef.
 ```
     [
         {
-            "menu_item_id": 8,
-            "food_type": "main",
-            "name": "egg",
-            "price": 12,
-            "description": "123",
-            "comment": "123",
-            "photo": "http://images.bigoven.com/image/upload/v1435854425/perfect-soft-boiled-eggs-f87fbe.jpg",
+            "menu_item_id": 0,
+            "food_type": "string",
+            "name": "string",
+            "price": 0,
+            "description": "string",
+            "comment": "string",
+            "photo": "string",
             "spicy_level": 0,
-            "tags": "halal",
-            "calories": 123,
-            "ingredients": "123",
-            "chef_id": 6,
+            "tags": "string",
+            "calories": 0,
+            "ingredients": "string",
+            "chef_id": 0,
             "status": true
         }
     ]
