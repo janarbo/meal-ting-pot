@@ -25,7 +25,7 @@ const MainPage = () => {
   }
 
   const handleTagClick = (tag) => {
-    const newProfiles = chefProfiles.filter((profile) => profile.tags.includes(tag.name));
+    const newProfiles = availableProfiles.filter((profile) => profile.tags.includes(tag.name));
     setFilteredProfiles(newProfiles);
   }
 
