@@ -56,7 +56,7 @@ function App() {
                 </Route>
               </Route>
             </Route>
-            <Route path="" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="login" element={<LoginForm accountInfo={data} />} />
             <Route path="signup" element={<SignupForm accountInfo={data} />} />
           </Routes>
