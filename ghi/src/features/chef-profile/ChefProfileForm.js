@@ -1,52 +1,51 @@
 import React from 'react';
 import { useState } from 'react';
-import { useCreateProfileMutation, useGetAllTagsQuery } from './features/chef-profile/chefProfileApi';
+import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
 import {useNavigate} from 'react-router-dom'
-import { useGetAllChefQuery } from './features/menu-items/menuItemApi';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
-import SideBar from "./SideBar";
 
-function ProfileForm() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [bio, setBio] = useState("");
-  const [availability, setAvailability] = useState(false);
-  const [featuredMenuItem, setFeaturedMenuItem] = useState("");
+
+function ProfileForm(){
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [photo, setPhoto] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [bio, setBio] = useState('');
   const [tagName, setTagName] = useState("");
-  const { data: menuItems } = useGetAllChefQuery();
   const { data: tags } = useGetAllTagsQuery();
   const navigate = useNavigate();
   const [createProfile] = useCreateProfileMutation();
 
-  const handleOnClick = () => {
-    availability ? setAvailability(false) : setAvailability(true);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const payload = {
-        full_name: fullName,
-        email: email,
-        photo: photo,
-        phone_number: phoneNumber,
-        address: address,
-        bio: bio,
-        availability: availability,
-        tags: tagName,
-        featured_menu_item: featuredMenuItem,
+        'full_name':fullName,
+        'email': email,
+        'photo': photo,
+        'phone_number':phoneNumber,
+        'address': address,
+        'bio':bio,
+        'availability': false,
+        'tags':tagName,
+        'featured_menu_item': null
       };
-      await createProfile(payload);
-      navigate("/home");
-    } catch (error) {
-      console.log(error);
-    }
+
+      const response = await createProfile(payload);
+
+      if (response.data) {
+        const newProfileId = response.data.profile_id;
+        navigate(`/chef/${newProfileId}/menu-items/new`);
+      }
+
+      } catch (error) {
+        console.log(error)
+      }
   };
 
   return (
+
     <div className="flex items-center justify-center h-screen">
       <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
         <form
@@ -108,7 +107,7 @@ function ProfileForm() {
 
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="photo"
                     className="block text-sm font-medium text-gray-700"
                   >
                     Photo
@@ -121,7 +120,6 @@ function ProfileForm() {
                       id="photo"
                       autoComplete="photo"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder="Photo"
                       value={photo}
                       onChange={(e) => setPhoto(e.target.value)}
                     />
@@ -143,7 +141,6 @@ function ProfileForm() {
                       id="phoneNumber"
                       autoComplete="phoneNumber"
                       className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder="PhoneNumber"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
@@ -154,7 +151,7 @@ function ProfileForm() {
                     htmlFor="address"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Address
+                    Pickup Address
                   </label>
                   <div className="mt-2">
                     <input
@@ -188,23 +185,6 @@ function ProfileForm() {
                   </div>
                 </div>
 
-                <div className="flex items-center mt-6">
-                  <input
-                    type="checkbox"
-                    id="availability"
-                    name="availability"
-                    value={availability}
-                    onChange={handleOnClick}
-                    className="checkbox checkbox-primary"
-                  />
-                  <label
-                    htmlFor="availability"
-                    className="ml-2 block text-sm text-gray-900"
-                  >
-                    Availability
-                  </label>
-                </div>
-
                 <select
                   label="tags"
                   id="tags"
@@ -222,25 +202,6 @@ function ProfileForm() {
                   })}
                 </select>
 
-                <select
-                  label="Featured Menu Item"
-                  id="featuredMenuItem"
-                  className="mt-4 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={featuredMenuItem}
-                  onChange={(e) => setFeaturedMenuItem(e.target.value)}
-                >
-                  <option value="">Signature Dish</option>
-                  {menuItems?.map((menuItem) => {
-                    return (
-                      <option
-                        key={menuItem.menu_item_id}
-                        value={menuItem.menu_item_id}
-                      >
-                        {menuItem.name}
-                      </option>
-                    );
-                  })}
-                </select>
                 <button
                   type="submit"
                   className="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -251,8 +212,9 @@ function ProfileForm() {
             </div>
           </div>
         </form>
-        <SideBar />
+
       </div>
+
     </div>
   );
 }

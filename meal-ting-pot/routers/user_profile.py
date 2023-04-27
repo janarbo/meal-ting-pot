@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Response
 from typing import Union, List
 from queries.user_profile import (
     UserProfileIn,
+    UserProfileAvailabilityIn,
     UserProfileRepository,
     UserProfileOut,
     Error,
@@ -50,6 +51,19 @@ def update_profile(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, UserProfileOut]:
     return repo.update(profile_id, user_profile, account_data)
+
+
+@router.put(
+    "/profile/{profile_id}/availability",
+    response_model=Union[UserProfileOut, Error],
+)
+def update_profile_availability(
+    profile_id: int,
+    user_profile: UserProfileAvailabilityIn,
+    repo: UserProfileRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+) -> Union[Error, UserProfileOut]:
+    return repo.update_availability(profile_id, user_profile, account_data)
 
 
 @router.get(

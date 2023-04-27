@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
-    const{menuItemId} = useParams()
+    const{ profileId, menuItemId} = useParams()
     const navigate=useNavigate()
     const [updateMenuItem, {isLoading}]= useUpdateMenuItemMutation()
     const {data: menuItem, isLoading: isLoadingMenuItem, isSuccess}= useGetOneMenuItemQuery(menuItemId)
@@ -30,7 +30,7 @@ const UpdateMenuItemForm = () => {
             setFormData({menu_item_id: parseInt(menuItemId), food_type: menuItem.food_type, name: menuItem.name, price: menuItem.price, description:menuItem.description, comment: menuItem.comment, photo: menuItem.photo, spicy_level: menuItem.spicy_level, tags: menuItem.tags, calories: menuItem.calories, ingredients: menuItem.ingredients, status: menuItem.status
             })
         }
-    },[isSuccess, menuItem?.foodtype, menuItem?.name, menuItem?.price, menuItem?.description,menuItem?.comment, menuItem?.photo, menuItem?.spicy_level, menuItem?.tags,  menuItem?.calories,  menuItem?.ingredients, menuItem?.status])
+    },[isSuccess, menuItem?.foodtype, menuItem?.name, menuItem?.price, menuItem?.food_type, menuItemId ,menuItem?.description,menuItem?.comment, menuItem?.photo, menuItem?.spicy_level, menuItem?.tags,  menuItem?.calories,  menuItem?.ingredients, menuItem?.status])
     if (isLoadingMenuItem) return <p>Loading...</p>
     const handleFormChange=(e)=>{
         const value= e.target.value;
@@ -46,24 +46,32 @@ const UpdateMenuItemForm = () => {
             try {
 
                 await updateMenuItem(formData).unwrap()
-                navigate(`/chef/menu-items`)
+                navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
                 console.error('Failed to save the menu item', e)
             }
         }
     }
+    const foodTypeOptions=['main', 'side', 'dessert']
+    const spicyLevelOptions=[0,1,2,3,4,5]
     return(
         <section>
             <h2>Update a Menu Item</h2>
             <form>
                 <label htmlFor="food_type">Food Type:</label>
-                <input
+                <select
                     type="text"
                     id="food_type"
                     name="food_type"
                     value={formData.food_type}
                     onChange={handleFormChange}
-                />
+                >
+                {foodTypeOptions.map(food_type=>{
+                    return(
+                        <option key={food_type} value={food_type}>{food_type}</option>
+                    )
+                })}
+                </select>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name= "name" value={formData.name} onChange={handleFormChange}/>
                 <label htmlFor="price">Price:</label>
@@ -85,7 +93,19 @@ const UpdateMenuItemForm = () => {
                 <label htmlFor="photo">photo:</label>
                 <input type="text" name= "photo" id="photo" value={formData.photo} onChange={handleFormChange}/>
                 <label htmlFor="spicy_level">Spicy Level:</label>
-                <input type="int" name="spicy_level" id="spicy_level" value={formData.spicy_level} onChange={handleFormChange}/>
+                <select
+                    type="int"
+                    id="spicy_level"
+                    name="spicy_level"
+                    value={formData.spicy_level}
+                    onChange={handleFormChange}
+                >
+                {spicyLevelOptions.map(spicy_level=>{
+                    return(
+                        <option key={spicy_level} value={spicy_level}>{spicy_level}</option>
+                    )
+                })}
+                </select>
                 <label htmlFor="tags">Tags:</label>
                 <input type="text" name="tags" id="tags" value={formData.tags} onChange={handleFormChange}/>
                 <label htmlFor="calories">calories:</label>
