@@ -71,7 +71,6 @@
             )
         }
 
-
     return (
     <div className="flex">
         <div>
@@ -118,6 +117,8 @@
                         See My Orders
                     </button>
                 </li>
+
+                {data.featured_menu_item && (
                 <li>
                     <button
                         className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
@@ -129,6 +130,7 @@
                         }
                     </button>
                 </li>
+                )}
                     <li>
                     <button
                         className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"

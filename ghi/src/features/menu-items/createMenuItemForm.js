@@ -5,6 +5,7 @@ import { useCreateMenuItemMutation } from "./menuItemApi";
 import { useGetOneChefProfileQuery } from "../chef-profile/chefProfileApi";
 import { useUpdateProfileMutation } from "../chef-profile/chefProfileApi";
 import { useParams } from "react-router-dom";
+import { useGetAllTagsQuery } from "../chef-profile/chefProfileApi";
 
 const CreateMenuItemForm=()=>{
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -12,6 +13,7 @@ const CreateMenuItemForm=()=>{
 
     const[createMenuItem, {isLoading}]= useCreateMenuItemMutation();
     const { data, isLoading: chefProfileLoading } = useGetOneChefProfileQuery(profileId);
+    const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
 
     const [updateProfile] = useUpdateProfileMutation();
 
@@ -31,7 +33,7 @@ const CreateMenuItemForm=()=>{
         chef_id: chefId
     })
 
-    if (chefProfileLoading) {
+    if (chefProfileLoading || tagsLoading) {
         return (
             <div>Loading...</div>
         )
@@ -50,7 +52,14 @@ const CreateMenuItemForm=()=>{
         if(canSubmit){
             try{
                 const response = await createMenuItem(formData);
-                if (!data.featured_menu_item) {
+                if (data.featured_menu_item === null) {
+                    let tagId = null
+                    for (let tagObject of tags) {
+                        if (data.tags === tagObject.name) {
+                            tagId = tagObject.id
+                        }
+                    }
+
                     const profileUpdate = {
                         "address": data.address,
                         "availability": data.availability,
@@ -61,8 +70,9 @@ const CreateMenuItemForm=()=>{
                         "full_name": data.full_name,
                         "email": data.email,
                         "phone_number": data.phone_number,
-                        "tags": data.tags,
+                        "tags": tagId
                     }
+
                     await updateProfile(profileUpdate);
                 }
                 setFormData({});
