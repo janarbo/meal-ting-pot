@@ -142,6 +142,7 @@ This action get all orders for the chef.
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
 <br>
+
 ```
     [
         {
@@ -159,7 +160,7 @@ This action get all orders for the chef.
             "chef_id": 0,
             "status": true
         }
-    ]
+]
 ```
 </details>
 
