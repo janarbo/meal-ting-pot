@@ -1,37 +1,68 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import LoginForm from './LoginForm.js';
+import LandingPage from './LandingPage.js';
+import SignupForm from './SignupForm.js';
+import MainPage from './MainPage.js';
+import Nav from './Nav.js';
+import { useGetTokenQuery } from './features/auth/authAPI.js';
+import Protected from './features/auth/protected.js';
+import ChefProtected from './features/auth/chefProtected.js';
+import ProfileForm from './components/chef-profile/ChefProfileForm.js';
+import ChefProfilePage from './components/chef-profile/ChefProfilePage.js'
+import UpdateProfileForm from './components/chef-profile/UpdateProfile.js';
+import GetAllChefMenuList from './components/menu-items/chefMenuList.js';
+import CreateMenuItemForm from './components/menu-items/createMenuItemForm.js';
+import UpdateMenuItemForm from './components/menu-items/chefUpdateMenuItem.js';
+import ShoppingCartList from './components/shopping-cart/ShoppingCartList.js';
+import AboutUs from './AboutUs.js';
+import ChefOrderList from './components/orders/ChefOrderList.js';
+import CustomerOrderList from './components/orders/CustomerOrderList.js';
+import ShoppingCartProvider from './features/shopping-cart/shoppingCartContext.js';
+import ChefStore from './components/chef/ChefStore.js';
+
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);  
+  const { data } = useGetTokenQuery();
 
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log('fastapi url: ', url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
+  if ( data === undefined ) {
+    return null;
+  }
 
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, [])
-
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, '');
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
-    </div>
+    <>
+      <ShoppingCartProvider>
+        <BrowserRouter basename={basename}>
+          <Nav accountInfo={data} />
+          <Routes>
+            <Route element={<Protected token={data} />}>
+              <Route path="home" element={<MainPage />} />
+              <Route path="cart" element={<ShoppingCartList />} />
+              <Route path="about" element={<AboutUs />} />
+              <Route path="orders" element={<CustomerOrderList />} />
+              <Route path="chef/:fullName/:userId/:profileId" element={<ChefStore />} />
+              <Route element={<ChefProtected token={data} />}>
+                <Route path="chef">
+                  <Route path=":profileId/menu-items" element={<GetAllChefMenuList />} />
+                  <Route path=":profileId/menu-items/new" element={<CreateMenuItemForm/>}/>
+                  <Route path=":profileId/menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
+                  <Route path="profile/create" element={<ProfileForm />} />
+                  <Route path="profile/:profileId" element={<ChefProfilePage/>} />
+                  <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
+                  <Route path=":profileId/orders" element={<ChefOrderList />} />
+                </Route>
+              </Route>
+            </Route>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="login" element={<LoginForm accountInfo={data} />} />
+            <Route path="signup" element={<SignupForm accountInfo={data} />} />
+          </Routes>
+        </BrowserRouter>
+      </ShoppingCartProvider>
+    </>
   );
 }
 
