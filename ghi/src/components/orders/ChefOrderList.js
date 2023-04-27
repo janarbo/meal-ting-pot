@@ -74,10 +74,18 @@ function ChefOrderList() {
         setShowAllOrders(false);
     }
 };
-    let filteredOrders = orders;
+
+
+    const filteredOrders = orders.filter(order => order.chef_id === parseInt(chefId));
+    console.log(chefId)
+    console.log(filteredOrders)
+
+    let filteredStatusOrders = filteredOrders;
       if (filterStatus !== null) {
-          filteredOrders = orders.filter(order => order.status === filterStatus);
+          filteredStatusOrders = filteredOrders.filter(order => order.status === filterStatus);
       }
+    console.log(filteredStatusOrders)
+
 
   return (
           <div>
@@ -87,6 +95,10 @@ function ChefOrderList() {
                   className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
                   onClick={() => handleFilterButtonClick(null)}
                 > All Orders</button>
+                <button
+                  className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
+                  onClick={() => handleFilterButtonClick(1)}
+                > Needs Confirmation</button>
                 <button
                   className={`btn btn-primary ${filterStatus === 3  ? "active" : ""}`}
                   onClick={() => handleFilterButtonClick(3)}
@@ -112,7 +124,7 @@ function ChefOrderList() {
                   </thead>
                   {orders ? (
                     <tbody>
-                      {filteredOrders
+                      {filteredStatusOrders
                         .filter((order) => getStatus(order.status) !== "DECLINED")
                         .sort((a, b) => {
                           if (a.status !== b.status) {
