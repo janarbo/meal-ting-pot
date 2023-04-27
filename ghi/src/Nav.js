@@ -7,6 +7,7 @@ import { Navbar } from 'react-bootstrap';
 import { ShoppingCartContext } from "./features/shopping-cart/shoppingCartContext";
 import { useGetAllChefProfilesQuery } from "./features/chef-profile/chefProfileApi";
 
+
 function ChefProfile({ userId }) {
   const [profileId, setProfileId] = useState(null);
   const { data, isLoading } = useGetAllChefProfilesQuery();
