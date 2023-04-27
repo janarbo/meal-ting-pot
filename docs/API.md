@@ -399,7 +399,7 @@ This action update an profile and stores it within the database.
 
 
 ![image info](https://gyazo.com/d5c8b02c8638041fc9c9462f36ef403b)
-* This action update an profile availabilty and stores it within the database.
+This action update an profile availabilty and stores it within the database.
 
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
