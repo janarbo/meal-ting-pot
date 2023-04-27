@@ -46,17 +46,17 @@ function App() {
               <Route path="chef/:fullName/:userId/:profileId" element={<ChefStore />} />
               <Route element={<ChefProtected token={data} />}>
                 <Route path="chef">
-                  <Route path="menu-items" element={<GetAllChefMenuList />} />
-                  <Route path="menu-items/new" element={<CreateMenuItemForm/>}/>
-                  <Route path="menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
+                  <Route path=":profileId/menu-items" element={<GetAllChefMenuList />} />
+                  <Route path=":profileId/menu-items/new" element={<CreateMenuItemForm/>}/>
+                  <Route path=":profileId/menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
                   <Route path="profile/create" element={<ProfileForm />} />
                   <Route path="profile/:profileId" element={<ChefProfilePage/>} />
                   <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
-                  <Route path="orders" element={<ChefOrderList />} />
+                  <Route path=":profileId/orders" element={<ChefOrderList />} />
                 </Route>
               </Route>
             </Route>
-            <Route path="" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="login" element={<LoginForm accountInfo={data} />} />
             <Route path="signup" element={<SignupForm accountInfo={data} />} />
           </Routes>

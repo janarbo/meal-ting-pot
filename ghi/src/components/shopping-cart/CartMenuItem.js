@@ -19,7 +19,7 @@ function CartMenuItem(props) {
 
     const handleDropdownQtyChange = (event) => {
         const value = event.target.value;
-        if (value == "10+") {
+        if (value === "10+") {
             setDropdown(false);
             setInput(true);
         } else {
@@ -60,7 +60,7 @@ function CartMenuItem(props) {
     return (
         <>
         <div className="flex">
-            <img className="max-h-72 max-w-72 w-40 h-40 rounded" src={photo}></img>
+            <img className="max-h-72 max-w-72 w-40 h-40 rounded" src={photo} alt={photo}></img>
             <div className="flex flex-col ml-4">
                 <h4 className="font-normal capitalize">{menuItem.name}</h4>
                 <div className="flex items-center">

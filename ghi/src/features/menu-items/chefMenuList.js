@@ -1,12 +1,14 @@
 import { useGetAllChefQuery, useUpdateMenuItemMutation  } from './menuItemApi'
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 
 
 function GetAllChefMenuList() {
     const userId = useSelector((state) => state.auth.userInfo.id);
+    const { profileId } = useParams();
     const [updateMenuItemStatus, {isLoading}]=useUpdateMenuItemMutation()
     const { data: menuItems, isLoading: isLoadingMenuItems } = useGetAllChefQuery(userId);
     const navigate=useNavigate()
@@ -14,6 +16,7 @@ function GetAllChefMenuList() {
     if(isLoading||isLoadingMenuItems){
         return <p>Loading...</p>
     }
+
     const updateMenuItemStatusClicked= async (menu_item)=>{
         if (canSave){
             try{
@@ -40,10 +43,10 @@ function GetAllChefMenuList() {
     }
     const updateMenuItemClicked=(menu_item)=>{
 
-        navigate(`/chef/menu-items/edit/${menu_item.menu_item_id}/`)
+        navigate(`/chef/${profileId}/menu-items/edit/${menu_item.menu_item_id}/`)
     }
     const createMenuItemClicked=()=>{
-        navigate(`/chef/menu-items/new/`)
+        navigate(`/chef/${profileId}/menu-items/new/`)
     }
     return (
 <div>
@@ -67,7 +70,7 @@ function GetAllChefMenuList() {
                     <tbody>
                     {menuItems.map(menu_item => (
                         <tr key={menu_item.menu_item_id}>
-                            <td><img  className="h-20 w-20 object-cover" src={menu_item.photo} alt="Menu Item Photo" /></td>
+                            <td><img  className="h-20 w-20 object-cover" src={menu_item.photo} alt={menu_item.photo} /></td>
                             <td>{menu_item.name}</td>
                             <td>{menu_item.price}</td>
                             <td>{menu_item.description}</td>
