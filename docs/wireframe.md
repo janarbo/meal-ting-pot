@@ -1,6 +1,6 @@
 <h1> Wireframes </h1>
 
-Domain driven design of our application during the planning phase of the project.
+Domain-driven design of the application during the planning phase.
 
 <h2>Complete WireFrame</h2>
 
