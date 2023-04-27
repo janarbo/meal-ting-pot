@@ -105,4 +105,11 @@ I resolved some bugs regarding my state for the shoppingCartList component. Afte
 #### (Tuesday) 4/25/2023
 I worked on the chef store component so that, when users clicked on a MenuItemCard, a MenuItemCardDetail component shows instead with extra information (ingredients, tags, spicy level, calories). After finishing up my last component, I continued stylizing the home page and adjusted the footer so that it was below the content as well. I also wrote another unit test for cart-item and also protected chef pages from customer users. Therefore, if a customer user tries to type a url that only chef's should access, they are navigated to the home page.
 
+#### (Wednesday) 4/26/2023
+We worked together on any remaining components that needed to have their functionality working. In our sidebar, the availability button for the chef profile updates their status now.
+
+Also, we we're running into an issue where if a user signs in and logs out. The information stored in the userSlice was not changed. Therefore, if another user account is signed in wo refreshing the page, the 2nd account would see information from the 1st. We added a logout action in our userSlice that would change the state to the initial state and used it in our logout reducer in the authApi.
+
+Lastly, we uncommented our docker-compose yml file to make sure our code passes the pipelines for deployment. The deployed server is now up and running and we'll use CI/CD for any further changes.
+
 </details>
