@@ -54,7 +54,11 @@ function ChefProfilePage() {
       </tr>
       <tr>
         <th className="border border-gray-400 px-4 py-2">Availability:</th>
-        <td className="border border-gray-400 px-4 py-2">{profile.availability ? 'Available' : 'Not Available'}</td>
+        {profile.featured_menu_item ? (
+          <td className="border border-gray-400 px-4 py-2">{profile.availability ? 'Available' : 'Not Available'}</td>
+        ) : (
+          <td className="border border-gray-400 px-4 py-2">Not Available. Please create a menu item first.</td>
+        )}
       </tr>
       <tr>
         <th className="border border-gray-400 px-4 py-2">Tags</th>
