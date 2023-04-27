@@ -7,7 +7,6 @@ This action creates an account tied to a specific user and stores it within the 
 <br>
 
 ```
-{
     {
         "first_name": "string",
         "last_name": "string",
@@ -16,6 +15,31 @@ This action creates an account tied to a specific user and stores it within the 
         "email": "string",
         "is_chef": true
     }
-}
 ```
 </details>
+<details>
+
+<summary><strong>Returns (Status Code 200):</strong></summary>
+<br>
+
+```
+    {
+        "access_token": "string",
+        "token_type": "Bearer",
+        "account": {
+            "id": "string",
+            "first_name": "string",
+            "last_name": "string",
+            "username": "string",
+            "email": "string",
+            "is_chef": true
+        }
+        }
+```
+</details>
+
+![image info](login.png)
+This action logs an existing user into the application.
+
+Request Body:
+![image info](requestbody.png)
