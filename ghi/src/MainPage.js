@@ -5,7 +5,7 @@ import {
 } from "./features/chef-profile/chefProfileApi";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
-import NoAvatar from "./images/NoAvatar.png";
+import NoAvatar from "./images/styling/NoAvatar.png";
 
 
 const MainPage = () => {
