@@ -1,11 +1,12 @@
 import { useState} from "react";
 import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import { useCreateMenuItemMutation } from "./menuItemApi";
-import { useGetOneChefProfileQuery } from "../chef-profile/chefProfileApi";
-import { useUpdateProfileMutation } from "../chef-profile/chefProfileApi";
+import { useCreateMenuItemMutation } from "../../features/menu-items/menuItemApi";
+import { useUpdateProfileMutation, useGetOneChefProfileQuery, useGetAllTagsQuery } from "../../features/chef-profile/chefProfileApi";
 import { useParams } from "react-router-dom";
-import { useGetAllTagsQuery } from "../chef-profile/chefProfileApi";
+import SideBar from '../../SideBar';
+import Footer from "../../Footer"
+
 
 const CreateMenuItemForm=()=>{
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -87,6 +88,9 @@ const CreateMenuItemForm=()=>{
 
     return(
         <section>
+            <div>
+                <SideBar/>
+            </div>
             <h2>Create a New Menu Item</h2>
             <form>
                 <label htmlFor="food_type">Food Type:</label>
@@ -151,6 +155,9 @@ const CreateMenuItemForm=()=>{
                     disabled={!canSubmit}
                 >Share the Noms!</button>
             </form>
+            <div>
+                <Footer/>
+            </div>
         </section>
 )
 

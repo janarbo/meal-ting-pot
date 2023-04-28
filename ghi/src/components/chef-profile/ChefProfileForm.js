@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { useCreateProfileMutation, useGetAllTagsQuery } from './chefProfileApi';
+import { useCreateProfileMutation, useGetAllTagsQuery } from '../../features/chef-profile/chefProfileApi';
 import {useNavigate} from 'react-router-dom'
+import Footer from "../../Footer"
 
 
 function ProfileForm(){
@@ -214,7 +215,9 @@ function ProfileForm(){
         </form>
 
       </div>
-
+    <div>
+      <Footer />
+    </div>
     </div>
   );
 }
