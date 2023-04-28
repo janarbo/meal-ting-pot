@@ -8,8 +8,6 @@ import {
 import { useGetAllChefQuery } from '../../features/menu-items/menuItemApi';
 import { useSelector } from "react-redux";
 import SideBar from '../../SideBar';
-import Footer from "../../Footer"
-
 
 
 function UpdateProfileForm() {
@@ -90,8 +88,6 @@ function UpdateProfileForm() {
       return <div>Updating...</div>;
    }
 
-   console.log(tagName);
-   console.log(featuredMenuItem);
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -264,9 +260,6 @@ function UpdateProfileForm() {
     </div>
       </form>
       </div>
-  <div>
-    <Footer />
-  </div>
   </div>
 
 
