@@ -8,6 +8,7 @@ import { useCreateCartItemMutation } from "../../features/shopping-cart/shopping
 // Order API
 import { useCreateOrderMutation } from "../../features/orders/orderApi";
 
+
 function ShoppingCartList() {
     const navigate = useNavigate();
     const shoppingCart = useContext(ShoppingCartContext);

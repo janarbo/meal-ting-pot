@@ -4,11 +4,10 @@ import {
   useUpdateProfileMutation,
   useGetAllTagsQuery,
   useGetOneProfileQuery,
-} from './chefProfileApi';
-import { useGetAllChefQuery } from '../menu-items/menuItemApi';
+} from '../../features/chef-profile/chefProfileApi';
+import { useGetAllChefQuery } from '../../features/menu-items/menuItemApi';
 import { useSelector } from "react-redux";
 import SideBar from '../../SideBar';
-
 
 
 function UpdateProfileForm() {
@@ -89,8 +88,6 @@ function UpdateProfileForm() {
       return <div>Updating...</div>;
    }
 
-   console.log(tagName);
-   console.log(featuredMenuItem);
 
   return (
     <div className="flex items-center justify-center h-screen">
