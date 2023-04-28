@@ -51,8 +51,7 @@ function ChefOrderList() {
                           status: value,
                           shopping_cart: items
                       }
-                      const result = await updateOrder(updatedOrder).unwrap();
-                      console.log(result);
+                      await updateOrder(updatedOrder).unwrap();
 
               } catch (error) {
                   console.log(error);
