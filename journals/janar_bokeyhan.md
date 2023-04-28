@@ -16,7 +16,7 @@
 
 ### Thursday 3-30-2023
 * Ted led as a driver we tackled the authentication task as a team.
-* We followed the video in learn, but the video is for mongodb, we have to search other resources get the auth done.
+* We followed the video in Learn, but it was for MongoDB.   Therefore, we had to search for other resources to get the authentication done.
 * Big shout out to my teammates, they were able to resolve all issues promptly and in a very professional manner.
 
 
@@ -49,15 +49,15 @@
 * We installed tailwindcss together.
 
 ###  Thurday 4-13-2023
-* I finished frontend of get all profiles by using redux, and made it rendered as card style,this feature allows customer users to be able to choose their prefered chef and order food from chef profile detail page.
+* I finished the frontend of the get_all_profiles function using Redux and made it render as card style. This feature allows customer users to choose their preferred chef and order food from the chef profile detail page.
 
 ### Friday 4-14-2023
 * I finished frontend of profile form by using redux, this feature allows chef users to edit their profile information after they logged in.
-* When I input the phone number, I found that the phone number type is integer which has limited max size, so I changed the data type to BIGINT.
+* When I inputted the phone number, I found that the phone number type is an integer, which has a limited max size. So, I changed the data type to BIGINT.
 * I also created the endpoint for get all tags, which can populate the tags for drop down menu in profile form.
 
 ### Monday 4-17-2023
-* We worked as a group, Ted led as driving, we worked on the deployment today, we ran into a CORS issue in the deployment logs.
+* We worked as a group, Ted led as driver, we worked on the deployment today, we ran into a CORS issue in the deployment logs.
 
 ### Tuesday 4-18-2023
 * Ted led as driving, we worked on the deployment, we were able to get our backend running, but got CORS error from gitlab authentication.
@@ -82,3 +82,13 @@
 * I also finished a unit test for the get all profile function today.
 * I fixed the order list problem,  seperated multiple items to different row in one order.
 * Hopefully tmr we will start CSS for the frontend.
+
+
+### Wednesday 4-26-2023
+* Today I worked on finishing the filter button function of chef order list component so that the chef users can click on the button to see orders with different status.
+* We also worked together on some of the components to make them functional.
+* We tried running deployment again, fixed some issues and make it running without issue.
+
+### Thursday 4-27-2023
+* Today, I resolved the problem of users being able to see all chefs' order lists with the help of my teammate. As a result, they can now only view their individual orders.
+* Finished the API documentation.
