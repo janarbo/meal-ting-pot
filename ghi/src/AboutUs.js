@@ -1,6 +1,8 @@
 import React from "react";
 import ted from "../src/images/aboutUs/ted_hwang.jpg"
 import jacob from "../src/images/aboutUs/jacob_williams.jpg";
+import derek from "../src/images/aboutUs/derek_wang.jpg"
+import Footer from "./Footer"
 
 const teamMembers = [
   {
@@ -24,12 +26,11 @@ const teamMembers = [
   },
   {
     name: "Derek Wang",
-    image:
-      "https://img.freepik.com/free-vector/plant-emoji_78370-262.jpg?w=826&t=st=1682322093~exp=1682322693~hmac=994b87fbe8336e70394cf41c7510320a93cf74ae100f877f204ceb1bc88abefe",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.",
+    image: derek,
+    bio: "My love for cooking and sharing food really comes from watching my Mom make us meals as a kid. It started off with her giving me small tasks like throwing certain ingredients into the pan as she was cooking, and by the time I entered undergrad, I had the skills to cook for myself. My housemates would often walk into the kitchen, drawn by the sounds and smells of whatever I was cooking, and it brought me so much joy to be able to share my culture and what I was cooking with them. Meal-ting Pot is an everyday opportunity for others to feel that same joy that got me hooked in the first place.",
     socialLinks: {
       Gitlab: "https://gitlab.com/derekwangg",
-      Linkedin: "https://www.linkedin.com/in/john-doe",
+      Linkedin: "https://www.linkedin.com/in/derek-wangg/",
     },
   },
   {

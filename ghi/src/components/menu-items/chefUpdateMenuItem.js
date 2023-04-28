@@ -1,8 +1,10 @@
 import {useState, useEffect} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
-import { useGetOneMenuItemQuery } from './menuItemApi'
-import { useUpdateMenuItemMutation } from './menuItemApi'
+import { useGetOneMenuItemQuery } from '../../features/menu-items/menuItemApi'
+import { useUpdateMenuItemMutation } from '../../features/menu-items/menuItemApi'
 import { useSelector } from 'react-redux'
+import SideBar from '../../SideBar';
+import Footer from "../../Footer"
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -31,7 +33,9 @@ const UpdateMenuItemForm = () => {
             })
         }
     },[isSuccess, menuItem?.foodtype, menuItem?.name, menuItem?.price, menuItem?.food_type, menuItemId ,menuItem?.description,menuItem?.comment, menuItem?.photo, menuItem?.spicy_level, menuItem?.tags,  menuItem?.calories,  menuItem?.ingredients, menuItem?.status])
+
     if (isLoadingMenuItem) return <p>Loading...</p>
+
     const handleFormChange=(e)=>{
         const value= e.target.value;
         const inputName=e.target.name;
@@ -55,7 +59,11 @@ const UpdateMenuItemForm = () => {
     const foodTypeOptions=['main', 'side', 'dessert']
     const spicyLevelOptions=[0,1,2,3,4,5]
     return(
+
         <section>
+            <div>
+                <SideBar/>
+            </div>
             <h2>Update a Menu Item</h2>
             <form>
                 <label htmlFor="food_type">Food Type:</label>
@@ -120,6 +128,9 @@ const UpdateMenuItemForm = () => {
                     Save Menu Item
                 </button>
             </form>
+            <div>
+                <Footer />
+            </div>
         </section>
     )
 }

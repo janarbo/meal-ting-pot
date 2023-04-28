@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useGetAllOrdersQuery } from "../../features/orders/orderApi";
+import Footer from "../../Footer"
 
 const CustomerOrderList = () => {
     const customerId = useSelector((state) => state.auth.userInfo.id);
@@ -100,10 +101,12 @@ const CustomerOrderList = () => {
                             </table>
                         </div>
                     </div>
-                );
-            })}
-        </div>
-    );
-};
-
+            );
+        })}
+    <div>
+        <Footer />
+    </div>
+    </div>
+);
+    }
 export default CustomerOrderList;
