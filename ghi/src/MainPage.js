@@ -6,12 +6,19 @@ import {
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import NoAvatar from "./images/styling/NoAvatar.png";
+import InvalidMenuItem from "./images/styling/InvalidMenuItem.png";
 
 
 const MainPage = () => {
   const profileImage = NoAvatar;
+  const invalidMenuItemImage = InvalidMenuItem;
+
   const addDefaultSrc = (event) => {
         event.target.src = profileImage;
+  }
+
+  const addDefaultMenuSrc = (event) => {
+      event.target.src = invalidMenuItemImage;
   }
 
   const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
@@ -70,6 +77,7 @@ const MainPage = () => {
                 onClick={() => handleProfileClick(profile.full_name, profile.user_id, profile.profile_id)}
               >
                 <img
+                  onError={addDefaultMenuSrc}
                   className="w-full h-48 md:h-50 rounded object-cover"
                   src={profile.featured_menu_item}
                   alt={profile.featured_menu_item}
