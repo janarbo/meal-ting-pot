@@ -15,12 +15,14 @@
 10. Logged in chef users can confirm, mark ready for pickup, complete, or decline orders and view order history.
 
 ## Live Demo
-<p>View a live demo of this project here: <a>https://bidoof_supremacy.gitlab.io/meal-ting-pot/</a></p>
+<p>View a live demo of this project here: <a>https://bidoof_supremacy.gitlab.io/meal-ting-pot/</a>
+
+</p>
 
 ## Design
 - [Wireframe](docs/wireframe/wireframe.md)
-- [API](docks/api.md)
-- [Schemas](docs/schemas.md)
+- [API](docs/API.md)
+- [Schemas](docs/Schemas.md)
 
 ## Installation
 
@@ -34,7 +36,8 @@
 
 -Access the FastAPI backend at <a>http://localhost:8000/docs</a>
 
-##
+## Maintainers
+
 - @htedd
 - @Jacobdub
 - @Janarbo
