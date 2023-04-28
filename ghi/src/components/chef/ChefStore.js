@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 import { useGetOneChefProfileQuery } from "../../features/chef-profile/chefProfileApi";
 import MenuItemCard from "./MenuItemCard";
 import MenuItemCardDetail from "./MenuItemCardDetail";
-import NoAvatar from "../../images/NoAvatar.png"
+import Footer from "../../Footer"
+import NoAvatar from "../../images/styling/NoAvatar.png"
 
 
 function ChefStore() {
@@ -147,7 +148,9 @@ function ChefStore() {
                         </div>
                     </>
                 )}
-
+            <div>
+                <Footer />
+            </div>
             </div>
         </>
     );

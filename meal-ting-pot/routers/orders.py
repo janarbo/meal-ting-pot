@@ -45,7 +45,7 @@ def get_all_orders(
     account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> List[OrdersDetailOut]:
     response.status = 400
-    orders = repo.get_all_orders()
+    orders = repo.get_all()
     if orders is None:
         raise HTTPException(
             status_code=404, detail="There are no orders in database"

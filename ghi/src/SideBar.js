@@ -1,15 +1,20 @@
     import React from "react";
-    import { useState } from "react";
     import { useNavigate } from "react-router-dom";
     import { useLogoutMutation } from "./features/auth/authAPI";
     import { useParams } from "react-router-dom";
+    import {
+        useGetOneChefProfileQuery,
+        useUpdateProfileStatusMutation
+    } from "./features/chef-profile/chefProfileApi";
+
 
     const SideBar = () => {
         const navigate = useNavigate();
         const [logout] = useLogoutMutation();
-        const [availability, setAvailability] = useState(false);
         const { profileId } = useParams();
 
+        const { data, isLoading } = useGetOneChefProfileQuery(profileId);
+        const [updateProfile] = useUpdateProfileStatusMutation();
 
         const handleHomeClick = () => {
             navigate("/home");
@@ -20,20 +25,31 @@
         };
 
         const handleCreateProfileClick = () => {
-            navigate("/chef/profile/create");
+            navigate(`/chef/profile/create`);
         };
 
         const handleMenuClick = () => {
-            navigate("/chef/menu-items");
+            navigate(`/chef/${profileId}/menu-items`);
         };
 
         const handleOrdersClick = () => {
-            navigate("/chef/orders");
+            navigate(`/chef/${profileId}/orders`);
         };
 
         const handleAvailabilityClick = () => {
-            availability ? setAvailability(false) : setAvailability(true);
-            console.log(availability);
+            if (data.availability) {
+                let input = {
+                    "profile_id": data.profile_id,
+                    "availability": false
+                }
+                updateProfile(input);
+            } else {
+                let input = {
+                    "profile_id": data.profile_id,
+                    "availability": true
+                }
+                updateProfile(input);
+            }
         };
 
         const handleLogoutClick = async () => {
@@ -49,13 +65,19 @@
             navigate("/about");
         };
 
+        if (isLoading) {
+            return (
+                <div>Loading...</div>
+            )
+        }
+
     return (
     <div className="flex">
         <div>
             <ul className="list-inside">
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleHomeClick}
                     >
                         Home
@@ -63,23 +85,25 @@
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleProfileClick}
                     >
                         My Profile
                     </button>
                 </li>
                 <li>
+                    {!data && (
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleCreateProfileClick}
                     >
                         Create Profile
                     </button>
+                    )}
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleMenuClick}
                     >
                         My Menu
@@ -87,23 +111,29 @@
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleOrdersClick}
                     >
                         See My Orders
                     </button>
                 </li>
+
+                {data.featured_menu_item && (
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleAvailabilityClick}
                     >
-                        Available/Unavailable
+                        {data.availability ? (
+                            <div>Not Available</div>
+                        ) : <div>Available</div>
+                        }
                     </button>
                 </li>
+                )}
                     <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleLogoutClick}
                     >
                         Logout
@@ -111,7 +141,7 @@
                     </li>
                     <li>
                         <button
-                            className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full"
+                            className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full"
                             onClick={handleSupportClick}
                         >
                             Support Center
