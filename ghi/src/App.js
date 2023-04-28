@@ -8,12 +8,12 @@ import Nav from './Nav.js';
 import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
 import ChefProtected from './features/auth/chefProtected.js';
-import ProfileForm from './features/chef-profile/ChefProfileForm.js';
-import ChefProfilePage from './features/chef-profile/ChefProfilePage.js'
-import UpdateProfileForm from './features/chef-profile/UpdateProfile.js';
-import GetAllChefMenuList from './features/menu-items/chefMenuList.js';
-import CreateMenuItemForm from './features/menu-items/createMenuItemForm.js';
-import UpdateMenuItemForm from './features/menu-items/chefUpdateMenuItem.js';
+import ProfileForm from './components/chef-profile/ChefProfileForm.js';
+import ChefProfilePage from './components/chef-profile/ChefProfilePage.js'
+import UpdateProfileForm from './components/chef-profile/UpdateProfile.js';
+import GetAllChefMenuList from './components/menu-items/chefMenuList.js';
+import CreateMenuItemForm from './components/menu-items/createMenuItemForm.js';
+import UpdateMenuItemForm from './components/menu-items/chefUpdateMenuItem.js';
 import ShoppingCartList from './components/shopping-cart/ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
 import ChefOrderList from './components/orders/ChefOrderList.js';
