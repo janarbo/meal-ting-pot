@@ -61,10 +61,8 @@ const UpdateMenuItemForm = () => {
     return(
 
         <section>
-            <div>
+            <div style={{ display: "flex" }}>
                 <SideBar/>
-            </div>
-            <div className="flex items-center justify-center h-screen">
             <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
             <div className="m-6">
             <h2>Update a Menu Item</h2>
