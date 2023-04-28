@@ -4,10 +4,11 @@ import {
   useUpdateProfileMutation,
   useGetAllTagsQuery,
   useGetOneProfileQuery,
-} from './chefProfileApi';
-import { useGetAllChefQuery } from '../menu-items/menuItemApi';
+} from '../../features/chef-profile/chefProfileApi';
+import { useGetAllChefQuery } from '../../features/menu-items/menuItemApi';
 import { useSelector } from "react-redux";
 import SideBar from '../../SideBar';
+import Footer from "../../Footer"
 
 
 
@@ -263,6 +264,9 @@ function UpdateProfileForm() {
     </div>
       </form>
       </div>
+  <div>
+    <Footer />
+  </div>
   </div>
 
 

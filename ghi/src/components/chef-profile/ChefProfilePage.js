@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams, Link  } from 'react-router-dom';
-import { useGetOneProfileQuery } from './chefProfileApi';
+import { useGetOneProfileQuery } from '../../features/chef-profile/chefProfileApi';
 import SideBar from '../../SideBar';
+import Footer from "../../Footer"
 
 
 function ChefProfilePage() {
@@ -71,6 +72,9 @@ function ChefProfilePage() {
     </tbody>
   </table>
   <Link to={`/chef/profile/${profileId}/edit`} className="bg-green-700 hover:bg-green-500 text-white font-bold py-2 px-4 rounded mt-8">Update Profile</Link>
+</div>
+<div>
+  <Footer />
 </div>
 </div>
 
