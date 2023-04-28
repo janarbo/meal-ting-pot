@@ -1,12 +1,11 @@
 import React from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useGetOneProfileQuery } from '../../features/chef-profile/chefProfileApi';
 import SideBar from '../../SideBar';
 import Footer from "../../Footer";
 
 function ChefProfilePage() {
   const { profileId } = useParams();
-  const navigate = useNavigate();
 
   const { data: profile, isLoading, isError } = useGetOneProfileQuery(profileId) || {}
 
