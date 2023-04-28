@@ -2,11 +2,11 @@ import { useState} from "react";
 import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import { useCreateMenuItemMutation } from "../../features/menu-items/menuItemApi";
-import { useUpdateProfileMutation, useGetOneChefProfileQuery } from "../../features/chef-profile/chefProfileApi";
+import { useUpdateProfileMutation, useGetOneChefProfileQuery, useGetAllTagsQuery } from "../../features/chef-profile/chefProfileApi";
 import { useParams } from "react-router-dom";
 import SideBar from '../../SideBar';
 import Footer from "../../Footer"
-import { useGetAllTagsQuery } from "../chef-profile/chefProfileApi";
+
 
 const CreateMenuItemForm=()=>{
     const chefId = useSelector((state)  => state.auth.userInfo.id);
