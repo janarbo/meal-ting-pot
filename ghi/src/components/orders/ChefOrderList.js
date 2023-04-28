@@ -52,7 +52,6 @@ function ChefOrderList() {
                           shopping_cart: items
                       }
                       const result = await updateOrder(updatedOrder).unwrap();
-                      console.log(result);
 
               } catch (error) {
                   console.log(error);
@@ -78,14 +77,11 @@ function ChefOrderList() {
 
 
     const filteredOrders = orders.filter(order => order.chef_id === parseInt(chefId));
-    console.log(chefId)
-    console.log(filteredOrders)
 
     let filteredStatusOrders = filteredOrders;
       if (filterStatus !== null) {
           filteredStatusOrders = filteredOrders.filter(order => order.status === filterStatus);
       }
-    console.log(filteredStatusOrders)
 
 
   return (
