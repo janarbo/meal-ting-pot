@@ -52,7 +52,7 @@ function App() {
                   <Route path="profile/create" element={<ProfileForm />} />
                   <Route path="profile/:profileId" element={<ChefProfilePage/>} />
                   <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
-                  <Route path=":profileId/orders" element={<ChefOrderList />} />
+                  <Route path="orders" element={<ChefOrderList />} />
                 </Route>
               </Route>
             </Route>
