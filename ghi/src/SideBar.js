@@ -71,14 +71,13 @@
             )
         }
 
-
     return (
     <div className="flex">
         <div>
             <ul className="list-inside">
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleHomeClick}
                     >
                         Home
@@ -86,7 +85,7 @@
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleProfileClick}
                     >
                         My Profile
@@ -95,7 +94,7 @@
                 <li>
                     {!data && (
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleCreateProfileClick}
                     >
                         Create Profile
@@ -104,7 +103,7 @@
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleMenuClick}
                     >
                         My Menu
@@ -112,15 +111,17 @@
                 </li>
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleOrdersClick}
                     >
                         See My Orders
                     </button>
                 </li>
+
+                {data.featured_menu_item && (
                 <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleAvailabilityClick}
                     >
                         {data.availability ? (
@@ -129,9 +130,10 @@
                         }
                     </button>
                 </li>
+                )}
                     <li>
                     <button
-                        className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
                         onClick={handleLogoutClick}
                     >
                         Logout
@@ -139,7 +141,7 @@
                     </li>
                     <li>
                         <button
-                            className="bg-green-800 bg-opacity-80 hover:bg-green-200 opacity-100 text-black font-bold py-2 px-4 rounded-full"
+                            className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full"
                             onClick={handleSupportClick}
                         >
                             Support Center

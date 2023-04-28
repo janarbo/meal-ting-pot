@@ -19,6 +19,7 @@ function ProfileForm(){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const payload = {
         'full_name':fullName,
@@ -31,13 +32,17 @@ function ProfileForm(){
         'tags':tagName,
         'featured_menu_item': null
       };
-        const response = await createProfile(payload);
+
+      const response = await createProfile(payload);
+
+      if (response.data) {
         const newProfileId = response.data.profile_id;
-        await createProfile(payload);
         navigate(`/chef/${newProfileId}/menu-items/new`);
-          } catch (error) {
-            console.log(error)
-          }
+      }
+
+      } catch (error) {
+        console.log(error)
+      }
   };
 
   return (

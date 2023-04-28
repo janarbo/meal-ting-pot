@@ -5,7 +5,7 @@ import {
 } from "./features/chef-profile/chefProfileApi";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
-import NoAvatar from "./images/NoAvatar.png";
+import NoAvatar from "./images/styling/NoAvatar.png";
 
 
 const MainPage = () => {
@@ -25,7 +25,7 @@ const MainPage = () => {
   }
 
   const handleTagClick = (tag) => {
-    const newProfiles = chefProfiles.filter((profile) => profile.tags.includes(tag.name));
+    const newProfiles = availableProfiles.filter((profile) => profile.tags.includes(tag.name));
     setFilteredProfiles(newProfiles);
   }
 

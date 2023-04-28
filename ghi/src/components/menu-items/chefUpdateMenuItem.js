@@ -9,7 +9,6 @@ import Footer from "../../Footer"
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
     const{ profileId, menuItemId} = useParams()
-    console.log(profileId);
     const navigate=useNavigate()
     const [updateMenuItem, {isLoading}]= useUpdateMenuItemMutation()
     const {data: menuItem, isLoading: isLoadingMenuItem, isSuccess}= useGetOneMenuItemQuery(menuItemId)
