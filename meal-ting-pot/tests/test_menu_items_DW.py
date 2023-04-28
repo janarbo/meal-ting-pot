@@ -5,6 +5,7 @@ from authenticator import authenticator
 
 client = TestClient(app)
 
+
 def get_current_account_data_test():
     return {
         "id": 1,
@@ -42,6 +43,7 @@ class CreateMenuItemQueries:
 
         result.update(menu_item)
         return result
+
 
 def test_get_all_menu_items():
     app.dependency_overrides[MenuItemRepository] = EmptyMenuItemQueries
@@ -94,4 +96,3 @@ def test_create_menu_item():
 
     assert response.status_code == 200
     assert response.json() == expected
-
