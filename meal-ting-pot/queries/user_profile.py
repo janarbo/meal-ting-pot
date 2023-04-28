@@ -19,6 +19,10 @@ class UserProfileIn(BaseModel):
     featured_menu_item: Optional[str]
 
 
+class UserProfileAvailabilityIn(BaseModel):
+    availability: bool
+
+
 class UserProfileDetailOut(BaseModel):
     profile_id: int
     user_id: int
@@ -86,6 +90,49 @@ class UserProfileRepository:
             print(e)
             return {"message": "Could not update the user profile"}
 
+    def update_availability(
+        self,
+        profile_id: int,
+        user_profile: UserProfileAvailabilityIn,
+        account_data: dict,
+    ) -> Union[UserProfileOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        UPDATE user_profiles
+                        SET availability = %s
+                        WHERE profile_id = %s
+                        RETURNING
+                            full_name, email, photo, phone_number, address, bio, tags, featured_menu_item
+                        """,
+                        [
+                            user_profile.availability,
+                            profile_id,
+                        ],
+                    )
+                    row = result.fetchone()
+                    dict = {
+                        "full_name": row[0],
+                        "email": row[1],
+                        "photo": row[2],
+                        "phone_number": row[3],
+                        "address": row[4],
+                        "bio": row[5],
+                        "tags": row[6],
+                        "featured_menu_item": row[7],
+                        "availability": user_profile.availability,
+                    }
+                    return UserProfileOut(
+                        profile_id=profile_id,
+                        user_id=account_data["id"],
+                        **dict,
+                    )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update the user profile"}
+
     def get_all(self) -> Union[Error, List[UserProfileDetailOut]]:
         try:
             with pool.connection() as conn:
@@ -105,7 +152,6 @@ class UserProfileRepository:
                         user_profiles up
                         LEFT JOIN tags t ON up.tags = t.id
                         LEFT JOIN menu_items mi ON up.featured_menu_item = mi.menu_item_id
-                        WHERE up.availability = true AND mi.photo is not null
                         """,
                     )
                     results = db.fetchall()
@@ -240,5 +286,5 @@ class UserProfileRepository:
             availability=record[8],
             tags=record[9],
             featured_menu_item=record[10],
-            social_media=social_media
+            social_media=social_media,
         )

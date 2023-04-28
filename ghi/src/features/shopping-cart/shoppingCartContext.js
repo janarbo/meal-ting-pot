@@ -91,9 +91,9 @@ export function ShoppingCartProvider({children}) {
 
     function getTotalCost() {
         let totalCost = 0;
-        cartProducts.map((cartItem) => {
+        for (let cartItem of cartProducts) {
             totalCost += (cartItem.price * cartItem.quantity);
-        })
+        }
         return totalCost;
     }
 

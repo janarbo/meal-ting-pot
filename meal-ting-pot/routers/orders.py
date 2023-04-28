@@ -21,7 +21,7 @@ def get_one_order(
     repo: OrdersRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    order = repo.get_one(order_id)
+    order = repo.get_one_order(order_id)
     if order is None:
         raise HTTPException(status_code=404, detail="order not found")
     return order

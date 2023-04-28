@@ -5,7 +5,7 @@ import {
 } from "./features/chef-profile/chefProfileApi";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
-import NoAvatar from "./images/NoAvatar.png";
+import NoAvatar from "./images/styling/NoAvatar.png";
 
 
 const MainPage = () => {
@@ -14,7 +14,6 @@ const MainPage = () => {
         event.target.src = profileImage;
   }
 
-  const [selectedTag, setSelectedTag] = useState(null);
   const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
   const { data: chefProfiles, isLoading: chefProfilesLoading } = useGetAllChefProfilesQuery();
 
@@ -26,13 +25,19 @@ const MainPage = () => {
   }
 
   const handleTagClick = (tag) => {
-    setSelectedTag(tag);
-    const newProfiles = chefProfiles.filter((profile) => profile.tags.includes(tag.name));
+    const newProfiles = availableProfiles.filter((profile) => profile.tags.includes(tag.name));
     setFilteredProfiles(newProfiles);
   }
 
   if (tagsLoading || chefProfilesLoading) {
     return <div>Loading...</div>;
+  }
+
+  const availableProfiles = []
+  for (let profile of chefProfiles) {
+    if(profile.availability) {
+      availableProfiles.push(profile);
+    }
   }
 
   return (
@@ -57,7 +62,7 @@ const MainPage = () => {
           <div data-theme="garden" className="p-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
             ? filteredProfiles
-            : chefProfiles
+            : availableProfiles
           ).map((profile) => (
               <div
                 className="bg-white overflow-hidden shadow rounded-lg hover:cursor-pointer"

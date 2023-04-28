@@ -8,15 +8,15 @@ import Nav from './Nav.js';
 import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
 import ChefProtected from './features/auth/chefProtected.js';
-import ProfileForm from './features/chef-profile/ChefProfileForm.js';
-import ChefProfilePage from './features/chef-profile/ChefProfilePage.js'
-import UpdateProfileForm from './features/chef-profile/UpdateProfile.js';
-import GetAllChefMenuList from './features/menu-items/chefMenuList.js';
-import CreateMenuItemForm from './features/menu-items/createMenuItemForm.js';
-import UpdateMenuItemForm from './features/menu-items/chefUpdateMenuItem.js';
+import ProfileForm from './components/chef-profile/ChefProfileForm.js';
+import ChefProfilePage from './components/chef-profile/ChefProfilePage.js'
+import UpdateProfileForm from './components/chef-profile/UpdateProfile.js';
+import GetAllChefMenuList from './components/menu-items/chefMenuList.js';
+import CreateMenuItemForm from './components/menu-items/createMenuItemForm.js';
+import UpdateMenuItemForm from './components/menu-items/chefUpdateMenuItem.js';
 import ShoppingCartList from './components/shopping-cart/ShoppingCartList.js';
 import AboutUs from './AboutUs.js';
-import ChefOrderList from './ChefOrderList.js';
+import ChefOrderList from './components/orders/ChefOrderList.js';
 import CustomerOrderList from './components/orders/CustomerOrderList.js';
 import ShoppingCartProvider from './features/shopping-cart/shoppingCartContext.js';
 import ChefStore from './components/chef/ChefStore.js';
@@ -46,17 +46,17 @@ function App() {
               <Route path="chef/:fullName/:userId/:profileId" element={<ChefStore />} />
               <Route element={<ChefProtected token={data} />}>
                 <Route path="chef">
-                  <Route path="menu-items" element={<GetAllChefMenuList />} />
-                  <Route path="menu-items/new" element={<CreateMenuItemForm/>}/>
-                  <Route path="menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
+                  <Route path=":profileId/menu-items" element={<GetAllChefMenuList />} />
+                  <Route path=":profileId/menu-items/new" element={<CreateMenuItemForm/>}/>
+                  <Route path=":profileId/menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
                   <Route path="profile/create" element={<ProfileForm />} />
                   <Route path="profile/:profileId" element={<ChefProfilePage/>} />
                   <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
-                  <Route path="orders" element={<ChefOrderList />} />
+                  <Route path=":profileId/orders" element={<ChefOrderList />} />
                 </Route>
               </Route>
             </Route>
-            <Route path="" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="login" element={<LoginForm accountInfo={data} />} />
             <Route path="signup" element={<SignupForm accountInfo={data} />} />
           </Routes>
