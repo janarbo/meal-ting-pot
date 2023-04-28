@@ -77,14 +77,11 @@ function ChefOrderList() {
 
 
     const filteredOrders = orders.filter(order => order.chef_id === parseInt(chefId));
-    console.log(chefId)
-    console.log(filteredOrders)
 
     let filteredStatusOrders = filteredOrders;
       if (filterStatus !== null) {
           filteredStatusOrders = filteredOrders.filter(order => order.status === filterStatus);
       }
-    console.log(filteredStatusOrders)
 
 
   return (
