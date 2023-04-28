@@ -7,6 +7,7 @@ import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shop
 import { useCreateCartItemMutation } from "../../features/shopping-cart/shoppingCartApi";
 // Order API
 import { useCreateOrderMutation } from "../../features/orders/orderApi";
+import Footer from "../../Footer"
 
 function ShoppingCartList() {
     const navigate = useNavigate();
@@ -92,6 +93,9 @@ function ShoppingCartList() {
                     <h4 className="italic pb-4">Your cart is empty</h4>
                     )}
                 </div>
+            <div>
+                <Footer />
+            </div>
             </div>
     )
 }

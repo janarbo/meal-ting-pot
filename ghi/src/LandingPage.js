@@ -2,6 +2,7 @@ import React from "react";
 import landing2 from './images/styling/landing2.jpg'
 import { useNavigate } from "react-router-dom";
 
+
 const LandingPage = () => {
   const backgroundImage = `url(${landing2})`
   const h1Style = {

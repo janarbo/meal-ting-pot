@@ -1,9 +1,9 @@
-import { useGetAllChefQuery, useUpdateMenuItemMutation  } from './menuItemApi'
+import { useGetAllChefQuery, useUpdateMenuItemMutation  } from '../../features/menu-items/menuItemApi'
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
-
+import SideBar from '../../SideBar';
+import Footer from "../../Footer"
 
 
 function GetAllChefMenuList() {
@@ -50,6 +50,9 @@ function GetAllChefMenuList() {
     }
     return (
 <div>
+<div>
+    <SideBar/>
+</div>
     <h1>Your Menu Items</h1>
     <button className="btn btn-success" onClick={()=>createMenuItemClicked()}>Add a New Menu Item</button>
     <div className="row">
@@ -92,6 +95,9 @@ function GetAllChefMenuList() {
                 )}
             </table>
         </div>
+    </div>
+    <div>
+    <Footer />
     </div>
 </div>
     )};
