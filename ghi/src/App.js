@@ -8,6 +8,7 @@ import Nav from './Nav.js';
 import { useGetTokenQuery } from './features/auth/authAPI.js';
 import Protected from './features/auth/protected.js';
 import ChefProtected from './features/auth/chefProtected.js';
+import ProtectChefFromChef from './features/auth/protectChefFromChef.js';
 import ProfileForm from './components/chef-profile/ChefProfileForm.js';
 import ChefProfilePage from './components/chef-profile/ChefProfilePage.js'
 import UpdateProfileForm from './components/chef-profile/UpdateProfile.js';
@@ -46,13 +47,15 @@ function App() {
               <Route path="chef/:fullName/:userId/:profileId" element={<ChefStore />} />
               <Route element={<ChefProtected token={data} />}>
                 <Route path="chef">
-                  <Route path=":profileId/menu-items" element={<GetAllChefMenuList />} />
-                  <Route path=":profileId/menu-items/new" element={<CreateMenuItemForm/>}/>
-                  <Route path=":profileId/menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
                   <Route path="profile/create" element={<ProfileForm />} />
-                  <Route path="profile/:profileId" element={<ChefProfilePage/>} />
-                  <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
-                  <Route path="orders" element={<ChefOrderList />} />
+                  <Route element={<ProtectChefFromChef token={data}/>}>
+                    <Route path=":profileId/menu-items" element={<GetAllChefMenuList />} />
+                    <Route path=":profileId/menu-items/new" element={<CreateMenuItemForm/>}/>
+                    <Route path=":profileId/menu-items/edit/:menuItemId" element={<UpdateMenuItemForm/>}/>
+                    <Route path="profile/:profileId" element={<ChefProfilePage/>} />
+                    <Route path="profile/:profileId/edit" element={<UpdateProfileForm />} />
+                    <Route path=":profileId/orders" element={<ChefOrderList />} />
+                  </Route>
                 </Route>
               </Route>
             </Route>
