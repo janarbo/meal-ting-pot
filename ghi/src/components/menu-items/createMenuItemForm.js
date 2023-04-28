@@ -88,16 +88,26 @@ const CreateMenuItemForm=()=>{
 
     return(
         <section>
-            <div>
+            <div style={{ display: "flex" }}>
                 <SideBar/>
-            </div>
+
+
+            <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
+            <div className="m-6">
             <h2>Create a New Menu Item</h2>
+            </div>
+            <div className="m-6">
             <form>
-                <label htmlFor="food_type">Food Type:</label>
+                <div className="mb-6">
+                <label
+                htmlFor="food_type"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Food Type:</label>
                 <select
                     type="text"
                     id="food_type"
                     name="food_type"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     value={formData.food_type}
                     onChange={handleFormChange}
                 >
@@ -108,28 +118,78 @@ const CreateMenuItemForm=()=>{
                     )
                 })}
                 </select>
-                <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name= "name" value={formData.name} onChange={handleFormChange}/>
-                <label htmlFor="price">Price:</label>
-                <input type="int" id="price" name= "price" value={formData.price} onChange={handleFormChange}/>
-                <label htmlFor="description">Description:</label>
+                </div>
+                <div className="mb-6">
+                <label htmlFor="name"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Name:</label>
+                <input
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                type="text"
+                id="name"
+                name= "name"
+                value={formData.name}
+                onChange={handleFormChange}/>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="price"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Price:</label>
+                <input
+                type="int"
+                id="price"
+                name= "price"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                value={formData.price}
+                onChange={handleFormChange}/>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="description"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Description:</label>
                 <textarea
                     id="description"
                     name="description"
                     value={formData.description}
                     onChange={handleFormChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 />
-                <label htmlFor="comment">Comment:</label>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="comment"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Comment:</label>
                 <textarea
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     id="comment"
                     name="comment"
                     value={formData.comment}
                     onChange={handleFormChange}
                 />
-                <label htmlFor="photo">photo:</label>
-                <input type="text" name= "photo" id="photo" value={formData.photo} onChange={handleFormChange}/>
-                <label htmlFor="spicy_level">Spicy Level:</label>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="photo"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Photo Link:</label>
+                <input
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                type="text"
+                name= "photo"
+                id="photo"
+                value={formData.photo}
+                onChange={handleFormChange}/>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="spicy_level"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Spicy Level:</label>
                 <select
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     type="int"
                     id="spicy_level"
                     name="spicy_level"
@@ -143,18 +203,56 @@ const CreateMenuItemForm=()=>{
                     )
                 })}
                 </select>
-                <label htmlFor="tags">Tags:</label>
-                <input type="text" name="tags" id="tags" value={formData.tags} onChange={handleFormChange}/>
-                <label htmlFor="calories">calories:</label>
-                <input type="int" name="calories" id="calories" value={formData.calories} onChange={handleFormChange}/>
-                <label htmlFor="ingredients">Ingredients:</label>
-                <input type="text" name="ingredients" id="ingredients" value={formData.ingredients} onChange={handleFormChange}/>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="tags"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Tags:</label>
+                <input
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                type="text"
+                name="tags"
+                id="tags"
+                value={formData.tags}
+                onChange={handleFormChange}/>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="calories"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Calories:</label>
+                <input
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                type="int"
+                name="calories"
+                id="calories"
+                value={formData.calories}
+                onChange={handleFormChange}/>
+                </div>
+                <div className="mb-6">
+                <label
+                htmlFor="ingredients"
+                className="text-sm font-medium text-gray-900 block mb-2"
+                >Ingredients:</label>
+                <input
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                type="text"
+                name="ingredients"
+                id="ingredients"
+                value={formData.ingredients}
+                onChange={handleFormChange}/>
+                </div>
                 <button
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                     type="button"
                     onClick={onSubmit}
                     disabled={!canSubmit}
                 >Share the Noms!</button>
             </form>
+            </div>
+            </div>
+            </div>
             <div>
                 <Footer/>
             </div>

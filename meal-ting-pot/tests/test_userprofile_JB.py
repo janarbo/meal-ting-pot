@@ -7,6 +7,7 @@ from typing import List
 
 client = TestClient(app)
 
+
 def get_current_account_data_test():
     return {
         "first_name": "string",
@@ -16,6 +17,7 @@ def get_current_account_data_test():
         "email": "janar@email.com",
         "is_chef": True,
     }
+
 
 class EmptyProfileQueries:
     def get_all(self) -> List[UserProfileDetailOut]:
@@ -54,5 +56,5 @@ def test_get_all():
             "availability": True,
             "tags": "1",
             "featured_menu_item": "2",
-            }
-        ]
+        }
+    ]
