@@ -50,9 +50,9 @@ function GetAllChefMenuList() {
     }
     return (
 <div>
-<div>
+    <div style={{ display: "flex" }}>
     <SideBar/>
-</div>
+    <div>
     <h1>Your Menu Items</h1>
     <button className="btn btn-success" onClick={()=>createMenuItemClicked()}>Add a New Menu Item</button>
     <div className="row">
@@ -94,7 +94,9 @@ function GetAllChefMenuList() {
                     </tbody>
                 )}
             </table>
+            </div>
         </div>
+    </div>
     </div>
     <div>
     <Footer />
