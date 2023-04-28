@@ -15,38 +15,44 @@ class UserProfileIn(BaseModel):
     address: str
     bio: str
     availability: bool
-    tags: Optional[int]
-    featured_menu_item: Optional[int]
-
-class UserProfileDetailOut(BaseModel):
-    profile_id : int
-    user_id: int
-    full_name: str
-    address: str
-    availability: bool
-    tags: str
+    tags: Optional[str]
     featured_menu_item: Optional[str]
 
+
+class UserProfileAvailabilityIn(BaseModel):
+    availability: bool
+
+
+class UserProfileDetailOut(BaseModel):
+    profile_id: int
+    user_id: int
+    full_name: str
+    photo: str
+    address: str
+    availability: bool
+    tags: Optional[str]
+    featured_menu_item: Optional[str]
+
+
 class UserProfileOut(BaseModel):
-    profile_id : int
+    profile_id: int
     user_id: int
     full_name: str
     email: str
-    photo : str
+    photo: str
     phone_number: int
     address: str
     bio: str
     availability: bool
-    tags: Optional[int]
-    featured_menu_item: Optional[int]
-    social_media: List[str]
-
-
-
+    tags: Optional[str]
+    featured_menu_item: Optional[str]
+    social_media: Optional[List[str]]
 
 
 class UserProfileRepository:
-    def update(self, profile_id: int, user_profile: UserProfileIn, account_data: dict) ->  Union[UserProfileOut, Error]:
+    def update(
+        self, profile_id: int, user_profile: UserProfileIn, account_data: dict
+    ) -> Union[UserProfileOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -74,10 +80,55 @@ class UserProfileRepository:
                             user_profile.availability,
                             user_profile.tags,
                             user_profile.featured_menu_item,
-                            profile_id
+                            profile_id,
                         ],
                     )
-                return self.user_profile_in_to_out(profile_id, user_profile, account_data["id"])
+                return self.user_profile_in_to_out(
+                    profile_id, user_profile, account_data["id"]
+                )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update the user profile"}
+
+    def update_availability(
+        self,
+        profile_id: int,
+        user_profile: UserProfileAvailabilityIn,
+        account_data: dict,
+    ) -> Union[UserProfileOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        UPDATE user_profiles
+                        SET availability = %s
+                        WHERE profile_id = %s
+                        RETURNING
+                            full_name, email, photo, phone_number, address, bio, tags, featured_menu_item
+                        """,
+                        [
+                            user_profile.availability,
+                            profile_id,
+                        ],
+                    )
+                    row = result.fetchone()
+                    dict = {
+                        "full_name": row[0],
+                        "email": row[1],
+                        "photo": row[2],
+                        "phone_number": row[3],
+                        "address": row[4],
+                        "bio": row[5],
+                        "tags": row[6],
+                        "featured_menu_item": row[7],
+                        "availability": user_profile.availability,
+                    }
+                    return UserProfileOut(
+                        profile_id=profile_id,
+                        user_id=account_data["id"],
+                        **dict,
+                    )
         except Exception as e:
             print(e)
             return {"message": "Could not update the user profile"}
@@ -92,6 +143,7 @@ class UserProfileRepository:
                         up.profile_id,
                         up.user_id,
                         up.full_name,
+                        up.photo,
                         up.address,
                         up.availability,
                         t.name AS tag_name,
@@ -100,7 +152,6 @@ class UserProfileRepository:
                         user_profiles up
                         LEFT JOIN tags t ON up.tags = t.id
                         LEFT JOIN menu_items mi ON up.featured_menu_item = mi.menu_item_id
-                        WHERE up.availability = true AND mi.photo is not null
                         """,
                     )
                     results = db.fetchall()
@@ -112,10 +163,11 @@ class UserProfileRepository:
                             profile_id=record[0],
                             user_id=record[1],
                             full_name=record[2],
-                            address=record[3],
-                            availability=record[4],
-                            tags=record[5],
-                            featured_menu_item=record[6]
+                            photo=record[3],
+                            address=record[4],
+                            availability=record[5],
+                            tags=record[6],
+                            featured_menu_item=record[7],
                         )
                         result.append(user_profile)
                     return result
@@ -123,45 +175,64 @@ class UserProfileRepository:
             print(e)
             return {"message": "Could not get the user profile"}
 
-
     def get_one(self, profile_id: int) -> Optional[UserProfileOut]:
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor() as db:
-                        result = db.execute(
-                            """
-                            SELECT up.* as user_profiles, ARRAY_AGG(s.url) as social_media
-                            FROM users as u
-                            LEFT OUTER JOIN user_profiles up
-                                on (u.id=up.user_id)
-                            LEFT OUTER JOIN social_media s
-                                on (up.profile_id=s.user_profile_id)
-                            WHERE u.id = %s
-                            GROUP BY up.profile_id
-                            ORDER BY up.profile_id;
-
-                            """,
-                            [profile_id],
-                        )
-                        records = result.fetchall()
-                        if not records:
-                            return None
-                        return self.user_profile_to_out(records[0])
-            except Exception as e:
-                print(e)
-                return {"message": "Could not get the user profile"}
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                        up.profile_id,
+                        up.user_id,
+                        up.full_name,
+                        up.email,
+                        up.photo,
+                        up.phone_number,
+                        up.address,
+                        up.bio,
+                        up.availability,
+                        t.name AS tag_name,
+                        m.name AS menu_item_name,
+                        ARRAY_AGG(s.url) AS social_media
+                        FROM user_profiles AS up
+                        LEFT JOIN social_media AS s ON up.profile_id = s.user_profile_id
+                        LEFT JOIN tags AS t ON up.tags = t.id
+                        LEFT JOIN menu_items AS m ON up.featured_menu_item = m.menu_item_id
+                        WHERE up.profile_id = %s
+                        GROUP BY up.profile_id, t.name, m.name;
+                        """,
+                        [profile_id],
+                    )
+                    records = result.fetchall()
+                    if not records:
+                        return None
+                    profile = self.user_profile_to_out(records[0])
+                    if not profile.social_media:
+                        profile.social_media = None
+                    return profile
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get the user profile"}
 
     def create(
-            self, user_profile: UserProfileIn, account_data: dict
-
-        ) -> Union[UserProfileOut, Error]:
+        self, user_profile: UserProfileIn, account_data: dict
+    ) -> Union[UserProfileOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         INSERT INTO user_profiles
-                            (user_id, full_name, email, photo, phone_number, address, bio, availability, tags, featured_menu_item)
+                            (user_id,
+                            full_name,
+                            email,
+                            photo,
+                            phone_number,
+                            address,
+                            bio,
+                            availability,
+                            tags,
+                            featured_menu_item)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING profile_id;
@@ -197,10 +268,12 @@ class UserProfileRepository:
             profile_id=profile_id,
             user_id=user_id,
             **old_data,
-            social_media=[],
         )
 
     def user_profile_to_out(self, record) -> UserProfileOut:
+        social_media = record[11]
+        if None in social_media:
+            social_media = []
         return UserProfileOut(
             profile_id=record[0],
             user_id=record[1],
@@ -213,5 +286,5 @@ class UserProfileRepository:
             availability=record[8],
             tags=record[9],
             featured_menu_item=record[10],
-            social_media=record[11]
+            social_media=social_media,
         )
