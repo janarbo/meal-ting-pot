@@ -7,6 +7,7 @@ import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shop
 import { useCreateCartItemMutation } from "../../features/shopping-cart/shoppingCartApi";
 // Order API
 import { useCreateOrderMutation } from "../../features/orders/orderApi";
+import Footer from "../../Footer"
 
 function ShoppingCartList() {
     const navigate = useNavigate();
@@ -75,7 +76,6 @@ function ShoppingCartList() {
                     <div className="flex flex-wrap">
                         <h3 className="mt-3 mb-4 font-normal">Shopping Cart</h3>
                         {shoppingCart.items.length > 0 && (
-<<<<<<< HEAD
                         <div className="flex-grow-1 flex justify-end items-center">
                             <h3 className="mt-2 mb-4 font-normal">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
                             <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:bg-gray-100 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
@@ -83,15 +83,6 @@ function ShoppingCartList() {
                             </button>
                         </div>
                     )}
-=======
-                            <div className="flex-grow-1 flex justify-end items-center">
-                                <h3 className="mt-2 mb-4 font-normal">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                                <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:bg-green-200 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
-                                {isSubmitting ? 'Submitting...' : 'Submit Order'}
-                                </button>
-                            </div>
-                        )}
->>>>>>> main
                     </div>
                     <hr className="mt-0 mb-3"></hr>
                     {shoppingCart.items.length > 0 ? (
@@ -102,6 +93,9 @@ function ShoppingCartList() {
                     <h4 className="italic pb-4">Your cart is empty</h4>
                     )}
                 </div>
+            <div>
+                <Footer />
+            </div>
             </div>
     )
 }
