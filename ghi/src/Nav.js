@@ -1,68 +1,70 @@
-<<<<<<< HEAD
-import { NavLink } from 'react-router-dom'
-import React from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLogoutMutation } from "./features/auth/authAPI";
-import { useNavigate } from "react-router-dom";
-
-function Nav() {
-    const navigate = useNavigate();
-    const [logout, setLogout] = useLogoutMutation();
-
-    function handleLogout() {
-        navigate('')
-    }
-
-    return (
-        <button onClick={async () => {
-            await logout();
-            handleLogout();
-        }}>
-            Logout
-        </button>
-=======
 import React, { useContext } from "react";
 import { useLogoutMutation } from "./features/auth/authAPI";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Navbar } from 'react-bootstrap';
 import { ShoppingCartContext } from "./features/shopping-cart/shoppingCartContext";
+import { useGetAllChefProfilesQuery } from "./features/chef-profile/chefProfileApi";
 
+
+function ChefProfile({ userId }) {
+  const [profileId, setProfileId] = useState(null);
+  const { data, isLoading } = useGetAllChefProfilesQuery();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && data) {
+      for (let profile of data) {
+        if (userId === profile.user_id) {
+          setProfileId(profile.profile_id);
+          break;
+        }
+      }
+    }
+  }, [isLoading, data, userId]);
+
+  if (profileId) {
+    return (
+      <button className="text-2xl hover:underline font-medium" onClick={() => navigate(`/chef/profile/${profileId}`)}>Profile</button>
+    );
+  } else {
+    return (
+      <button className="text-2xl hover:underline font-medium" onClick={() => navigate(`/chef/profile/create`)}>Create a Profile</button>
+    );
+  }
+}
 
 function Nav({ accountInfo }) {
-    const navigate = useNavigate();
+  const userId = accountInfo && parseInt(accountInfo.account.id);
 
-    const [logout] = useLogoutMutation();
-    const handleLogout = async (e) => {
-        e.preventDefault();
-        await logout();
-        navigate("/");
-    }
+  const shoppingCart = useContext(ShoppingCartContext);
+  const productsCount = shoppingCart.items.reduce((sum, product) => sum + product.quantity, 0);
 
-    const handleCart = async (e) => {
-        navigate("/cart");
-    }
+  const navigate = useNavigate();
+  const [logout] = useLogoutMutation();
 
-    const handleHome = async (e) => {
-        navigate("/home");
-    }
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    await logout();
+    navigate("/");
+  }
 
-    const handleAboutUs = async (e) => {
-        navigate("/about")
-    }
+  const handleCart = async (e) => {
+    navigate("/cart");
+  }
 
-    const handleOrders = async (e) => {
-        navigate("/orders");
-    }
+  const handleHome = async (e) => {
+    navigate("/home");
+  }
 
-    const handleProfile = async (e) => {
-        navigate("/chef/profile/create");
-    }
+  const handleAboutUs = async (e) => {
+    navigate("/about")
+  }
 
-    const shoppingCart = useContext(ShoppingCartContext);
-    const productsCount = shoppingCart.items.reduce((sum, product) => sum + product.quantity, 0);
+  const handleOrders = async (e) => {
+    navigate("/orders");
+  }
 
     return (
         <>
@@ -90,7 +92,6 @@ function Nav({ accountInfo }) {
                 </>
             }
         </ >
->>>>>>> main
     );
   }
 

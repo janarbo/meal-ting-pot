@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 >>>>>>> main
 
+
 const LoginForm = ({ accountInfo }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -40,14 +41,11 @@ const LoginForm = ({ accountInfo }) => {
 
   useEffect(() => {
     if (accountInfo) {
-      if (accountInfo.account.is_chef) {
-        navigate('/chef/menu-items/')
-      } else {
-        navigate('/home');
-      }
+      navigate('/home');
     }
   }, [accountInfo, navigate])
 >>>>>>> main
+
 
   return (
     <div className="container">

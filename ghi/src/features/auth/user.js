@@ -19,9 +19,13 @@ export const userSlice = createSlice({
             state.userInfo = payload.account;
             state.userToken = payload.access_token;
         },
+        logoutUser: (state) => {
+            state.userInfo = {};
+            state.userToken = null;
+        },
     },
 >>>>>>> main
 });
 
 export default userSlice.reducer;
-export const { setUser } = userSlice.actions;
+export const { setUser, logoutUser } = userSlice.actions;

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { setUser } from "./user.js";
+import { setUser, logoutUser } from "./user.js";
 
 <<<<<<< HEAD
 export const authApi = createApi({
@@ -42,9 +42,14 @@ export const authApi = createApi({
             return headers
         },
     }),
+
     endpoints: (builder) => ({
         signup: builder.mutation({
+<<<<<<< HEAD
             query: info => {
+>>>>>>> main
+=======
+            query: (info) => {
 >>>>>>> main
                 let dictionary = {};
                 if (info instanceof HTMLElement) {
@@ -68,7 +73,9 @@ export const authApi = createApi({
             },
             invalidatesTags: ['token'],
         }),
+
         login: builder.mutation({
+<<<<<<< HEAD
 <<<<<<< HEAD
             query: info => {
                 let formData = null;
@@ -97,6 +104,9 @@ export const authApi = createApi({
             }
 =======
         query: info => {
+=======
+        query: (info) => {
+>>>>>>> main
             let formData = null;
             if (info instanceof HTMLElement) {
                 formData = new FormData(info);
@@ -123,6 +133,7 @@ export const authApi = createApi({
         },
 >>>>>>> main
         }),
+
         getToken: builder.query({
             query: () => ({
                 url: '/token',
@@ -155,6 +166,7 @@ export const authApi = createApi({
             },
 >>>>>>> main
         }),
+
         logout: builder.mutation({
             query: () => ({
                 url: '/token',
@@ -164,6 +176,17 @@ export const authApi = createApi({
             invalidatesTags: ['token']
 =======
             invalidatesTags: ['token'],
+<<<<<<< HEAD
+>>>>>>> main
+=======
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(logoutUser());
+                } catch (error) {
+                    console.error(error);
+                }
+            },
 >>>>>>> main
         }),
     }),

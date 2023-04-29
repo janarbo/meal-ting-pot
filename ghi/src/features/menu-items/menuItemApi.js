@@ -3,7 +3,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const menuItemApi = createApi({
     reducerPath: 'menuItem',
     baseQuery: fetchBaseQuery({
-<<<<<<< HEAD
         baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
         credentials: "include"
     }),
@@ -22,7 +21,6 @@ export const menuItemApi = createApi({
         })
     })
 })
-=======
     baseUrl: process.env.REACT_APP_MEAL_TING_POT_API_HOST,
     credentials: "include"
     }),
@@ -34,21 +32,20 @@ export const menuItemApi = createApi({
         method: 'GET',
         params: {
             chef_id: chefId
-        },
-        providesTags:['MenuItems']
-    }),
+        }
+    })
     }),
     getAllChef: builder.query({
         query: (chefId) => ({
         url: `/chef/${chefId}/menu_items`,
+        }),
         providesTags: ['MenuItems']
-    })
     }),
     getOneMenuItem: builder.query({
         query: (menuItemId) => ({
         url: `/menu-items/${menuItemId}`,
+    }),
         providesTags: ['MenuItems']
-    })
     }),
 
     createMenuItem: builder.mutation({
@@ -78,7 +75,6 @@ export const menuItemApi = createApi({
     })
 })
 });
->>>>>>> main
 
 export const {
     useGetAllCustomerQuery,
@@ -89,6 +85,10 @@ export const {
 =======
     useDeleteMenuItemMutation,
     useCreateMenuItemMutation,
+<<<<<<< HEAD
     useUpdateMenuItemMutation
+>>>>>>> main
+=======
+    useUpdateMenuItemMutation,
 >>>>>>> main
 } = menuItemApi;

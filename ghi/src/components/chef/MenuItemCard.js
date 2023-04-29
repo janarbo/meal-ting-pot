@@ -1,14 +1,9 @@
-import { ShoppingCartContext } from '../../features/shopping-cart/shoppingCartContext';
-import { useContext } from 'react';
-
 function MenuItemCard(props) {
     const product = props.product;
-    const shoppingCart = useContext(ShoppingCartContext);
-    const productQuantity = shoppingCart.getProductQuantity(product.menu_item_id);
 
     return (
         <div onClick={props.onClick} className="hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
-            <img alt={product.photo}className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
+            <img alt={product.photo} className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
             <div className="px-6 py-4">
                 <div className="font-semibold text-xl mb-2 capitalize">{product.name}</div>
                 <p className="text-gray-700 text-base mb-0">

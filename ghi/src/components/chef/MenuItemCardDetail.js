@@ -1,6 +1,7 @@
 import { ShoppingCartContext } from '../../features/shopping-cart/shoppingCartContext';
 import { useContext } from 'react';
 
+
 function MenuItemCardDetail(props) {
     const product = props.product;
     const shoppingCart = useContext(ShoppingCartContext);
