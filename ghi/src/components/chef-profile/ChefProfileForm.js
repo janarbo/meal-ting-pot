@@ -37,7 +37,9 @@ function ProfileForm(){
 
       if (response.data) {
         const newProfileId = response.data.profile_id;
-        navigate(`/chef/${newProfileId}/menu-items/new`);
+        setTimeout(() => {
+          navigate(`/chef/${newProfileId}/menu-items/new/`);
+        }, 200);
       }
 
       } catch (error) {
