@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux"
 import { useGetAllOrdersQuery, useUpdateOrderMutation } from "../../features/orders/orderApi"
 import React, { useState } from "react";
-
+import Footer from "../../Footer"
+import SideBar from '../../SideBar';
 function ChefOrderList() {
     const chefId = useSelector((state) => state.auth.userInfo.id);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -50,8 +51,7 @@ function ChefOrderList() {
                           status: value,
                           shopping_cart: items
                       }
-                      const result = await updateOrder(updatedOrder).unwrap();
-                      console.log(result);
+                      await updateOrder(updatedOrder).unwrap();
 
               } catch (error) {
                   console.log(error);
@@ -74,19 +74,32 @@ function ChefOrderList() {
         setShowAllOrders(false);
     }
 };
-    let filteredOrders = orders;
+
+
+    const filteredOrders = orders.filter(order => order.chef_id === parseInt(chefId));
+
+    let filteredStatusOrders = filteredOrders;
       if (filterStatus !== null) {
-          filteredOrders = orders.filter(order => order.status === filterStatus);
+          filteredStatusOrders = filteredOrders.filter(order => order.status === filterStatus);
       }
 
+
   return (
+
           <div>
+          <div>
+          <SideBar/>
+          </div>
             <h1>Your Order List</h1>
             <div>
                 <button
                   className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
                   onClick={() => handleFilterButtonClick(null)}
                 > All Orders</button>
+                <button
+                  className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
+                  onClick={() => handleFilterButtonClick(1)}
+                > Needs Confirmation</button>
                 <button
                   className={`btn btn-primary ${filterStatus === 3  ? "active" : ""}`}
                   onClick={() => handleFilterButtonClick(3)}
@@ -112,7 +125,7 @@ function ChefOrderList() {
                   </thead>
                   {orders ? (
                     <tbody>
-                      {filteredOrders
+                      {filteredStatusOrders
                         .filter((order) => getStatus(order.status) !== "DECLINED")
                         .sort((a, b) => {
                           if (a.status !== b.status) {
@@ -202,6 +215,9 @@ function ChefOrderList() {
                 </table>
               </div>
             </div>
+          <div>
+              <Footer />
+          </div>
           </div>
 );
 }
