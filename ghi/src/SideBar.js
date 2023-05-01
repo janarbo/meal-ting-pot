@@ -77,7 +77,7 @@
             <ul className="list-inside">
                 <li>
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleHomeClick}
                     >
                         Home
@@ -85,7 +85,7 @@
                 </li>
                 <li>
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleProfileClick}
                     >
                         My Profile
@@ -94,7 +94,7 @@
                 <li>
                     {!data && (
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleCreateProfileClick}
                     >
                         Create Profile
@@ -103,7 +103,7 @@
                 </li>
                 <li>
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleMenuClick}
                     >
                         My Menu
@@ -111,7 +111,7 @@
                 </li>
                 <li>
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleOrdersClick}
                     >
                         See My Orders
@@ -121,7 +121,7 @@
                 {data.featured_menu_item && (
                 <li>
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleAvailabilityClick}
                     >
                         {data.availability ? (
@@ -133,7 +133,7 @@
                 )}
                     <li>
                     <button
-                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2"
+                        className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full mb-2 w-full"
                         onClick={handleLogoutClick}
                     >
                         Logout
@@ -141,7 +141,7 @@
                     </li>
                     <li>
                         <button
-                            className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full"
+                            className="bg-[#b05e5e] bg-opacity-80 hover:bg-[#b05e5e] opacity-100 text-black font-bold py-2 px-4 rounded-full w-full"
                             onClick={handleSupportClick}
                         >
                             Support Center
