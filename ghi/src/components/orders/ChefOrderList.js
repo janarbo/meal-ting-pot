@@ -23,7 +23,7 @@ function ChefOrderList() {
         case 2:
             return "CONFIRMED";
         case 3:
-            return "READY_FOR_PICKUP";
+            return "READY FOR PICKUP";
         case 4:
             return "COMPLETED";
         case 5:
