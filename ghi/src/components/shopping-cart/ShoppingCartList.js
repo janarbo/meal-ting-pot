@@ -74,7 +74,7 @@ function ShoppingCartList() {
         <div className="min-h-screen pt-4 font-sans">
             <div className="pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
                 <div className="flex justify-between items-center">
-                    <h3 className="text-2xl">Shopping Cart</h3>
+                    <h3 className="text-3xl">Shopping Cart</h3>
                     {shoppingCart.items.length > 0 && (
                     <div className="flex items-center">
                         <h3 className="mt-4 mb-4 text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
@@ -90,7 +90,7 @@ function ShoppingCartList() {
                     <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
                 ))
                 ) : (
-                <h4 className="italic pb-4">Your cart is empty</h4>
+                <h4 className="italic pb-4 text-xl">Your cart is empty</h4>
                 )}
             </div>
         </div>
