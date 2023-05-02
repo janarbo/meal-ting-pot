@@ -93,7 +93,7 @@ const CustomerOrderList = () => {
                         </thead>
                         <tbody>
                             {order.shopping_cart.map((item) => (
-                            <tr className="hover font-bold" key={item.name}>
+                            <tr className="hover" key={item.name}>
                                 <td className="text-center">
                                 <img
                                     src={item.photo}
