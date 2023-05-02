@@ -67,7 +67,7 @@ function MenuItemCardDetail(props) {
                         <button onClick={() => shoppingCart.addOneToCart(product.menu_item_id)} className="bg-[#9db2a3] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">+</button>
                     </>
                 ) :
-                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full"
+                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full mt-3"
                             onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
                 }
             </div>
