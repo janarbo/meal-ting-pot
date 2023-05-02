@@ -8,7 +8,7 @@ function MenuItemCardDetail(props) {
     const productQuantity = shoppingCart.getProductQuantity(product.menu_item_id);
 
     return (
-        <div className="hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="bg-white hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
             <img alt={product.photo} className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
             <div className="px-6 pt-3 pb-3">
                 {/* NAME/DESCRIPTION */}
@@ -17,13 +17,13 @@ function MenuItemCardDetail(props) {
                 {product.description}
                 </p>
                 {/* INGREDIENTS */}
-                <hr className="mb-2"></hr>
+                <hr className="mt-2 mb-2"></hr>
                 <h6 className="text-left font-light text-m mb-1">Ingredients</h6>
                 <p className="text-left text-gray-700 mb-0 text-xs capitalize">
                     {product.ingredients}
                 </p>
                 {/* SPICY/CALORIES/TAGS */}
-                <hr className="mb-2"></hr>
+                <hr className="mt-2 mb-2"></hr>
                 <div className="flex items-center mb-0">
                     <h6 className="text-left font-light text-xs mb-0">Spicy Level:</h6>
                     <p className="text-gray-700 ml-1 mb-0 text-xs capitalize">
@@ -67,7 +67,7 @@ function MenuItemCardDetail(props) {
                         <button onClick={() => shoppingCart.addOneToCart(product.menu_item_id)} className="bg-[#9db2a3] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">+</button>
                     </>
                 ) :
-                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full"
+                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full mt-3"
                             onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo)}>Add to Cart</button>
                 }
             </div>

@@ -217,10 +217,9 @@ function ProfileForm(){
         </form>
 
       </div>
-    <div>
-      <Footer />
+
     </div>
-    </div>
+   
   );
 }
 export default ProfileForm;

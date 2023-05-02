@@ -58,14 +58,14 @@ const MainPage = () => {
                 <button
                   key={tag.id}
                   onClick={() => handleTagClick(tag)}
-                  className="text-gray-800 py-2 px-2 border rounded-full mb-4 hover:bg-gray-100 mr-1"
+                  className="text-white py-2 px-2 border bg-[#829b7a] rounded-full mb-4 hover:opacity-70 mr-1"
                 >
                   {tag.name}
                 </button>
               ))}
           </div>
           <hr className="mt-0 mb-4"></hr>
-          <h2 className="text-xl leading-6 font-normal">Explore Chefs</h2>
+          <h2 className="text-xl leading-6 font-normal mb-2">Explore Chefs</h2>
           <div data-theme="garden" className="p-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
             ? filteredProfiles
