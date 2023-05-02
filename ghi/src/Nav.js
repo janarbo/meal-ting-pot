@@ -81,7 +81,7 @@ function Nav({ accountInfo }) {
                   <li><a onClick={handleLogout}>Logout</a></li>
                 </ul>
               </div>
-              <a onClick={handleHome} className="btn btn-ghost normal-case text-xl">Meal-Ting Pot</a>
+              <a onClick={handleHome} className="btn btn-ghost normal-case text-xl font-sb">Meal-Ting Pot</a>
             </div>
             <div className="flex-none">
               <div className="dropdown dropdown-end mr-5">

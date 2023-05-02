@@ -71,29 +71,29 @@ function ShoppingCartList() {
     };
 
     return (
-            <div data-theme="garden" className="min-h-screen pt-4 font-sans">
-                <div className="bg-white pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
-                    <div className="flex flex-wrap">
-                        <h3 className="mt-3 mb-4 font-normal">Shopping Cart</h3>
-                        {shoppingCart.items.length > 0 && (
-                        <div className="flex-grow-1 flex justify-end items-center">
-                            <h3 className="mt-2 mb-4 font-normal">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                            <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:bg-gray-100 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
-                            {isSubmitting ? 'Submitting...' : 'Submit Order'}
-                            </button>
-                        </div>
-                    )}
+        <div className="min-h-screen pt-4 font-sans">
+            <div className="pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
+                <div className="flex justify-between items-center">
+                    <h3 className="mt-3 text-2xl">Shopping Cart</h3>
+                    {shoppingCart.items.length > 0 && (
+                    <div className="flex items-center">
+                        <h3 className="mt-2 mb-4 text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
+                        <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:opacity-80 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
+                        {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                        </button>
                     </div>
-                    <hr className="mt-0 mb-3"></hr>
-                    {shoppingCart.items.length > 0 ? (
-                    shoppingCart.items.map((product, idx) => (
-                        <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
-                    ))
-                    ) : (
-                    <h4 className="italic pb-4">Your cart is empty</h4>
                     )}
                 </div>
+                <hr className="mt-0 mb-2"></hr>
+                {shoppingCart.items.length > 0 ? (
+                shoppingCart.items.map((product, idx) => (
+                    <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
+                ))
+                ) : (
+                <h4 className="italic pb-4">Your cart is empty</h4>
+                )}
             </div>
+        </div>
     )
 }
 
