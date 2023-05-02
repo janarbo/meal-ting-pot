@@ -54,7 +54,7 @@ const CustomerOrderList = () => {
 
     return (
         <div className="overflow-x-auto">
-            <h2 className="text-2xl font-bold">My Order History</h2>
+            <h1 className="text-2xl">My Order History</h1>
             {filteredOrders.map((order, index) => {
             const totalPrice = order.shopping_cart.reduce(
                 (acc, item) => acc + item.price * item.quantity,
@@ -94,12 +94,16 @@ const CustomerOrderList = () => {
                         <tbody>
                             {order.shopping_cart.map((item) => (
                             <tr className="hover" key={item.name}>
-                                <td className="text-center">
-                                <img
-                                    src={item.photo}
-                                    alt={item.name}
-                                    className="object-contain w-full h-32"
-                                />
+                                <td>
+                                    <div className="avatar">
+                                        <div className="w-24 rounded">
+                                            <img
+                                                src={item.photo}
+                                                alt={item.name}
+                                                className="object-contain w-full h-32"
+                                            />
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>{item.name}</td>
                                 <td>{item.quantity}</td>
