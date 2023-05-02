@@ -17,13 +17,13 @@ function MenuItemCardDetail(props) {
                 {product.description}
                 </p>
                 {/* INGREDIENTS */}
-                <hr className="mb-2"></hr>
+                <hr className="mt-2 mb-2"></hr>
                 <h6 className="text-left font-light text-m mb-1">Ingredients</h6>
                 <p className="text-left text-gray-700 mb-0 text-xs capitalize">
                     {product.ingredients}
                 </p>
                 {/* SPICY/CALORIES/TAGS */}
-                <hr className="mb-2"></hr>
+                <hr className="mt-2 mb-2"></hr>
                 <div className="flex items-center mb-0">
                     <h6 className="text-left font-light text-xs mb-0">Spicy Level:</h6>
                     <p className="text-gray-700 ml-1 mb-0 text-xs capitalize">
