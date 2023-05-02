@@ -74,10 +74,10 @@ function ShoppingCartList() {
         <div className="min-h-screen pt-4 font-sans">
             <div className="pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
                 <div className="flex justify-between items-center">
-                    <h3 className="mt-3 text-2xl">Shopping Cart</h3>
+                    <h3 className="text-2xl">Shopping Cart</h3>
                     {shoppingCart.items.length > 0 && (
                     <div className="flex items-center">
-                        <h3 className="mt-2 mb-4 text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
+                        <h3 className="mt-4 mb-4 text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
                         <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:opacity-80 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
                         {isSubmitting ? 'Submitting...' : 'Submit Order'}
                         </button>

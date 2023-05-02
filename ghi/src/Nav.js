@@ -94,9 +94,9 @@ function Nav({ accountInfo }) {
                 <div data-theme="garden" tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 shadow">
                   <div className="card-body">
                     {productsCount <= 1 ? (
-                      <span className="text-lg">{productsCount} Item</span>
+                      <span className="text-lg">Item: {productsCount}</span>
                     ) : (
-                      <span className="text-lg">{productsCount} Items</span>
+                      <span className="text-lg">Items: {productsCount}</span>
                     )}
                     <span className="text-lg">Total: ${shoppingCart.getTotalCost().toFixed(2)}</span>
                     <div className="card-actions">
