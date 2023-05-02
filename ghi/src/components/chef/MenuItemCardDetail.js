@@ -8,7 +8,7 @@ function MenuItemCardDetail(props) {
     const productQuantity = shoppingCart.getProductQuantity(product.menu_item_id);
 
     return (
-        <div className="hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
+        <div className="bg-white hover:cursor-pointer max-w-sm rounded overflow-hidden shadow-lg">
             <img alt={product.photo} className="w-full h-48 md:h-50 rounded object-cover" src={product.photo}/>
             <div className="px-6 pt-3 pb-3">
                 {/* NAME/DESCRIPTION */}
