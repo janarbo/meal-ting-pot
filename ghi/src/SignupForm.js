@@ -46,7 +46,7 @@ const SignupForm = ({ accountInfo }) => {
 
     return (
      <>
-
+      <div className="min-h-screen ">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -131,6 +131,7 @@ const SignupForm = ({ accountInfo }) => {
             </a>
           </p>
         </div>
+      </div>
       </div>
     </>
 );
