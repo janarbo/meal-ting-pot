@@ -95,6 +95,7 @@ const MainPage = () => {
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "-100px" }}>
         <img
           className="mx-auto"
+          alt={meal}
           src={meal}
           style={{ height: "200px", width: "250px", marginBottom: "-50px" }}
         />

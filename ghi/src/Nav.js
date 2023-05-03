@@ -23,11 +23,11 @@ function ChefProfile({ userId }) {
 
   if (profileId) {
     return (
-      <a onClick={() => navigate(`/chef/profile/${profileId}`)}>Profile</a>
+      <button onClick={() => navigate(`/chef/profile/${profileId}`)}>Profile</button>
     );
   } else {
     return (
-      <a onClick={() => navigate(`/chef/profile/create`)}>Create a Profile</a>
+      <button onClick={() => navigate(`/chef/profile/create`)}>Create a Profile</button>
     );
   }
 }
@@ -74,14 +74,14 @@ function Nav({ accountInfo }) {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                 </label>
                 <ul data-theme="garden" tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52">
-                  <li><a onClick={handleHome}>Home</a></li>
-                  <li><a onClick={handleAboutUs}>About</a></li>
+                  <li><button onClick={handleHome}>Home</button></li>
+                  <li><button onClick={handleAboutUs}>About</button></li>
                   <li>{accountInfo.account.is_chef && <ChefProfile userId={userId} />}</li>
-                  <li><a onClick={handleOrders}>Orders</a></li>
-                  <li><a onClick={handleLogout}>Logout</a></li>
+                  <li><button onClick={handleOrders}>Orders</button></li>
+                  <li><button onClick={handleLogout}>Logout</button></li>
                 </ul>
               </div>
-              <a onClick={handleHome} className="btn btn-ghost normal-case text-xl font-sb">Meal-Ting Pot</a>
+              <button onClick={handleHome} className="btn btn-ghost normal-case text-xl font-sb">Meal-Ting Pot</button>
             </div>
             <div className="flex-none">
               <div className="dropdown dropdown-end mr-5">

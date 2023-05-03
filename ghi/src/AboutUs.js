@@ -6,6 +6,8 @@ import janar from "../src/images/aboutUs/janar_bokeyhan.jpg"
 import Footer from "./Footer"
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import Lottie from "lottie-react";
+import chefIngredients from "./images/styling/chefIngredients.json";
 
 const teamMembers = [
   {
@@ -50,7 +52,10 @@ const teamMembers = [
 const AboutUs = () => {
   return (
     <div className="mockup-window-container mx-auto px-60 pt-10 text-center">
-      <div data-theme="garden" className="mockup-window border border-[#b05e5e] pb-10">
+      <div
+        data-theme="garden"
+        className="mockup-window border border-[#b05e5e] pb-10"
+      >
         <div className="border-t border-[#b05e5e]"></div>
         <h1 className="text-3xl font-bold my-8 text-[#b05e5e] pt-5">
           Meal-Ting-Pot
@@ -82,6 +87,12 @@ const AboutUs = () => {
           simply broaden your palate. Join us in our pledge to explore the
           endless possibilities of food together!
         </p>
+        <div className="flex justify-center">
+          <Lottie
+            animationData={chefIngredients}
+            style={{ width: "300px", height: "300px" }}
+          />
+        </div>
       </div>
       <div>
         <h2 className="text-2xl font-bold my-4 text-[#b05e5e] pt-10">
@@ -91,7 +102,10 @@ const AboutUs = () => {
       <div className="flex justify-center">
         {teamMembers.map((member) => (
           <div key={member.name} className="max-w-md mx-4 my-8">
-            <div data-theme="garden" className="card w-96 shadow-xl pt-10 pl-10 pr-10 pb-5">
+            <div
+              data-theme="garden"
+              className="card w-96 shadow-xl pt-10 pl-10 pr-10 pb-5"
+            >
               <img
                 src={member.image}
                 alt={member.name}

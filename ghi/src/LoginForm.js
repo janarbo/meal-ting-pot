@@ -40,6 +40,7 @@ const LoginForm = ({ accountInfo }) => {
 
           <img
             className="mx-auto"
+            alt={logo}
             src={logo}
             style={{ height: "150px", width: "150px", marginBottom: "20px !important" }}
           />
@@ -97,7 +98,7 @@ const LoginForm = ({ accountInfo }) => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <a href="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a href="/meal-ting-pot/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
              Signup
             </a>
           </p>
