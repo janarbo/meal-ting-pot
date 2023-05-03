@@ -15,8 +15,10 @@ function ShoppingCartList() {
     const [createCartItem] = useCreateCartItemMutation();
     const [createOrder] = useCreateOrderMutation();
 
+    const apiUrl = process.env.API_URL || 'http://localhost:4000';
+
     const checkout = async () => {
-        await fetch('http://localhost:4000/checkout', {
+        await fetch(`${apiUrl}/checkout`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
