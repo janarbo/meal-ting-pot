@@ -228,9 +228,9 @@ const UpdateMenuItemForm = () => {
                 value={formData.ingredients}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                <div className="mb-6 w-full">
                 <button
-                    className="btn btn-accent"
+                    className="btn w-full bg-[#60af71]"
                     type="button"
                     onClick={onSaveMenuItemClicked}
                     disabled={!canSave}

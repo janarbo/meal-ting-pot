@@ -46,7 +46,7 @@ return (
               <th className="border border-green-500 px-4 py-2">Name</th>
               <td className="border border-green-500 px-4 py-2">{profile.full_name}</td>
             </tr>
-            <tr>
+            <tr className="bg-green-200 hover">
               <th className="border border-green-500 px-4 py-2">Email</th>
               <td className="border border-green-500 px-4 py-2">{profile.email}</td>
             </tr>
@@ -56,7 +56,7 @@ return (
                 <img src={profile.photo} alt="Profile" className="h-16 w-16 object-cover rounded-full" />
               </td>
             </tr>
-            <tr>
+            <tr className="bg-green-200 hover">
               <th className="border border-green-500 px-4 py-2">Phone Number</th>
               <td className="border border-green-500 px-4 py-2">{profile.phone_number}</td>
             </tr>
@@ -64,7 +64,7 @@ return (
               <th className="border border-green-500 px-4 py-2">Address</th>
               <td className="border border-green-500 px-4 py-2">{profile.address}</td>
             </tr>
-            <tr>
+            <tr className="bg-green-200 hover">
               <th className="border border-green-500 px-4 py-2">Bio</th>
               <td className="border border-green-500 px-4 py-2" style={{ whiteSpace: 'pre-wrap' }}>{profile.bio}</td>
             </tr>
@@ -76,7 +76,7 @@ return (
                 <td className="border border-green-500 px-4 py-2">Not Available. Please create a menu item first.</td>
               )}
             </tr>
-            <tr >
+            <tr  className="bg-green-200 hover">
               <th className="border border-green-500 px-4 py-2">Tags</th>
               <td className="border border-green-500 px-4 py-2">{profile.tags}</td>
             </tr>
@@ -88,7 +88,7 @@ return (
         </table>
          <button
            onClick={handleClick}
-           className=" w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#49cc90] hover:bg-[#84dab2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" style={{marginTop:"0px", marginBottom:"1000px"}}>
+           className=" w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#a7e18d] hover:bg-[#8cc07b] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" style={{marginTop:"0px", marginBottom:"1000px"}}>
           Update
         </button>
         </div>

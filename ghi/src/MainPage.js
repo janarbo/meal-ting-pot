@@ -107,7 +107,7 @@ const MainPage = () => {
             <button
               key={tag.id}
               onClick={() => handleTagClick(tag)}
-              className="text-white  py-2 px-2 border-none bg-[#829b7a] rounded-full mb-4 hover:opacity-70 w-full"
+              className="text-white  py-2 px-2 border-none bg-[#8cc07b] rounded-full mb-4 hover:opacity-70 w-full"
             >
               {tag.name}
             </button>

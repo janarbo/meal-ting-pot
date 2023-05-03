@@ -255,9 +255,9 @@ const CreateMenuItemForm=()=>{
                 value={formData.ingredients}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                <div className="mb-6 w-full">
                 <button
-                    className="btn btn-accent"
+                    className="btn bg-[#60af71] border-none"
                     type="button"
                     onClick={onSubmit}
                     disabled={!canSubmit}

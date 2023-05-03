@@ -95,18 +95,19 @@ function UpdateProfileForm() {
 
   return (
        <>
+       <div className="min-h-screen ">
        <div style={{ display: "flex", justifyContent: "center", marginBotton:"600px" }}>
-        <div style={{ marginTop: "200px", marginLeft: "10px", flex: 3,  width: "100%"}} className='w=full'>
+        <div style={{ marginTop: "200px", marginLeft: "10px", flex: 7,  width: "100%"}} className='w=full'>
            <SideBar />
          </div>
         <div style={{ flex: 2 }}></div>
 
-        <div  data-theme="garden" className="bg-white flex items-center justify-center h-full" style={{marginRight:"200px", marginBotton:"1000px"}}>
+        <div  data-theme="garden" className="bg-white flex items-center justify-center " style={{marginRight:"200px", marginBotton:"500px"}}>
         <div className="w-1/2 flex flex-col items-center justify-center">
           <div className="w-1/3 flex items-center justify-center"  style={{marginBottom: "-20px"}}>
             <Lottie animationData={chefCooking} />
           </div>
-            <div className="bg-[#ecfaf4] overflow-hidden shadow rounded-lg flex-wrap w-full max-w-lg">
+            <div className="bg-[#edf8f3] overflow-hidden shadow rounded-lg flex-wrap w-full max-w-lg">
               <form
                 onSubmit={handleSubmit}
                 className="divide-y divide-gray-200 lg:col-span-9 w-full max-w-lg p-6"
@@ -274,7 +275,7 @@ function UpdateProfileForm() {
               )}
                   <button
                   type="submit"
-                  className=" w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#49cc90] hover:bg-[#84dab2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  className=" w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#a7e18d] hover:bg-[#84dab2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                   Update</button>
                 </div>
               </div>
@@ -283,6 +284,7 @@ function UpdateProfileForm() {
   </div>
 </div>
    </div>
+  </div>
 
 
 </>
