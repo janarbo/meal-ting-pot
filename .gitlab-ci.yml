@@ -24,6 +24,18 @@ api-unit-test-job:
     - export SIGNING_KEY="abchbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4MDIwNDg3NCwiaWF0IjoxNjgwMjA0ODc0fQ.zP48f3iAahHElKAEOXo56SdBHDZxJORiow9Usnit_cY"
     - python -m pytest
 
+# Build stripe server
+build-stripe-job:
+  stage: build
+  image: node:lts-bullseye
+  variables:
+    PUBLIC_URL: https://bidoof_supremacy.gitlab.io/meal-ting-pot
+    STRIPE_PRIVATE_KEY: "${STRIPE_PRIVATE_KEY}"
+  script:
+    - npm install
+    - npm install pm2 -g
+    - pm2 start server.js --name stripe-server
+
 # Build the React/JavaScript front-end
 build-front-end-job:
   stage: build

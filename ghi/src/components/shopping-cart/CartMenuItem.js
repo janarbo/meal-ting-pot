@@ -61,10 +61,10 @@ function CartMenuItem(props) {
         <>
         <div className="flex">
             <img className="max-h-72 max-w-72 w-40 h-40 rounded" src={photo} alt={photo}></img>
-            <div className="flex flex-col ml-4">
-                <h4 className="font-normal capitalize">{menuItem.name}</h4>
-                <div className="flex items-center">
-                    <p className="mr-1 pt-3">Qty:</p>
+            <div className="flex flex-col ml-4 mt-4">
+                <h4 className="font-normal capitalize text-xl">{menuItem.name}</h4>
+                <div className="flex items-center mt-2">
+                    <p className="mr-1 mt-3 mb-3">Qty:</p>
                     { dropdown && (
                         <select onChange={handleDropdownQtyChange} value={dropdownValue} required id="quantity" name="quantity" className="border border-gray-400 rounded-md py-1 px-4">
                         {optionList.map(i => {
@@ -89,15 +89,15 @@ function CartMenuItem(props) {
                                 value={inputValue}
                                 onChange={(event) => setInputValue(event.target.value)}
                                 required
-                                className="inline-block border border-gray-400 rounded-md py-1 px-4 mr-2 w-24 h-12">
+                                className="inline-block border border-gray-400 rounded-md px-4 mr-2 w-24 h-12">
                             </input>
                             <button onClick={() => handleInputQtyChange(inputValue)} className="text-gray-800 hover:bg-gray-100 py-2 px-3 border rounded">Update</button>
                         </div>
                     )}
-                    <button onClick={() => shoppingCart.deleteFromCart(id)} className="text-gray-800 hover:bg-gray-100 py-2 px-3 border rounded">Delete</button>
+                    <button onClick={() => shoppingCart.deleteFromCart(id)} className="text-gray-800 hover:bg-gray-100 py-2 px-3 ml-2 border rounded">Delete</button>
                 </div>
                 <div>
-                        <p className="mt-2 text-l">Price: ${menuItem.price.toFixed(2)}</p>
+                        <p className="mt-2 mb-3 text-l">Price: ${menuItem.price.toFixed(2)}</p>
                         {quantity > 1 ? (
                             <p className="text-l">Subtotal ({quantity} items): ${(quantity * menuItem.price).toFixed(2)}</p> )
                         : (
@@ -106,7 +106,7 @@ function CartMenuItem(props) {
                 </div>
             </div>
         </div>
-        <hr className="mt-0"></hr>
+        <hr className="mb-2 mt-2"></hr>
         </>
     )
 }

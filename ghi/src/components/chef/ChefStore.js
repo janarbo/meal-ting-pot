@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetAllCustomerQuery } from "../../features/menu-items/menuItemApi";
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { useGetOneChefProfileQuery } from "../../features/chef-profile/chefProfileApi";
 import MenuItemCard from "./MenuItemCard";
 import MenuItemCardDetail from "./MenuItemCardDetail";
@@ -54,7 +54,7 @@ function ChefStore() {
                 <div className="flex mb-4">
                     <img onError={addDefaultSrc} alt={profileData.photo} className="mt-4 max-h-72 max-w-72 w-40 h-40 rounded-full" src={profileData.photo}></img>
                     <div className="flex flex-col">
-                        <h1 align="left" className="p-3 mb-0 font-light">{profileData.full_name}</h1>
+                        <h1 align="left" className="p-3 mb-0 font-light text-3xl">{profileData.full_name}</h1>
                         <p className="ml-4 mb-2 mr-5 font-light">{profileData.bio}</p>
                     </div>
                     <div className="pl-2 pt-2 flex flex-col">
@@ -86,66 +86,72 @@ function ChefStore() {
                     )}
                 </div>
 
-                {filteredMenuData.filter(product => product.food_type === 'main').length > 0 && (
+                {filteredMenuData.filter((product) => product.food_type === 'main').length > 0 && (
                     <>
-                        <div ref={mainRef} className="pb-5">
-                            <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Main Items</h6>
-                            <div data-theme="garden" className="p-4">
-                                <Row xs={1} md={3} className="g-4">
-                                {filteredMenuData.filter(product => product.food_type === 'main').map((product) => (
-                                    <Col align="center" key={product.menu_item_id}>
-                                        {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
-                                            <MenuItemCardDetail product={product} />
-                                        ) : (
-                                            <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
-                                        )}
-                                    </Col>
-                                ))}
-                                </Row>
-                            </div>
+                    <div ref={mainRef} className="pb-5">
+                        <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">
+                        Main Items
+                        </h6>
+                        <div data-theme="garden" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                        {filteredMenuData
+                            .filter((product) => product.food_type === 'main')
+                            .map((product) => (
+                            <Col align="center" key={product.menu_item_id}>
+                                {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
+                                    <MenuItemCardDetail product={product} />
+                                ) : (
+                                    <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
+                                )}
+                            </Col>
+                            ))}
                         </div>
+                    </div>
                     </>
                 )}
 
-                {filteredMenuData.filter(product => product.food_type === 'side').length > 0 && (
+                {filteredMenuData.filter((product) => product.food_type === 'side').length > 0 && (
                     <>
-                        <div ref={sideRef} className="pb-5">
-                            <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Side Items</h6>
-                            <div data-theme="garden" className="p-4">
-                                <Row xs={1} md={3} className="g-4">
-                                {filteredMenuData.filter(product => product.food_type === 'side').map((product) => (
-                                    <Col align="center" key={product.menu_item_id}>
-                                        {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
-                                            <MenuItemCardDetail product={product} />
-                                        ) : (
-                                            <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
-                                        )}
-                                    </Col>
-                                ))}
-                                </Row>
-                            </div>
+                    <div ref={sideRef} className="pb-5">
+                        <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">
+                        Side Items
+                        </h6>
+                        <div data-theme="garden" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                        {filteredMenuData
+                            .filter((product) => product.food_type === 'side')
+                            .map((product) => (
+                            <Col align="center" key={product.menu_item_id}>
+                                {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
+                                    <MenuItemCardDetail product={product} />
+                                ) : (
+                                    <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
+                                )}
+                            </Col>
+                            ))}
                         </div>
+                    </div>
                     </>
                 )}
 
-                {filteredMenuData.filter(product => product.food_type === 'dessert').length > 0 && (
+                {filteredMenuData.filter((product) => product.food_type === 'dessert').length > 0 && (
                     <>
-                        <div ref={dessertRef} className="pb-5">
-                            <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">Dessert Items</h6>
-                            <div data-theme="garden" className="p-4">
-                                <Row xs={1} md={3} className="g-4">
-                                {filteredMenuData.filter(product => product.food_type === 'dessert').map((product) => (
-                                    <Col align="center" key={product.menu_item_id}>
-                                        {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
-                                            <MenuItemCardDetail product={product} />
-                                        ) : (
-                                            <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
-                                        )}
-                                    </Col>
-                                ))}
-                                </Row>
-                            </div>
+                    <div ref={dessertRef} className="pb-5">
+                        <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">
+                        Dessert Items
+                        </h6>
+                        <div data-theme="garden" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                        {filteredMenuData
+                            .filter((product) => product.food_type === 'dessert')
+                            .map((product) => (
+                            <Col align="center" key={product.menu_item_id}>
+                                {showCardDetail && selectedItem.menu_item_id === product.menu_item_id ? (
+                                    <MenuItemCardDetail product={product} />
+                                ) : (
+                                    <MenuItemCard onClick={() => handleCardClick(product)} product={product}/>
+                                )}
+                            </Col>
+                            ))}
                         </div>
+                    </div>
                     </>
                 )}
             <div>

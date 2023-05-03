@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useSignupMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
+import logo from "./images/styling/logo-removebg.png"
+
+
 
 const SignupForm = ({ accountInfo }) => {
     const [firstName, setFirstName] = useState('');
@@ -42,13 +45,29 @@ const SignupForm = ({ accountInfo }) => {
     const canSave = Boolean(firstName) && Boolean(lastName) && Boolean(username) && Boolean(password) && Boolean(email)
 
     return (
-    <form onSubmit={handleSubmit}>
-        <h1>Signup</h1>
+     <>
+
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            className="mx-auto"
+            alt={logo}
+            src={logo}
+            style={{ height: "150px", width: "150px", marginBottom: "20px !important" }}
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Sign Up</h2>
+        </div>
+
+
+<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
         <input
             type="text"
             placeholder="FirstName"
             value={firstName}
             onChange={(event) => setFirstName(event.target.value)}
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             required
         />
         <input
@@ -56,6 +75,8 @@ const SignupForm = ({ accountInfo }) => {
             placeholder="LastName"
             value={lastName}
             onChange={(event) => setLastName(event.target.value)}
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+
             required
         />
         <input
@@ -63,6 +84,7 @@ const SignupForm = ({ accountInfo }) => {
             placeholder="Username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             required
         />
         <input
@@ -70,6 +92,7 @@ const SignupForm = ({ accountInfo }) => {
             placeholder="Email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             required
         />
         <input
@@ -77,19 +100,40 @@ const SignupForm = ({ accountInfo }) => {
             placeholder="Password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             required
         />
-        <input
-            onClick={handleOnClick}
-            value={isChef}
-            type="checkbox"
-            placeholder="isChef"
-            name="chef"
-        />
-        <label htmlFor="chef">Chef account</label>
-        <button className="dbg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="submit" disabled={!canSave}>Create</button>
+
+        <div className="flex flex-col">
+            <div className="form-control w-52">
+                <label className="cursor-pointer label"  htmlFor="chef">
+                <span className="label-text">Chef Account</span>
+                <input
+                    onClick={handleOnClick}
+                    value={isChef}
+                    type="checkbox"
+                    placeholder="isChef"
+                    name="chef"
+                    className="toggle toggle-[#b05f5c]"
+                     />
+                </label>
+            </div>
+            </div>
+        <button
+         className="flex w-full justify-center rounded-md bg-[#b05f5c]  px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+         type="submit"
+         disabled={!canSave}>Create</button>
     </form>
-    );
+      <p className="mt-10 text-center text-sm text-gray-500">
+            Have an account?{' '}
+            <a href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+             Login
+            </a>
+          </p>
+        </div>
+      </div>
+    </>
+);
 }
 
 export default SignupForm

@@ -1,7 +1,6 @@
 import { ShoppingCartContext } from "../../features/shopping-cart/shoppingCartContext"
-import { useContext, useState } from "react"
+import { useContext }from "react"
 import CartMenuItem from "./CartMenuItem";
-import { useNavigate } from "react-router-dom";
 // Shopping Cart API
 import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shoppingCartApi";
 import { useCreateCartItemMutation } from "../../features/shopping-cart/shoppingCartApi";
@@ -10,24 +9,32 @@ import { useCreateOrderMutation } from "../../features/orders/orderApi";
 
 
 function ShoppingCartList() {
-    const navigate = useNavigate();
     const shoppingCart = useContext(ShoppingCartContext);
 
     const [createShoppingCart] = useCreateShoppingCartMutation();
     const [createCartItem] = useCreateCartItemMutation();
     const [createOrder] = useCreateOrderMutation();
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const handleOrderSubmit = async (event) => {
-        event.preventDefault();
+    const checkout = async () => {
+        await fetch('http://localhost:4000/checkout', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: shoppingCart.items
+            })
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            if(response.url) {
+                handleOrderSubmit();
+                window.location.assign(response.url);
+            }
+        })
+    }
 
-        if (!isSubmitting) {
-            setIsSubmitting(true);
-            setTimeout(() => {
-                setIsSubmitting(false);
-            }, 3000);
-        }
-
+    async function handleOrderSubmit() {
         try {
             const productsByChef = {};
             shoppingCart.items.forEach((product) => {
@@ -59,41 +66,37 @@ function ShoppingCartList() {
                     shopping_cart_id: shoppingCartId,
                     chef_id: parseInt(chefId),
                 }
-
                 await createOrder(orderData);
             }
-            shoppingCart.clearCart();
-            navigate('/orders')
-
         } catch (error) {
             console.error(error);
         }
     };
 
     return (
-            <div data-theme="garden" className="min-h-screen pt-4 font-sans">
-                <div className="bg-white pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
-                    <div className="flex flex-wrap">
-                        <h3 className="mt-3 mb-4 font-normal">Shopping Cart</h3>
+        <div className="min-h-screen font-sans">
+            <div className="max-w-screen-2xl mx-auto">
+                    <div className="flex justify-between items-center">
+                        <h3 className="text-2xl">Shopping Cart</h3>
                         {shoppingCart.items.length > 0 && (
-                        <div className="flex-grow-1 flex justify-end items-center">
-                            <h3 className="mt-2 mb-4 font-normal">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                            <button onClick={handleOrderSubmit} disabled={isSubmitting} className="bg-green-100 text-xl hover:bg-gray-100 text-gray-800 py-2 px-3 border rounded shadow mb-4 mt-2 ml-5">
-                            {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                        <div className="flex items-center">
+                            <h3 className="text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
+                            <button onClick={checkout} className="bg-green-100 text-xl hover:opacity-80 text-gray-800 py-2 px-2 border rounded shadow mb-2 ml-5">
+                            Checkout
                             </button>
                         </div>
                     )}
                     </div>
-                    <hr className="mt-0 mb-3"></hr>
-                    {shoppingCart.items.length > 0 ? (
-                    shoppingCart.items.map((product, idx) => (
-                        <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
-                    ))
-                    ) : (
-                    <h4 className="italic pb-4">Your cart is empty</h4>
-                    )}
-                </div>
+                <hr className="mt-0 mb-2"></hr>
+                {shoppingCart.items.length > 0 ? (
+                shoppingCart.items.map((product, idx) => (
+                    <CartMenuItem key={idx} id={product.id} quantity={product.quantity} photo={product.photo}></CartMenuItem>
+                ))
+                ) : (
+                <h4 className="italic pb-4 text-xl">Your cart is empty</h4>
+                )}
             </div>
+        </div>
     )
 }
 
