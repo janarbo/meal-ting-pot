@@ -53,13 +53,13 @@ function GetAllChefMenuList() {
         navigate(`/chef/${profileId}/menu-items/new/`)
     }
     return (
-<div className="flex flex-col h-screen relative">
+<div className="flex flex-col h-screen relative font-sans">
     <div className="flex flex-grow">
         <SideBar />
         <div className="flex-grow p-6 relative z-10">
         <h1 className="text-3xl font-bold mb-4">Your Menu Items</h1>
     <div className="flex mb-4 items-center">
-        <button className="btn btn-primary" onClick={() => createMenuItemClicked()}>
+        <button className="btn bg-[#60af71] border-none text-white" onClick={() => createMenuItemClicked()}>
             Add a New Menu Item
         </button>
         <Lottie className="w-full h-48 ml-10" animationData={chefCooking}/>
@@ -82,45 +82,45 @@ function GetAllChefMenuList() {
                 <tbody>
                 {menuItems.map((menu_item, index) => (
                     <tr key={menu_item.menu_item_id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                    <td className="text-center">{menu_item.food_type}</td>
-                    <td>
-                        <img className="mask mask-squircle w-20 h-20" src={menu_item.photo} alt={menu_item.photo} />
-                    </td>
-                    <td className="text-center">{menu_item.name}</td>
-                    <td className="text-center">${menu_item.price}</td>
-                    <td className="text-center whitespace-normal break-words">{menu_item.description}</td>
-                    {menu_item.status ? (
-                        <td className="text-center">Available</td>
-                    ) : (
-                        <td className="text-center">Not Available</td>
-                    )}
-                    {menu_item.status ? (
-                        <td className="text-center">
-                        <button
-                            className="btn btn-error btn-xs sm:btn-sm md:btn-md lg"
-                            onClick={() => updateMenuItemStatusClicked(menu_item)}
-                        >
-                            Make Unavailable
-                        </button>
+                        <td className="text-center">{menu_item.food_type}</td>
+                        <td>
+                            <img className="mask mask-squircle w-20 h-20" src={menu_item.photo} alt={menu_item.photo} />
                         </td>
-                    ) : (
+                        <td className="text-center">{menu_item.name}</td>
+                        <td className="text-center">${menu_item.price}</td>
+                        <td className="text-center whitespace-normal break-words">{menu_item.description}</td>
+                        {menu_item.status ? (
+                            <td className="text-center">Available</td>
+                        ) : (
+                            <td className="text-center">Not Available</td>
+                        )}
+                        {menu_item.status ? (
+                            <td className="text-center">
+                            <button
+                                className="btn btn-error btn-xs sm:btn-sm md:btn-md lg"
+                                onClick={() => updateMenuItemStatusClicked(menu_item)}
+                            >
+                                Make Unavailable
+                            </button>
+                            </td>
+                        ) : (
+                            <td className="text-center">
+                            <button
+                                className="btn btn-success btn-xs sm:btn-sm md:btn-md lg"
+                                onClick={() => updateMenuItemStatusClicked(menu_item)}
+                            >
+                                Make Available
+                            </button>
+                            </td>
+                        )}
                         <td className="text-center">
-                        <button
-                            className="btn btn-success btn-xs sm:btn-sm md:btn-md lg"
-                            onClick={() => updateMenuItemStatusClicked(menu_item)}
-                        >
-                            Make Available
-                        </button>
+                            <button
+                            className="btn btn-warning btn-xs sm:btn-sm md:btn-md lg"
+                            onClick={() => updateMenuItemClicked(menu_item)}
+                            >
+                            Update!
+                            </button>
                         </td>
-                    )}
-                    <td className="text-center">
-                        <button
-                        className="btn btn-warning btn-xs sm:btn-sm md:btn-md lg"
-                        onClick={() => updateMenuItemClicked(menu_item)}
-                        >
-                        Update!
-                        </button>
-                    </td>
                     </tr>
                 ))}
             </tbody>

@@ -77,7 +77,7 @@ const CustomerOrderList = () => {
                     <div className="p-6 space-y-6">
                         <h3 className="text-bold text-lg">Order {index + 1} | Placed: {order.order_date}</h3>
                         <div className="flex justify-between items-center">
-                        <div className="chat-bubble">
+                        <div className="chat-bubble ">
                             <p className="font-bold">Order Status:</p>
                             <p className={`font-bold ${getStatusClassName(order.status)}`}>{getStatus(order.status)}</p>
                         </div>

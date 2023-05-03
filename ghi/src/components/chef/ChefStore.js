@@ -154,9 +154,9 @@ function ChefStore() {
                     </div>
                     </>
                 )}
+            </div>
             <div>
                 <Footer />
-            </div>
             </div>
         </>
     );

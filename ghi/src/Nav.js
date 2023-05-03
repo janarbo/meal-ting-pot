@@ -85,7 +85,7 @@ function Nav({ accountInfo }) {
             </div>
             <div>
               <img className="w-14 h-14 object-contain" src={logo} alt="Logo" />
-              <button onClick={handleHome} className="text-[#b05e5e] btn btn-ghost normal-case font-medium text-3xl">Meal-Ting Pot</button>
+              <button onClick={handleHome} className="text-[#b05e5e] btn btn-ghost normal-case font-normal text-3xl">Meal-Ting Pot</button>
             </div>
             <div className="flex items-center">
               <div className="dropdown dropdown-end mr-5">
