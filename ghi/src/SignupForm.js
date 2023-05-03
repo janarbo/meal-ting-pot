@@ -50,8 +50,8 @@ const SignupForm = ({ accountInfo }) => {
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-            className="mx-auto"
             alt={logo}
+            className="mx-auto"
             src={logo}
             style={{ height: "150px", width: "150px", marginBottom: "20px !important" }}
           />
@@ -126,7 +126,7 @@ const SignupForm = ({ accountInfo }) => {
     </form>
       <p className="mt-10 text-center text-sm text-gray-500">
             Have an account?{' '}
-            <a href="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a href="/meal-ting-pot/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
              Login
             </a>
           </p>
