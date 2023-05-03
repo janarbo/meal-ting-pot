@@ -33,6 +33,10 @@ const SignupForm = ({ accountInfo }) => {
         event.target.reset();
     };
 
+    const handleLogin = () => {
+        navigate('/login');
+    }
+
     useEffect(() => {
         if (accountInfo) {
             isChef ? (
@@ -46,8 +50,8 @@ const SignupForm = ({ accountInfo }) => {
 
     return (
      <>
-
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+     <div className="min-h-screen">
+              <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt={logo}
@@ -126,12 +130,13 @@ const SignupForm = ({ accountInfo }) => {
     </form>
       <p className="mt-10 text-center text-sm text-gray-500">
             Have an account?{' '}
-            <a href="/meal-ting-pot/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <button onClick={handleLogin} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
              Login
-            </a>
+            </button>
           </p>
         </div>
       </div>
+     </div>
     </>
 );
 }

@@ -90,7 +90,7 @@ function ChefOrderList() {
       <SideBar/>
     </div>
     <div style={{ flex: 2 }}>
-    <div  data-theme="garden" className="bg-white flex flex-col items-center justify-center h-full" style={{marginTop:'-300px', marginBottom:"500px"}}>
+    <div data-theme="garden" className="bg-white flex flex-col items-center justify-center h-full font-sans" style={{marginTop:'-300px', marginBottom:"500px"}}>
         <h1>My Orders</h1>
           <div className="mb-4">
             <button

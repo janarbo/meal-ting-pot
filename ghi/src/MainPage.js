@@ -91,7 +91,7 @@ const MainPage = () => {
   return (
     <>
   <div className="min-h-screen font-sans">
-    <div className="pt-3 pl-5 pr-5 max-w-screen-2xl mx-auto">
+    <div className="pt-6 pl-5 pr-5 max-w-screen-2xl mx-auto">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: "-100px" }}>
         <img
           className="mx-auto"
