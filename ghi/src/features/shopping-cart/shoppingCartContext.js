@@ -24,7 +24,7 @@ export function ShoppingCartProvider({children}) {
         return quantity;
     }
 
-    function addOneToCart(id, price, chefId, photo) {
+    function addOneToCart(id, price, chefId, photo, name) {
         const quantity = getProductQuantity(id);
 
         if (quantity === 0) {
@@ -36,7 +36,8 @@ export function ShoppingCartProvider({children}) {
                         quantity: 1,
                         price: price,
                         chef_id: chefId,
-                        photo: photo
+                        photo: photo,
+                        name: name,
                     }
                 ]
             )

@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import SideBar from '../../SideBar';
-import Footer from "../../Footer"
+import Footer from "../../Footer";
+import Lottie from "lottie-react";
+import cookingLoader from "../../images/styling/cookingLoader.json";
+import chefCooking from "../../images/styling/chefCooking.json";
+
 
 
 function GetAllChefMenuList() {
@@ -14,7 +18,7 @@ function GetAllChefMenuList() {
     const navigate=useNavigate()
     const canSave=!isLoading
     if(isLoading||isLoadingMenuItems){
-        return <p>Loading...</p>
+        return <Lottie animationData={cookingLoader}/>
     }
 
     const updateMenuItemStatusClicked= async (menu_item)=>{
@@ -49,59 +53,92 @@ function GetAllChefMenuList() {
         navigate(`/chef/${profileId}/menu-items/new/`)
     }
     return (
-<div>
-    <div style={{ display: "flex" }}>
-    <SideBar/>
-    <div>
-    <h1>Your Menu Items</h1>
-    <button className="btn btn-success" onClick={()=>createMenuItemClicked()}>Add a New Menu Item</button>
-    <div className="row">
-        <div className="col-sm">
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Change Status</th>
-                        <th>Update Menu Item</th>
+<div className="flex flex-col h-screen relative">
+    <div className="flex flex-grow">
+        <SideBar />
+        <div className="flex-grow p-6 relative z-10">
+        <h1 className="text-3xl font-bold mb-4">Your Menu Items</h1>
+    <div className="flex mb-4 items-center">
+        <button className="btn btn-primary" onClick={() => createMenuItemClicked()}>
+            Add a New Menu Item
+        </button>
+        <Lottie className="w-full h-48 ml-10" animationData={chefCooking}/>
+    </div>
+        <div className="overflow-x-auto">
+            <table className="table w-full table-zebra table-bordered">
+            <thead>
+                <tr>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Food Type</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Photo</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Name</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Price</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Description</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Status</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Change Status</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Update Menu Item</th>
+                </tr>
+            </thead>
+            {menuItems ? (
+                <tbody>
+                {menuItems.map((menu_item, index) => (
+                    <tr key={menu_item.menu_item_id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+                    <td className="text-center">{menu_item.food_type}</td>
+                    <td>
+                        <img className="mask mask-squircle w-20 h-20" src={menu_item.photo} alt={menu_item.photo} />
+                    </td>
+                    <td className="text-center">{menu_item.name}</td>
+                    <td className="text-center">${menu_item.price}</td>
+                    <td className="text-center whitespace-normal break-words">{menu_item.description}</td>
+                    {menu_item.status ? (
+                        <td className="text-center">Available</td>
+                    ) : (
+                        <td className="text-center">Not Available</td>
+                    )}
+                    {menu_item.status ? (
+                        <td className="text-center">
+                        <button
+                            className="btn btn-error btn-xs sm:btn-sm md:btn-md lg"
+                            onClick={() => updateMenuItemStatusClicked(menu_item)}
+                        >
+                            Make Unavailable
+                        </button>
+                        </td>
+                    ) : (
+                        <td className="text-center">
+                        <button
+                            className="btn btn-success btn-xs sm:btn-sm md:btn-md lg"
+                            onClick={() => updateMenuItemStatusClicked(menu_item)}
+                        >
+                            Make Available
+                        </button>
+                        </td>
+                    )}
+                    <td className="text-center">
+                        <button
+                        className="btn btn-warning btn-xs sm:btn-sm md:btn-md lg"
+                        onClick={() => updateMenuItemClicked(menu_item)}
+                        >
+                        Update!
+                        </button>
+                    </td>
                     </tr>
-                </thead>
-                {menuItems? (
-                    <tbody>
-                    {menuItems.map(menu_item => (
-                        <tr key={menu_item.menu_item_id}>
-                            <td><img  className="h-20 w-20 object-cover" src={menu_item.photo} alt={menu_item.photo} /></td>
-                            <td>{menu_item.name}</td>
-                            <td>{menu_item.price}</td>
-                            <td>{menu_item.description}</td>
-                            {menu_item.status ? <td>Available</td> : <td>Not Available</td>}
-                            <td>
-                                <button className="btn btn-danger"
-                                onClick={()=>updateMenuItemStatusClicked(menu_item)}>Change Status</button>
-                            </td>
-                            <td><button className="btn btn-success" onClick={()=>updateMenuItemClicked(menu_item)}>Update!</button></td>
-                        </tr>
-                        ))}
-                    </tbody>
-                ) : (
-                    <tbody>
-                        <tr>
-                            <td>Loading...</td>
-                        </tr>
-                    </tbody>
-                )}
-            </table>
-            </div>
-        </div>
+                ))}
+            </tbody>
+        ) : (
+        <tbody>
+            <tr>
+            <td>{cookingLoader}</td>
+            </tr>
+        </tbody>
+        )}
+    </table>
     </div>
     </div>
-    <div>
+    </div>
     <Footer />
-    </div>
 </div>
+
+
     )};
 
 

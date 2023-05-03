@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux"
 import { useGetAllOrdersQuery, useUpdateOrderMutation } from "../../features/orders/orderApi"
 import React, { useState } from "react";
-import Footer from "../../Footer"
 import SideBar from '../../SideBar';
 function ChefOrderList() {
     const chefId = useSelector((state) => state.auth.userInfo.id);
@@ -23,7 +22,7 @@ function ChefOrderList() {
         case 2:
             return "CONFIRMED";
         case 3:
-            return "READY_FOR_PICKUP";
+            return "READY FOR PICKUP";
         case 4:
             return "COMPLETED";
         case 5:
@@ -86,43 +85,44 @@ function ChefOrderList() {
 
   return (
 
-          <div>
-          <div>
-          <SideBar/>
+  <div>
+    <div>
+      <SideBar/>
+    </div>
+    <div style={{ flex: 2 }}>
+    <div  data-theme="garden" className="bg-white flex flex-col items-center justify-center h-full" style={{marginTop:'-300px', marginBottom:"500px"}}>
+        <h1>My Orders</h1>
+          <div className="mb-4">
+            <button
+              className={`btn ${showAllOrders ? "active" : ""}`}
+              onClick={() => handleFilterButtonClick(null)}
+            > All Orders</button>
+            <button
+              className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
+              onClick={() => handleFilterButtonClick(1)}
+            > Needs Confirmation</button>
+            <button
+              className={`btn btn-secondary ${filterStatus === 3  ? "active" : ""}`}
+              onClick={() => handleFilterButtonClick(3)}
+              >Ready For pickup</button>
+            <button
+              className={`btn btn-accent ${filterStatus === 4 ? "active" : ""}`}
+              onClick={() => handleFilterButtonClick(4)}
+              >Completed</button>
           </div>
-            <h1>Your Order List</h1>
-            <div>
-                <button
-                  className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
-                  onClick={() => handleFilterButtonClick(null)}
-                > All Orders</button>
-                <button
-                  className={`btn btn-primary ${showAllOrders ? "active" : ""}`}
-                  onClick={() => handleFilterButtonClick(1)}
-                > Needs Confirmation</button>
-                <button
-                  className={`btn btn-primary ${filterStatus === 3  ? "active" : ""}`}
-                  onClick={() => handleFilterButtonClick(3)}
-                  >Ready For pickup</button>
-                <button
-                  className={`btn btn-primary ${filterStatus === 4 ? "active" : ""}`}
-                  onClick={() => handleFilterButtonClick(4)}
-                  >Completed</button>
-            </div>
-            <div className="row">
-              <div className="col-sm">
-                <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Photo</th>
-                      <th>Name</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
+          <div className="flex-grow overflow-y-auto">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
                   {orders ? (
                     <tbody>
                       {filteredStatusOrders
@@ -163,7 +163,7 @@ function ChefOrderList() {
                                           Confirm
                                         </button>
                                         <button
-                                          className="btn btn-danger"
+                                          className="btn"
                                           onClick={() => handleButtonClick(order, 5)}
                                         >
                                           Decline
@@ -179,20 +179,22 @@ function ChefOrderList() {
                                           Ready for Pickup
                                         </button>
                                         <button
-                                          className="btn btn-primary"
+                                          className="btn btn-accent"
                                           onClick={() => handleButtonClick(order, 4)}
                                         >
                                           Complete
                                         </button>
                                       </>
                                     )}
-                                    {getStatus(order.status) === "READY_FOR_PICKUP" && (
+                                    {getStatus(order.status) === "READY FOR PICKUP" && (
+                                      <>
                                       <button
-                                        className="btn btn-primary"
+                                        className="btn btn-accent"
                                         onClick={() => handleButtonClick(order, 4)}
                                       >
                                         Complete
                                       </button>
+                                      </>
                                     )}
                                   </td>
                                 </>
@@ -215,10 +217,8 @@ function ChefOrderList() {
                 </table>
               </div>
             </div>
-          <div>
-              <Footer />
           </div>
-          </div>
+    </div>
 );
 }
 
