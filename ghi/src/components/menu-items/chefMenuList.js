@@ -68,14 +68,14 @@ function GetAllChefMenuList() {
             <table className="table w-full table-zebra table-bordered">
             <thead>
                 <tr>
-                    <th className="text-center">Food Type</th>
-                    <th className="text-center">Photo</th>
-                    <th className="text-center">Name</th>
-                    <th className="text-center">Price</th>
-                    <th className="text-center">Description</th>
-                    <th className="text-center">Status</th>
-                    <th className="text-center">Change Status</th>
-                    <th className="text-center">Update Menu Item</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Food Type</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Photo</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Name</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Price</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Description</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Status</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Change Status</th>
+                    <th className="text-center bg-gray-100 py-2 px-4 border">Update Menu Item</th>
                 </tr>
             </thead>
             {menuItems ? (
