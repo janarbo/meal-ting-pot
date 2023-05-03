@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux"
 import { useGetAllOrdersQuery, useUpdateOrderMutation } from "../../features/orders/orderApi"
 import React, { useState } from "react";
-import Footer from "../../Footer"
 import SideBar from '../../SideBar';
 function ChefOrderList() {
     const chefId = useSelector((state) => state.auth.userInfo.id);
