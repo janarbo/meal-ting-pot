@@ -29,7 +29,7 @@ build-stripe-job:
   stage: build
   image: node:lts-bullseye
   variables:
-    PUBLIC_URL: https://bidoof_supremacy.gitlab.io/meal-ting-pot
+    SERVER_URL: https://bidoof_supremacy.gitlab.io/meal-ting-pot
     STRIPE_PRIVATE_KEY: "${STRIPE_PRIVATE_KEY}"
   script:
     - npm install
