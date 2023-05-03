@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetAllCustomerQuery } from "../../features/menu-items/menuItemApi";
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { useGetOneChefProfileQuery } from "../../features/chef-profile/chefProfileApi";
 import MenuItemCard from "./MenuItemCard";
 import MenuItemCardDetail from "./MenuItemCardDetail";

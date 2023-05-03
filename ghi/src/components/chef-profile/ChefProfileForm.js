@@ -2,7 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { useCreateProfileMutation, useGetAllTagsQuery } from '../../features/chef-profile/chefProfileApi';
 import {useNavigate} from 'react-router-dom'
-import Footer from "../../Footer"
+import Lottie from "lottie-react";
+import chefCooking from "../../images/styling/chefCooking.json";
+
 
 
 function ProfileForm(){
@@ -13,7 +15,7 @@ function ProfileForm(){
   const [address, setAddress] = useState('');
   const [bio, setBio] = useState('');
   const [tagName, setTagName] = useState("");
-  const { data: tags } = useGetAllTagsQuery();
+  const { data: tags, isLoading } = useGetAllTagsQuery();
   const navigate = useNavigate();
   const [createProfile] = useCreateProfileMutation();
 
@@ -46,21 +48,29 @@ function ProfileForm(){
         console.log(error)
       }
   };
+   if(isLoading){
+        return <Lottie animationData={chefCooking}/>
+    }
+
 
   return (
 
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
+        <>
+       <div className="w-full h-80 flex justify-center" style={{marginBottom: "-250px"}}>
+        <Lottie animationData={chefCooking}/>
+      </div>
+      <div data-theme="garden" className="bg-white flex items-center justify-center h-screen">
+      <div className="bg-[#ecfaf4] overflow-hidden shadow rounded-lg w-1/4 flex flex-wrap justify-center">
         <form
           onSubmit={handleSubmit}
-          className="divide-y divide-gray-200 lg:col-span-9"
+          className="divide-y divide-gray-200 lg:col-span-9 w-full max-w-lg"
         >
-          <div className="py-6 px-4 sm:p-6 lg:pb-8">
-            <div>
-              <h2 className="text-lg leading-6 font-medium text-gray-900">
-                Profile
-              </h2>
-            </div>
+              <div className="py-6 px-4 sm:p-6 lg:pb-8">
+                <div>
+                  <h2 className="text-lg leading-6 font-medium text-gray-900">
+                    Start My Chef Career
+                  </h2>
+                </div>
 
             <div className="mt-6 flex flex-col lg:flex-row">
               <div className="flex-grow space-y-6">
@@ -69,7 +79,7 @@ function ProfileForm(){
                     htmlFor="fullName"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Full name
+                    Full Name
                   </label>
                   <div className="mt-1 rounded-md shadow-sm flex">
                     <div className="relative flex-grow focus-within:z-10">
@@ -78,8 +88,7 @@ function ProfileForm(){
                         name="fullName"
                         id="fullName"
                         autoComplete="name"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                        placeholder="Full name"
+                      className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                       />
@@ -100,8 +109,7 @@ function ProfileForm(){
                       name="email"
                       id="email"
                       autoComplete="email"
-                      className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
-                      placeholder="Email"
+                      className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -122,7 +130,7 @@ function ProfileForm(){
                       label="photo"
                       id="photo"
                       autoComplete="photo"
-                      className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
+                      className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                       value={photo}
                       onChange={(e) => setPhoto(e.target.value)}
                     />
@@ -143,7 +151,7 @@ function ProfileForm(){
                       label="phoneNumber"
                       id="phoneNumber"
                       autoComplete="phoneNumber"
-                      className="focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-l-md sm:text-sm border-gray-300"
+                      className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
@@ -162,7 +170,7 @@ function ProfileForm(){
                       name="address"
                       type="text"
                       autoComplete="address"
-                      className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                      className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                     />
@@ -181,7 +189,7 @@ function ProfileForm(){
                       id="bio"
                       name="bio"
                       rows="3"
-                      className="block w-full shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                      className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                       value={bio}
                       onChange={(e) => setBio(e.target.value)}
                     ></textarea>
@@ -193,7 +201,7 @@ function ProfileForm(){
                   id="tags"
                   value={tagName}
                   onChange={(e) => setTagName(e.target.value)}
-                  className="block w-full py-2 px-3 border border-gray-300 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-base-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full py-2 px-3 border border-green-500 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-green-300 focus:border-green-300  sm:text-sm"
                 >
                   <option value="">Tag</option>
                   {tags?.map((tag) => {
@@ -207,7 +215,7 @@ function ProfileForm(){
 
                 <button
                   type="submit"
-                  className="mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className=" w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#49cc90] hover:bg-[#84dab2] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Save
                 </button>
@@ -219,7 +227,8 @@ function ProfileForm(){
       </div>
 
     </div>
-   
+    </>
+
   );
 }
 export default ProfileForm;

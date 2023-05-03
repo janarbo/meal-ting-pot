@@ -16,7 +16,7 @@ return (
             <div className="hero-overlay bg-opacity-50"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1  style={h1Style} className="mb-6 text-6xl font-bold">Meal-ting Pot</h1>
+                        <h1 style={h1Style} className="mb-6 text-6xl font-bold">Meal-ting Pot</h1>
                         <div className="mt-10 flex flex-col items-center justify-center gap-y-6">
                         <button onClick={() => navigate('/login')} className="w-full rounded-md bg-yellow-600 px-4 py-2 text-bg
                         font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline

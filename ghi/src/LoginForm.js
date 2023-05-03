@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useLoginMutation } from "./features/auth/authAPI";
 import { useNavigate } from "react-router-dom";
+import logo from "./images/styling/logo-removebg.png"
+// import funny from "./images/styling/funny.gif"
+// import loginbg from "./images/styling/loginbg.JPG"
 
 
 
@@ -12,6 +15,7 @@ const LoginForm = ({ accountInfo }) => {
   const [password, setPassword] = useState("");
   const [login] = useLoginMutation();
   const navigate = useNavigate();
+  // const backgroundImage = loginbg
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,19 +34,22 @@ const LoginForm = ({ accountInfo }) => {
   return (
     <>
 
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          /> */}
+{/* <div className="flex min-h-screen flex-1 flex-col  px-6 py-12 lg:px-8" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundPosition: "center top"}}> */}
+        <div className="flex min-h-screen flex-1 flex-col  px-6 py-12 lg:px-8" >
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm"  >
+
+          <img
+            className="mx-auto"
+            alt={logo}
+            src={logo}
+            style={{ height: "150px", width: "150px", marginBottom: "20px !important" }}
+          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Login
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm" >
           <form onSubmit={handleSubmit} className="space-y-6" action="#" method="POST">
             <div>
               <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
@@ -90,11 +97,17 @@ const LoginForm = ({ accountInfo }) => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-             Become a Member
+            Don't have an account?{' '}
+            <a href="/meal-ting-pot/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+             Signup
             </a>
           </p>
+
+          {/* <img
+            className="mx-auto"
+            src={funny}
+            style={{ height: "200px", width: "300px", marginBottom: "20px !important" }}
+          /> */}
         </div>
       </div>
     </>

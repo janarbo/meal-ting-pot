@@ -23,7 +23,7 @@ function MenuItemCard(props) {
                     <h6 className="font-bold text-right mr-5">+</h6>
                 )}
             </div>
-            <div className= "px-6 pt-0 pb-2">
+            <div className= "px-6 pt-0 pb-4">
                 <hr className="mt-0"></hr>
             </div>
         </div>
