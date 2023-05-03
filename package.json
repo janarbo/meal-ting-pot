@@ -1,10 +1,30 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "@mui/material": "^5.12.3",
     "autoprefix": "^1.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "postcss": "^8.4.21",
+    "stripe": "^12.3.0",
     "tailwindcss": "^3.3.1"
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.5.1"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "meal-ting-pot",
+  "description": "<p>Meal-ting Pot is an all-in-one platform that caters to both aspiring chefs and food enthusiasts. Whether you're eager to showcase your culinary flair to the world or seeking to broaden your palate, our website and social media app have got you covered. Join our community of passionate foodies and embark on a journey of discovering new flavors and culinary skills!</p>",
+  "version": "1.0.0",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

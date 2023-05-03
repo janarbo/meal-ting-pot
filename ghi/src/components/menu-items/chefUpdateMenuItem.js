@@ -4,7 +4,9 @@ import { useGetOneMenuItemQuery } from '../../features/menu-items/menuItemApi'
 import { useUpdateMenuItemMutation } from '../../features/menu-items/menuItemApi'
 import { useSelector } from 'react-redux'
 import SideBar from '../../SideBar';
-import Footer from "../../Footer"
+import Footer from "../../Footer";
+import Lottie from "lottie-react";
+import cookingLoader from "../../images/styling/cookingLoader.json";
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -34,7 +36,7 @@ const UpdateMenuItemForm = () => {
         }
     },[isSuccess, menuItem?.foodtype, menuItem?.name, menuItem?.price, menuItem?.food_type, menuItemId ,menuItem?.description,menuItem?.comment, menuItem?.photo, menuItem?.spicy_level, menuItem?.tags,  menuItem?.calories,  menuItem?.ingredients, menuItem?.status])
 
-    if (isLoadingMenuItem) return <p>Loading...</p>
+    if (isLoadingMenuItem) return <Lottie animationData={cookingLoader}/>
 
     const handleFormChange=(e)=>{
         const value= e.target.value;
@@ -60,92 +62,107 @@ const UpdateMenuItemForm = () => {
     const spicyLevelOptions=[0,1,2,3,4,5]
     return(
 
-        <section>
-            <div style={{ display: "flex" }}>
-                <SideBar/>
-            <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
-            <div className="m-6">
-            <h2>Update a Menu Item</h2>
-            </div>
-            <div className="m-6">
-            <form>
-                <div className="mb-6">
-                <label
-                className="text-sm font-medium text-gray-900 block mb-2" htmlFor="food_type"
-                >Food Type:</label>
-                <select
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    type="text"
-                    id="food_type"
-                    name="food_type"
-                    value={formData.food_type}
-                    onChange={handleFormChange}
-                >
-                {foodTypeOptions.map(food_type=>{
-                    return(
-                        <option key={food_type} value={food_type}>{food_type}</option>
-                    )
+    <section>
+    <div className="flex flex-col md:flex-row min-h-screen justify-center">
+        <SideBar />
+        <div className="w-full md:w-1/2 p-6">
+        <h2 className="text-2xl font-bold mb-6">Update a Menu Item</h2>
+        <form>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
+                htmlFor="food_type"
+            >
+                Food Type:
+            </label>
+            <select
+                className="select select-bordered w-full max-w-xs p-2.5"
+                type="text"
+                id="food_type"
+                name="food_type"
+                value={formData.food_type}
+                onChange={handleFormChange}
+            >
+                {foodTypeOptions.map((food_type) => {
+                return (
+                    <option key={food_type} value={food_type}>
+                    {food_type}
+                    </option>
+                );
                 })}
-                </select>
-                </div>
-                <div className="mb-6">
-                <label
-                className="text-sm font-medium text-gray-900 block mb-2"
+            </select>
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="name"
-                >Name:</label>
-                <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+                Name:
+            </label>
+            <input
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 id="name"
-                name= "name"
+                name="name"
                 value={formData.name}
-                onChange={handleFormChange}/>
-                </div>
-                <div className="mb-6">
-                <label
-                className="text-sm font-medium text-gray-900 block mb-2"
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="price"
-                >Price:</label>
-                <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+                Price:
+            </label>
+            <input
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="int"
                 id="price"
-                name= "price"
+                name="price"
                 value={formData.price}
-                onChange={handleFormChange}/>
-                </div>
-                <div className="mb-6">
-                <label
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
                 htmlFor="description"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Description:</label>
-                <textarea
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleFormChange}
-                />
-                </div>
-                <div className="mb-6">
-                <label
-                className="text-sm font-medium text-gray-900 block mb-2" htmlFor="comment"
-                >Comment:</label>
-                <textarea
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    id="comment"
-                    name="comment"
-                    value={formData.comment}
-                    onChange={handleFormChange}
-                />
-                </div>
-                <div className="mb-6">
-                <label
-                className="text-sm font-medium text-gray-900 block mb-2"
+                className="text-gray-700 font-bold mb-2 block"
+            >
+                Description:
+            </label>
+            <textarea
+                className="input input-bordered w-full max-w-xs p-2.5"
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
+                htmlFor="comment"
+            >
+                Comment:
+            </label>
+            <textarea
+                className="input input-bordered w-full max-w-xs p-2.5"
+                id="comment"
+                name="comment"
+                value={formData.comment}
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="photo"
-                >Photo Link:</label>
-                <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+                Photo Link:
+            </label>
+            <input
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 name= "photo"
                 id="photo"
@@ -154,11 +171,11 @@ const UpdateMenuItemForm = () => {
                 </div>
                 <div className="mb-6">
                 <label
-                    className="text-sm font-medium text-gray-900 block mb-2"
+                    className="text-gray-700 font-bold block mb-2 block"
                     htmlFor="spicy_level"
                 >Spicy Level:</label>
                 <select
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="select select-bordered w-full max-w-xs p-2.5"
                     type="int"
                     id="spicy_level"
                     name="spicy_level"
@@ -174,11 +191,11 @@ const UpdateMenuItemForm = () => {
                 </div>
                 <div className="mb-6">
                 <label
-                className="text-sm font-medium text-gray-900 block mb-2"
+                className="text-gray-700 font-bold block mb-2 block"
                 htmlFor="tags"
                 >Tags:</label>
                 <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 name="tags"
                 id="tags"
@@ -187,11 +204,11 @@ const UpdateMenuItemForm = () => {
                 </div>
                 <div className="mb-6">
                 <label
-                className="text-sm font-medium text-gray-900 block mb-2"
+                className="text-gray-700 font-bold block mb-2 block"
                 htmlFor="calories"
                 >Calories:</label>
                 <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="int"
                 name="calories"
                 id="calories"
@@ -200,11 +217,11 @@ const UpdateMenuItemForm = () => {
                 </div>
                 <div className="mb-6">
                 <label
-                className="text-sm font-medium text-gray-900 block mb-2"
+                className="text-gray-700 font-bold block mb-2 block"
                 htmlFor="ingredients"
                 >Ingredients:</label>
                 <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 name="ingredients"
                 id="ingredients"
@@ -213,7 +230,7 @@ const UpdateMenuItemForm = () => {
                 </div>
                 <div className="mb-6">
                 <button
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    className="btn btn-accent"
                     type="button"
                     onClick={onSaveMenuItemClicked}
                     disabled={!canSave}
@@ -222,7 +239,6 @@ const UpdateMenuItemForm = () => {
                 </button>
                 </div>
             </form>
-            </div>
             </div>
             </div>
             <div>

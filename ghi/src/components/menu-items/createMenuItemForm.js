@@ -6,6 +6,8 @@ import { useUpdateProfileMutation, useGetOneChefProfileQuery, useGetAllTagsQuery
 import { useParams } from "react-router-dom";
 import SideBar from '../../SideBar';
 import Footer from "../../Footer"
+import Lottie from "lottie-react";
+import cookingLoader from "../../images/styling/cookingLoader.json";
 
 
 const CreateMenuItemForm=()=>{
@@ -36,7 +38,7 @@ const CreateMenuItemForm=()=>{
 
     if (chefProfileLoading || tagsLoading) {
         return (
-            <div>Loading...</div>
+            <Lottie animationData={cookingLoader}/>
         )
     }
 
@@ -87,96 +89,107 @@ const CreateMenuItemForm=()=>{
     const spicyLevelOptions=[0,1,2,3,4,5]
 
     return(
-        <section>
-            <div style={{ display: "flex" }}>
-                <SideBar/>
-
-
-            <div className="bg-white overflow-hidden shadow rounded-lg w-1/2">
-            <div className="m-6">
-            <h2>Create a New Menu Item</h2>
-            </div>
-            <div className="m-6">
-            <form>
-                <div className="mb-6">
-                <label
+    <section>
+    <div className="flex flex-col md:flex-row min-h-screen justify-center">
+        <SideBar />
+        <div className="w-full md:w-1/2 p-6">
+        <h2 className="text-2xl font-bold mb-6">Update a Menu Item</h2>
+        <form>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="food_type"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Food Type:</label>
-                <select
-                    type="text"
-                    id="food_type"
-                    name="food_type"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    value={formData.food_type}
-                    onChange={handleFormChange}
-                >
-                <option value=''>Choose Food Type</option>
-                {foodTypeOptions.map(food_type=>{
-                    return(
-                        <option key={food_type} value={food_type}>{food_type}</option>
-                    )
+            >
+                Food Type:
+            </label>
+            <select
+                className="select select-bordered w-full max-w-xs p-2.5"
+                type="text"
+                id="food_type"
+                name="food_type"
+                value={formData.food_type}
+                onChange={handleFormChange}
+            >
+                {foodTypeOptions.map((food_type) => {
+                return (
+                    <option key={food_type} value={food_type}>
+                    {food_type}
+                    </option>
+                );
                 })}
-                </select>
-                </div>
-                <div className="mb-6">
-                <label htmlFor="name"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Name:</label>
-                <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            </select>
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
+                htmlFor="name"
+            >
+                Name:
+            </label>
+            <input
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 id="name"
-                name= "name"
+                name="name"
                 value={formData.name}
-                onChange={handleFormChange}/>
-                </div>
-                <div className="mb-6">
-                <label
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="price"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Price:</label>
-                <input
+            >
+                Price:
+            </label>
+            <input
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="int"
                 id="price"
-                name= "price"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                name="price"
                 value={formData.price}
-                onChange={handleFormChange}/>
-                </div>
-                <div className="mb-6">
-                <label
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
                 htmlFor="description"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Description:</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleFormChange}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                />
-                </div>
-                <div className="mb-6">
-                <label
+                className="text-gray-700 font-bold mb-2 block"
+            >
+                Description:
+            </label>
+            <textarea
+                className="input input-bordered w-full max-w-xs p-2.5"
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="comment"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Comment:</label>
-                <textarea
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    id="comment"
-                    name="comment"
-                    value={formData.comment}
-                    onChange={handleFormChange}
-                />
-                </div>
-                <div className="mb-6">
-                <label
+            >
+                Comment:
+            </label>
+            <textarea
+                className="input input-bordered w-full max-w-xs p-2.5"
+                id="comment"
+                name="comment"
+                value={formData.comment}
+                onChange={handleFormChange}
+            />
+            </div>
+            <div className="mb-6">
+            <label
+                className="text-gray-700 font-bold mb-2 block"
                 htmlFor="photo"
-                className="text-sm font-medium text-gray-900 block mb-2"
-                >Photo Link:</label>
-                <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+                Photo Link:
+            </label>
+            <input
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 name= "photo"
                 id="photo"
@@ -185,18 +198,17 @@ const CreateMenuItemForm=()=>{
                 </div>
                 <div className="mb-6">
                 <label
-                htmlFor="spicy_level"
-                className="text-sm font-medium text-gray-900 block mb-2"
+                    className="text-gray-700 font-bold block mb-2 block"
+                    htmlFor="spicy_level"
                 >Spicy Level:</label>
                 <select
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="select select-bordered w-full max-w-xs p-2.5"
                     type="int"
                     id="spicy_level"
                     name="spicy_level"
                     value={formData.spicy_level}
                     onChange={handleFormChange}
                 >
-                    <option value=''>Choose a Spice Level</option>
                 {spicyLevelOptions.map(spicy_level=>{
                     return(
                         <option key={spicy_level} value={spicy_level}>{spicy_level}</option>
@@ -206,11 +218,11 @@ const CreateMenuItemForm=()=>{
                 </div>
                 <div className="mb-6">
                 <label
+                className="text-gray-700 font-bold block mb-2 block"
                 htmlFor="tags"
-                className="text-sm font-medium text-gray-900 block mb-2"
                 >Tags:</label>
                 <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 name="tags"
                 id="tags"
@@ -219,11 +231,11 @@ const CreateMenuItemForm=()=>{
                 </div>
                 <div className="mb-6">
                 <label
+                className="text-gray-700 font-bold block mb-2 block"
                 htmlFor="calories"
-                className="text-sm font-medium text-gray-900 block mb-2"
                 >Calories:</label>
                 <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="int"
                 name="calories"
                 id="calories"
@@ -232,29 +244,32 @@ const CreateMenuItemForm=()=>{
                 </div>
                 <div className="mb-6">
                 <label
+                className="text-gray-700 font-bold block mb-2 block"
                 htmlFor="ingredients"
-                className="text-sm font-medium text-gray-900 block mb-2"
                 >Ingredients:</label>
                 <input
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="input input-bordered w-full max-w-xs p-2.5"
                 type="text"
                 name="ingredients"
                 id="ingredients"
                 value={formData.ingredients}
                 onChange={handleFormChange}/>
                 </div>
+                <div className="mb-6">
                 <button
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    className="btn btn-accent"
                     type="button"
                     onClick={onSubmit}
                     disabled={!canSubmit}
-                >Share the Noms!</button>
+                >
+                    Share The Noms!
+                </button>
+                </div>
             </form>
             </div>
             </div>
-            </div>
             <div>
-                <Footer/>
+                <Footer />
             </div>
         </section>
 )
