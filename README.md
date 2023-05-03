@@ -15,12 +15,11 @@
 10. Logged in chef users can confirm, mark ready for pickup, complete, or decline orders and view order history.
 
 ## Live Demo
-<p>View a live demo of this project here: <a>https://bidoof_supremacy.gitlab.io/meal-ting-pot/</a>
 
-</p>
+View a live demo of this project here: <a> https://bidoof_supremacy.gitlab.io/meal-ting-pot/ </a>
 
 ## Design
-- [Wireframe](docs/wireframe/wireframe.md)
+- [Wireframe](docs/wireframe.md)
 - [API](docs/API.md)
 - [Schemas](docs/Schemas.md)
 
