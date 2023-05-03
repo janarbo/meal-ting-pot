@@ -15,10 +15,10 @@ function ShoppingCartList() {
     const [createCartItem] = useCreateCartItemMutation();
     const [createOrder] = useCreateOrderMutation();
 
-    const apiUrl = process.env.API_URL || 'http://localhost:4000';
+    // const apiUrl = process.env.API_URL || 'http://localhost:4000';
 
     const checkout = async () => {
-        await fetch(`${apiUrl}/checkout`, {
+        await fetch(`https://bidoof_supremacy.gitlab.io/meal-ting-pot/checkout`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
