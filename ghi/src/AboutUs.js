@@ -13,7 +13,7 @@ const teamMembers = [
   {
     name: "Janar Bo",
     image:janar,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.",
+    bio: " I'm a Kazakh from Inner Asia living in LA, when I first moved to the city, I really missed the taste of home. But, that's when I started cooking up a storm in my own kitchen! I'm not a master chef, but I experimented with spices from local supermarkets to recreate the flavors I grew up with. I wanted to share my homemade dishes with more people who miss authentic food from home. Join us and let's bring authentic food to everyone! ",
     socialLinks: {
       Gitlab: "https://gitlab.com/Janarbo",
       Linkedin: "https://www.linkedin.com/in/janar-bokeyhan/",
