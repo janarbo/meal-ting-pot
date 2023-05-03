@@ -28,7 +28,7 @@ function ChefProfilePage() {
 
 
 return (
-   <div style={{ display: "flex", justifyContent: "center" }}>
+   <div className="font-sans" style={{ display: "flex", justifyContent: "center" }}>
     <div style={{ marginTop: "200px", marginLeft: "20px", wordWrap: "break-word", flex: 1 }}>
       <SideBar />
     </div>

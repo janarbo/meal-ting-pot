@@ -13,7 +13,7 @@ const teamMembers = [
   {
     name: "Janar Bo",
     image:janar,
-    bio: " I'm a Kazakh from Inner Asia living in LA, when I first moved to the city, I really missed the taste of home. But, that's when I started cooking up a storm in my own kitchen! I'm not a master chef, but I experimented with spices from local supermarkets to recreate the flavors I grew up with. I wanted to share my homemade dishes with more people who miss authentic food from home. Join us and let's bring authentic food to everyone! ",
+    bio: "I'm a Kazakh from Inner Asia living in LA, when I first moved to the city, I really missed the taste of home. But, that's when I started cooking up a storm in my own kitchen! I'm not a master chef, but I experimented with spices from local supermarkets to recreate the flavors I grew up with. I wanted to share my homemade dishes with more people who miss authentic food from home. Join us and let's bring authentic food to everyone! ",
     socialLinks: {
       Gitlab: "https://gitlab.com/Janarbo",
       Linkedin: "https://www.linkedin.com/in/janar-bokeyhan/",
@@ -22,7 +22,7 @@ const teamMembers = [
   {
     name: "Ted Hwang",
     image: ted,
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.",
+    bio: "As someone who isn't particularly skilled in cooking, I was intrigued when Janar pitched us her idea for our software app. With our e-commerce platform for home-cooked meals, I'm now able to explore a variety of culinary traditions from around the world.",
     socialLinks: {
       Gitlab: "https://gitlab.com/htedd",
       Linkedin: "https://www.linkedin.com/in/htedd10/",
@@ -51,51 +51,50 @@ const teamMembers = [
 
 const AboutUs = () => {
   return (
-    <div className="mockup-window-container mx-auto px-60 pt-10 text-center">
+    <>
+    <div className="mockup-window-container mx-auto px-60 pt-10 text-center font-sans">
       <div
         data-theme="garden"
         className="mockup-window border border-[#b05e5e] pb-10"
       >
         <div className="border-t border-[#b05e5e]"></div>
-        <h1 className="text-3xl font-bold my-8 text-[#b05e5e] pt-5">
-          Meal-Ting-Pot
-        </h1>
-        <h2 className="text-2xl font-bold my-4">Our Mission Statement</h2>
-        <p className="my-4 mx-auto max-w-2xl">
-          At Meal-ting Pot, we strive to create a dynamic and inclusive platform
-          that brings together food enthusiasts and aspiring chefs from all over
-          the world. Our mission is to foster a community that encourages
-          culinary exploration and skill development, while celebrating the
-          diversity and richness of global cuisine. Whether you're a seasoned
-          chef looking to share your passion with others or a food lover eager
-          to expand your horizons, Meal-ting Pot is the place for you. Come join
-          us on a journey of discovery and creativity, and let's explore the
-          endless possibilities of food together!
-        </p>
-        <h2 className="text-2xl font-bold my-4">Our Promise/Pledge</h2>
-        <p className="my-4 mx-auto max-w-2xl">
-          As part of Meal-ting Pot's commitment to fostering a dynamic and
-          inclusive community of food enthusiasts and aspiring chefs, we pledge
-          to provide a platform that encourages culinary exploration, skill
-          development, and celebrates the diversity and richness of global
-          cuisine. We promise to continue to provide a space where seasoned
-          chefs can share their passion and expertise with others, and food
-          lovers can expand their horizons and embark on a journey of discovery
-          and creativity. With Meal-ting Pot, you can trust that you will have
-          access to an all-in-one platform that caters to your culinary needs,
-          whether you're looking to showcase your culinary flair to the world or
-          simply broaden your palate. Join us in our pledge to explore the
-          endless possibilities of food together!
-        </p>
-        <div className="flex justify-center">
-          <Lottie
-            animationData={chefIngredients}
-            style={{ width: "300px", height: "300px" }}
-          />
-        </div>
+          <div className="flex justify-center items-center">
+            <div className="flex items-center flex-wrap">
+              <div className="w-64 h-64">
+                <Lottie animationData={chefIngredients} />
+              </div>
+            </div>
+          </div>
+          <h2 className="text-2xl font-normal mt-0 mb-5">Our Mission Statement</h2>
+          <p className="my-4 mx-auto max-w-2xl">
+            At Meal-ting Pot, we strive to create a dynamic and inclusive platform
+            that brings together food enthusiasts and aspiring chefs from all over
+            the world. Our mission is to foster a community that encourages
+            culinary exploration and skill development, while celebrating the
+            diversity and richness of global cuisine. Whether you're a seasoned
+            chef looking to share your passion with others or a food lover eager
+            to expand your horizons, Meal-ting Pot is the place for you. Come join
+            us on a journey of discovery and creativity, and let's explore the
+            endless possibilities of food together!
+          </p>
+          <h2 className="text-2xl font-normal my-5">Our Promise/Pledge</h2>
+          <p className="my-4 mx-auto max-w-2xl">
+            As part of Meal-ting Pot's commitment to fostering a dynamic and
+            inclusive community of food enthusiasts and aspiring chefs, we pledge
+            to provide a platform that encourages culinary exploration, skill
+            development, and celebrates the diversity and richness of global
+            cuisine. We promise to continue to provide a space where seasoned
+            chefs can share their passion and expertise with others, and food
+            lovers can expand their horizons and embark on a journey of discovery
+            and creativity. With Meal-ting Pot, you can trust that you will have
+            access to an all-in-one platform that caters to your culinary needs,
+            whether you're looking to showcase your culinary flair to the world or
+            simply broaden your palate. Join us in our pledge to explore the
+            endless possibilities of food together!
+          </p>
       </div>
       <div>
-        <h2 className="text-2xl font-bold my-4 text-[#b05e5e] pt-10">
+        <h2 className="text-3xl font-light mt-4 mb-2 pt-10">
           Meet Our Team: Bidoof Supremacy
         </h2>
       </div>
@@ -112,7 +111,7 @@ const AboutUs = () => {
                 className="avatar online rounded-full w-40 h-40 mx-auto"
               />
               <div className="card-body">
-                <h2 className="card-title flex justify-center">
+                <h2 className="card-title flex justify-center font-normal">
                   {member.name} {member.title}
                 </h2>
               </div>
@@ -139,10 +138,11 @@ const AboutUs = () => {
           </div>
         ))}
       </div>
-      <div className="pt-5">
-        <Footer />
-      </div>
     </div>
+    <div className="pt-5">
+        <Footer />
+    </div>
+    </>
   );
 };
 
