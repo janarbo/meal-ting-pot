@@ -39,7 +39,7 @@ const LoginForm = ({ accountInfo }) => {
     <>
 
 {/* <div className="flex min-h-screen flex-1 flex-col  px-6 py-12 lg:px-8" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundPosition: "center top"}}> */}
-        <div className="flex min-h-screen flex-1 flex-col  px-6 py-12 lg:px-8" >
+        <div className="flex min-h-screen flex-1 flex-col px-6 py-12 lg:px-8 font-sans" >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm"  >
 
           <img
