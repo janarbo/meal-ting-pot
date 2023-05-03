@@ -25,8 +25,8 @@ app.post("/checkout", async (req, res) => {
             }
         }),
         mode: 'payment',
-        success_url: `${process.env.PUBLIC_URL}/orders`,
-        cancel_url: `${process.env.PUBLIC_URL}/home`
+        success_url: `${process.env.SERVER_URL}/orders`,
+        cancel_url: `${process.env.SERVER_URL}/home`
     })
     res.send(JSON.stringify({
         url: session.url
