@@ -113,7 +113,7 @@ function UpdateProfileForm() {
               >
                 <div>
                   <h2 className="text-lg leading-6 font-medium text-gray-900 text-center">
-                    Update Your Profile
+                    Update My Profile
                   </h2>
                 </div>
               <div className="mt-6 flex flex-col lg:flex-row">

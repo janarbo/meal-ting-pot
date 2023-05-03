@@ -68,7 +68,7 @@ function ProfileForm(){
               <div className="py-6 px-4 sm:p-6 lg:pb-8">
                 <div>
                   <h2 className="text-lg leading-6 font-medium text-gray-900">
-                    Start Your Chef Career
+                    Start My Chef Career
                   </h2>
                 </div>
 

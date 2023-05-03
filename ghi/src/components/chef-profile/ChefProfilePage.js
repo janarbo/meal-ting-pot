@@ -37,7 +37,7 @@ return (
           <div data-theme="garden" className="overflow-x-auto bg-white items-center justify-center">
             <div>
               <h2 className="text-lg leading-6 font-medium text-gray-900 text-center" style={{ marginBottom: "20px" }}>
-                Your Profile
+                My Profile
               </h2>
             </div>
         <table className="table w-full items-center justify-center " style={{justifyContent: "center" }}>

@@ -92,7 +92,7 @@ function ChefOrderList() {
     </div>
     <div style={{ flex: 2 }}>
     <div  data-theme="garden" className="bg-white flex flex-col items-center justify-center h-full" style={{marginTop:'-300px', marginBottom:"500px"}}>
-        <h1>Your Order List</h1>
+        <h1>My Orders</h1>
           <div className="mb-4">
             <button
               className={`btn ${showAllOrders ? "active" : ""}`}
