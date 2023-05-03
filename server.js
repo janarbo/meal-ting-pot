@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express');
 var cors = require('cors');
 
-const stripe = require('stripe')(`${process.env.STRIPE_PRIVATE_KEY}`);
+const stripe = require('stripe')(`${process.env.SECRET_STRIPE_KEY}`);
 
 const app = express();
 app.use(cors());
@@ -17,7 +17,7 @@ app.post("/checkout", async (req, res) => {
                 price_data: {
                     currency: 'usd',
                     product_data: {
-                        name: item.name
+                        name: item.name,
                     },
                     unit_amount: Math.round(item.price*100)
                 },
@@ -25,12 +25,12 @@ app.post("/checkout", async (req, res) => {
             }
         }),
         mode: 'payment',
-        success_url: `${process.env.SERVER_URL}/orders`,
-        cancel_url: `${process.env.SERVER_URL}/home`
+        success_url: `${req.headers.origin}/orders`,
+        cancel_url: `${req.headers.origin}/home`
     })
     res.send(JSON.stringify({
         url: session.url
     }))
 });
 
-app.listen(4000, () => console.log("Listening on port 4000"));
+app.listen(4242, () => console.log('Running on port 4242'));
