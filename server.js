@@ -33,21 +33,4 @@ app.post("/checkout", async (req, res) => {
     }))
 });
 
-app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
-  const event = request.body;
-
-  // Handle the event
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log("PAYMENT WAS SUCCESSFUL")
-      break;
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
-
-  // Return a response to acknowledge receipt of the event
-  response.json({received: true});
-});
-
 app.listen(4000, () => console.log("Listening on port 4000"));
