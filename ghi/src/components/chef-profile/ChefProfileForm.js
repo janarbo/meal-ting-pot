@@ -56,14 +56,11 @@ function ProfileForm(){
   return (
 
         <>
-       <div className="w-full h-80 flex justify-center" style={{marginBottom: "-210px"}}>
+       <div className="w-full h-80 flex justify-center" style={{marginBottom: "-250px"}}>
         <Lottie animationData={chefCooking}/>
       </div>
-
-
-        <div data-theme="garden" className="bg-white flex items-center justify-center h-screen">
-
-      <div className="bg-[#ecfaf4] overflow-hidden shadow rounded-lg w-1/3 flex flex-wrap justify-center">
+      <div data-theme="garden" className="bg-white flex items-center justify-center h-screen">
+      <div className="bg-[#ecfaf4] overflow-hidden shadow rounded-lg w-1/4 flex flex-wrap justify-center">
         <form
           onSubmit={handleSubmit}
           className="divide-y divide-gray-200 lg:col-span-9 w-full max-w-lg"
