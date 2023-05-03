@@ -12,7 +12,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
 return (
-        <div className="hero min-h-screen" style={{ backgroundImage }}>
+        <div className="hero min-h-screen font-sans" style={{ backgroundImage }}>
             <div className="hero-overlay bg-opacity-50"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
