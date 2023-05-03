@@ -7,6 +7,7 @@ import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shop
 import { useCreateCartItemMutation } from "../../features/shopping-cart/shoppingCartApi";
 // Order API
 import { useCreateOrderMutation } from "../../features/orders/orderApi";
+import Footer from "../../Footer";
 
 
 function ShoppingCartList() {
@@ -71,14 +72,15 @@ function ShoppingCartList() {
     }
 
     return (
-        <div className="min-h-screen font-sans">
-            <div className="max-w-screen-2xl mx-auto">
+        <>
+        <div className="min-h-screen font-sans pb-5">
+            <div className="max-w-screen-xl mx-auto pt-10">
                     <div className="flex justify-between items-center">
                         <h3 className="text-2xl">Shopping Cart</h3>
                         {shoppingCart.items.length > 0 && (
                         <div className="flex items-center">
                             <h3 className="text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                            <button onClick={handleOrderSubmit} className="bg-green-100 text-xl hover:opacity-80 text-gray-800 py-2 px-2 border rounded shadow mb-2 ml-5">
+                            <button onClick={handleOrderSubmit} className="bg-[#829b7a] text-xl hover:opacity-80 text-gray-800 py-2 px-2 border rounded shadow mb-2 ml-5">
                             Submit Order
                             </button>
                         </div>
@@ -94,6 +96,8 @@ function ShoppingCartList() {
                 )}
             </div>
         </div>
+        <Footer />
+        </>
     )
 }
 
