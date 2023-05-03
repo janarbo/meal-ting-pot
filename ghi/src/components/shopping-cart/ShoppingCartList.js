@@ -1,6 +1,7 @@
 import { ShoppingCartContext } from "../../features/shopping-cart/shoppingCartContext"
-import { useContext }from "react"
+import { useContext, useState } from "react"
 import CartMenuItem from "./CartMenuItem";
+import { useNavigate } from "react-router-dom";
 // Shopping Cart API
 import { useCreateShoppingCartMutation } from "../../features/shopping-cart/shoppingCartApi";
 import { useCreateCartItemMutation } from "../../features/shopping-cart/shoppingCartApi";
@@ -9,34 +10,24 @@ import { useCreateOrderMutation } from "../../features/orders/orderApi";
 
 
 function ShoppingCartList() {
+    const navigate = useNavigate();
     const shoppingCart = useContext(ShoppingCartContext);
 
     const [createShoppingCart] = useCreateShoppingCartMutation();
     const [createCartItem] = useCreateCartItemMutation();
     const [createOrder] = useCreateOrderMutation();
 
-    // const apiUrl = process.env.API_URL || 'http://localhost:4000';
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const handleOrderSubmit = async (event) => {
+        event.preventDefault();
 
-    const checkout = async () => {
-        await fetch(`https://bidoof_supremacy.gitlab.io/meal-ting-pot/checkout`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                items: shoppingCart.items
-            })
-        }).then((response) => {
-            return response.json();
-        }).then((response) => {
-            if(response.url) {
-                handleOrderSubmit();
-                window.location.assign(response.url);
-            }
-        })
-    }
+        if (!isSubmitting) {
+            setIsSubmitting(true);
+            setTimeout(() => {
+                setIsSubmitting(false);
+            }, 3000);
+        }
 
-    async function handleOrderSubmit() {
         try {
             const productsByChef = {};
             shoppingCart.items.forEach((product) => {
@@ -68,12 +59,16 @@ function ShoppingCartList() {
                     shopping_cart_id: shoppingCartId,
                     chef_id: parseInt(chefId),
                 }
+
                 await createOrder(orderData);
             }
+            shoppingCart.clearCart();
+            navigate('/orders')
+
         } catch (error) {
             console.error(error);
         }
-    };
+    }
 
     return (
         <div className="min-h-screen font-sans">
@@ -83,8 +78,8 @@ function ShoppingCartList() {
                         {shoppingCart.items.length > 0 && (
                         <div className="flex items-center">
                             <h3 className="text-2xl">Total: ${shoppingCart.getTotalCost().toFixed(2)}</h3>
-                            <button onClick={checkout} className="bg-green-100 text-xl hover:opacity-80 text-gray-800 py-2 px-2 border rounded shadow mb-2 ml-5">
-                            Checkout
+                            <button onClick={handleOrderSubmit} className="bg-green-100 text-xl hover:opacity-80 text-gray-800 py-2 px-2 border rounded shadow mb-2 ml-5">
+                            Submit Order
                             </button>
                         </div>
                     )}
