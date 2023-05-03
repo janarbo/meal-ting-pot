@@ -50,6 +50,7 @@ const SignupForm = ({ accountInfo }) => {
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
+            alt={logo}
             className="mx-auto"
             src={logo}
             style={{ height: "150px", width: "150px", marginBottom: "20px !important" }}

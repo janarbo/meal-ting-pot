@@ -40,6 +40,7 @@ const LoginForm = ({ accountInfo }) => {
 
           <img
             className="mx-auto"
+            alt={logo}
             src={logo}
             style={{ height: "150px", width: "150px", marginBottom: "20px !important" }}
           />
