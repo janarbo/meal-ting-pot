@@ -164,7 +164,7 @@ function ChefOrderList() {
                                           Confirm
                                         </button>
                                         <button
-                                          className="btn btn-danger"
+                                          className="btn"
                                           onClick={() => handleButtonClick(order, 5)}
                                         >
                                           Decline
@@ -187,7 +187,7 @@ function ChefOrderList() {
                                         </button>
                                       </>
                                     )}
-                                    {getStatus(order.status) === "READY_FOR_PICKUP" && (
+                                    {getStatus(order.status) === "READY FOR PICKUP" && (
                                       <>
                                       <button
                                         className="btn btn-accent"
