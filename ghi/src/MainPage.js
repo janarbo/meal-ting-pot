@@ -114,8 +114,8 @@ const MainPage = () => {
           ))}
       </Carousel>
       <hr className="mt-0 mb-4"></hr>
-      <h2 className="text-xl leading-6 font-normal">Explore Chefs</h2>
-    <div className="w-full pt-3 pb-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <h2 className="text-xl leading-6 font-normal mb-2">Explore Chefs</h2>
+    <div className="w-full p-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {(Array.isArray(filteredProfiles) && filteredProfiles.length > 0
         ? filteredProfiles
         : availableProfiles
