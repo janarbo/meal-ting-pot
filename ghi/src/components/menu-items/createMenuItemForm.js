@@ -16,7 +16,7 @@ const CreateMenuItemForm=()=>{
     const chefId = useSelector((state)  => state.auth.userInfo.id);
     const { profileId } = useParams();
 
-    const[createMenuItem, {isLoading}, result]= useCreateMenuItemMutation();
+    const[createMenuItem, {isLoading}]= useCreateMenuItemMutation();
     const { data, isLoading: chefProfileLoading } = useGetOneChefProfileQuery(profileId);
     const { data: tags, isLoading: tagsLoading } = useGetAllTagsQuery();
 
