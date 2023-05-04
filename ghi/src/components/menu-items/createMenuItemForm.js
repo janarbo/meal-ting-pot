@@ -53,11 +53,10 @@ const CreateMenuItemForm=()=>{
         })
     }
     const canSubmit= [formData.food_type, formData.name, formData.price, formData.description, formData.photo, formData.spicy_level, formData.calories, formData.ingredients ].every(Boolean) && !isLoading
-    const onSubmit= async (e)=> {
+    const onSubmit= async ()=> {
         if(canSubmit){
             try{
-                e.preventDefault();
-                const response = await createMenuItem(formData).unwrap();
+                const response = await createMenuItem(formData);
                 if (data.featured_menu_item === null) {
                     let tagId = null
                     for (let tagObject of tags) {
@@ -65,7 +64,6 @@ const CreateMenuItemForm=()=>{
                             tagId = tagObject.id
                         }
                     }
-
                     const profileUpdate = {
                         "address": data.address,
                         "availability": data.availability,
@@ -85,7 +83,7 @@ const CreateMenuItemForm=()=>{
                 navigate(`/chef/${profileId}/menu-items/`)
 
             }catch(e){
-                toast.error(`Failed to create`)
+                toast.error(`Failed to create. Please verify your price and calories are valid numbers`)
             }
         }
     }
