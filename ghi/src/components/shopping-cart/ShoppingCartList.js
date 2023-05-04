@@ -66,10 +66,15 @@ function ShoppingCartList() {
                 await createOrder(orderData);
             }
 
-            toast.success("Order submitted successfully! Navigating...",{
+            toast.success("Order submitted successfully! Navigating...", {
                 autoClose: 2900,
                 hideProgressBar: true,
-                icon: ({theme, type}) => <img src="https://cdn-icons-png.flaticon.com/512/534/534820.png?w=826&t=st=1683164450~exp=1683165050~hmac=085194f9717385afe47456d8f24848796d83a163996fe31e8d2d9c83f38e7881"/>
+                icon: ({ theme, type }) => (
+                    <img
+                        alt="https://cdn-icons-png.flaticon.com/512/534/534820.png?w=826&t=st=1683164450~exp=1683165050~hmac=085194f9717385afe47456d8f24848796d83a163996fe31e8d2d9c83f38e7881"
+                        src="https://cdn-icons-png.flaticon.com/512/534/534820.png?w=826&t=st=1683164450~exp=1683165050~hmac=085194f9717385afe47456d8f24848796d83a163996fe31e8d2d9c83f38e7881"
+                    />
+                ),
             });
 
             setTimeout(() => {
