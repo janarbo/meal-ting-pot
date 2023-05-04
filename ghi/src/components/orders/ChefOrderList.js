@@ -87,7 +87,7 @@ function ChefOrderList() {
 
   return (
 
-  <div>
+  <div className="min-h-screen font-sans">
     <div>
       <SideBar/>
     </div>
