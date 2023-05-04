@@ -95,14 +95,14 @@ function UpdateProfileForm() {
 
   return (
        <>
-       <div className="min-h-screen ">
+         <div className="min-h-screen font-sans">
        <div style={{ display: "flex", justifyContent: "center", marginBotton:"600px" }}>
-        <div style={{ marginTop: "200px", marginLeft: "10px", flex: 7,  width: "100%"}} className='w=full'>
+         <div style={{ marginTop: "200px", marginLeft: "10px", flex: 7,  width: "100%"}} className='w=full'>
            <SideBar />
          </div>
         <div style={{ flex: 2 }}></div>
 
-        <div  data-theme="garden" className="bg-white flex items-center justify-center " style={{marginRight:"200px", marginBotton:"500px"}}>
+        <div  data-theme="garden" className="bg-white flex items-center justify-center " style={{marginRight:"500px", marginBotton:"500px"}}>
         <div className="w-1/2 flex flex-col items-center justify-center">
           <div className="w-1/3 flex items-center justify-center"  style={{marginBottom: "-20px"}}>
             <Lottie animationData={chefCooking} />
@@ -283,11 +283,12 @@ function UpdateProfileForm() {
         </div>
   </div>
 </div>
-   </div>
-  </div>
 
+ </div>
+ </div>
 
 </>
+
 
   );
 

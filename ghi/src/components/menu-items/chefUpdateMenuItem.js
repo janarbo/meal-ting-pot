@@ -7,6 +7,9 @@ import SideBar from '../../SideBar';
 import Footer from "../../Footer";
 import Lottie from "lottie-react";
 import cookingLoader from "../../images/styling/cookingLoader.json";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import chefCooking from "../../images/styling/chefCooking.json";
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -46,15 +49,14 @@ const UpdateMenuItemForm = () => {
             [inputName]:value
         })
     }
-    const canSave=!isLoading
+    const canSave= [formData.food_type, formData.name, formData.price, formData.description, formData.photo, formData.spicy_level, formData.calories, formData.ingredients ].every(Boolean) && !isLoading
     const onSaveMenuItemClicked=async()=>{
         if (canSave){
             try {
-
                 await updateMenuItem(formData).unwrap()
                 navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
-                console.error('Failed to save the menu item', e)
+                toast.error(`Failed to create. Please verify your price and calories are valid numbers`)
             }
         }
     }
@@ -62,21 +64,36 @@ const UpdateMenuItemForm = () => {
     const spicyLevelOptions=[0,1,2,3,4,5]
     return(
 
-    <section>
-    <div className="flex flex-col md:flex-row min-h-screen justify-center">
-        <SideBar />
-        <div className="w-full md:w-1/2 p-6">
-        <h2 className="text-2xl font-bold mb-6">Update a Menu Item</h2>
-        <form>
-            <div className="mb-6">
+<>
+       <div className="min-h-screen font-sans">
+       <div style={{ display: "flex", justifyContent: "center", marginBotton:"600px" }}>
+        <div style={{ marginTop: "200px", marginLeft: "10px", flex: 7,  width: "100%"}} className='w=full'>
+           <SideBar />
+         </div>
+        <div style={{ flex: 2 }}></div>
+
+        <div  data-theme="garden" className="bg-white flex items-center justify-center " style={{marginRight:"200px", marginBotton:"500px"}}>
+        <div className="w-1/2 flex flex-col items-center justify-center">
+          <div className="w-1/3 flex items-center justify-center"  style={{marginBottom: "-20px"}}>
+            <Lottie animationData={chefCooking} />
+          </div>
+            <div className="bg-[#edf8f3] overflow-hidden shadow rounded-lg flex-wrap w-full max-w-lg">
+
+        <form className="divide-y divide-gray-200 lg:col-span-9 w-full max-w-lg p-6">
+            <div>
+                <h2 className="text-lg leading-6 font-medium text-gray-900 text-center">Update a Menu Item</h2>
+            </div>
+            <div className="mt-6 flex flex-col lg:flex-row">
+                  <div className="flex-grow space-y-6">
+            <div>
             <label
-                className="text-gray-700 font-bold mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="food_type"
             >
                 Food Type:
             </label>
             <select
-                className="select select-bordered w-full max-w-xs p-2.5"
+                className="block w-full py-2 px-3 border border-green-500 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-green-300 focus:border-green-300  sm:text-sm"
                 type="text"
                 id="food_type"
                 name="food_type"
@@ -92,15 +109,16 @@ const UpdateMenuItemForm = () => {
                 })}
             </select>
             </div>
-            <div className="mb-6">
+            <div>
             <label
-                className="text-gray-700 font-bold mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="name"
             >
                 Name:
             </label>
+            <div className="mt-1 rounded-md shadow-sm flex">
             <input
-                className="input input-bordered w-full max-w-xs p-2.5"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                 type="text"
                 id="name"
                 name="name"
@@ -108,75 +126,84 @@ const UpdateMenuItemForm = () => {
                 onChange={handleFormChange}
             />
             </div>
-            <div className="mb-6">
+            </div>
+            <div>
             <label
-                className="text-gray-700 font-bold mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="price"
             >
                 Price:
             </label>
+            <div className="mt-1 rounded-md shadow-sm flex">
             <input
-                className="input input-bordered w-full max-w-xs p-2.5"
-                type="int"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:int-sm border-green-500"
+                type="number"
                 id="price"
                 name="price"
                 value={formData.price}
                 onChange={handleFormChange}
             />
             </div>
-            <div className="mb-6">
+            </div>
+            <div>
             <label
                 htmlFor="description"
-                className="text-gray-700 font-bold mb-2 block"
+                className="block text-sm font-medium text-gray-700"
             >
                 Description:
             </label>
+            <div className="mt-1 rounded-md shadow-sm flex">
             <textarea
-                className="input input-bordered w-full max-w-xs p-2.5"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                 id="description"
                 name="description"
                 value={formData.description}
                 onChange={handleFormChange}
             />
             </div>
+            </div>
             <div className="mb-6">
             <label
-                className="text-gray-700 font-bold mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="comment"
             >
                 Comment:
             </label>
+            <div className="mt-1 rounded-md shadow-sm flex">
             <textarea
-                className="input input-bordered w-full max-w-xs p-2.5"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                 id="comment"
                 name="comment"
                 value={formData.comment}
                 onChange={handleFormChange}
             />
             </div>
+            </div>
             <div className="mb-6">
             <label
-                className="text-gray-700 font-bold mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="photo"
             >
                 Photo Link:
             </label>
+            <div className="mt-1 rounded-md shadow-sm flex">
             <input
-                className="input input-bordered w-full max-w-xs p-2.5"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                 type="text"
                 name= "photo"
                 id="photo"
                 value={formData.photo}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                </div>
+                <div>
                 <label
-                    className="text-gray-700 font-bold block mb-2 block"
+                    className="block text-sm font-medium text-gray-700"
                     htmlFor="spicy_level"
                 >Spicy Level:</label>
                 <select
-                    className="select select-bordered w-full max-w-xs p-2.5"
-                    type="int"
+                    className="block w-full py-2 px-3 border border-green-500 bg-base-100 rounded-md shadow-sm focus:outline-none focus:ring-green-300 focus:border-green-300  sm:text-sm"
+                    type="number"
                     id="spicy_level"
                     name="spicy_level"
                     value={formData.spicy_level}
@@ -189,44 +216,50 @@ const UpdateMenuItemForm = () => {
                 })}
                 </select>
                 </div>
-                <div className="mb-6">
+                <div>
                 <label
-                className="text-gray-700 font-bold block mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="tags"
                 >Tags:</label>
+                <div className="mt-1 rounded-md shadow-sm flex">
                 <input
-                className="input input-bordered w-full max-w-xs p-2.5"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                 type="text"
                 name="tags"
                 id="tags"
                 value={formData.tags}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                </div>
+                <div>
                 <label
-                className="text-gray-700 font-bold block mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="calories"
                 >Calories:</label>
+                <div className="mt-1 rounded-md shadow-sm flex">
                 <input
-                className="input input-bordered w-full max-w-xs p-2.5"
-                type="int"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
+                type="number"
                 name="calories"
                 id="calories"
                 value={formData.calories}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                </div>
+                <div>
                 <label
-                className="text-gray-700 font-bold block mb-2 block"
+                className="block text-sm font-medium text-gray-700"
                 htmlFor="ingredients"
                 >Ingredients:</label>
+                <div className="mt-1 rounded-md shadow-sm flex">
                 <input
-                className="input input-bordered w-full max-w-xs p-2.5"
+                className="focus:ring-green-300 focus:border-green-300 block w-full min-w-0 rounded-l-md sm:text-sm border-green-500"
                 type="text"
                 name="ingredients"
                 id="ingredients"
                 value={formData.ingredients}
                 onChange={handleFormChange}/>
+                </div>
                 </div>
                 <div className="mb-6 ">
                 <button
@@ -238,13 +271,20 @@ const UpdateMenuItemForm = () => {
                     Save Menu Item
                 </button>
                 </div>
+                </div>
+                </div>
             </form>
+            <ToastContainer position="bottom-right"/>
+            </div>
+            </div>
+                </div>
             </div>
             </div>
             <div>
                 <Footer />
             </div>
-        </section>
+
+</>
     )
 }
 export default UpdateMenuItemForm

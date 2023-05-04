@@ -2,8 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useGetAllOrdersQuery } from "../../features/orders/orderApi";
 import Footer from "../../Footer"
-import Lottie from "lottie-react";
-import orderCheck from "../../images/styling/orderCheck.json";
 
 const CustomerOrderList = () => {
     const customerId = useSelector((state) => state.auth.userInfo.id);
@@ -55,13 +53,9 @@ const CustomerOrderList = () => {
     const filteredOrders = orders.filter(order => order.customer_id === parseInt(customerId));
 
     return (
-        <div className="overflow-x-auto">
-            <h1 className="text-2xl flex justify-center">My Order History</h1>
-            <div className="flex justify-center">
-                <Lottie
-                    animationData={orderCheck}
-                    style={{ width: "200px", height: "200px" }}
-                />
+        <div className="overflow-x-auto font-sans">
+            <div className="pb-5 pl-5">
+                <h1 className="text-2xl font-medium">My Order History</h1>
             </div>
             {filteredOrders.map((order, index) => {
             const totalPrice = order.shopping_cart.reduce(
@@ -113,7 +107,7 @@ const CustomerOrderList = () => {
                                         </div>
                                     </div>
                                 </td>
-                                <td>{item.name}</td>
+                                <td className="capitalize">{item.name}</td>
                                 <td>{item.quantity}</td>
                                 <td>${item.price}</td>
                             </tr>

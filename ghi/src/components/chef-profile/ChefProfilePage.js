@@ -28,7 +28,7 @@ function ChefProfilePage() {
 
 
 return (
-   <div style={{ display: "flex", justifyContent: "center" }}>
+  <div className="font-sans" style={{ display: "flex", justifyContent: "center" }}>
     <div style={{ marginTop: "200px", marginLeft: "20px", wordWrap: "break-word", flex: 1 }}>
       <SideBar />
     </div>
@@ -40,7 +40,7 @@ return (
                 My Profile
               </h2>
             </div>
-        <table className="table w-full items-center justify-center " style={{justifyContent: "center" }}>
+        <table className="table w-full items-center justify-center " style={{justifyContent: "center", backgroundColor: '#edf8f3'}}>
           <tbody className="items-center justify-center">
             <tr className="bg-green-200 hover">
               <th className="border border-green-500 px-4 py-2">Name</th>
@@ -95,6 +95,7 @@ return (
   </div>
       </div>
   </div>
+
 );
 }
 
