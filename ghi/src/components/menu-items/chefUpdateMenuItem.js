@@ -7,6 +7,8 @@ import SideBar from '../../SideBar';
 import Footer from "../../Footer";
 import Lottie from "lottie-react";
 import cookingLoader from "../../images/styling/cookingLoader.json";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -53,7 +55,7 @@ const UpdateMenuItemForm = () => {
                 await updateMenuItem(formData).unwrap()
                 navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
-                console.error('Failed to save the menu item', e)
+                toast.error(`Failed to create. Please verify your price and calories are valid numbers`)
             }
         }
     }
@@ -238,6 +240,7 @@ const UpdateMenuItemForm = () => {
                 </button>
                 </div>
             </form>
+            <ToastContainer position="bottom-right"/>
             </div>
             </div>
             <div>
