@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
 return (
-    <footer className="font-sans left-0 right-0 bg-white border-t border-gray-200 py-4 px-6">
+    <footer data-theme="garden" className="font-sans left-0 right-0 border-t border-gray-200 py-4 px-6">
         <div className="text-center mb-4">
-            <h4 className="text-[#b05e5e] font-medium mb-3">Meal-ting Pot</h4>
+            <h4 className="text-[#b05e5e] font-medium text-xl mb-3">Meal-Ting Pot</h4>
             <p className="text-sm">
             Meal-ting Pot is an all-in-one platform that caters to both aspiring
             chefs and food enthusiasts. Whether you're eager to showcase your

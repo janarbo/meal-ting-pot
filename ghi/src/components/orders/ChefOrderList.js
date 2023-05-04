@@ -2,6 +2,8 @@ import { useSelector } from "react-redux"
 import { useGetAllOrdersQuery, useUpdateOrderMutation } from "../../features/orders/orderApi"
 import React, { useState } from "react";
 import SideBar from '../../SideBar';
+
+
 function ChefOrderList() {
     const chefId = useSelector((state) => state.auth.userInfo.id);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -90,7 +92,7 @@ function ChefOrderList() {
       <SideBar/>
     </div>
     <div style={{ flex: 2 }}>
-    <div  data-theme="garden" className="bg-white flex flex-col items-center justify-center h-full" style={{marginTop:'-300px', marginBottom:"500px"}}>
+    <div data-theme="garden" className="bg-white flex flex-col items-center justify-center h-full font-sans" style={{marginTop:'-300px', marginBottom:"500px"}}>
         <h1>My Orders</h1>
           <div className="mb-4">
             <button

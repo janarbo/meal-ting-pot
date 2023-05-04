@@ -55,8 +55,8 @@ const CustomerOrderList = () => {
     const filteredOrders = orders.filter(order => order.customer_id === parseInt(customerId));
 
     return (
-        <div className="overflow-x-auto">
-            <h1 className="text-2xl flex justify-center">My Order History</h1>
+        <div className="overflow-x-auto font-sans">
+            <h1 className="text-2xl font-medium flex justify-center pt-5">My Order History</h1>
             <div className="flex justify-center">
                 <Lottie
                     animationData={orderCheck}
@@ -77,7 +77,7 @@ const CustomerOrderList = () => {
                     <div className="p-6 space-y-6">
                         <h3 className="text-bold text-lg">Order {index + 1} | Placed: {order.order_date}</h3>
                         <div className="flex justify-between items-center">
-                        <div className="chat-bubble">
+                        <div className="chat-bubble ">
                             <p className="font-bold">Order Status:</p>
                             <p className={`font-bold ${getStatusClassName(order.status)}`}>{getStatus(order.status)}</p>
                         </div>
@@ -113,7 +113,7 @@ const CustomerOrderList = () => {
                                         </div>
                                     </div>
                                 </td>
-                                <td>{item.name}</td>
+                                <td className="capitalize">{item.name}</td>
                                 <td>{item.quantity}</td>
                                 <td>${item.price}</td>
                             </tr>
