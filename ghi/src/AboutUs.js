@@ -22,7 +22,7 @@ const teamMembers = [
   {
     name: "Ted Hwang",
     image: ted,
-    bio: "As someone who isn't particularly skilled in cooking, I was intrigued when Janar pitched us her idea for our software app. With our e-commerce platform for home-cooked meals, I'm now able to explore a variety of culinary traditions from around the world.",
+    bio: "As someone who isn't particularly skilled in cooking, I was intrigued when Janar pitched us her idea for our software app. With our e-commerce platform for home-cooked meals, I'm now able to eat cuisines from skilled chefs and explore a variety of culinary traditions from around the world.",
     socialLinks: {
       Gitlab: "https://gitlab.com/htedd",
       Linkedin: "https://www.linkedin.com/in/htedd10/",
