@@ -46,11 +46,10 @@ const UpdateMenuItemForm = () => {
             [inputName]:value
         })
     }
-    const canSave=!isLoading
+    const canSave= [formData.food_type, formData.name, formData.price, formData.description, formData.photo, formData.spicy_level, formData.calories, formData.ingredients ].every(Boolean) && !isLoading
     const onSaveMenuItemClicked=async()=>{
         if (canSave){
             try {
-
                 await updateMenuItem(formData).unwrap()
                 navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
