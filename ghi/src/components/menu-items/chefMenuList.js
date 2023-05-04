@@ -53,7 +53,7 @@ function GetAllChefMenuList() {
         navigate(`/chef/${profileId}/menu-items/new/`)
     }
     return (
-<div className="flex flex-col h-screen relative font-sans">
+<div className="flex flex-col min-h-screen relative font-sans">
     <div className="flex flex-grow">
         <SideBar />
         <div className="flex-grow p-6 relative z-10">
@@ -64,7 +64,7 @@ function GetAllChefMenuList() {
         </button>
         <Lottie className="w-full h-48 ml-10" animationData={chefCooking}/>
     </div>
-        <div className="overflow-x-auto">
+        <div data-theme="garden" className="overflow-x-auto">
             <table className="table w-full table-zebra table-bordered">
             <thead>
                 <tr>
