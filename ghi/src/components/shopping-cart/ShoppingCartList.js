@@ -8,7 +8,9 @@ import { useCreateCartItemMutation } from "../../features/shopping-cart/shopping
 // Order API
 import { useCreateOrderMutation } from "../../features/orders/orderApi";
 import Footer from "../../Footer";
-
+// Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ShoppingCartList() {
     const navigate = useNavigate();
@@ -63,12 +65,23 @@ function ShoppingCartList() {
 
                 await createOrder(orderData);
             }
-            shoppingCart.clearCart();
-            navigate('/orders')
+
+            toast.success("Order submitted successfully! Navigating...",{
+                autoClose: 2900,
+                hideProgressBar: true,
+                icon: ({theme, type}) => <img src="https://cdn-icons-png.flaticon.com/512/534/534820.png?w=826&t=st=1683164450~exp=1683165050~hmac=085194f9717385afe47456d8f24848796d83a163996fe31e8d2d9c83f38e7881"/>
+            });
+
+            setTimeout(() => {
+                navigate("/orders");
+                shoppingCart.clearCart();
+
+            }, 2900);
 
         } catch (error) {
             console.error(error);
         }
+
     }
 
     return (
@@ -95,6 +108,10 @@ function ShoppingCartList() {
                 <h4 className="italic pb-4 text-xl">Your cart is empty</h4>
                 )}
             </div>
+            <ToastContainer
+                position="top-right"
+                toastStyle={{ top: '65px' }}
+            />
         </div>
         <Footer />
         </>
