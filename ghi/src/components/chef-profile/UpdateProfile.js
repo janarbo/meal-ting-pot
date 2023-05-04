@@ -95,7 +95,7 @@ function UpdateProfileForm() {
 
   return (
        <>
-       <div className="min-h-screen font-sans">
+       <div className="min-h-screen ">
        <div style={{ display: "flex", justifyContent: "center", marginBotton:"600px" }}>
         <div style={{ marginTop: "200px", marginLeft: "10px", flex: 7,  width: "100%"}} className='w=full'>
            <SideBar />
