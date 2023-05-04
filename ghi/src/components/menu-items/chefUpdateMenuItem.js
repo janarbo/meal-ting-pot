@@ -7,6 +7,8 @@ import SideBar from '../../SideBar';
 import Footer from "../../Footer";
 import Lottie from "lottie-react";
 import cookingLoader from "../../images/styling/cookingLoader.json";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateMenuItemForm = () => {
     const chefId = useSelector((state)  => state.auth.userInfo.id);
@@ -46,15 +48,14 @@ const UpdateMenuItemForm = () => {
             [inputName]:value
         })
     }
-    const canSave=!isLoading
+    const canSave= [formData.food_type, formData.name, formData.price, formData.description, formData.photo, formData.spicy_level, formData.calories, formData.ingredients ].every(Boolean) && !isLoading
     const onSaveMenuItemClicked=async()=>{
         if (canSave){
             try {
-
                 await updateMenuItem(formData).unwrap()
                 navigate(`/chef/${profileId}/menu-items`)
             } catch(e){
-                console.error('Failed to save the menu item', e)
+                toast.error(`Failed to create. Please verify your price and calories are valid numbers`)
             }
         }
     }
@@ -63,7 +64,7 @@ const UpdateMenuItemForm = () => {
     return(
 
     <section>
-    <div className="flex flex-col md:flex-row min-h-screen justify-center">
+    <div className="flex flex-col md:flex-row min-h-screen justify-center font-sans">
         <SideBar />
         <div className="w-full md:w-1/2 p-6">
         <h2 className="text-2xl font-bold mb-6">Update a Menu Item</h2>
@@ -228,9 +229,9 @@ const UpdateMenuItemForm = () => {
                 value={formData.ingredients}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                <div className="mb-6 ">
                 <button
-                    className="btn btn-accent"
+                    className="btn border-none bg-[#60af71]"
                     type="button"
                     onClick={onSaveMenuItemClicked}
                     disabled={!canSave}
@@ -239,6 +240,7 @@ const UpdateMenuItemForm = () => {
                 </button>
                 </div>
             </form>
+            <ToastContainer position="bottom-right"/>
             </div>
             </div>
             <div>

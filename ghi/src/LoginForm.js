@@ -24,6 +24,10 @@ const LoginForm = ({ accountInfo }) => {
     setPassword("");
   };
 
+  const handleSignup = () => {
+    navigate('/signup')
+  }
+
   useEffect(() => {
     if (accountInfo) {
       navigate('/home');
@@ -35,7 +39,7 @@ const LoginForm = ({ accountInfo }) => {
     <>
 
 {/* <div className="flex min-h-screen flex-1 flex-col  px-6 py-12 lg:px-8" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: "cover", backgroundAttachment: "fixed", backgroundPosition: "center top"}}> */}
-        <div className="flex min-h-screen flex-1 flex-col  px-6 py-12 lg:px-8" >
+        <div className="flex min-h-screen flex-1 flex-col px-6 py-12 lg:px-8 font-sans" >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm"  >
 
           <img
@@ -98,9 +102,9 @@ const LoginForm = ({ accountInfo }) => {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Don't have an account?{' '}
-            <a href="/meal-ting-pot/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <button onClick={handleSignup} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
              Signup
-            </a>
+            </button>
           </p>
 
           {/* <img
