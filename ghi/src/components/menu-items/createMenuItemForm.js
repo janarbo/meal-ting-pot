@@ -8,6 +8,8 @@ import SideBar from '../../SideBar';
 import Footer from "../../Footer"
 import Lottie from "lottie-react";
 import cookingLoader from "../../images/styling/cookingLoader.json";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateMenuItemForm=()=>{
@@ -50,11 +52,12 @@ const CreateMenuItemForm=()=>{
             [inputName]: value
         })
     }
-    const canSubmit= !isLoading
-    const onSubmit= async ()=> {
+    const canSubmit= [formData.food_type, formData.name, formData.price, formData.description, formData.photo, formData.spicy_level, formData.calories, formData.ingredients ].every(Boolean) && !isLoading
+    const onSubmit= async (e)=> {
         if(canSubmit){
             try{
-                const response = await createMenuItem(formData);
+                e.preventDefault();
+                const response = await createMenuItem(formData).unwrap();
                 if (data.featured_menu_item === null) {
                     let tagId = null
                     for (let tagObject of tags) {
@@ -80,8 +83,9 @@ const CreateMenuItemForm=()=>{
                 }
                 setFormData({});
                 navigate(`/chef/${profileId}/menu-items/`)
+
             }catch(e){
-                console.error('Failed to create', e)
+                toast.error(`Failed to create`)
             }
         }
     }
@@ -268,6 +272,7 @@ const CreateMenuItemForm=()=>{
                 </button>
                 </div>
             </form>
+            <ToastContainer position="bottom-right"/>
             </div>
             </div>
             <div>
