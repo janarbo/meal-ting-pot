@@ -89,7 +89,7 @@ function ChefStore() {
                 {filteredMenuData.filter((product) => product.food_type === 'main').length > 0 && (
                     <>
                     <div ref={mainRef} className="pb-5">
-                        <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">
+                        <h6 className="text-xl font-normal decoration-[#b05e5e] pb-1 underline decoration-2 underline-offset-4">
                         Main Items
                         </h6>
                         <div data-theme="garden" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
@@ -112,7 +112,7 @@ function ChefStore() {
                 {filteredMenuData.filter((product) => product.food_type === 'side').length > 0 && (
                     <>
                     <div ref={sideRef} className="pb-5">
-                        <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">
+                        <h6 className="text-xl font-normal decoration-[#b05e5e] pb-1 underline decoration-2 underline-offset-4">
                         Side Items
                         </h6>
                         <div data-theme="garden" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
@@ -135,7 +135,7 @@ function ChefStore() {
                 {filteredMenuData.filter((product) => product.food_type === 'dessert').length > 0 && (
                     <>
                     <div ref={dessertRef} className="pb-5">
-                        <h6 className="text-xl font-normal decoration-[#b05e5e] underline decoration-2 underline-offset-4">
+                        <h6 className="text-xl font-normal decoration-[#b05e5e] pb-1 underline decoration-2 underline-offset-4">
                         Dessert Items
                         </h6>
                         <div data-theme="garden" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
@@ -154,9 +154,9 @@ function ChefStore() {
                     </div>
                     </>
                 )}
+            </div>
             <div>
                 <Footer />
-            </div>
             </div>
         </>
     );

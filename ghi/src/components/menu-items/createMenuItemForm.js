@@ -90,10 +90,10 @@ const CreateMenuItemForm=()=>{
 
     return(
     <section>
-    <div className="flex flex-col md:flex-row min-h-screen justify-center">
+    <div className="flex flex-col md:flex-row min-h-screen justify-center font-sans">
         <SideBar />
         <div className="w-full md:w-1/2 p-6">
-        <h2 className="text-2xl font-bold mb-6">Update a Menu Item</h2>
+        <h2 className="text-2xl font-bold mb-6">Create a Menu Item</h2>
         <form>
             <div className="mb-6">
             <label
@@ -110,6 +110,7 @@ const CreateMenuItemForm=()=>{
                 value={formData.food_type}
                 onChange={handleFormChange}
             >
+                <option value=''>Choose Food Type</option>
                 {foodTypeOptions.map((food_type) => {
                 return (
                     <option key={food_type} value={food_type}>
@@ -209,6 +210,7 @@ const CreateMenuItemForm=()=>{
                     value={formData.spicy_level}
                     onChange={handleFormChange}
                 >
+                <option value=''>Choose a Spicy Level</option>
                 {spicyLevelOptions.map(spicy_level=>{
                     return(
                         <option key={spicy_level} value={spicy_level}>{spicy_level}</option>
@@ -255,9 +257,9 @@ const CreateMenuItemForm=()=>{
                 value={formData.ingredients}
                 onChange={handleFormChange}/>
                 </div>
-                <div className="mb-6">
+                <div className="mb-6 w-full">
                 <button
-                    className="btn btn-accent"
+                    className="btn bg-[#60af71] border-none"
                     type="button"
                     onClick={onSubmit}
                     disabled={!canSubmit}
