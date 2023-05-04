@@ -1,6 +1,7 @@
 import { ShoppingCartContext } from '../../features/shopping-cart/shoppingCartContext';
 import { useContext } from 'react';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MenuItemCardDetail(props) {
     const product = props.product;
@@ -62,15 +63,26 @@ function MenuItemCardDetail(props) {
                 <hr className="mt-0"></hr>
                 { productQuantity > 0 ? (
                     <>
-                        <button onClick={() => shoppingCart.removeOneFromCart(product.menu_item_id)} className="bg-[#c78e8e] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">-</button>
-                        <button onClick={() => shoppingCart.deleteFromCart(product.menu_item_id)} className="bg-[#c78e8e] font-normal text-xl hover:opacity-80 py-2 px-3 border ml-2 mr-2 mb-2 mt-2 rounded-xl">Remove from Cart</button>
-                        <button onClick={() => shoppingCart.addOneToCart(product.menu_item_id)} className="bg-[#9db2a3] font-bold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">+</button>
+                        <div className="flex justify-between">
+                            <button onClick={() => {
+                                shoppingCart.removeOneFromCart(product.menu_item_id)
+                                toast.error(`Removed ${product.name.charAt(0).toUpperCase() + product.name.slice(1)} from Cart`)
+                                }} className="bg-gray-200 font-semibold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">-</button>
+                            <button onClick={() => {
+                                shoppingCart.addOneToCart(product.menu_item_id)
+                                toast.success(`Added ${product.name.charAt(0).toUpperCase() + product.name.slice(1)} to Cart`)
+                            }} className="bg-gray-200 font-semibold text-xl hover:opacity-80 py-2 px-3 border mb-2 mt-2 rounded-full">+</button>
+                        </div>
                     </>
                 ) :
-                    <button className="bg-[#c78e8e] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full mt-3"
-                            onClick={()=> shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo, product.name)}>Add to Cart</button>
+                    <button className="bg-[#9db2a3] font-normal text-xl text-right hover:opacity-80 py-2 px-3 border mb-2 rounded-full mt-3"
+                            onClick={() => {
+                                shoppingCart.addOneToCart(product.menu_item_id, product.price, product.chef_id, product.photo, product.name)
+                                toast.success(`Added ${product.name.charAt(0).toUpperCase() + product.name.slice(1)} to Cart`)
+                            }}>Add to Cart</button>
                 }
             </div>
+            <ToastContainer position="bottom-right"/>
         </div>
     )
 }
