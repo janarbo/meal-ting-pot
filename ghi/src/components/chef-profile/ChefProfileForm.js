@@ -59,7 +59,7 @@ function ProfileForm(){
        <div className="w-full h-80 flex justify-center" style={{marginBottom: "-30px"}}>
         <Lottie animationData={chefCooking}/>
       </div>
-      <div data-theme="garden" className="bg-white flex items-center justify-center h-screen font-sans" style={{marginBottom:'500px'}}>
+      <div data-theme="garden" className="bg-white flex items-center justify-center h-screen" style={{marginBottom:'500px'}}>
       <div className="bg-[#ecfaf4] overflow-hidden shadow rounded-lg w-1/2 flex flex-wrap justify-center">
         <form
           onSubmit={handleSubmit}

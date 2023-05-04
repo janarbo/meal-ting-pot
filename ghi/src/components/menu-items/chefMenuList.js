@@ -53,18 +53,18 @@ function GetAllChefMenuList() {
         navigate(`/chef/${profileId}/menu-items/new/`)
     }
     return (
-<div className="flex flex-col h-screen relative font-sans">
+<div className="flex flex-col min-h-screen relative font-sans">
     <div className="flex flex-grow">
         <SideBar />
         <div className="flex-grow p-6 relative z-10">
         <h1 className="text-3xl font-bold mb-4">Your Menu Items</h1>
     <div className="flex mb-4 items-center">
-        <button className="btn bg-[#60af71] border-none text-white" onClick={() => createMenuItemClicked()}>
+        <button className="btn bg-[#60af71] text-white border-none" onClick={() => createMenuItemClicked()}>
             Add a New Menu Item
         </button>
         <Lottie className="w-full h-48 ml-10" animationData={chefCooking}/>
     </div>
-        <div className="overflow-x-auto">
+        <div data-theme="garden" className="overflow-x-auto">
             <table className="table w-full table-zebra table-bordered">
             <thead>
                 <tr>
