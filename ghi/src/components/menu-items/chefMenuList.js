@@ -59,7 +59,7 @@ function GetAllChefMenuList() {
         <div className="flex-grow p-6 relative z-10">
         <h1 className="text-3xl font-bold mb-4">Your Menu Items</h1>
     <div className="flex mb-4 items-center">
-        <button className="btn bg-[#60af71] border-none text-white" onClick={() => createMenuItemClicked()}>
+        <button className="btn bg-[#60af71] border-none" onClick={() => createMenuItemClicked()}>
             Add a New Menu Item
         </button>
         <Lottie className="w-full h-48 ml-10" animationData={chefCooking}/>
