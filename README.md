@@ -16,7 +16,7 @@
 
 ## Live Demo
 
-View a live demo of this project here: <a> https://bidoof_supremacy.gitlab.io/meal-ting-pot/ </a>
+View a demo video of this project here: <a> https://www.youtube.com/watch?v=Esd_xI0y-k4 </a>
 
 ## Design
 - [Wireframe](docs/wireframe.md)
