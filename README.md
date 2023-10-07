@@ -14,7 +14,7 @@
 9. Logged in chef users can add/edit/change availability of dishes.
 10. Logged in chef users can confirm, mark ready for pickup, complete, or decline orders and view order history.
 
-## Live Demo
+##  Demo
 
 View a demo video of this project here: <a> https://www.youtube.com/watch?v=Esd_xI0y-k4 </a>
 
