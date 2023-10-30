@@ -273,7 +273,7 @@ Returns (Status Code 200):
 true
 
 ### Profile Page
-![image info](https://gyazo.com/9c6edeec347f19b45cc65b047670b3dd)
+![image info](https://i.gyazo.com/2c6d149b253d2b1671e5cdd5ee8584c9.png)
 This action creates an profile and stores it within the database.
 
 <details>
@@ -321,7 +321,7 @@ This action creates an profile and stores it within the database.
 </details>
 
 
-![image info](https://gyazo.com/96e56b86b386da81c00f58329fd72da3)
+![image info](https://i.gyazo.com/3f8bc426064e128ab2eb913c2a29209f.png)
 This action get one profile data.
 
 <details>
@@ -400,8 +400,8 @@ This action update an profile and stores it within the database.
 
 
 
-![image info](https://gyazo.com/d5c8b02c8638041fc9c9462f36ef403b)
-This action update an profile availabilty and stores it within the database.
+![image info](https://i.gyazo.com/f91fefc8599473e0056ef348a93164fc.png)
+This action update a profile availabilty and stores it within the database.
 
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
@@ -441,7 +441,7 @@ This action update an profile availabilty and stores it within the database.
 </details>
 
 
-![image info](https://gyazo.com/3792ab2a2626ca3a8371172f5f2409e6)
+![image info](https://i.gyazo.com/1d7196fc1529159ef98fc1d0b6fcecc8.png)
  This action get all profiles data.
 
 <details>
