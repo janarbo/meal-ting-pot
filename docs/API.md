@@ -1,5 +1,5 @@
 ### Accounts
-![image info](https://i.gyazo.com/383157896b4432be848bbde9d64018ae.png)
+![image info](https://i.gyazo.com/f50f9b0a09cce9cc2d13d4ff49972049.png)
 This action creates an account tied to a specific user and stores it within the database.
 
 <details>
@@ -63,7 +63,7 @@ This action logs an existing user out of the application.
 Returns (Status Code 200):
 true
 
-![image info](https://gyazo.com/96c042a08b0c8ed6641cc5c47643818d)
+![image info](https://i.gyazo.com/383157896b4432be848bbde9d64018ae.png)
 This action gets token stored within the database.
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
