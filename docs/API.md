@@ -351,8 +351,8 @@ This action get one profile data.
 
 
 
-![image info](https://gyazo.com/71552b3b22769c33b0ed2602530ff437)
-This action update an profile and stores it within the database.
+![image info](https://i.gyazo.com/e026ff11c2067cb2aa47f1e97cf069b2.png)
+This action updates a profile and stores it within the database.
 
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
@@ -401,7 +401,7 @@ This action update an profile and stores it within the database.
 
 
 ![image info](https://i.gyazo.com/f91fefc8599473e0056ef348a93164fc.png)
-This action update a profile availabilty and stores it within the database.
+This action updates a profile availability and stores it within the database.
 
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
@@ -409,7 +409,7 @@ This action update a profile availabilty and stores it within the database.
 
 ```
     {
-     "availability": true
+     "Availability": true
     }
 
 ```
@@ -430,7 +430,7 @@ This action update a profile availabilty and stores it within the database.
             "phone_number": 0,
             "address": "string",
             "bio": "string",
-            "availability": true,
+            "Availability": true,
             "tags": "string",
             "featured_menu_item": "string",
             "social_media": [
@@ -442,7 +442,7 @@ This action update a profile availabilty and stores it within the database.
 
 
 ![image info](https://i.gyazo.com/1d7196fc1529159ef98fc1d0b6fcecc8.png)
- This action get all profiles data.
+ This action gets all profile data.
 
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -459,7 +459,7 @@ This action update a profile availabilty and stores it within the database.
 
 ### Shopping Cart
 
-![image info](https://gyazo.com/0135fa60b587f58f70324299efbca7c6)
+![image info](https://i.gyazo.com/85a293d8398ae4cc87be156df23bed60.png)
 This action create one shopping cart and stores it within the database.
 
 
@@ -477,7 +477,7 @@ This action create one shopping cart and stores it within the database.
 
 
 
-![image info](https://gyazo.com/f4c8a2964aab56233f0f604a580d6409)
+![image info](https://i.gyazo.com/d3f41d4e0fe8f37eaad0c4afc71e88fa.png)
 This action get one shopping cart with items.
 
 <details>
@@ -500,8 +500,8 @@ This action get one shopping cart with items.
 
 ### Cart Items
 
-![image info](https://gyazo.com/4f5a5c8f82c012048f5d673746778f07)
-This action get one cart item.
+![image info](https://i.gyazo.com/0ee90b78970e52447707b4966a4ff2f7.png)
+This action gets one cart item.
 
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -517,8 +517,8 @@ This action get one cart item.
 ```
 </details>
 
-![image info](https://gyazo.com/5eea55b86262fc8fbbe742fdbf3efc89)
-This action update one cart item.
+![image info](https://i.gyazo.com/978a2a665af5ad57e708aadaf862791d.png)
+This action updates one cart item.
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
 <br>
@@ -545,13 +545,13 @@ This action update one cart item.
 ```
 </details>
 
-![image info](https://gyazo.com/5eb5d3eb1cfc2e0a4cf12dc58b3c249b)
+![image info](https://i.gyazo.com/a1c257ef8500e746711ce9734f55faa9.png)
 This action delete cart item.
 
 Returns (Status Code 200):
 true
 
-![image info](https://gyazo.com/93bfb5bcdad16f1ff307a8cfbb7abc26)
+![image info](https://i.gyazo.com/2027b2694597d16cf7113c5218d75f06.png)
 This action create cart item.
 
 <details>
@@ -583,7 +583,7 @@ This action create cart item.
 </details>
 
 ### Orders
-![image info](https://gyazo.com/052509332988063824b05ef2286a6de1)
+![image info](https://i.gyazo.com/9e4596649383554d0d4f9cd587f378ea.png)
 This action get one order.
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -603,7 +603,7 @@ This action get one order.
 </details>
 
 
-![image info](https://gyazo.com/8c6b0ab05d6fa8effbac82676849273b)
+![image info](https://i.gyazo.com/d200fccc3cd0013ae747222dfad40053.png)
 This action update one order and  stors in the database.
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
@@ -635,7 +635,7 @@ This action update one order and  stors in the database.
 </details>
 
 
-![image info](https://gyazo.com/d89e354aa225c15e78b41b9be1cef486)
+![image info](https://i.gyazo.com/9763b9d855766621839b22929276fda1.png)
 This action get all orders data.
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -668,8 +668,8 @@ This action get all orders data.
 
 
 
-![image info](https://gyazo.com/73ed186b8a2ca932089377cf292df374)
-This action create order and stores in database.
+![image info](https://i.gyazo.com/ab3a63e7732fca7cb6e62a2161136efe.png)
+This action creates orders and stores them in the database.
 
 <details>
 <summary><strong>JSON Request Body:</strong></summary>
@@ -705,8 +705,8 @@ This action create order and stores in database.
 
 
 ### Tags
-![image info](https://gyazo.com/98ecc422f82d6af290ffbb60cf736f88)
-This action get all tags.
+![image info](https://i.gyazo.com/780ae9747d22af4599ac2461d623d1f3.png)
+This action gets all tags.
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
 <br>
