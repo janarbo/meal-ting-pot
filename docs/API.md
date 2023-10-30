@@ -87,7 +87,7 @@ This action gets token stored within the database.
 
 
 ### Menu Items
-![image info](https://gyazo.com/5574e4136313f0e7286fd12c7c9c4bad)
+![image info](https://i.gyazo.com/78171ba96bc2745703376506aa03f573.png)
 This action creates an menu item and stores it within the database.
 
 <details>
@@ -136,8 +136,8 @@ This action creates an menu item and stores it within the database.
 </details>
 
 
-![image info](https://gyazo.com/c5322901e68320541bb4abf3d48ae10f)
-This action get all orders for the chef.
+![image info](https://i.gyazo.com/4c392e013e995939f6e2572a64fce1b5.png)
+This action get all menu items for the chef.
 
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -164,8 +164,8 @@ This action get all orders for the chef.
 ```
 </details>
 
-![image info](https://gyazo.com/88be1523796d9eabcea2751b36e970f2)
-This action get all orders for the customer.
+![image info](https://i.gyazo.com/c793044867b291c499dc0b51c0f55c53.png)
+This action get all menu items for the customer.
 
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -192,7 +192,7 @@ This action get all orders for the customer.
 ```
 </details>
 
-![image info](https://gyazo.com/1b842b990a15dd1670ceb76514d1988b)
+![image info](https://i.gyazo.com/b005bdd71ca59defcc1cfbe0ec200aaf.png)
 * This action get one menu item detail for the customer.
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
@@ -217,7 +217,7 @@ This action get all orders for the customer.
 ```
 </details>
 
-![image info](https://gyazo.com/fe4c0649992fbe495d47f5f60abfed1c)
+![image info](https://i.gyazo.com/2c1092878d4c1db59cae3ff7ee0137a7.png)
 This action update menu item data in the database.
 
 <details>
@@ -267,7 +267,8 @@ This action update menu item data in the database.
 
 
 
-![image info](https://gyazo.com/81acd2db9f7975be1f92daffa25aeb86)
+![image info](https://i.gyazo.com/0755708bd90fd35a12613553417a9855.png)
+This action deletes menu item data in the database.
 Returns (Status Code 200):
 true
 
