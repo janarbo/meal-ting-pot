@@ -1,5 +1,5 @@
 ### Accounts
-![image info](https://gyazo.com/50457fd65b67d1eea1afaa961ed6c95d)
+![image info](https://gyazo.com/383157896b4432be848bbde9d64018ae)
 This action creates an account tied to a specific user and stores it within the database.
 
 <details>
