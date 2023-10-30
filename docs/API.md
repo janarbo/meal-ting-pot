@@ -43,7 +43,7 @@ This action creates an account tied to a specific user and stores it within the 
 This action logs an existing user into the application.
 
 Request Body:
-![image info](https://gyazo.com/25bbe1936d6e1b57e0f9c104e7d2cb31)
+![image info](https://i.gyazo.com/87b209f2d5d3f8927a6a0bf5e17c9cad.png)
 
 <details>
 <summary><strong>Returns (Status Code 200):</strong></summary>
