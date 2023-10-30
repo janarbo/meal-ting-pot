@@ -39,7 +39,7 @@ This action creates an account tied to a specific user and stores it within the 
 </details>
 
 
-![image info](https://gyazo.com/ca46996d1bc4522fcb0166f9efc6266c)
+![image info](https://i.gyazo.com/7423b304f47858ce199f02e16add1db9.png)
 This action logs an existing user into the application.
 
 Request Body:
@@ -57,7 +57,7 @@ Request Body:
 ```
 </details>
 
-![image info](https://gyazo.com/e3668c21142e2a99fa061e923e1b5964)
+![image info](https://i.gyazo.com/19ad65ce4e8afd9adeb4e513c327b294.png)
 This action logs an existing user out of the application.
 
 Returns (Status Code 200):
