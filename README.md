@@ -27,7 +27,7 @@ View a demo video of this project here: <a> https://www.youtube.com/watch?v=Esd_
 
 1. Fork repository at: <a>https://gitlab.com/bidoof_supremacy/meal-ting-pot</a>
 2. Clone repository to local by running: `git clone https://gitlab.com/bidoof_supremacy/meal-ting-pot.git`
-3. Create local database by running: `docker volume create meal-tin-pot-data`
+3. Create local database by running: `docker volume create meal-ting-pot-data`
 4. Build images and containers by running: `docker compose build`
 5. Bring up the containers by running: `docker compose up`
 
